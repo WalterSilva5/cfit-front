@@ -1,0 +1,23 @@
+##concluido tem duas rashtags
+a fazer não tem rashtag
+
+
+________________________________________________________________________________
+aluno
+o aluno deve poder se cadastrar, fazer login, cadastrar aparelho, cadastrar exercicio
+pode ter zero ou mais instrutores
+pode ter vinculo com zero ou mais academias 
+_______________________________________________________________________________
+instrutor
+pode se cadastrar, fazer login, cadastrar aparelho, cadastrar exercicio
+pode ter vinculo com zero ou mais alunos
+pode ter vinculo com zero ou mais academias
+________________________________________________________________________________
+ADMINISTRADOR
+pode fazer login
+cadastrar exercicios
+cadastrar aparelhos
+bloquear alunos
+instrotores ou academias
+Alterar a logo do site
+alterar o video de apresentação do site
