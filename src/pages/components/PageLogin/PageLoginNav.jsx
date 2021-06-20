@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import $ from 'jquery';
 import cfitBanner from '../../../assets/img/logo.png';
 import PageLoginModalCadastro from './PageLoginModalCadastro';

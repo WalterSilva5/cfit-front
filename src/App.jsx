@@ -13,17 +13,17 @@ function App() {
     <div className="wsi-bg-black">
       <div  style={{ minHeight: '95vh' }}>
         <Switch>
-          <Route exact path="/">
+          <Route exact path="/dist/">
             <div>
               <PageLogin />
             </div>
             {/* <PageInicio /> */}
           </Route>
-          <Route exact path="/aulas">
+          <Route exact path="/dist/aulas">
             <PageAulas />
           </Route>
           <Route exact path="*">
-            <Page404 />
+            <Redirect to="/dist/" />
           </Route>
         </Switch>
       </div>
