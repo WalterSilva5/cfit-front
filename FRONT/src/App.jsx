@@ -6,7 +6,7 @@ import classes from './App.module.scss';
 import PageHome from './pages/PageHome.jsx';
 import PageLogin from './pages/PageLogin';
 import Page404 from './pages/Page404';
-
+import PageAulas from './pages/PageAulas';
 function App() {
   const authToken = localStorage.getItem('authToken');
   return (
@@ -20,6 +20,10 @@ function App() {
           </Route>
           <Route exact path="/home">
             <PageHome />
+          </Route>
+
+          <Route path="/aulas">
+            <PageAulas />
           </Route>
           <Route exact path="*">
             <Page404 />
