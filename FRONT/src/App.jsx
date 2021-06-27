@@ -3,24 +3,23 @@
 /* eslint-disable import/no-named-as-default-member */
 import { Route, Switch, Redirect } from 'react-router-dom';
 import classes from './App.module.scss';
-import PageAulas from './pages/PageAulas.jsx';
-import PageInicio from './pages/PageInicio.jsx';
+import PageHome from './pages/PageHome.jsx';
 import PageLogin from './pages/PageLogin';
 import Page404 from './pages/Page404';
 
 function App() {
+  const authToken = localStorage.getItem('authToken');
   return (
     <div className="wsi-bg-black">
-      <div  style={{ minHeight: '95vh' }}>
+      <div style={{ minHeight: '95vh' }}>
         <Switch>
           <Route exact path="/">
-            <div>
-              <PageLogin />
-            </div>
-            {/* <PageInicio /> */}
+            {
+              authToken ? <PageHome /> : <PageLogin />
+            }
           </Route>
-          <Route exact path="/aulas">
-            <PageAulas />
+          <Route exact path="/home">
+            <PageHome />
           </Route>
           <Route exact path="*">
             <Page404 />

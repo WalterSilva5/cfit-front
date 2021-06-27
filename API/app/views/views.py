@@ -13,12 +13,15 @@ from rest_framework import permissions
 from rest_framework.views import APIView
 
 # Create your views here.
+
+
 class RotaDeTeste(APIView):
     jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
     jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
 
     def post(self, request):
         return Response("teste ok")
+
 
 class VideoViewSet(viewsets.ModelViewSet):
     queryset = Video.objects.all()
@@ -41,11 +44,10 @@ class VideoViewSet(viewsets.ModelViewSet):
 class PlaylistViewSet(viewsets.ModelViewSet):
     serializer_class = PlaylistSerializer
     queryset = Playlist.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
 
-class UserViewSet(viewsets.ModelViewSet):
-    serializer_class = UserSerializer
-    queryset = User.objects.all()
-    permission_classes = [permissions.AllowAny]
+
+
 
 
     @action(detail=False, methods=['post'])
@@ -54,9 +56,18 @@ class UserViewSet(viewsets.ModelViewSet):
         return Response('ok')
 
 
+class UserViewSet(viewsets.ModelViewSet):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+    permission_classes = [permissions.AllowAny]
+
+    @action(detail=False, methods=['post'])
+    def create_user(self, request):
+        print(request.POST)
+        return Response('ok')
+
     # @action(detail=True, methods=['post'])
     # def update_user(self, request, pk=None):
-
 
     @action(detail=True, methods=['delete'])
     def delete_user(self, request, pk=None):

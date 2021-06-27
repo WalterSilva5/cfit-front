@@ -18,9 +18,9 @@ const PageLogin = () => {
     axios
       .post('http://localhost/api/token/', { username, password })
       .then((response) => {
-        localStorage.setItem('authtoken', response.data.access);
-        console.log(response.data.access);
-        history.push('/aulas');
+        localStorage.setItem('authToken', response.data.access);
+        //console.log(response.data.access);
+        history.push('/home');
       })
       .catch((error) => {
         alert(error);
