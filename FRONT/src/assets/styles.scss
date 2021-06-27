@@ -1,0 +1,154 @@
+$wsi-black: rgb(22, 22, 22);
+$wsi-black-light: rgb(35, 35, 35);
+$wsi-primary: rgba(#E05F00, 0.979);
+$wsi-primary-dark: rgba(#0BE07B, 0.979);
+$wsi-primary-light: rgba(248, 132, 66, 0.979);
+$wsi-success: #0B5EE0;
+$wsi-secondary: #00b87a;
+$wsi-border-primary: 1px solid rgba($wsi-secondary, .5);
+$wsi-shadow-light: 3px 3px 1px rgba(white, .5);
+$wsi-shadow-primary: 5px 5px 2px rgba($wsi-primary, .5);
+$wsi-shadow-secondary: 5px 5px 2px rgba($wsi-secondary, .5);
+$wsi-shadow: 2px 2px 1px black;
+
+* {
+    user-select: none;
+    transition: 0.5s;
+    &:hover {
+        transition: 0.5s;
+    }
+}
+
+img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-select: none;
+}
+
+@mixin bg-light {
+    color: black;
+}
+
+@mixin bg-dark {
+    color: white;
+}
+
+/*colors*/
+.wsi-primary {
+    color: $wsi-primary;
+}
+
+
+.wsi-secondary{
+    color: $wsi-secondary;
+}
+
+.wsi-success{
+    color: $wsi-success;
+}
+
+.wsi-bg-success{
+    background-color: $wsi-success;
+}
+/*backgrounds*/
+.wsi-bg-black {
+    @include bg-dark;
+    background-color: $wsi-black;
+}
+
+.wsi-bg-black-light{
+    background-color: $wsi-black-light;
+}
+
+.wsi-bg-primary {
+    @include bg-dark;
+    background-color: $wsi-primary;
+    &:hover {
+        background-color: $wsi-primary-dark;
+    }
+    &:active {
+        background-color: $wsi-primary-light;
+    }
+}
+
+
+.wsi-btn-secondary{
+    background-color: $wsi-secondary;
+    &:hover{
+        background-color: rgba($wsi-secondary, .8);
+    }
+}
+
+/*borders*/
+.wsi-border-primary {
+    border: $wsi-border-primary;
+}
+.wsi-border-container {
+    @extend .wsi-rounded;
+    border: $wsi-border-primary;
+}
+
+.wsi-rounded {
+    border-radius: 20px;
+}
+
+.wsi-shadow-light {
+    box-shadow: $wsi-shadow-light;
+    &:hover {
+        box-shadow: $wsi-shadow-primary;
+    }
+}
+
+.wsi-shadow-primary{
+    box-shadow: $wsi-shadow-light;
+    &:hover {
+        box-shadow: $wsi-shadow-secondary;
+    }
+}
+
+.wsi-container {
+    width: 100%;
+}
+
+.wsi-container-dark {
+    @extend .wsi-rounded;
+    background-color: $wsi-black-light;
+}
+
+.wsi-shadow {
+    box-shadow: $wsi-shadow;
+}
+.btn {
+    font-weight: bold;
+}
+.btn-primary {
+    @extend .wsi-bg-primary;
+    border: none;
+}
+
+.wsi-btn-lg {
+    min-height: 70px;
+    font-size: 1.5em;
+}
+
+.form-control-lg {
+    font-size: 1.5em;
+    min-height: 80px;
+}
+
+.align-center {
+    display: flexbox;
+    align-content: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.nm {
+    margin-left: 0  !important;
+    margin-right: 0 !important;
+}
+.np{
+    padding: 0 !important;
+}

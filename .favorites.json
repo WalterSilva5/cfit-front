@@ -1,42 +1,18 @@
 [
     {
         "type": "Directory",
-        "name": "/home/wsi/repos/WSI-PDV-FRONT/src",
+        "name": "/home/wsi/repos/CFIT-PROJECT/API",
         "parent_id": null,
-        "workspaceRoot": "/home/wsi/repos/WSI-PDV-FRONT",
-        "workspacePath": "src",
-        "id": "LA2v8yg7jSdRW9sY"
+        "workspaceRoot": "/home/wsi/repos/CFIT-PROJECT",
+        "workspacePath": "API",
+        "id": "sgZ1CnmLoGM6viYW"
     },
     {
         "type": "Directory",
-        "name": "/home/wsi/repos/WSI-PDV-FRONT/src/components",
+        "name": "/home/wsi/repos/CFIT-PROJECT/FRONT",
         "parent_id": null,
-        "workspaceRoot": "/home/wsi/repos/WSI-PDV-FRONT",
-        "workspacePath": "src/components",
-        "id": "9Cta2TwADKVj14QE"
-    },
-    {
-        "type": "Directory",
-        "name": "/home/wsi/repos/WSI-PDV-FRONT/src/store",
-        "parent_id": null,
-        "workspaceRoot": "/home/wsi/repos/WSI-PDV-FRONT",
-        "workspacePath": "src/store",
-        "id": "7XVb6pTBaSgowdFv"
-    },
-    {
-        "type": "Directory",
-        "name": "/home/wsi/repos/WSI-PDV-FRONT/src/wsi-api",
-        "parent_id": null,
-        "workspaceRoot": "/home/wsi/repos/WSI-PDV-FRONT",
-        "workspacePath": "src/wsi-api",
-        "id": "XOemNJ1pyKHtrolu"
-    },
-    {
-        "type": "Directory",
-        "name": "/home/wsi/repos/WSI-PDV-FRONT/src/assets",
-        "parent_id": null,
-        "workspaceRoot": "/home/wsi/repos/WSI-PDV-FRONT",
-        "workspacePath": "src/assets",
-        "id": "qBpNLlyiK0GMmQ5J"
+        "workspaceRoot": "/home/wsi/repos/CFIT-PROJECT",
+        "workspacePath": "FRONT",
+        "id": "VGHkCybi5329tNOX"
     }
 ]
