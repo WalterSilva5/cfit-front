@@ -46,13 +46,9 @@ class PlaylistViewSet(viewsets.ModelViewSet):
     queryset = Playlist.objects.all()
     permission_classes = [permissions.IsAuthenticated]
 
-
-
-
-
-    @action(detail=False, methods=['post'])
-    def create_user(self, request):
-        print(request.POST)
+    @csrf_exempt
+    @action(detail=False, methods=['get'])
+    def get_playlists(self, request):
         return Response('ok')
 
 

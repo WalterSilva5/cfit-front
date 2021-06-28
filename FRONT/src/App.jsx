@@ -24,11 +24,11 @@ function App() {
               authToken ? <PageHome /> : <PageLogin />
             }
           </Route>
-          <Route path="/aulas">
+          {/* <Route path="/aulas">
             {
               authToken ? <PageAulas /> : <PageLogin />
             }
-          </Route>
+          </Route> */}
           <Route exact path="*">
             <Page404 />
           </Route>

@@ -597,7 +597,7 @@
         "kind": 6,
         "importPath": "API.app.views.views",
         "description": "API.app.views.views",
-        "peekOfCode": "class PlaylistViewSet(viewsets.ModelViewSet):\n    serializer_class = PlaylistSerializer\n    queryset = Playlist.objects.all()\n    permission_classes = [permissions.IsAuthenticated]\n    @action(detail=False, methods=['post'])\n    def create_user(self, request):\n        print(request.POST)\n        return Response('ok')\nclass UserViewSet(viewsets.ModelViewSet):\n    serializer_class = UserSerializer",
+        "peekOfCode": "class PlaylistViewSet(viewsets.ModelViewSet):\n    serializer_class = PlaylistSerializer\n    queryset = Playlist.objects.all()\n    permission_classes = [permissions.IsAuthenticated]\n    @csrf_exempt\n    @action(detail=False, methods=['get'])\n    def get_playlists(self, request):\n        return Response('ok')\nclass UserViewSet(viewsets.ModelViewSet):\n    serializer_class = UserSerializer",
         "detail": "API.app.views.views",
         "documentation": {}
     },
