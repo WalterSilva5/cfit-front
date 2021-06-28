@@ -14,7 +14,7 @@ class Playlist(models.Model):
 
 class Video(models.Model):
     titulo = models.CharField(max_length=200)
-    playlist_id = models.IntegerField(max_length=200)
+    playlist_id = models.IntegerField()
 
     def __str__(self):
         return self.titulo

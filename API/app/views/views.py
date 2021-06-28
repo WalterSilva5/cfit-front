@@ -1,24 +1,21 @@
+from django.http.response import JsonResponse
 from app.serializers.VideoSerializer import VideoSerializer
 from app.serializers.PlaylistSerializer import PlaylistSerializer
 from app.serializers.UserSerializer import UserSerializer
 from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.decorators import action, permission_classes
+from rest_framework.decorators import action
 from app.models import Video, Playlist, User
 from django.contrib.auth.models import User
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework_jwt.settings import api_settings
 from rest_framework import permissions
 from rest_framework.views import APIView
+from django.http import JsonResponse
 
 # Create your views here.
 
 
 class RotaDeTeste(APIView):
-    jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
-    jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
-
     def post(self, request):
         return Response("teste ok")
 
@@ -44,13 +41,6 @@ class VideoViewSet(viewsets.ModelViewSet):
 class PlaylistViewSet(viewsets.ModelViewSet):
     serializer_class = PlaylistSerializer
     queryset = Playlist.objects.all()
-    permission_classes = [permissions.IsAuthenticated]
-
-    @csrf_exempt
-    @action(detail=False, methods=['get'])
-    def get_playlists(self, request):
-        return Response('ok')
-
 
 class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
