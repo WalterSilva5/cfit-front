@@ -88,6 +88,22 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -266,6 +282,14 @@
         "documentation": {}
     },
     {
+        "label": "JsonResponse",
+        "importPath": "django.http.response",
+        "description": "django.http.response",
+        "isExtraImport": true,
+        "detail": "django.http.response",
+        "documentation": {}
+    },
+    {
         "label": "VideoSerializer",
         "importPath": "app.serializers.VideoSerializer",
         "description": "app.serializers.VideoSerializer",
@@ -322,27 +346,11 @@
         "documentation": {}
     },
     {
-        "label": "permission_classes",
-        "importPath": "rest_framework.decorators",
-        "description": "rest_framework.decorators",
+        "label": "JsonResponse",
+        "importPath": "django.http",
+        "description": "django.http",
         "isExtraImport": true,
-        "detail": "rest_framework.decorators",
-        "documentation": {}
-    },
-    {
-        "label": "csrf_exempt",
-        "importPath": "django.views.decorators.csrf",
-        "description": "django.views.decorators.csrf",
-        "isExtraImport": true,
-        "detail": "django.views.decorators.csrf",
-        "documentation": {}
-    },
-    {
-        "label": "api_settings",
-        "importPath": "rest_framework_jwt.settings",
-        "description": "rest_framework_jwt.settings",
-        "isExtraImport": true,
-        "detail": "rest_framework_jwt.settings",
+        "detail": "django.http",
         "documentation": {}
     },
     {
@@ -548,6 +556,15 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "API.app.migrations.0008_alter_video_playlist_id",
+        "description": "API.app.migrations.0008_alter_video_playlist_id",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('app', '0007_user'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='video',\n            name='playlist_id',\n            field=models.IntegerField(),\n        ),",
+        "detail": "API.app.migrations.0008_alter_video_playlist_id",
+        "documentation": {}
+    },
+    {
         "label": "PlaylistSerializer",
         "kind": 6,
         "importPath": "API.app.serializers.PlaylistSerializer",
@@ -579,7 +596,7 @@
         "kind": 6,
         "importPath": "API.app.views.views",
         "description": "API.app.views.views",
-        "peekOfCode": "class RotaDeTeste(APIView):\n    jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER\n    jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER\n    def post(self, request):\n        return Response(\"teste ok\")\nclass VideoViewSet(viewsets.ModelViewSet):\n    queryset = Video.objects.all()\n    serializer_class = VideoSerializer\n    @action(detail=False, methods=['get'])\n    def get_video(self, request, pk=None):",
+        "peekOfCode": "class RotaDeTeste(APIView):\n    def post(self, request):\n        return Response(\"teste ok\")\nclass VideoViewSet(viewsets.ModelViewSet):\n    queryset = Video.objects.all()\n    serializer_class = VideoSerializer\n    @action(detail=False, methods=['get'])\n    def get_video(self, request, pk=None):\n        permission_classes = [permissions.IsAuthenticatedOrReadOnly]\n        videos = self.queryset",
         "detail": "API.app.views.views",
         "documentation": {}
     },
@@ -597,7 +614,7 @@
         "kind": 6,
         "importPath": "API.app.views.views",
         "description": "API.app.views.views",
-        "peekOfCode": "class PlaylistViewSet(viewsets.ModelViewSet):\n    serializer_class = PlaylistSerializer\n    queryset = Playlist.objects.all()\n    permission_classes = [permissions.IsAuthenticated]\n    @csrf_exempt\n    @action(detail=False, methods=['get'])\n    def get_playlists(self, request):\n        return Response('ok')\nclass UserViewSet(viewsets.ModelViewSet):\n    serializer_class = UserSerializer",
+        "peekOfCode": "class PlaylistViewSet(viewsets.ModelViewSet):\n    serializer_class = PlaylistSerializer\n    queryset = Playlist.objects.all()\nclass UserViewSet(viewsets.ModelViewSet):\n    serializer_class = UserSerializer\n    queryset = User.objects.all()\n    permission_classes = [permissions.AllowAny]\n    @action(detail=False, methods=['post'])\n    def create_user(self, request):\n        print(request.POST)",
         "detail": "API.app.views.views",
         "documentation": {}
     },
@@ -624,7 +641,7 @@
         "kind": 6,
         "importPath": "API.app.models",
         "description": "API.app.models",
-        "peekOfCode": "class Playlist(models.Model):\n    titulo = models.CharField(max_length=100)\n    descricao = models.CharField(max_length=200)\n    def __str__(self):\n        return self.titulo\nclass Video(models.Model):\n    titulo = models.CharField(max_length=200)\n    playlist_id = models.IntegerField(max_length=200)\n    def __str__(self):\n        return self.titulo",
+        "peekOfCode": "class Playlist(models.Model):\n    titulo = models.CharField(max_length=100)\n    descricao = models.CharField(max_length=200)\n    def __str__(self):\n        return self.titulo\nclass Video(models.Model):\n    titulo = models.CharField(max_length=200)\n    playlist_id = models.IntegerField()\n    def __str__(self):\n        return self.titulo",
         "detail": "API.app.models",
         "documentation": {}
     },
@@ -633,7 +650,7 @@
         "kind": 6,
         "importPath": "API.app.models",
         "description": "API.app.models",
-        "peekOfCode": "class Video(models.Model):\n    titulo = models.CharField(max_length=200)\n    playlist_id = models.IntegerField(max_length=200)\n    def __str__(self):\n        return self.titulo\nclass User(DjangoUser):\n    def __init__(self, *args, **kwargs):\n        super().__init__(*args, **kwargs)\n    def __str__(self):\n        return self.username",
+        "peekOfCode": "class Video(models.Model):\n    titulo = models.CharField(max_length=200)\n    playlist_id = models.IntegerField()\n    def __str__(self):\n        return self.titulo\nclass User(DjangoUser):\n    def __init__(self, *args, **kwargs):\n        super().__init__(*args, **kwargs)\n    def __str__(self):\n        return self.username",
         "detail": "API.app.models",
         "documentation": {}
     },
@@ -678,7 +695,7 @@
         "kind": 5,
         "importPath": "API.projectwsi.settings",
         "description": "API.projectwsi.settings",
-        "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = 'django-insecure-44&lsudo6ygw_*jmo=3s7nt7y$+c$45%037ms(#^%qc5gi5e&#'\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [",
+        "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = 'django-insecure-44&lsudo6ygw_*jmo=3s7nt7y$+c$45%037ms(#^%qc5gi5e&#'\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = ['*']\n# CORS_ALLOWED_ORIGINS = [\n#     '*']",
         "detail": "API.projectwsi.settings",
         "documentation": {}
     },
@@ -687,7 +704,7 @@
         "kind": 5,
         "importPath": "API.projectwsi.settings",
         "description": "API.projectwsi.settings",
-        "peekOfCode": "SECRET_KEY = 'django-insecure-44&lsudo6ygw_*jmo=3s7nt7y$+c$45%037ms(#^%qc5gi5e&#'\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',",
+        "peekOfCode": "SECRET_KEY = 'django-insecure-44&lsudo6ygw_*jmo=3s7nt7y$+c$45%037ms(#^%qc5gi5e&#'\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = ['*']\n# CORS_ALLOWED_ORIGINS = [\n#     '*']\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',",
         "detail": "API.projectwsi.settings",
         "documentation": {}
     },
@@ -696,7 +713,7 @@
         "kind": 5,
         "importPath": "API.projectwsi.settings",
         "description": "API.projectwsi.settings",
-        "peekOfCode": "DEBUG = True\nALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',",
+        "peekOfCode": "DEBUG = True\nALLOWED_HOSTS = ['*']\n# CORS_ALLOWED_ORIGINS = [\n#     '*']\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',",
         "detail": "API.projectwsi.settings",
         "documentation": {}
     },
@@ -705,7 +722,7 @@
         "kind": 5,
         "importPath": "API.projectwsi.settings",
         "description": "API.projectwsi.settings",
-        "peekOfCode": "ALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n    # Third-Party Apps",
+        "peekOfCode": "ALLOWED_HOSTS = ['*']\n# CORS_ALLOWED_ORIGINS = [\n#     '*']\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',",
         "detail": "API.projectwsi.settings",
         "documentation": {}
     },
@@ -723,7 +740,7 @@
         "kind": 5,
         "importPath": "API.projectwsi.settings",
         "description": "API.projectwsi.settings",
-        "peekOfCode": "MIDDLEWARE = [\n    'django.middleware.security.SecurityMiddleware',\n    'django.contrib.sessions.middleware.SessionMiddleware',\n    'django.middleware.common.CommonMiddleware',\n    'django.middleware.csrf.CsrfViewMiddleware',\n    'django.contrib.auth.middleware.AuthenticationMiddleware',\n    'django.contrib.messages.middleware.MessageMiddleware',\n    'django.middleware.clickjacking.XFrameOptionsMiddleware',\n]\nROOT_URLCONF = 'projectwsi.urls'",
+        "peekOfCode": "MIDDLEWARE = [\n    'django.middleware.security.SecurityMiddleware',\n    'django.contrib.sessions.middleware.SessionMiddleware',\n    'corsheaders.middleware.CorsMiddleware',\n    'django.middleware.common.CommonMiddleware',\n    'django.middleware.csrf.CsrfViewMiddleware',\n    'django.contrib.auth.middleware.AuthenticationMiddleware',\n    'django.contrib.messages.middleware.MessageMiddleware',\n    'django.middleware.clickjacking.XFrameOptionsMiddleware',\n]",
         "detail": "API.projectwsi.settings",
         "documentation": {}
     },
@@ -822,7 +839,7 @@
         "kind": 5,
         "importPath": "API.projectwsi.settings",
         "description": "API.projectwsi.settings",
-        "peekOfCode": "STATIC_URL = '/static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nREST_FRAMEWORK = {\n    'DEFAULT_PERMISSION_CLASSES': (\n        'rest_framework.permissions.IsAuthenticatedOrReadOnly',\n    ),\n    'DEFAULT_AUTHENTICATION_CLASSES': (\n        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',",
+        "peekOfCode": "STATIC_URL = '/static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nREST_FRAMEWORK = {\n    'DEFAULT_PERMISSION_CLASSES': (\n        'rest_framework.permissions.IsAuthenticatedOrReadOnly',\n    ),\n    'DEFAULT_AUTHENTICATION_CLASSES': (\n        'rest_framework_simplejwt.authentication.JWTAuthentication',",
         "detail": "API.projectwsi.settings",
         "documentation": {}
     },
@@ -831,7 +848,7 @@
         "kind": 5,
         "importPath": "API.projectwsi.settings",
         "description": "API.projectwsi.settings",
-        "peekOfCode": "DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nREST_FRAMEWORK = {\n    'DEFAULT_PERMISSION_CLASSES': (\n        'rest_framework.permissions.IsAuthenticatedOrReadOnly',\n    ),\n    'DEFAULT_AUTHENTICATION_CLASSES': (\n        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',\n        'rest_framework.authentication.SessionAuthentication',\n        'rest_framework.authentication.BasicAuthentication',\n    ),",
+        "peekOfCode": "DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nREST_FRAMEWORK = {\n    'DEFAULT_PERMISSION_CLASSES': (\n        'rest_framework.permissions.IsAuthenticatedOrReadOnly',\n    ),\n    'DEFAULT_AUTHENTICATION_CLASSES': (\n        'rest_framework_simplejwt.authentication.JWTAuthentication',\n        'rest_framework.authentication.SessionAuthentication',\n        'rest_framework.authentication.BasicAuthentication',\n    ),",
         "detail": "API.projectwsi.settings",
         "documentation": {}
     },
@@ -840,7 +857,7 @@
         "kind": 5,
         "importPath": "API.projectwsi.settings",
         "description": "API.projectwsi.settings",
-        "peekOfCode": "REST_FRAMEWORK = {\n    'DEFAULT_PERMISSION_CLASSES': (\n        'rest_framework.permissions.IsAuthenticatedOrReadOnly',\n    ),\n    'DEFAULT_AUTHENTICATION_CLASSES': (\n        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',\n        'rest_framework.authentication.SessionAuthentication',\n        'rest_framework.authentication.BasicAuthentication',\n    ),\n}",
+        "peekOfCode": "REST_FRAMEWORK = {\n    'DEFAULT_PERMISSION_CLASSES': (\n        'rest_framework.permissions.IsAuthenticatedOrReadOnly',\n    ),\n    'DEFAULT_AUTHENTICATION_CLASSES': (\n        'rest_framework_simplejwt.authentication.JWTAuthentication',\n        'rest_framework.authentication.SessionAuthentication',\n        'rest_framework.authentication.BasicAuthentication',\n    ),\n}",
         "detail": "API.projectwsi.settings",
         "documentation": {}
     },
