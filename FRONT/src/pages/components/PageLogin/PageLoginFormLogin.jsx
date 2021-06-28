@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { nodeName } from 'jquery';
 import classes from './PageLogin.module.scss';
 import PageLoginModalCadastro from './PageLoginModalCadastro';
 
@@ -10,10 +11,10 @@ const PageLoginFormLogin = () => {
   const [password, setpassword] = React.useState('');
 
   const AuthUser = (username, password) => {
+    setmsgErrorVisbile(false);
     axios
       .post('http://localhost/api/token/', { username, password })
       .then((response) => {
-        setmsgErrorVisbile(false);
         localStorage.setItem('authToken', response.data.access);
         // console.log(response.data.access);
         window.location.href = '/home';
@@ -47,7 +48,9 @@ const PageLoginFormLogin = () => {
             autoComplete="off"
             className="form-control form-control-lg wsi-shadow-primary my-3"
             value={password}
-            onChange={(e) => { setpassword(e.target.value); }}
+            onChange={(e) => {
+              setpassword(e.target.value);
+            }}
           />
 
           <button className="btn btn-lg py-3 align-content-middle col-5 btn-primary wsi-shadow-light" onClick={() => { AuthUser(username, password); }}>
@@ -55,14 +58,14 @@ const PageLoginFormLogin = () => {
           </button>
 
           <div className={` modal animate__animated d-block
-              ${modalVisible ? 'animate__fadeInLeft' : 'animate__fadeOutRight'}`}
+              ${!modalVisible ? 'animate__fadeOutRight' : 'animate__fadeInLeft'}`}
           >
             <PageLoginModalCadastro setmodalVisible={setmodalVisible} />
           </div>
           <div
             className={`d-flex row justify-content-center my-2 animate__animated ${
 
-              msgErrorVisbile ? 'd-block' : 'd-none'
+              msgErrorVisbile ? 'animate__bounceIn' : 'animate__bounceOut'
             }`}
             style={{ height: '100px' }}
           >
