@@ -6,22 +6,25 @@ import classes from './App.module.scss';
 import PageHome from './pages/PageHome.jsx';
 import PageLogin from './pages/PageLogin';
 import Page404 from './pages/Page404';
-import PageAulas from './pages/PageAulas';
+// import PageAulas from './pages/PageAulas';
+import { getPlaylists } from './util/PlaylistUtil';
 
 function App() {
   const authToken = localStorage.getItem('authToken');
+  const playlists = getPlaylists();
+  console.log(playlists);
   return (
     <div className="wsi-bg-black">
       <div style={{ minHeight: '95vh' }}>
         <Switch>
           <Route exact path="/">
             {
-              authToken ? <PageHome /> : <PageLogin />
+              authToken ? <PageHome playlists={playlists} /> : <PageLogin />
             }
           </Route>
           <Route exact path="/home">
             {
-              authToken ? <PageHome /> : <PageLogin />
+              authToken ? <PageHome playlists={playlists} /> : <PageLogin />
             }
           </Route>
           {/* <Route path="/aulas">
