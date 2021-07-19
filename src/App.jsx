@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-named-as-default */
 /* eslint-disable import/no-named-as-default-member */
@@ -7,25 +8,18 @@ import PageHome from './pages/PageHome.jsx';
 import PageLogin from './pages/PageLogin';
 import Page404 from './pages/Page404';
 // import PageAulas from './pages/PageAulas';
-import { getPlaylists } from './util/PlaylistUtil';
 
 function App() {
   const authToken = localStorage.getItem('authToken');
-  const playlists = getPlaylists();
-  console.log(playlists);
   return (
     <div className="wsi-bg-black">
       <div style={{ minHeight: '95vh' }}>
         <Switch>
           <Route exact path="/">
-            {
-              authToken ? <PageHome playlists={playlists} /> : <PageLogin />
-            }
+            {authToken ? <PageHome /> : <PageLogin />}
           </Route>
           <Route exact path="/home">
-            {
-              authToken ? <PageHome playlists={playlists} /> : <PageLogin />
-            }
+            {authToken ? <PageHome /> : <PageLogin />}
           </Route>
           {/* <Route path="/aulas">
             {
@@ -45,8 +39,12 @@ function App() {
           </b>
         </h4>
         <div className="col-12 text-center">
-
-          <a target="_b\ylank" className="text-white" href="http://waltersilva5.github.io" rel="noreferrer">
+          <a
+            target="_b\ylank"
+            className="text-white"
+            href="http://waltersilva5.github.io"
+            rel="noreferrer"
+          >
             <h6>
               <b>
                 Desenvolvido por:

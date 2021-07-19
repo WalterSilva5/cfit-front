@@ -1,24 +1,35 @@
+/* eslint-disable no-undef */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-unused-vars */
 import axios from 'axios';
 import PageHeader from './components/PageHeader';
+import { serverAddress } from '../util/Settings';
 
-const PageHome = (props) => {
-  console.log(props);
-  const [playlists, setplaylists] = React.useState(props.playlists);
-  console.log(playlists);
+// const result = plays.map((res) => <h1 key={res}>{res}</h1>);
+const PageHome = () => {
+  const [playlists, setplaylists] = React.useState([]);
+  const [isLoading, setLoading] = React.useState(true);
+  const getPlaylists = () => {
+    axios.get(`${serverAddress}playlist`).then((response) => {
+      const linhas = response.data.map((res) => <h1 key={res.pk}>{res.titulo}</h1>);
+      console.log(linhas)
+      setplaylists(linhas);
+      setLoading(false);
+    });
+  };
+
+  React.useEffect(() => {
+    getPlaylists();
+  }, []);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   return (
     <div>
-      <PageHeader />
-      <div>
-        <h1 className="text-center">PLAYLISTS</h1>
-        <div>
-          {
-            playlists.map((res) => <h1 key={res}>{res}</h1>)
-          }
-          <h1 />
-        </div>
-      </div>
+      <PageHeader/>
+      <div>{playlists}</div>
     </div>
   );
 };

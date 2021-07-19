@@ -1,11 +1,13 @@
-/* eslint-disable no-console */
+/* eslint-disable no-shadow */
 /* eslint-disable no-undef */
-/* eslint-disable react/prop-types */
+/* eslint-disable react/button-has-type */
+/* eslint-disable linebreak-style */
 import axios from 'axios';
+import {serverAddress} from '../../../util/Settings';
 
-const RegisterUser = (username) => {
+const RegisterUser = (username, password) => {
   axios
-    .post('http://localhost/user/', { username, password })
+    .post(`${serverAddress}user/`, { username, password })
     .then((response) => {
       console.log(response);
     })
@@ -15,7 +17,7 @@ const RegisterUser = (username) => {
 };
 
 const PageLoginModalCadastro = (props) => {
-  const [userName, setuserName] = React.useState('');
+  const [username, setusername] = React.useState('');
   const [password, setpassword] = React.useState('');
   return (
     <div>
@@ -44,8 +46,8 @@ const PageLoginModalCadastro = (props) => {
               type="text"
               className="form-control my-3 wsi-shadow-light"
               placeholder="USUARIO"
-              value={userName}
-              onChange={(e) => setuserName(e.target.value)}
+              value={username}
+              onChange={(e) => setusername(e.target.value)}
             />
             {/* <input
               type="text"
@@ -62,8 +64,7 @@ const PageLoginModalCadastro = (props) => {
             <button
               className="btn btn-primary wsi-shadow-primary"
               onClick={() => {
-                console.log('clickado');
-                RegisterUser(userName);
+                RegisterUser(username, password);
               }}
             >
               CADASTRAR

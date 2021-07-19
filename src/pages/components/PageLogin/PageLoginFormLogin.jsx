@@ -1,7 +1,12 @@
+/* eslint-disable no-shadow */
+/* eslint-disable no-undef */
+/* eslint-disable react/button-has-type */
+/* eslint-disable linebreak-style */
 import axios from 'axios';
 import { nodeName } from 'jquery';
 import classes from './PageLogin.module.scss';
 import PageLoginModalCadastro from './PageLoginModalCadastro';
+import {serverAddress} from '../../../util/settings'
 
 const PageLoginFormLogin = () => {
   const [modalVisible, setmodalVisible] = React.useState(false);
@@ -10,10 +15,10 @@ const PageLoginFormLogin = () => {
   const [username, setusername] = React.useState('');
   const [password, setpassword] = React.useState('');
 
-  const AuthUser = (username, password) => {
+  const AuthUser = () => {
     setmsgErrorVisbile(false);
     axios
-      .post('http://localhost/api/token/', { username, password })
+      .post(`${serverAddress}token/`, { crossdomain: true, username, password })
       .then((response) => {
         localStorage.setItem('authToken', response.data.access);
         // console.log(response.data.access);
@@ -32,7 +37,9 @@ const PageLoginFormLogin = () => {
   };
   return (
     <div className="row wsi-border-container nm p-3 d-flex justify-content-center text-center py-3 col-12">
-      <div className={` wsi-container-dark col-md-6 d-flex justify-content-center align-items-center ${classes.PageLoginMenuContainer}`}>
+      <div
+        className={` wsi-container-dark col-md-6 d-flex justify-content-center align-items-center ${classes.PageLoginMenuContainer}`}
+      >
         <div className="text-center col-12">
           <input
             type="text"
@@ -40,7 +47,9 @@ const PageLoginFormLogin = () => {
             autoComplete="off"
             className="form-control-lg wsi-shadow-primary form-control"
             value={username}
-            onChange={(e) => { setusername(e.target.value); }}
+            onChange={(e) => {
+              setusername(e.target.value);
+            }}
           />
           <input
             type="password"
@@ -53,18 +62,25 @@ const PageLoginFormLogin = () => {
             }}
           />
 
-          <button className="btn btn-lg py-3 align-content-middle col-5 btn-primary wsi-shadow-light" onClick={() => { AuthUser(username, password); }}>
+          <button
+            className="btn btn-lg py-3 align-content-middle col-5 btn-primary wsi-shadow-light"
+            onClick={() => {
+              AuthUser();
+            }}
+          >
             <b>ENTRAR</b>
           </button>
 
-          <div className={` modal animate__animated d-block
-              ${!modalVisible ? 'animate__fadeOutRight' : 'animate__fadeInLeft'}`}
+          <div
+            className={` modal animate__animated d-block
+              ${
+                !modalVisible ? 'animate__fadeOutRight' : 'animate__fadeInLeft'
+              }`}
           >
             <PageLoginModalCadastro setmodalVisible={setmodalVisible} />
           </div>
           <div
             className={`d-flex row justify-content-center my-2 animate__animated ${
-
               msgErrorVisbile ? 'animate__bounceIn' : 'animate__bounceOut'
             }`}
             style={{ height: '100px' }}
@@ -77,13 +93,26 @@ const PageLoginFormLogin = () => {
             <p>
               Ainda não tem conta?
               {' '}
-              <button className="btn wsi-btn-secondary wsi-shadow-light" onClick={() => { setmodalVisible(true); }}>CADASTRE-SE</button>
+              <button
+                className="btn wsi-btn-secondary wsi-shadow-light"
+                onClick={() => {
+                  setmodalVisible(true);
+                }}
+              >
+                CADASTRE-SE
+              </button>
             </p>
           </div>
         </div>
       </div>
-      <div className={`col-md-6 embed-responsive np embed-responsive d-flex ${classes.PageLoginMenuContainer} `}>
-        <iframe className="embed-responsive-item col-12 wsi-rounded" src="https://www.youtube.com/embed/--cxZbnmmoc" allowFullScreen />
+      <div
+        className={`col-md-6 embed-responsive np embed-responsive d-flex ${classes.PageLoginMenuContainer} `}
+      >
+        <iframe
+          className="embed-responsive-item col-12 wsi-rounded"
+        //   src="https://www.youtube.com/embed/--cxZbnmmoc"
+          allowFullScreen
+        />
       </div>
     </div>
   );

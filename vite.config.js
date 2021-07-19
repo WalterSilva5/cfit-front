@@ -9,7 +9,12 @@ export default defineConfig({
       injectReact: true,
     }),
   ],
-  server: {
-    host: true,
+  proxy: {
+    '/api': {
+      target: 'https://localhost/api-v1',
+      changeOrigin: true,
+      secure: false,
+      ws: true,
+    },
   },
 });
