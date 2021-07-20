@@ -10,9 +10,9 @@ const PageHeader = () => {
       <div className="">
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-2">
           <span className="navbar-brand"><b>CFIT</b></span>
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          {/* <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon" />
-          </button>
+          </button> */}
           <div className="collapse navbar-collapse" id="navbarNav">
             <div className="navbar-nav" />
           </div>
