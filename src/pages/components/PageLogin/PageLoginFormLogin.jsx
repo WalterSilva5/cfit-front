@@ -38,7 +38,8 @@ const PageLoginFormLogin = () => {
         window.location.href = '/home';
       })
       .catch((error) => {
-        const { status } = error.response;
+        const status = error.response
+        console.log(status)
         setmsgErrorVisbile(true);
         if (status == 400) {
           setmsgError('PREENCHA TODOS OS CAMPOS');
