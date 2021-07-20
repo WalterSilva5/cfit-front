@@ -40,7 +40,7 @@ function App() {
         </h4>
         <div className="col-12 text-center">
           <a
-            target="_b\ylank"
+            target="_blank"
             className="text-white"
             href="http://waltersilva5.github.io"
             rel="noreferrer"

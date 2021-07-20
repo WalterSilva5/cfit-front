@@ -1,36 +1,51 @@
+/* eslint-disable eqeqeq */
+/* eslint-disable jsx-a11y/iframe-has-title */
 /* eslint-disable no-shadow */
 /* eslint-disable no-undef */
 /* eslint-disable react/button-has-type */
 /* eslint-disable linebreak-style */
 import axios from 'axios';
 import { nodeName } from 'jquery';
+import jwt_decode from 'jwt-decode';
 import classes from './PageLogin.module.scss';
 import PageLoginModalCadastro from './PageLoginModalCadastro';
-import {serverAddress} from '../../../util/settings'
+import { serverAddress } from '../../../util/settings';
 
 const PageLoginFormLogin = () => {
   const [modalVisible, setmodalVisible] = React.useState(false);
-  const [msgError, setmsgError] = React.useState('');
+  const [msgError, setmsgError] = React.useState('teste');
   const [msgErrorVisbile, setmsgErrorVisbile] = React.useState(false);
   const [username, setusername] = React.useState('');
   const [password, setpassword] = React.useState('');
+
+  const setLevelAccess = () => {
+    const accessUser = localStorage.getItem('accessUser');
+    axios.get(`${serverAddress}user/${accessUser}`)
+      .then((response) => {
+        localStorage.setItem('perm', response.data.is_superuser);
+      });
+  };
 
   const AuthUser = () => {
     setmsgErrorVisbile(false);
     axios
       .post(`${serverAddress}token/`, { crossdomain: true, username, password })
       .then((response) => {
+        const dado = jwt_decode(response.data.access);
         localStorage.setItem('authToken', response.data.access);
-        // console.log(response.data.access);
+        localStorage.setItem('accessUser', dado.user_id);
+        setLevelAccess();
         window.location.href = '/home';
       })
       .catch((error) => {
-        const status = error.response;
+        const { status } = error.response;
         setmsgErrorVisbile(true);
-        if (status === 400) {
+        if (status == 400) {
           setmsgError('PREENCHA TODOS OS CAMPOS');
-        } else if (status === 401) {
+        } else if (status == 401) {
           setmsgError('USUARIO OU SENHA INVALIDOS');
+        }else{
+          setmsgError(status);
         }
         // console.log('Erro: ', error.response.status);
       });
