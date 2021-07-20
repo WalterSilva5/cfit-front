@@ -10,11 +10,6 @@ export default defineConfig({
     }),
   ],
   proxy: {
-    '/api': {
-      target: 'https://localhost/api-v1',
-      changeOrigin: true,
-      secure: false,
-      ws: true,
-    },
+    host: true,
   },
 });

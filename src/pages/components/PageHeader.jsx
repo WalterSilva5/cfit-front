@@ -4,6 +4,7 @@ import { logoutUser } from '../../util/UserUtil';
 
 const PageHeader = () => {
   const [menuPopoverVisible, setmenuPopoverVisible] = React.useState(false);
+  const permission = localStorage.getItem('perm');
   return (
     <div>
       <div className="">
@@ -42,6 +43,9 @@ const PageHeader = () => {
                 }}
               >
                 <NavLink className="btn btn-primary col-12" to="/">INICIO</NavLink>
+                {
+                  permission == 10 ? <button className="btn my-3 btn-primary col-12" type="button">ADMIN</button> : null
+                }
                 <button className="btn my-3 btn-primary col-12" type="button" onClick={() => logoutUser()}>SAIR</button>
                 {/* <NavLink className="btn btn-primary mx-2" to="/aulas">AULAS</NavLink>
             <NavLink className="btn btn-primary" to="/teste">teste</NavLink> */}

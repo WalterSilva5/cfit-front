@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable eqeqeq */
 /* eslint-disable jsx-a11y/iframe-has-title */
 /* eslint-disable no-shadow */
@@ -22,14 +23,18 @@ const PageLoginFormLogin = () => {
     const accessUser = localStorage.getItem('accessUser');
     axios.get(`${serverAddress}user/${accessUser}`)
       .then((response) => {
-        localStorage.setItem('perm', response.data.is_superuser);
+        console.log(response.data)
+        localStorage.setItem('perm', response.data.type);
       });
   };
 
   const AuthUser = () => {
     setmsgErrorVisbile(false);
     axios
-      .post(`${serverAddress}token/`, { crossdomain: true, username, password })
+      .post(`${serverAddress}token/`, {
+        username,
+        password,
+      })
       .then((response) => {
         const dado = jwt_decode(response.data.access);
         localStorage.setItem('authToken', response.data.access);
@@ -38,17 +43,21 @@ const PageLoginFormLogin = () => {
         window.location.href = '/home';
       })
       .catch((error) => {
-        const status = error.response
-        console.log(status)
         setmsgErrorVisbile(true);
-        if (status == 400) {
-          setmsgError('PREENCHA TODOS OS CAMPOS');
-        } else if (status == 401) {
-          setmsgError('USUARIO OU SENHA INVALIDOS');
-        }else{
-          setmsgError(status);
+        try {
+          const status = error.response.status;
+          if (status == 400) {
+            setmsgError('PREENCHA TODOS OS CAMPOS');
+          } else if (status == 401) {
+            setmsgError('USUARIO OU SENHA INVALIDOS');
+          } else if (status == undefined) {
+            setmsgError('ERRO NO SERVIDOR');
+          } else {
+            setmsgError(toString(status.response.statusText));
+          }
+        } catch (e) {
+          setmsgError('ERRO NO SERVIDOR', e);
         }
-        // console.log('Erro: ', error.response.status);
       });
   };
   return (
