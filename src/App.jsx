@@ -7,13 +7,14 @@ import classes from './App.module.scss';
 import PageHome from './pages/PageHome.jsx';
 import PageLogin from './pages/PageLogin';
 import Page404 from './pages/Page404';
+import CfitAdmin from './pages/CfitAdmin';
 // import PageAulas from './pages/PageAulas';
 
 function App() {
   const authToken = localStorage.getItem('authToken');
   return (
     <div className="wsi-bg-black">
-      <div style={{ minHeight: '95vh' }}>
+      <div style={{ minHeight: '100vh' }}>
         <Switch>
           <Route exact path="/">
             {authToken ? <PageHome /> : <PageLogin />}
@@ -26,6 +27,9 @@ function App() {
               authToken ? <PageAulas /> : <PageLogin />
             }
           </Route> */}
+          <Route path="/cfit_admin">
+            <CfitAdmin />
+          </Route>
           <Route exact path="*">
             <Page404 />
           </Route>

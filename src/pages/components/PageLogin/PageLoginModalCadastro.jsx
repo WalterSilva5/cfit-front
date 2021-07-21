@@ -12,7 +12,9 @@ const RegisterUser = (username, password) => {
       console.log(response);
     })
     .catch((error) => {
-      const msg = JSON.parse(error.response.request.responseText);
+      console.log(error)
+      console.log(error.response)
+      //const msg = JSON.parse(error.response);
     });
 };
 

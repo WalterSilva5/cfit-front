@@ -4,10 +4,10 @@ import classes from './PlaylistCard.module.scss';
 
 const PlaylistCard = (props) => (
   <div
-    className={` col-md-3 mx-2 my-3 p-1 ${classes.cfitCard}`}
+    className="col-md-4  my-3"
     style={{ padding: '-20px', maxWidth: 'none' }}
   >
-    <div>
+    <div className={` px-2 ${classes.cfitCard}`}>
       <h3
         className="container text-center"
       >

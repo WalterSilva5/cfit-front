@@ -23,7 +23,7 @@ const PageLoginFormLogin = () => {
     const accessUser = localStorage.getItem('accessUser');
     axios.get(`${serverAddress}user/${accessUser}`)
       .then((response) => {
-        console.log(response.data)
+        //console.log(response.data)
         localStorage.setItem('perm', response.data.type);
       });
   };

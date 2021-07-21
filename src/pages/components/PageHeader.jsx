@@ -44,7 +44,7 @@ const PageHeader = () => {
               >
                 <NavLink className="btn btn-primary col-12" to="/">INICIO</NavLink>
                 {
-                  permission == 10 ? <button className="btn my-3 btn-primary col-12" type="button">ADMIN</button> : null
+                  permission == 10 ? <NavLink className="btn my-3 btn-primary col-12" to="/cfit_admin" type="button">ADMIN</NavLink> : null
                 }
                 <button className="btn my-3 btn-primary col-12" type="button" onClick={() => logoutUser()}>SAIR</button>
                 {/* <NavLink className="btn btn-primary mx-2" to="/aulas">AULAS</NavLink>

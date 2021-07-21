@@ -13,8 +13,6 @@ const PageHome = () => {
   const [isLoading, setLoading] = React.useState(true);
   const getPlaylists = () => {
     axios.get(`${serverAddress}playlist`).then((response) => {
-      console.log(response);
-      // <h1 key={res.pk}>{res.titulo}</h1>
       setplaylists(response.data.map((res) => (
         <PlaylistCard
           key={res.pk}
@@ -37,7 +35,7 @@ const PageHome = () => {
   return (
     <div>
       <PageHeader />
-      <div className="row d-flex justify-content-center">{playlists}</div>
+      <div className="row d-flex justify-content-center container-fluid">{playlists}</div>
     </div>
   );
 };
