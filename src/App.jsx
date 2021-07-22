@@ -17,13 +17,9 @@ function App() {
       <div style={{ minHeight: '100vh' }}>
         <Switch>
           <Route exact path="/">
-            {authToken ? <PageHome /> : <PageLogin />}
+            {authToken ? <Redirect to="/home"/> : <PageLogin />}
           </Route>
-          
-          <Route path="/home">
-            {authToken ? <PageHome /> : <PageLogin />}
-          </Route>
-          
+
           <Route exact path="/home">
             {authToken ? <PageHome /> : <PageLogin />}
           </Route>
