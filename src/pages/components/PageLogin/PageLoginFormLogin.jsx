@@ -25,7 +25,7 @@ const PageLoginFormLogin = () => {
     //console.log(rota);
     axios.get(rota)
       .then((response) => {
-        //console.log(response.data)
+        console.log(response.data)
         localStorage.setItem('perm', response.data.type);
       }).catch((error) => {
         console.log(error);
