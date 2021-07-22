@@ -1,4 +1,4 @@
-import iconInstagram from './../../../assets/img/instagram.png';
+import iconInstagram from '@/assets/img/instagram.png';
 
 const PageLoginContatos = () => (
   <div

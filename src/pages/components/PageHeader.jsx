@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import $ from 'jquery';
-import { logoutUser } from '../../util/UserUtil';
+import { logoutUser } from '@/util/UserUtil';
 
 const PageHeader = () => {
   const [menuPopoverVisible, setmenuPopoverVisible] = React.useState(false);
