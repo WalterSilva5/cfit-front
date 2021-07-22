@@ -1,5 +1,5 @@
 // Nome do cache
-const CACHE_NAME = 'my-pwa-cache';
+const CACHE_NAME = 'my-pwa-cache-v1.0.0';
 
 const urlsToCache = [
   "/",

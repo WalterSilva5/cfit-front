@@ -1,6 +1,6 @@
 {
-    "short_name": "todo",
-    "name": "Lista de tarefas",
+    "short_name": "Aulas de Dança",
+    "name": "Aulas de Dança",
     "icons": [
       {
         "src": "./src/assets/icone.png",
