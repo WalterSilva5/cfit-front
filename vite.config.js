@@ -10,7 +10,7 @@ export default defineConfig({
       injectReact: true,
     }),
   ],
-  proxy: {
+  server: {
     host: true,
   },
   resolve: {
