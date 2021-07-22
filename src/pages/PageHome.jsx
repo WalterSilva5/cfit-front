@@ -11,7 +11,7 @@ const PageHome = () => {
   const [playlists, setplaylists] = React.useState([]);
   const [isLoading, setLoading] = React.useState(true);
   const getPlaylists = () => {
-    axios.get(`${serverAddress}playlist`, {crossDomain: true}).then((response) => {
+    axios.get(`${serverAddress}playlist/`, { crossDomain: true}).then((response) => {
       setplaylists(response.data.map((res) => (
         <PlaylistCard
           key={res.pk}
