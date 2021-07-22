@@ -15,10 +15,10 @@ const CfitAdminPlaylists = () => {
   const getPlaylists = () => {
     axios.get(`${serverAddress}playlist`).then((response) => {
       setplaylists(response.data.map((res) => (
-        <tr className="border border-danger" key={res.pk}>
-          <td className="border border-danger">{res.titulo}</td>
-          <td className="border border-danger">{res.descricao}</td>
-          <td className="border border-danger"><button className="btn btn-primary" value={res.pk}
+        <tr className="wsi-border-admin" key={res.pk}>
+          <td className="wsi-border-admin">{res.titulo}</td>
+          <td className="wsi-border-admin">{res.descricao}</td>
+          <td className="wsi-border-admin"><button className="btn wsi-btn-admin-dark" value={res.pk}
             onClick={(e) => {
               updatePlaylistIdEditar(e.target.value);
               setmodalVisible(true);
@@ -42,21 +42,20 @@ const CfitAdminPlaylists = () => {
       <div className="row d-flex justify-content-between px-3">
         <h1 className="d-block col-4 m-2">PLAYLISTS</h1>
         {' '}
-        <button className="m-2 col-4 btn btn-primary"
+        <button className="m-2 col-4 btn wsi-btn-admin-dark wsi-shadow-light"
         onClick={() => {
           setmodalVisible(true);
         }}
         >ADICIONAR NOVA</button>
       </div>
       <div className="p-2">
-        <div style={{ height: '70vh', overflow: 'auto' }} className="rounded border border-danger">
-          <table className="table table-hover table-dark table-borderd border border-danger rounded">
-            <thead className="border border-danger bg-secondary">
-              <tr>
-                <th scope="col" className="border border-primary">TITULO</th>
-                <th scope="col" className="border border-primary">DESCRICAO</th>
-                <th className="col-1 border border-primary"
-                >EDITAR</th>
+        <div style={{ height: '70vh', overflow: 'auto' }} className="rounded wsi-border-admin">
+          <table className="table table-hover table-dark table-borderd wsi-border-admin rounded">
+            <thead className="wsi-border-admin">
+              <tr className="">
+                <th scope="col" className="border border-primary wsi-btn-admin-dark" style={{backgroundColor: '#2e0040'}}>TITULO</th>
+                <th scope="col" className="border border-primary wsi-btn-admin-dark" style={{backgroundColor: '#2e0040'}}>DESCRICAO</th>
+                <th className="col-1 border border-primary wsi-btn-admin-dark" style={{backgroundColor: '#2e0040'}}>EDITAR</th>
               </tr>
             </thead>
             <tbody>

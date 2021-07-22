@@ -33,6 +33,9 @@ function App() {
           <Route exact path="*">
             <Page404 />
           </Route>
+          <Route path="*">
+            <Page404 />
+          </Route>
         </Switch>
       </div>
       <div className="mt-5 pt-3 navbar navbar-spand wsi-bg-black-light d-flex justify-content-center">

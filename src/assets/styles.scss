@@ -5,6 +5,10 @@ $wsi-primary-dark: rgba(#0BE07B, 0.979);
 $wsi-primary-light: rgba(248, 132, 66, 0.979);
 $wsi-success: #0B5EE0;
 $wsi-secondary: #00b87a;
+$wsi-admin: purple;
+$wsi-admin-light: #facbf8;
+$wsi-admin-dark: #2e0040;
+$wsi-border-admin: 1px solid $wsi-admin;
 $wsi-border-primary: 1px solid rgba($wsi-secondary, .5);
 $wsi-shadow-light: 3px 3px 1px rgba(white, .5);
 $wsi-shadow-primary: 5px 5px 2px rgba($wsi-primary, .5);
@@ -52,6 +56,29 @@ img {
 .wsi-bg-success{
     background-color: $wsi-success;
 }
+.wsi-bg-admin{
+    background-color: $wsi-admin;
+}
+.wsi-bg-admin-light{
+    background-color: $wsi-admin-light;
+}
+
+.wsi-bg-admin-dark{
+    background-color: $wsi-admin-dark;
+}
+.wsi-btn-admin-dark{
+    background-color: $wsi-admin;
+    color: $wsi-admin-light;
+    box-shadow: $wsi-shadow-light;
+    transition: .5s;
+    &:hover{
+        font-weight: bold;
+        background-color: $wsi-admin-light;
+        color: wsi-bg-admin-dark;
+        transition: .5s;
+        box-shadow: $wsi-shadow-primary;
+    }
+}
 /*backgrounds*/
 .wsi-bg-black {
     @include bg-dark;
@@ -73,6 +100,9 @@ img {
     }
 }
 
+.wsi-bg-admin{
+    background-color: $wsi-admin;
+}
 
 .wsi-btn-secondary{
     background-color: $wsi-secondary;
@@ -88,6 +118,10 @@ img {
 .wsi-border-container {
     @extend .wsi-rounded;
     border: $wsi-border-primary;
+}
+
+.wsi-border-admin {
+    border: $wsi-border-admin;
 }
 
 .wsi-rounded {

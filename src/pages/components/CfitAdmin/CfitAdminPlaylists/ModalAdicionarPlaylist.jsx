@@ -89,7 +89,7 @@ const ModalAdicionarPlaylist = (props) => {
               onChange={(e) => setimagem(e.target.value)}
             />
             <button
-              className="btn btn-primary wsi-shadow-primary"
+              className="btn wsi-btn-admin-dark"
             >
               {playlistId == -1 ? 'CADASTRAR': 'SALVAR'}
             </button>

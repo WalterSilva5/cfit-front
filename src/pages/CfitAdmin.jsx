@@ -13,11 +13,11 @@ const CfitAdmin = () => (
     <div className="row container-fluid" style={{minHeight: '70vh' }}>
         <div className="col-md-3 my-2 border border-danger rounded">
         <div className="p-2">
-            <NavLink className="btn btn-primary col-12 my-1" to="/cfit_admin/playlists">PLAYLISTS</NavLink>
-            <NavLink className="btn btn-primary col-12 my-1" to="/cfit_admin/usuarios">USUARIOS</NavLink>
-            <NavLink className="btn btn-primary col-12 my-1" to="/cfit_admin/mensagens">MENSAGENS</NavLink>
-            <NavLink className="btn btn-primary col-12 my-1" to="/cfit_admin/add_aula">ADD AULA</NavLink>
-            <NavLink className="btn btn-primary col-12 my-1" to="/cfit_admin/ajustes">AJUSTES</NavLink>
+            <NavLink className="btn col-12 my-1 wsi-btn-admin-dark" to="/cfit_admin/playlists">PLAYLISTS</NavLink>
+            <NavLink className="btn col-12 my-1 wsi-btn-admin-dark" to="/cfit_admin/usuarios">USUARIOS</NavLink>
+            <NavLink className="btn col-12 my-1 wsi-btn-admin-dark" to="/cfit_admin/mensagens">MENSAGENS</NavLink>
+            <NavLink className="btn col-12 my-1 wsi-btn-admin-dark" to="/cfit_admin/add_aula">ADD AULA</NavLink>
+            <NavLink className="btn col-12 my-1 wsi-btn-admin-dark" to="/cfit_admin/ajustes">AJUSTES</NavLink>
         </div>
         </div>
         <div className="my-2 col-md-9">
