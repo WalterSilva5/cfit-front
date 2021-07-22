@@ -1,7 +1,7 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-undef */
 import axios from 'axios';
-import { serverAddress } from '../../../../util/Settings';
+import { serverAddress } from './../../../../util/Settings';
 
 const ModalAdicionarPlaylist = (props) => {
   const [titulo, settitulo] = React.useState('');

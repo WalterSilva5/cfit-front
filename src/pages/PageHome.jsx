@@ -5,7 +5,7 @@
 /* eslint-disable no-unused-vars */
 import axios from 'axios';
 import PageHeader from './components/PageHeader';
-import { serverAddress } from '../util/Settings';
+import { serverAddress } from './../util/Settings';
 import PlaylistCard from './components/PageHome/PlaylistCard';
 
 const PageHome = () => {

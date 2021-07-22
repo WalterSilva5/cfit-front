@@ -10,7 +10,7 @@ import { nodeName } from 'jquery';
 import jwt_decode from 'jwt-decode';
 import classes from './PageLogin.module.scss';
 import PageLoginModalCadastro from './PageLoginModalCadastro';
-import { serverAddress } from '../../../util/settings';
+import { serverAddress } from './../../../util/settings';
 
 const PageLoginFormLogin = () => {
   const [modalVisible, setmodalVisible] = React.useState(false);

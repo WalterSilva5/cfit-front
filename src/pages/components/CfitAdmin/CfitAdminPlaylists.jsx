@@ -2,7 +2,7 @@
 /* eslint-disable react/button-has-type */
 import ModalAdicionarPlaylist from "./CfitAdminPlaylists/ModalAdicionarPlaylist";
 import axios from 'axios';
-import { serverAddress } from '../../../util/Settings';
+import { serverAddress } from './../../../util/Settings';
 
 const CfitAdminPlaylists = () => {
   const [modalVisible, setmodalVisible] = React.useState(false);
