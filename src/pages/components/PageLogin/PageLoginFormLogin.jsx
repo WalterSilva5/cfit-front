@@ -25,8 +25,9 @@ const PageLoginFormLogin = () => {
     //console.log(rota);
     axios.get(rota)
       .then((response) => {
-        console.log(response.data)
+        //console.log(response.data)
         localStorage.setItem('perm', response.data.type);
+        window.location.href = '/';
       }).catch((error) => {
         console.log(error);
       })
@@ -44,7 +45,6 @@ const PageLoginFormLogin = () => {
         localStorage.setItem('authToken', response.data.access);
         localStorage.setItem('accessUser', dado.user_id);
         setLevelAccess();
-        //window.location.href = '/';
       })
       .catch((error) => {
         setmsgErrorVisbile(true);
