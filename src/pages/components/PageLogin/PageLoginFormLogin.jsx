@@ -44,7 +44,7 @@ const PageLoginFormLogin = () => {
         localStorage.setItem('authToken', response.data.access);
         localStorage.setItem('accessUser', dado.user_id);
         setLevelAccess();
-        window.location.href = '/home';
+        window.location.href = '/';
       })
       .catch((error) => {
         setmsgErrorVisbile(true);

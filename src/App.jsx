@@ -20,7 +20,7 @@ function App() {
             {authToken ? <Redirect to="/home"/> : <PageLogin />}
           </Route>
 
-          <Route exact path="/home">
+          <Route path="/home">
             {authToken ? <PageHome /> : <PageLogin />}
           </Route>
           {/* <Route path="/aulas">
