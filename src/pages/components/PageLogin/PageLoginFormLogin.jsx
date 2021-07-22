@@ -22,10 +22,10 @@ const PageLoginFormLogin = () => {
   const setLevelAccess = () => {
     const accessUser = localStorage.getItem('accessUser');
     const rota = `${serverAddress}user/${accessUser}/`;
-    console.log(rota);
+    //console.log(rota);
     axios.get(rota)
       .then((response) => {
-        console.log(response.data)
+        //console.log(response.data)
         localStorage.setItem('perm', response.data.type);
       }).catch((error) => {
         console.log(error);
@@ -44,7 +44,7 @@ const PageLoginFormLogin = () => {
         localStorage.setItem('authToken', response.data.access);
         localStorage.setItem('accessUser', dado.user_id);
         setLevelAccess();
-        //window.location.href = '/home';
+        window.location.href = '/home';
       })
       .catch((error) => {
         setmsgErrorVisbile(true);
