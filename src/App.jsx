@@ -19,6 +19,11 @@ function App() {
           <Route exact path="/">
             {authToken ? <PageHome /> : <PageLogin />}
           </Route>
+          
+          <Route path="/home">
+            {authToken ? <PageHome /> : <PageLogin />}
+          </Route>
+          
           <Route exact path="/home">
             {authToken ? <PageHome /> : <PageLogin />}
           </Route>
