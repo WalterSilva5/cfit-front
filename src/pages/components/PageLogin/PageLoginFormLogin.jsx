@@ -11,26 +11,23 @@ import jwt_decode from 'jwt-decode';
 import classes from './PageLogin.module.scss';
 import PageLoginModalCadastro from './PageLoginModalCadastro';
 import { serverAddress } from '@/util/Settings';
-axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*'
+
 const PageLoginFormLogin = () => {
   const [modalVisible, setmodalVisible] = React.useState(false);
   const [msgError, setmsgError] = React.useState('teste');
   const [msgErrorVisbile, setmsgErrorVisbile] = React.useState(false);
   const [username, setusername] = React.useState('');
   const [password, setpassword] = React.useState('');
-  const config = {
-    headers: {'Access-Control-Allow-Origin': '*'}
-  }
   const setLevelAccess = () => {
     const accessUser = localStorage.getItem('accessUser');
     const rota = `${serverAddress}user/${accessUser}/`;
     //console.log(rota);
-    axios.get(rota,{ crossdomain: true }, config)
+    axios.get(rota)
       .then((response) => {
         //console.log(response.data)
         localStorage.setItem('perm', response.data.type);
         window.location.href = '/';
-      }).catch((error) => {
+      }).catch((error) => {  
         console.log(error);
       })
   };
@@ -38,8 +35,7 @@ const PageLoginFormLogin = () => {
   const AuthUser = () => {
     setmsgErrorVisbile(false);
     axios
-      .post(`${serverAddress}token/`, { username, password, crossdomain: true,
-        headers: {'Access-Control-Allow-Origin': '*'}})
+      .post(`${serverAddress}token/`, { username, password, crossDomain: true })
       .then((response) => {
         const dado = jwt_decode(response.data.access);
         localStorage.setItem('authToken', response.data.access);

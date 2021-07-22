@@ -7,12 +7,11 @@ import axios from 'axios';
 import PageHeader from './components/PageHeader';
 import { serverAddress } from '@/util/Settings';
 import PlaylistCard from './components/PageHome/PlaylistCard';
-
 const PageHome = () => {
   const [playlists, setplaylists] = React.useState([]);
   const [isLoading, setLoading] = React.useState(true);
   const getPlaylists = () => {
-    axios.get(`${serverAddress}playlist`).then((response) => {
+    axios.get(`${serverAddress}playlist`, {crossDomain: true}).then((response) => {
       setplaylists(response.data.map((res) => (
         <PlaylistCard
           key={res.pk}
