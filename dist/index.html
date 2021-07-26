@@ -2,16 +2,30 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/ico" href="./assets/favicon.2c43edbe.ico" />
+    <link rel="icon" type="image/ico" href="/assets/favicon.2c43edbe.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="manifest" href="./manifest.json">
     <title>CFIT BETA</title>
-  <script type="module" crossorigin src="./assets/index.5f7fe16b.js"></script>
-  <link rel="modulepreload" src="./assets/vendor.53716dfb.js">
-  <link rel="stylesheet" href="./assets/index.bcb1138b.css">
+  <script type="module" crossorigin src="/assets/index.48cd8915.js"></script>
+  <link rel="modulepreload" src="/assets/vendor.0c6f9186.js">
+  <link rel="stylesheet" href="/assets/index.bcb1138b.css">
 </head>
   <body>
     <div id="root"></div>
     
+    <script>
+      if ('serviceWorker' in navigator) {
+        // Register a service worker hosted at the root of the
+        // site using the default scope.
+        navigator.serviceWorker.register('./service-worker.js').then(function(registration) {
+          console.log('Service worker registration succeeded:', registration);
+        }, /*catch*/ function(error) {
+          console.log('Service worker registration failed:', error);
+        });
+      } else {
+        console.log('Service workers are not supported.');
+      }
+    </script>
   
 <script>window.__REACT_DEVTOOLS_GLOBAL_HOOK__.inject = function () {};</script>
 </body>
