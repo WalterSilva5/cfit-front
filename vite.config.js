@@ -13,6 +13,7 @@ export default defineConfig({
     }),
     VitePWA({
       registerType: "autoUpdate",
+      injectRegister: false, // service worker is registered from a separate script.
       manifest: {
         short_name: "CARVALHOS FIT",
         name: "CARVALHOS FIT",
@@ -33,13 +34,20 @@ export default defineConfig({
         theme_color: "#000000",
         background_color: "#ffffff",
       },
-      workbox: {
-        globDirectory: path.resolve(__dirname, "src/assets"),
-        globPatterns: ["**/*.{js,css,png,jpg,gif,svg,eot,ttf,woff,woff2}"],
-        swSrc: path.resolve(__dirname, "src/sw.js"),
-        swDest: path.resolve(__dirname, "dist/sw.js"),
+      sw: {
+        enabled: true,
+        mode: "production",
+        serviceWorker: {
+          entry: path.resolve(__dirname, "sw.js"),
+        },
       },
-    }),
+      workbox: { // Workbox configuration
+        globDirectory: path.resolve(__dirname, "src/assets"),
+        globPatterns: ["**/*.{html,js,css,png,jpg,jpeg,gif,svg,eot,ttf,woff,woff2}"],
+        globIgnores: ["**/sw.js"],
+        swDest: path.resolve(__dirname, "sw.js"),
+      },
+      }),
   ],
   server: {
     host: true,

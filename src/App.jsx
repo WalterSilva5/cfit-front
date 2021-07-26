@@ -8,7 +8,7 @@ import PageHome from './pages/PageHome.jsx';
 import PageLogin from './pages/PageLogin';
 import Page404 from './pages/Page404';
 import CfitAdmin from './pages/CfitAdmin';
-import registerServiceWorker from './sw.js';
+import registerServiceWorker from '../sw.js';
 // import PageAulas from './pages/PageAulas';
 
 function App() {
