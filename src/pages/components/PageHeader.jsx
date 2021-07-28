@@ -1,15 +1,19 @@
-import { NavLink } from 'react-router-dom';
-import $ from 'jquery';
-import { logoutUser } from '@/util/UserUtil';
+import { NavLink } from "react-router-dom";
+import $ from "jquery";
+import { logoutUser } from "@/util/UserUtil";
+
+
+
 
 const PageHeader = () => {
-  const [menuPopoverVisible, setmenuPopoverVisible] = React.useState(false);
-  const permission = localStorage.getItem('perm');
+  const permission = localStorage.getItem("perm");
   return (
     <div>
       <div className="">
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-2">
-          <span className="navbar-brand"><b>CFIT</b></span>
+          <span className="navbar-brand">
+            <b>CFIT</b>
+          </span>
           {/* <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon" />
           </button> */}
@@ -20,7 +24,7 @@ const PageHeader = () => {
             type="button"
             className="btn btn-primary btn_poopover"
             onClick={() => {
-              setmenuPopoverVisible(!menuPopoverVisible);
+              $(".menu-popover").toggle();
             }}
             data-toggle="popover"
             title="Popover title"
@@ -30,29 +34,40 @@ const PageHeader = () => {
           </button>
         </nav>
 
-        {
-          menuPopoverVisible
-            ? (
-              <div
-                className="btn border border-danger p-5"
-                style={{
-                  backgroundColor: '#fa9a1c26',
-                  position: 'absolute',
-                  right: 0,
-                  width: '200px',
-                }}
-              >
-                <NavLink className="btn btn-primary col-12" to="/">INICIO</NavLink>
-                {
-                  permission == 10 ? <NavLink className="btn my-3 btn-primary col-12" to="/cfit_admin" type="button">ADMIN</NavLink> : null
-                }
-                <button className="btn my-3 btn-primary col-12" type="button" onClick={() => logoutUser()}>SAIR</button>
-                {/* <NavLink className="btn btn-primary mx-2" to="/aulas">AULAS</NavLink>
+        <div
+          className="btn border border-danger p-5 menu-popover"
+          style={{
+            backgroundColor: "#fa9a1c26",
+            position: "absolute",
+            right: 0,
+            width: "200px",
+            display: "None",
+          }}
+          onMouseLeave={()=>{$(".menu-popover").toggle()}}
+        >
+          <NavLink exact className="btn btn-primary col-12 my-1" to="/">
+            INICIO
+          </NavLink>
+          <button className="btn btn-primary col-12 my-1">TREINOS</button>
+          {permission == 10 ? (
+            <NavLink exact
+              className="btn my-1 btn-primary col-12"
+              to="/cfit_admin"
+              type="button"
+            >
+              ADMIN
+            </NavLink>
+          ) : null}
+          <button
+            className="btn my-3 btn-primary col-12"
+            type="button"
+            onClick={() => logoutUser()}
+          >
+            SAIR
+          </button>
+          {/* <NavLink className="btn btn-primary mx-2" to="/aulas">AULAS</NavLink>
             <NavLink className="btn btn-primary" to="/teste">teste</NavLink> */}
-              </div>
-            )
-            : null
-        }
+        </div>
       </div>
     </div>
   );
