@@ -37,7 +37,7 @@ const PageHeader = () => {
         <div
           className="btn border border-danger p-5 menu-popover"
           style={{
-            backgroundColor: "#fa9a1c26",
+            backgroundColor: "rgba(255, 230, 220, 0.7)",
             position: "absolute",
             right: 0,
             width: "200px",

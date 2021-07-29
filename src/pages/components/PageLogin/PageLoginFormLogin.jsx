@@ -12,6 +12,7 @@ import classes from './PageLogin.module.scss';
 import PageLoginModalCadastro from './PageLoginModalCadastro';
 import { serverAddress } from '@/util/Settings';
 
+
 const PageLoginFormLogin = () => {
   const [modalVisible, setmodalVisible] = React.useState(false);
   const [msgError, setmsgError] = React.useState('teste');
@@ -40,6 +41,8 @@ const PageLoginFormLogin = () => {
         const dado = jwt_decode(response.data.access);
         localStorage.setItem('authToken', response.data.access);
         localStorage.setItem('accessUser', dado.user_id);
+        const token = localStorage.getItem("authToken");
+        axios.defaults.headers.common = {'Authorization': 'Bearer '+token}
         setLevelAccess();
       })
       .catch((error) => {
