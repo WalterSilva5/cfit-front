@@ -42,7 +42,7 @@ const CfitAdminPlaylists = () => {
       <div className="row d-flex justify-content-between px-3">
         <h1 className="d-block col-4 m-2">PLAYLISTS</h1>
         {' '}
-        <button className="m-2 col-4 btn wsi-btn-admin-dark wsi-shadow-light"
+        <button className="m-2 col-4 btn wsi-btn-admin wsi-shadow-light"
         onClick={() => {
           setmodalVisible(true);
         }}
