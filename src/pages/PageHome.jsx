@@ -7,6 +7,8 @@ import axios from 'axios';
 import PageHeader from './components/PageHeader';
 import { serverAddress } from '@/util/Settings';
 import PlaylistCard from './components/PageHome/PlaylistCard';
+import { logoutUser } from "@/util/UserUtil";
+
 
 const PageHome = () => {
   const token = localStorage.getItem('authToken')
@@ -25,6 +27,10 @@ const PageHome = () => {
         />
       )));
       setLoading(false);
+    }).catch((err)=>{
+      if(err.response.status === 401){
+        logoutUser();
+      }
     });
   };
 
