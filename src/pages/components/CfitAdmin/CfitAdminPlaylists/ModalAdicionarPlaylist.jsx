@@ -41,7 +41,7 @@ const ModalAdicionarPlaylist = (props) => {
     })
       .then((result) => {
         console.log(result);
-        if (result.status == 201) {
+        if (result.status == 201 || result.status == 200) {
           set_sucesso_erro_mensagem("Playlist salva com sucesso!");
           set_tipo_alert("success");
         } else {
