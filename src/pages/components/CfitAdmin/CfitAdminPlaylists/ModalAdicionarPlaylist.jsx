@@ -2,10 +2,10 @@
 /* eslint-disable no-undef */
 import axios from "axios";
 import { serverAddress } from "@/util/Settings";
-const token = localStorage.getItem("authToken");
-axios.defaults.headers.common = { Authorization: "Bearer " + token };
 
 const ModalAdicionarPlaylist = (props) => {
+  const token = localStorage.getItem("authToken");
+  axios.defaults.headers.common = { Authorization: "Bearer " + token };
   const [titulo, settitulo] = React.useState("");
   const [descricao, setdescricao] = React.useState("");
   const [imagem, setimagem] = React.useState("");

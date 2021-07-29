@@ -8,9 +8,9 @@ import PageHeader from './components/PageHeader';
 import { serverAddress } from '@/util/Settings';
 import PlaylistCard from './components/PageHome/PlaylistCard';
 
-const token = localStorage.getItem('authToken')
-axios.defaults.headers.common = { Authorization: "Bearer " + token };
 const PageHome = () => {
+  const token = localStorage.getItem('authToken')
+  axios.defaults.headers.common = { Authorization: "Bearer " + token };
   const [playlists, setplaylists] = React.useState([]);
   const [isLoading, setLoading] = React.useState(true);
   const getPlaylists = () => {
