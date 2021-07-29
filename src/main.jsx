@@ -6,17 +6,9 @@ import store from "./store/store";
 import "bootstrap/dist/css/bootstrap.css";
 import "./assets/styles.scss";
 import "animate.css";
-import { registerSW } from 'virtual:pwa-register'
+import { registerServiceWorker } from './service-worker';
 
-const updateSW = registerSW({
-  onNeedRefresh(refresh) {  
-    refresh()
-  },
-  onofflineready: () => { 
-    console.log('onofflineready')
-  } 
-})
-updateSW()
+registerServiceWorker();
 
 ReactDOM.render(
   <React.StrictMode>

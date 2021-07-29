@@ -165,7 +165,7 @@ const ModalAdicionarPlaylist = (props) => {
             />
             <div className="d-flex justify-content-between">
               <button
-                className="btn wsi-btn-admin-dark"
+                className="btn wsi-btn-admin wsi-shadow-light"
                 onClick={() => {
                   salvarPlaylist();
                 }}
@@ -174,7 +174,7 @@ const ModalAdicionarPlaylist = (props) => {
               </button>
               {playlistId != -1 ? (
                 <button
-                  className="btn wsi-btn-admin-dark"
+                  className="btn btn-danger wsi-shadow-light"
                   onClick={() => {
                     deletarPlaylist();
                   }}

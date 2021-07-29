@@ -18,7 +18,7 @@ const CfitAdminPlaylists = () => {
         <tr className="wsi-border-admin" key={res.pk}>
           <td className="wsi-border-admin">{res.titulo}</td>
           <td className="wsi-border-admin">{res.descricao}</td>
-          <td className="wsi-border-admin"><button className="btn wsi-btn-admin-dark" value={res.pk}
+          <td className="wsi-border-admin"><button className="btn wsi-btn-admin" value={res.pk}
             onClick={(e) => {
               updatePlaylistIdEditar(e.target.value);
               setmodalVisible(true);
@@ -53,9 +53,9 @@ const CfitAdminPlaylists = () => {
           <table className="table table-hover table-dark table-borderd wsi-border-admin rounded">
             <thead className="wsi-border-admin">
               <tr className="">
-                <th scope="col" className="border border-primary wsi-btn-admin-dark" style={{backgroundColor: '#2e0040'}}>TITULO</th>
-                <th scope="col" className="border border-primary wsi-btn-admin-dark" style={{backgroundColor: '#2e0040'}}>DESCRICAO</th>
-                <th className="col-1 border border-primary wsi-btn-admin-dark" style={{backgroundColor: '#2e0040'}}>EDITAR</th>
+                <th scope="col" className="border border-primary" style={{backgroundColor: 'blue'}}>TITULO</th>
+                <th scope="col" className="border border-primary" style={{backgroundColor: 'blue'}}>DESCRICAO</th>
+                <th className="col-1 border border-primary" style={{backgroundColor: 'blue'}}>EDITAR</th>
               </tr>
             </thead>
             <tbody>
