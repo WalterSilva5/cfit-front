@@ -14,7 +14,7 @@ const PageHome = () => {
   const token = localStorage.getItem('authToken')
   axios.defaults.headers.common = { Authorization: "Bearer " + token };
   const [playlists, setplaylists] = React.useState([]);
-  const [isLoading, setLoading] = React.useState(true);
+  const [isCarregando, setCarregando] = React.useState(true);
   const getPlaylists = () => {
     axios.get(`${serverAddress}playlist/`, { crossDomain: true}).then((response) => {
       setplaylists(response.data.map((res) => (
@@ -26,7 +26,7 @@ const PageHome = () => {
           imagem={res.imagem}
         />
       )));
-      setLoading(false);
+      setCarregando(false);
     }).catch((err)=>{
       if(err.response.status === 401){
         logoutUser();
@@ -37,8 +37,8 @@ const PageHome = () => {
   React.useEffect(() => {
     getPlaylists();
   }, []);
-  if (isLoading) {
-    return <div><h1>Loading...</h1></div>;
+  if (isCarregando) {
+    return <div><h1>Carregando...</h1></div>;
   }
   return (
     <div>

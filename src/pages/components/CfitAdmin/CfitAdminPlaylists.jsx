@@ -6,9 +6,9 @@ import { serverAddress } from '@/util/Settings';
 
 const CfitAdminPlaylists = () => {
   const [modalVisible, setmodalVisible] = React.useState(false);
-  const [isLoading, setLoading] = React.useState(true);
+  const [isCarregando, setCarregando] = React.useState(true);
   const [playlists, setplaylists] = React.useState([]);
-  const [playlistIdEditar, setplaylistIdEditar] = React.useState("");
+  const [playlistIdEditar, setplaylistIdEditar] = React.useState(-1);
   const getPlaylists = () => {
     axios.get(`${serverAddress}playlist`).then((response) => {
       setplaylists(response.data.map((res) => (
@@ -23,32 +23,35 @@ const CfitAdminPlaylists = () => {
           >EDITAR</button></td>
         </tr>
       )));
-      setLoading(false);
+      setCarregando(false);
     });
   };
 
   React.useEffect(() => {
     if(playlists.length === 0) {
-      console.log(playlistIdEditar);
       getPlaylists();
     }
   }, []);
-  if (isLoading) {
-    return <div><h1>Loading...</h1></div>;
+  if (isCarregando) {
+    return <div><h1>Carregando...</h1></div>;
   }
 
   return (
     <div>
-      <div className="row d-flex justify-content-between px-3">
-        <h1 className="d-block col-4 m-2">PLAYLISTS</h1>
-        {' '}
-        <button className="m-2 col-4 btn wsi-btn-admin wsi-shadow-light"
-        onClick={() => {
-          setmodalVisible(true);
-        }}
-        >ADICIONAR NOVA</button>
+      <div className="row d-flex justify-content-between px-md-3">
+
+        <div className="col-md-6">
+          <h1 className="d-block col-4 m-md-2">PLAYLISTS</h1>
+        </div>
+        <div className="col-md-6 d-flex justify-content-end">
+          <button className="btn wsi-btn-admin wsi-shadow-light col-md-8"
+          onClick={() => {
+            setmodalVisible(true);
+          }}
+          >ADICIONAR NOVA</button>
+        </div>
       </div>
-      <div className="p-2">
+      <div className="p-md-2">
         <div style={{ height: '70vh', overflow: 'auto' }} className="rounded wsi-border-admin">
           <table className="table table-hover table-dark table-borderd wsi-border-admin rounded">
             <thead className="wsi-border-admin">
@@ -65,7 +68,7 @@ const CfitAdminPlaylists = () => {
           <div
             className={` modal animate__animated d-block
               ${
-                !modalVisible ? 'animate__fadeOutRight' : 'animate__fadeInLeft'
+                modalVisible ? 'animate__fadeInLeft': 'animate__fadeOutRight' 
               }`}
           >
             <ModalAdicionarPlaylist setmodalVisible={setmodalVisible} playlistIdEditar={playlistIdEditar} 

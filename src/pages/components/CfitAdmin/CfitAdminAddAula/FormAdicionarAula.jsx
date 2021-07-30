@@ -13,7 +13,8 @@ const FormAdicionarAula = (props) => {
   const [alertaAdicionarAula, setAlertaAdicionarAula] = React.useState(false);
   const [mensagemAdicionarAula, setMensagemAdicionarAula] = React.useState("");
   const [playlists, setplaylists] = React.useState([]);
-  const [isLoading, setLoading] = React.useState(true);
+  const [listaPlaylists, setListaPlaylists] = React.useState({});
+  const [isCarregando, setCarregando] = React.useState(true);
   const [videoPk, setVideoPk] = React.useState(0);
   const [permiteDeletar, setPermiteDeletar] = React.useState(false);
 
@@ -53,6 +54,7 @@ const FormAdicionarAula = (props) => {
     axios
       .get(`${serverAddress}playlist/`, { crossDomain: true })
       .then((response) => {
+        setListaPlaylists(response.data);
         setplaylists(
           response.data.map((res) => (
             <option key={res.pk} value={res.pk}>
@@ -60,7 +62,7 @@ const FormAdicionarAula = (props) => {
             </option>
           ))
         );
-        setLoading(false);
+        setCarregando(false);
       })
       .catch((err) => {
         if (err.response.status === 401) {
@@ -68,6 +70,7 @@ const FormAdicionarAula = (props) => {
         }
       });
   };
+ 
 
   const salvarVideo = () => {
     setAlertaAdicionarAula(true);
@@ -130,10 +133,10 @@ const FormAdicionarAula = (props) => {
       getPlaylists();
     }
   }, []);
-  if (isLoading) {
+  if (isCarregando) {
     return (
       <div>
-        <h1>Loading...</h1>
+        <h1>Carregando...</h1>
       </div>
     );
   }
@@ -179,9 +182,15 @@ const FormAdicionarAula = (props) => {
                 className="form-control"
                 onChange={(e) => setPlaylistId(e.target.value)}
               >
-                <option selected disabled hidden value="">
-                  ESCOLHA UMA PLAYLIST
-                </option>
+                {
+                  playlistId == -1? 
+                  <option defaultValue="selected" disabled hidden> ESCOLHA UMA PLAYLIST </option>
+                  :
+                  <option selected value={playlistId}>{
+                    listaPlaylists.find((playlist) => playlist.pk == playlistId).titulo
+                    
+                  }</option>
+                }
                 {playlists}
               </select>
             </div>

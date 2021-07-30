@@ -5,7 +5,7 @@ const TabelaDeAulas = (props) => {
   const token = localStorage.getItem("authToken");
   axios.defaults.headers.common = { Authorization: "Bearer " + token };
   const [aulas, setAulas] = React.useState([]);
-  const [isLoading, setLoading] = React.useState(true);
+  const [isCarregando, setCarregando] = React.useState(true);
 
   const getAulas = () => {
     axios
@@ -29,7 +29,7 @@ const TabelaDeAulas = (props) => {
             ))
           );
         }
-        setLoading(false);
+        setCarregando(false);
       })
       .catch((error) => {
         // console.log(error);
@@ -38,16 +38,16 @@ const TabelaDeAulas = (props) => {
 
 
   React.useEffect(() => {
-    if(props.playlistId != -1){
+    if(props.playlistId != -1 && props.playlistId != undefined && props.playlistId){
       getAulas();
     }
   }, [props.playlistId]);
 
 
-  if (isLoading) {
+  if (isCarregando) {
     return (
       <div>
-        <h1>Loading...</h1>
+        <h1>Carregando...</h1>
       </div>
     );
   }

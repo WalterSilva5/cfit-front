@@ -7,27 +7,18 @@ const ModalAdicionarPlaylist = (props) => {
   const token = localStorage.getItem("authToken");
   axios.defaults.headers.common = { Authorization: "Bearer " + token };
   const [titulo, settitulo] = React.useState("");
+  const [playlistId, setPlaylistId] = React.useState(-1);
   const [descricao, setdescricao] = React.useState("");
   const [imagem, setimagem] = React.useState("");
-  const [playlistId, setPlaylistId] = React.useState(props.playlistIdEditar);
   const [alert_adicionar_editar_playlist, set_alert_adicionar_editar_playlist] =
     React.useState(false);
   const [tipo_alert, set_tipo_alert] = React.useState("");
   const [sucesso_erro_mensagem, set_sucesso_erro_mensagem] = React.useState("");
   const [permiteDeletar, setPermiteDeletar] = React.useState(false);
 
-
-  React.useEffect(() => {
-    setPlaylistId(props.playlistIdEditar);
-  }, [props.playlistIdEditar]);
-
-  React.useEffect(() => {
-    if (titulo == "" && playlistId == -1) {
-      getPlaylists();
-    }
-  }, []);
-
   const resetData = () => {
+    props.setplaylistIdEditar(-1);
+    setPlaylistId(-1);
     settitulo("");
     setdescricao("");
     setimagem("");
@@ -40,15 +31,16 @@ const ModalAdicionarPlaylist = (props) => {
     let request_method = "";
     let editar_playlist = "";
     if (playlistId != -1) {
-      editar_playlist = playlistId + "/";
+      url= `${serverAddress}playlist/${editar_playlist}`,
       request_method = "put";
     } else {
       request_method = "post";
+      url = `${serverAddress}playlist/`;
     }
     set_alert_adicionar_editar_playlist(true);
     axios({
+      url: url,
       method: request_method,
-      url: `${serverAddress}playlist/${editar_playlist}`,
       data: { titulo, descricao, imagem },
     })
       .then((result) => {
@@ -98,29 +90,34 @@ const ModalAdicionarPlaylist = (props) => {
     }
   };
 
-  const setCampos = (props) => {
-    settitulo(props.titulo);
-    setdescricao(props.descricao);
-    setimagem(props.imagem);
-    setPlaylistId(props.pk);
+  const setCampos = (result) => {
+    settitulo(result.titulo);
+    setdescricao(result.descricao);
+    setimagem(result.imagem);
   };
-  const getPlaylists = () => {
-    try {
-      axios
+  const getPLaylist = () => {
+    if(playlistId != -1) {
+    axios
         .get(`${serverAddress}playlist/${playlistId}`)
         .then((response) => {
           setCampos(response.data);
         })
         .catch(() => {
-          settitulo("");
-          setdescricao("");
-          setimagem("");
-          setPlaylistId(-1);
+          setCampos({ titulo: "", descricao: "", imagem: "" });
         });
-    } catch (e) {
-      setcampos({ titulo: "", descricao: "", imagem: "" });
     }
   };
+
+  React.useEffect(() => {
+    getPLaylist();
+  }, [playlistId]);
+
+  React.useEffect(() => {
+    if (props.playlistIdEditar != -1 && props.playlistIdEditar != null && props.playlistIdEditar != "") {
+      setPlaylistId(props.playlistIdEditar);
+    }
+  }, [props]);
+
   return (
     <div>
       <div
@@ -140,9 +137,9 @@ const ModalAdicionarPlaylist = (props) => {
               className="btn wsi-btn btn-danger btn-sm"
               type="button"
               onClick={() => {
-                props.setplaylistIdEditar(-1);
+                props.setmodalVisible(false);
                 resetData();
-                window.location.href = "/cfit_admin/playlists";
+                //window.location.href = "/cfit_admin/playlists";
               }}
             >
               FECHAR
@@ -216,12 +213,14 @@ const ModalAdicionarPlaylist = (props) => {
                 <h5>{sucesso_erro_mensagem}</h5>
               </div>
             ) : null}
-            <div className="border border-danger rounded mt-5 p-2">
-              <TabelaDeAulas
-                playlistId={playlistId}
-                modalVisible={props.modalVisible}
-              />
-            </div>
+            {playlistId != -1 ? (
+              <div className="border border-danger rounded mt-5 p-2">
+                <TabelaDeAulas
+                  playlistId={playlistId}
+                  modalVisible={props.modalVisible}
+                />
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

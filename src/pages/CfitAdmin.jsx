@@ -12,7 +12,7 @@ const CfitAdmin = () => (
     <PageHeader />
     <div className="row container-fluid" style={{minHeight: '70vh' }}>
         <div className="col-md-3 my-2 border border-danger rounded wsi-container-dark">
-        <div className="p-2">
+        <div className="py-2">
             <NavLink className="btn col-12 my-1 wsi-btn-admin" to="/cfit_admin/playlists">PLAYLISTS</NavLink>
             <NavLink className="btn col-12 my-1 wsi-btn-admin" to="/cfit_admin/usuarios">USUARIOS</NavLink>
             <NavLink className="btn col-12 my-1 wsi-btn-admin" to="/cfit_admin/mensagens">MENSAGENS</NavLink>
@@ -20,8 +20,8 @@ const CfitAdmin = () => (
             <NavLink className="btn col-12 my-1 wsi-btn-admin" to="/cfit_admin/ajustes">AJUSTES</NavLink>
         </div>
         </div>
-        <div className="my-2 col-md-9">
-            <div className="border border-danger rounded wsi-container-dark"  style={{ minHeight: '70vh' }}>
+        <div className="my-2 col-md-9  px-md-2 px-0">
+            <div className="border border-danger rounded wsi-container-dark p-2"  style={{ minHeight: '70vh' }}>
                 <Switch>
                   <Route path="/cfit_admin/add_aula/:id?">
                     <CfitAdminAddAula />
