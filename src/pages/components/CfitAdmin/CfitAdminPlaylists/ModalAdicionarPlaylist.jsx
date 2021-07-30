@@ -16,6 +16,17 @@ const ModalAdicionarPlaylist = (props) => {
   const [sucesso_erro_mensagem, set_sucesso_erro_mensagem] = React.useState("");
   const [permiteDeletar, setPermiteDeletar] = React.useState(false);
 
+
+  React.useEffect(() => {
+    setPlaylistId(props.playlistIdEditar);
+  }, [props.playlistIdEditar]);
+
+  React.useEffect(() => {
+    if (titulo == "" && playlistId == -1) {
+      getPlaylists();
+    }
+  }, []);
+
   const resetData = () => {
     settitulo("");
     setdescricao("");
@@ -61,7 +72,9 @@ const ModalAdicionarPlaylist = (props) => {
     set_alert_adicionar_editar_playlist(true);
     if (!permiteDeletar) {
       set_tipo_alert("warning");
-      set_sucesso_erro_mensagem("MARQUE A CAIXA PRA CONFIRMAR ANTES DE DELETAR");
+      set_sucesso_erro_mensagem(
+        "MARQUE A CAIXA PRA CONFIRMAR ANTES DE DELETAR"
+      );
     } else {
       axios({
         method: "delete",
@@ -94,7 +107,7 @@ const ModalAdicionarPlaylist = (props) => {
   const getPlaylists = () => {
     try {
       axios
-        .get(`${serverAddress}playlist/${props.playlistIdEditar}`)
+        .get(`${serverAddress}playlist/${playlistId}`)
         .then((response) => {
           setCampos(response.data);
         })
@@ -108,10 +121,6 @@ const ModalAdicionarPlaylist = (props) => {
       setcampos({ titulo: "", descricao: "", imagem: "" });
     }
   };
-
-  React.useEffect(() => {
-    getPlaylists();
-  }, [props.playlistIdEditar]);
   return (
     <div>
       <div
@@ -180,6 +189,7 @@ const ModalAdicionarPlaylist = (props) => {
               </button>
               {playlistId != -1 ? (
                 <div>
+                  <span>Confirma?</span>
                   <input
                     className="form-check-input mx-3 mt-2"
                     onChange={(e) => {

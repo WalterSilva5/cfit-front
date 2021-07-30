@@ -8,10 +8,7 @@ const CfitAdminPlaylists = () => {
   const [modalVisible, setmodalVisible] = React.useState(false);
   const [isLoading, setLoading] = React.useState(true);
   const [playlists, setplaylists] = React.useState([]);
-  const [playlistIdEditar, setplaylistIdEditar] = React.useState(-1);
-  const updatePlaylistIdEditar = (playlistId) => {
-    setplaylistIdEditar(parseInt(playlistId));
-  }
+  const [playlistIdEditar, setplaylistIdEditar] = React.useState("");
   const getPlaylists = () => {
     axios.get(`${serverAddress}playlist`).then((response) => {
       setplaylists(response.data.map((res) => (
@@ -20,8 +17,8 @@ const CfitAdminPlaylists = () => {
           <td className="wsi-border-admin">{res.descricao}</td>
           <td className="wsi-border-admin"><button className="btn wsi-btn-admin" value={res.pk}
             onClick={(e) => {
-              updatePlaylistIdEditar(e.target.value);
               setmodalVisible(true);
+              setplaylistIdEditar(e.target.value);
             }}
           >EDITAR</button></td>
         </tr>
@@ -29,9 +26,12 @@ const CfitAdminPlaylists = () => {
       setLoading(false);
     });
   };
-  
+
   React.useEffect(() => {
-    getPlaylists();
+    if(playlists.length === 0) {
+      console.log(playlistIdEditar);
+      getPlaylists();
+    }
   }, []);
   if (isLoading) {
     return <div><h1>Loading...</h1></div>;

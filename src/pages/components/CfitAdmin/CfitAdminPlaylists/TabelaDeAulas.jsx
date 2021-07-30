@@ -13,28 +13,37 @@ const TabelaDeAulas = (props) => {
         `${serverAddress}video/videos_por_playlist/?playlist_id=${props.playlistId}`
       )
       .then((response) => {
-        setAulas(
-          response.data.map((video) => (
-            <tr key={video.pk}>
-              <td>{video.titulo}</td>
-              <td>
-                <a className="btn wsi-btn-admin"
-                href={`/cfit_admin/add_aula/${video.pk}`}  
-                >EDITAR</a>
-              </td>
-            </tr>
-          ))
-        );
+        if(!response.data || response.data.length === 0) {
+          setAulas(<tr><td>ESSA PLAYLIST NÃO TEM AULAS</td><td></td></tr>);
+        }else{
+          setAulas(
+            response.data.map((video) => (
+              <tr key={video.pk}>
+                <td>{video.titulo}</td>
+                <td>
+                  <a className="btn wsi-btn-admin"
+                  href={`/cfit_admin/add_aula/${video.pk}`}  
+                  >EDITAR</a>
+                </td>
+              </tr>
+            ))
+          );
+        }
         setLoading(false);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 
+
   React.useEffect(() => {
-    getAulas();
-  }, [aulas]);
+    if(props.playlistId != -1){
+      getAulas();
+    }
+  }, [props.playlistId]);
+
+
   if (isLoading) {
     return (
       <div>
