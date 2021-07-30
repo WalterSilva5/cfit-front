@@ -1,5 +1,5 @@
 import PageHeader from './components/PageHeader';
-import { Route, Switch, Redirect, NavLink } from 'react-router-dom';
+import { Route, Switch, Redirect, NavLink} from 'react-router-dom';
 import CfitAdminAddAula from './components/CfitAdmin/CfitAdminAddAula';
 import CfitAdminAjustes from './components/CfitAdmin/CfitAdminAjustes';
 import CfitAdminMensagens from './components/CfitAdmin/CfitAdminMensagens';
@@ -23,7 +23,7 @@ const CfitAdmin = () => (
         <div className="my-2 col-md-9">
             <div className="border border-danger rounded wsi-container-dark"  style={{ minHeight: '70vh' }}>
                 <Switch>
-                  <Route path="/cfit_admin/add_aula">
+                  <Route path="/cfit_admin/add_aula/:id?">
                     <CfitAdminAddAula />
                   </Route>
                   <Route path="/cfit_admin/ajustes">
@@ -35,7 +35,7 @@ const CfitAdmin = () => (
                   <Route path="/cfit_admin/playlists">
                     <CfitAdminPlaylists />
                   </Route>
-                   <Route path="/cfit_admin/usuarios">
+                  <Route path="/cfit_admin/usuarios">
                     <CfitAdminUsuarios />
                   </Route>
                 </Switch>

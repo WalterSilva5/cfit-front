@@ -68,7 +68,8 @@ const CfitAdminPlaylists = () => {
                 !modalVisible ? 'animate__fadeOutRight' : 'animate__fadeInLeft'
               }`}
           >
-            <ModalAdicionarPlaylist setmodalVisible={setmodalVisible} playlistIdEditar={playlistIdEditar} setplaylistIdEditar={setplaylistIdEditar}/>
+            <ModalAdicionarPlaylist setmodalVisible={setmodalVisible} playlistIdEditar={playlistIdEditar} 
+            setplaylistIdEditar={setplaylistIdEditar} modalVisible={modalVisible}/>
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 import axios from "axios";
 import { serverAddress } from "@/util/Settings";
-
+import TabelaDeAulas from "./TabelaDeAulas";
 const ModalAdicionarPlaylist = (props) => {
   const token = localStorage.getItem("authToken");
   axios.defaults.headers.common = { Authorization: "Bearer " + token };
@@ -14,6 +14,7 @@ const ModalAdicionarPlaylist = (props) => {
     React.useState(false);
   const [tipo_alert, set_tipo_alert] = React.useState("");
   const [sucesso_erro_mensagem, set_sucesso_erro_mensagem] = React.useState("");
+  const [permiteDeletar, setPermiteDeletar] = React.useState(false);
 
   const resetData = () => {
     settitulo("");
@@ -58,25 +59,30 @@ const ModalAdicionarPlaylist = (props) => {
 
   const deletarPlaylist = () => {
     set_alert_adicionar_editar_playlist(true);
-    axios({
-      method: "delete",
-      url: `${serverAddress}playlist/${playlistId}/`,
-    })
-      .then((result) => {
-        console.log(result);
-        if (result.status == 204) {
-          set_sucesso_erro_mensagem("Playlist deletada com sucesso!");
-          set_tipo_alert("success");
-        } else {
+    if (!permiteDeletar) {
+      set_tipo_alert("warning");
+      set_sucesso_erro_mensagem("MARQUE A CAIXA PRA CONFIRMAR ANTES DE DELETAR");
+    } else {
+      axios({
+        method: "delete",
+        url: `${serverAddress}playlist/${playlistId}/`,
+      })
+        .then((result) => {
+          console.log(result);
+          if (result.status == 204) {
+            set_sucesso_erro_mensagem("Playlist deletada com sucesso!");
+            set_tipo_alert("success");
+          } else {
+            set_sucesso_erro_mensagem("Ocorreu um erro ao deletar a playlist.");
+            set_tipo_alert("danger");
+          }
+        })
+        .catch((error) => {
+          console.log("err " + result);
           set_sucesso_erro_mensagem("Ocorreu um erro ao deletar a playlist.");
           set_tipo_alert("danger");
-        }
-      })
-      .catch((error) => {
-        console.log("err " + result);
-        set_sucesso_erro_mensagem("Ocorreu um erro ao deletar a playlist.");
-        set_tipo_alert("danger");
-      });
+        });
+    }
   };
 
   const setCampos = (props) => {
@@ -173,14 +179,26 @@ const ModalAdicionarPlaylist = (props) => {
                 {playlistId == -1 ? "CADASTRAR" : "SALVAR"}
               </button>
               {playlistId != -1 ? (
-                <button
-                  className="btn btn-danger wsi-shadow-light"
-                  onClick={() => {
-                    deletarPlaylist();
-                  }}
-                >
-                  DELETAR PLAYLIST
-                </button>
+                <div>
+                  <input
+                    className="form-check-input mx-3 mt-2"
+                    onChange={(e) => {
+                      setPermiteDeletar(e.target.checked);
+                      console.log(permiteDeletar);
+                    }}
+                    type="checkbox"
+                    value={permiteDeletar}
+                    id="flexCheckDefault"
+                  />
+                  <button
+                    className="btn btn-danger wsi-shadow-light"
+                    onClick={() => {
+                      deletarPlaylist();
+                    }}
+                  >
+                    DELETAR PLAYLIST
+                  </button>
+                </div>
               ) : null}
             </div>
             {alert_adicionar_editar_playlist ? (
@@ -188,6 +206,12 @@ const ModalAdicionarPlaylist = (props) => {
                 <h5>{sucesso_erro_mensagem}</h5>
               </div>
             ) : null}
+            <div className="border border-danger rounded mt-5 p-2">
+              <TabelaDeAulas
+                playlistId={playlistId}
+                modalVisible={props.modalVisible}
+              />
+            </div>
           </div>
         </div>
       </div>

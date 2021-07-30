@@ -8,7 +8,7 @@ import "./assets/styles.scss";
 import "animate.css";
 import { registerServiceWorker } from './service-worker';
 
-registerServiceWorker();
+//registerServiceWorker();
 
 ReactDOM.render(
   <React.StrictMode>
