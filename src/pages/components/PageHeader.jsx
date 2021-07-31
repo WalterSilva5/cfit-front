@@ -42,6 +42,7 @@ const PageHeader = () => {
             right: 0,
             width: "200px",
             display: "None",
+            zIndex: "9999",
           }}
           onMouseLeave={()=>{$(".menu-popover").toggle()}}
         >

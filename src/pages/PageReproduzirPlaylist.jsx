@@ -69,7 +69,7 @@ const PageReproduzirPlaylist = () => {
       <PageHeader />
       <dir className="col-12 p-1 d-flex justify-content-center">
         <div
-          className="col-md-10 border border-danger rounded m-0 p-md-2"
+          className="col-sm-12 col-md-10 border border-danger rounded m-0 p-md-2"
           style={{ minHeight: "70vh" }}
         >
           <h1 className="wsi-bg-dark text-center my-2">

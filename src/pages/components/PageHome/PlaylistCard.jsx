@@ -6,7 +6,7 @@ const imagemVazia =
 const PlaylistCard = (props) => {
   return (
     <div
-      className="col-md-4 btn my-3 p-1"
+      className="col-lg-4 btn my-3 p-1"
       onClick={() => {
         window.location.href = `/reproduzir_playlist/${props.id}`;
       }}
@@ -16,7 +16,7 @@ const PlaylistCard = (props) => {
         <h3 className="container text-center">
           <b>{props.titulo}</b>
         </h3>
-        <div className="container p-0 m-0 bg-danger" style={{ minHeight: "100%" }}>
+        <div className="container p-0 m-0 " style={{ height: "70%" }}>
           <img
             className="img-fluid"
             style={{ height: "100%", width: "100%" }}
