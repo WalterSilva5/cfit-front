@@ -9,22 +9,22 @@ import { serverAddress } from '@/util/Settings';
 import PlaylistCard from './components/PageHome/PlaylistCard';
 import { logoutUser } from "@/util/UserUtil";
 
-
 const PageHome = () => {
   const token = localStorage.getItem('authToken')
   axios.defaults.headers.common = { Authorization: "Bearer " + token };
   const [playlists, setplaylists] = React.useState([]);
   const [isCarregando, setCarregando] = React.useState(true);
+  const [aulaAtual , setAulaAtual] = React.useState("");
   const getPlaylists = () => {
     axios.get(`${serverAddress}playlist/`, { crossDomain: true}).then((response) => {
       setplaylists(response.data.map((res) => (
-        <PlaylistCard
-          key={res.pk}
-          titulo={res.titulo}
-          descricao={res.descricao}
-          id={res.pk}
-          imagem={res.imagem}
-        />
+          <PlaylistCard
+            key={res.pk}
+            titulo={res.titulo}
+            descricao={res.descricao}
+            id={res.pk}
+            imagem={res.imagem}
+          />
       )));
       setCarregando(false);
     }).catch((err)=>{
@@ -43,7 +43,7 @@ const PageHome = () => {
   return (
     <div>
       <PageHeader />
-      <div className="row d-flex justify-content-center container-fluid">{playlists}</div>
+      <div className="row p-0 d-flex justify-content-center container-fluid">{playlists}</div>
     </div>
   );
 };

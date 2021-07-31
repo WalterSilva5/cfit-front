@@ -44,7 +44,7 @@ const CfitAdminPlaylists = () => {
           <h1 className="d-block col-4 m-md-2">PLAYLISTS</h1>
         </div>
         <div className="col-md-6 d-flex justify-content-end">
-          <button className="btn wsi-btn-admin wsi-shadow-light col-md-8"
+          <button className="btn wsi-btn-admin col-md-8"
           onClick={() => {
             setmodalVisible(true);
           }}
@@ -66,9 +66,9 @@ const CfitAdminPlaylists = () => {
             </tbody>
           </table>
           <div
-            className={` modal animate__animated d-block
+            className={` modal animate__animated
               ${
-                modalVisible ? 'animate__fadeInLeft': 'animate__fadeOutRight' 
+                modalVisible ? 'animate__fadeInLeft  d-block': 'animate__fadeOutRight  d-block' 
               }`}
           >
             <ModalAdicionarPlaylist setmodalVisible={setmodalVisible} playlistIdEditar={playlistIdEditar} 

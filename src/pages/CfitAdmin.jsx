@@ -21,7 +21,7 @@ const CfitAdmin = () => (
         </div>
         </div>
         <div className="my-2 col-md-9  px-md-2 px-0">
-            <div className="border border-danger rounded wsi-container-dark p-2"  style={{ minHeight: '70vh' }}>
+            <div className="border border-danger rounded wsi-container-dark p-2  wsi-shadow-light"  style={{ minHeight: '70vh' }}>
                 <Switch>
                   <Route path="/cfit_admin/add_aula/:id?">
                     <CfitAdminAddAula />

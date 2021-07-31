@@ -8,14 +8,15 @@ import PageHome from "./pages/PageHome.jsx";
 import PageLogin from "./pages/PageLogin";
 import Page404 from "./pages/Page404";
 import CfitAdmin from "./pages/CfitAdmin";
+import PageReproduzirPlaylist from "./pages/PageReproduzirPlaylist";
 // import PageAulas from './pages/PageAulas';
 import PWAInstallerPrompt from 'react-pwa-installer-prompt';
 
 function App() {
   const authToken = localStorage.getItem("authToken");
   return (
-    <div className="wsi-bg-black">
-      <div style={{ minHeight: "100vh" }}>
+    <div className="wsi-bg-black p-0 m-0">
+      <div style={{ minHeight: "100vh" }} className="p-0 m-0">
         <Switch>
           <Route exact path="/">
             {authToken ? <Redirect to="/home" /> : <PageLogin />}
@@ -28,7 +29,10 @@ function App() {
             }
           </Route> */}
           <Route path="/cfit_admin">
-            <CfitAdmin />
+            {authToken ?  <CfitAdmin />:<PageHome />}
+          </Route>
+          <Route path="/reproduzir_playlist/:id?">
+            {authToken ? <PageReproduzirPlaylist /> : <PageHome />}
           </Route>
           <Route exact path="*">
             <Page404 />

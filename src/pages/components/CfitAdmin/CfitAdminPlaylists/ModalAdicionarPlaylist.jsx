@@ -30,6 +30,7 @@ const ModalAdicionarPlaylist = (props) => {
   const salvarPlaylist = () => {
     let request_method = "";
     let editar_playlist = "";
+    let url="";
     if (playlistId != -1) {
       url= `${serverAddress}playlist/${editar_playlist}`,
       request_method = "put";
@@ -48,15 +49,25 @@ const ModalAdicionarPlaylist = (props) => {
         if (result.status == 201 || result.status == 200) {
           set_sucesso_erro_mensagem("Playlist salva com sucesso!");
           set_tipo_alert("success");
-        } else {
-          set_sucesso_erro_mensagem("Ocorreu um erro ao salvar a playlist.");
+        } else if (result.status == 403 || result.status == 405) {
+          set_sucesso_erro_mensagem("Você não tem permissão para salvar playlist!");
+        }else {
+          set_sucesso_erro_mensagem("Houve um erro ao salvar a playlist!");
           set_tipo_alert("danger");
         }
       })
       .catch((result) => {
-        console.log(result);
-        set_sucesso_erro_mensagem("Ocorreu um erro ao salvar a playlist.");
         set_tipo_alert("danger");
+        if (result.response.status == 400) {
+          set_sucesso_erro_mensagem("Playlist já existente!");
+        }
+        else if (result.response.status == 401) {
+          set_sucesso_erro_mensagem("Erro ao salvar playlist!");
+        }else if (result.response.status == 403 || result.response.status == 405) {
+          set_sucesso_erro_mensagem("Você não tem permissão para salvar playlist!");
+        }else{
+          set_sucesso_erro_mensagem("Erro ao salvar playlist!");
+        }
       });
   };
 
@@ -175,17 +186,21 @@ const ModalAdicionarPlaylist = (props) => {
               value={imagem}
               onChange={(e) => setimagem(e.target.value)}
             />
-            <div className="d-flex justify-content-between">
+            <div className="row d-flex justify-content-between">
+            <div className="col-md-6">
+              
               <button
-                className="btn wsi-btn-admin wsi-shadow-light"
+                className="btn col-md-6 wsi-btn-admin wsi-shadow-light"
                 onClick={() => {
                   salvarPlaylist();
                 }}
               >
                 {playlistId == -1 ? "CADASTRAR" : "SALVAR"}
               </button>
+              </div>
+
               {playlistId != -1 ? (
-                <div>
+              <div className="col-md-6">
                   <span>Confirma?</span>
                   <input
                     className="form-check-input mx-3 mt-2"

@@ -17,7 +17,6 @@ const FormAdicionarAula = (props) => {
   const [isCarregando, setCarregando] = React.useState(true);
   const [videoPk, setVideoPk] = React.useState(0);
   const [permiteDeletar, setPermiteDeletar] = React.useState(false);
-
   const params = useParams();
 
   React.useEffect(() => {
@@ -182,15 +181,7 @@ const FormAdicionarAula = (props) => {
                 className="form-control"
                 onChange={(e) => setPlaylistId(e.target.value)}
               >
-                {
-                  playlistId == -1? 
-                  <option defaultValue="selected" disabled hidden> ESCOLHA UMA PLAYLIST </option>
-                  :
-                  <option selected value={playlistId}>{
-                    listaPlaylists.find((playlist) => playlist.pk == playlistId).titulo
-                    
-                  }</option>
-                }
+                {playlistId ==-1? <option> ESCOLHA UMA PLAYLIST </option> :null}
                 {playlists}
               </select>
             </div>
