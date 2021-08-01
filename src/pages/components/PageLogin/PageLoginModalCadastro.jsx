@@ -38,7 +38,7 @@ const PageLoginModalCadastro = (props) => {
     setalertType(type);
   }
 
-  const RegisterUser = () => {
+  const RegisterUser = (username, password) => {
     axios.defaults.headers.common = { Authorization: ""};
     axios
       .post(`${serverAddress}user/`, { usernameCadastro, passwordCadastro })
@@ -68,8 +68,7 @@ const PageLoginModalCadastro = (props) => {
   React.useEffect(() => {
     const listener = event => {
       if (event.code === "Enter" || event.code === "NumpadEnter") {
-        event.preventDefault();
-        RegisterUser()
+        RegisterUser(username, password)
       }
     };
     document.addEventListener("keydown", listener);

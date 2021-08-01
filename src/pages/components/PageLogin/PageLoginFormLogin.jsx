@@ -33,7 +33,7 @@ const PageLoginFormLogin = () => {
       })
   };
 
-  const AuthUser = () => {
+  const AuthUser = (username, password) => {
     setmsgErrorVisbile(false);
     axios
       .post(`${serverAddress}token/`, { username, password, crossDomain: true })
@@ -68,7 +68,7 @@ const PageLoginFormLogin = () => {
     if (!modalVisible)
       const listener = event => {
         if (event.code === "Enter" || event.code === "NumpadEnter") {
-          AuthUser()
+          AuthUser(username, password)
         }
       };
       document.addEventListener("keydown", listener);
