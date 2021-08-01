@@ -1,5 +1,5 @@
 //localhost
-//export const serverAddress = 'http://localhost/api-v1/' 
+export const serverAddress = 'http://localhost/api-v1/' 
 
 //remote host
-export const serverAddress = 'https://carvalhosfit-api.herokuapp.com/api-v1/' 
+//export const serverAddress = 'https://carvalhosfit-api.herokuapp.com/api-v1/' 

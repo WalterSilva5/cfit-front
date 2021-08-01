@@ -65,19 +65,17 @@ const PageLoginModalCadastro = (props) => {
 
   }, [confirmpasswordCadastro, passwordCadastro]);
 
-  React.useEffect(() => {
-    const listener = event => {
-      if (event.code === "Enter" || event.code === "NumpadEnter") {
-        if (usernameCadastro !== "" && passwordCadastro !== "") {
-          RegisterUser();
-        }
-      }
-    };
-    document.addEventListener("keydown", listener);
-    return () => {
-      document.removeEventListener("keydown", listener);
-    };
-  }, []);
+  // React.useEffect(() => {
+  //   const listener = event => {
+  //     if (event.code === "Enter" || event.code === "NumpadEnter") {
+  //         RegisterUser();
+  //     }
+  //   };
+  //   document.addEventListener("keydown", listener);
+  //   return () => {
+  //     document.removeEventListener("keydown", listener);
+  //   };
+  // }, []);
 
   return (
     <div>
