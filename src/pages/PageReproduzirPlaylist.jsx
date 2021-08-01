@@ -27,11 +27,14 @@ const PageReproduzirPlaylist = () => {
             </tr>
           );
         } else {
+          console.log(response.data[0].url);
+          setVideoUrl(response.data[0].url);
           setAulas(
             response.data.map((video) => (
               <div key={video.pk} className="d-flex border border-secondary my-1 p-2 rounded">
                 <button className="btn btn-primary"
                   onClick={() => {
+                    window.scrollTo( 0, 0);
                     setVideoUrl(video.url);
                   }}>
                   REPRODUZIR

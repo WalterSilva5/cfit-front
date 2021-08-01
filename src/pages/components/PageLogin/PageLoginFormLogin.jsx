@@ -68,8 +68,9 @@ const PageLoginFormLogin = () => {
     const listener = event => {
       if(!modalVisible){
         if (event.code === "Enter" || event.code === "NumpadEnter") {
-          console.log(username);
+          if (username != "" && password != ""){
             AuthUser();
+          }
         }
       }
     };
@@ -77,7 +78,7 @@ const PageLoginFormLogin = () => {
     return () => {
       document.removeEventListener("keydown", listener);
     };
-  }, []);;
+  }, [username, password, modalVisible]);;
 
   return (
     <div className="row wsi-border-container nm p-3 d-flex justify-content-center text-center py-3 col-12">

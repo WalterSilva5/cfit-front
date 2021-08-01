@@ -126,7 +126,6 @@ const FormAdicionarAula = (props) => {
         })
         .catch((err) => {
           setTipoAlerta("danger");
-          console.log(err)
           if (err.response.status === 400) {
             setMensagemAdicionarAula("Erro ao adicionar aula!");
           } else if (err.response.status === 500) {
@@ -157,7 +156,7 @@ const FormAdicionarAula = (props) => {
         style={{ minHeight: "70vh" }}
       >
         <div className="d-flex justify-content-center">
-          <div className="col-lg-10 col-sm-12 my-4 p-2 border border-secondary rounded">
+          <div className="col-lg-10 col-12 my-4 p-2 border border-secondary rounded">
             <div className="form-group mb-2">
               <label htmlFor="titulo" className="h2">
                 Titulo:
