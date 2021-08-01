@@ -6,19 +6,19 @@ import axios from "axios";
 import { serverAddress } from "@/util/Settings";
 
 const PageLoginModalCadastro = (props) => {
-  const [username, setusername] = React.useState("");
-  const [password, setpassword] = React.useState("");
+  const [usernameCadastro, setusernameCadastro] = React.useState("");
+  const [passwordCadastro, setpasswordCadastro] = React.useState("");
   const [error, seterror] = React.useState("");
   const [showErrorCadastro, setshowErrorCadastro] = React.useState(false);
   const [alertType, setalertType] = React.useState("danger");
-  const [confirmPassword, setConfirmPassword] = React.useState("");
+  const [confirmpasswordCadastro, setConfirmpasswordCadastro] = React.useState("");
 
   const clearForm = (alertType, error) => {
     const oldAlertType = alertType;
     const oldError =  error;
-    setusername("");
-    setpassword("");
-    setConfirmPassword("");
+    setusernameCadastro("");
+    setpasswordCadastro("");
+    setConfirmpasswordCadastro("");
     showErrorCadastroMessage(oldError, oldAlertType);
   }
 
@@ -26,9 +26,9 @@ const PageLoginModalCadastro = (props) => {
   const clearData = () => {
     setshowErrorCadastro(false);
     setalertType("");
-    setusername("");
-    setpassword("");
-    setConfirmPassword("");
+    setusernameCadastro("");
+    setpasswordCadastro("");
+    setConfirmpasswordCadastro("");
     seterror("");
   }
 
@@ -41,7 +41,7 @@ const PageLoginModalCadastro = (props) => {
   const RegisterUser = () => {
     axios.defaults.headers.common = { Authorization: ""};
     axios
-      .post(`${serverAddress}user/`, { username, password })
+      .post(`${serverAddress}user/`, { usernameCadastro, passwordCadastro })
       .then((response) => {
         if (response.status === 200 || response.data.success || response.status ==201) {
           showErrorCadastroMessage("Cadastro efetuado com sucesso!", "success");
@@ -56,14 +56,14 @@ const PageLoginModalCadastro = (props) => {
   };
 
   React.useEffect(() => {
-    if (confirmPassword !== "" && confirmPassword !== password) {
+    if (confirmpasswordCadastro !== "" && confirmpasswordCadastro !== passwordCadastro) {
       showErrorCadastroMessage("As senhas não conferem", "danger");
     }else{
       showErrorCadastroMessage("", "")
       setshowErrorCadastro(false)
     }
 
-  }, [confirmPassword, password]);
+  }, [confirmpasswordCadastro, passwordCadastro]);
 
   React.useEffect(() => {
     const listener = event => {
@@ -106,8 +106,8 @@ const PageLoginModalCadastro = (props) => {
               type="text"
               className="form-control my-3 wsi-shadow-light"
               placeholder="USUARIO"
-              value={username}
-              onChange={(e) => setusername(e.target.value.toUpperCase())}
+              value={usernameCadastro}
+              onChange={(e) => setusernameCadastro(e.target.value.toUpperCase())}
             />
             {/* <input
               type="text"
@@ -118,16 +118,16 @@ const PageLoginModalCadastro = (props) => {
               type="password"
               className="form-control my-3 wsi-shadow-light"
               placeholder="SENHA"
-              value={password}
-              onChange={(e) => setpassword(e.target.value)}
+              value={passwordCadastro}
+              onChange={(e) => setpasswordCadastro(e.target.value)}
             />
 
             <input
               type="password"
               className="form-control my-3 wsi-shadow-light"
               placeholder="CONFIRME A SENHA"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              value={confirmpasswordCadastro}
+              onChange={(e) => setConfirmpasswordCadastro(e.target.value)}
             />
 
             <button

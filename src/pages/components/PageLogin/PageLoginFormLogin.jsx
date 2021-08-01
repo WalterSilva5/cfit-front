@@ -65,16 +65,16 @@ const PageLoginFormLogin = () => {
   };
 
   React.useEffect(() => {
-    const listener = event => {
-      if (event.code === "Enter" || event.code === "NumpadEnter") {
-        event.preventDefault();
-        AuthUser()
-      }
-    };
-    document.addEventListener("keydown", listener);
-    return () => {
-      document.removeEventListener("keydown", listener);
-    };
+    if (!modalVisible)
+      const listener = event => {
+        if (event.code === "Enter" || event.code === "NumpadEnter") {
+          AuthUser()
+        }
+      };
+      document.addEventListener("keydown", listener);
+      return () => {
+        document.removeEventListener("keydown", listener);
+      };
   }, []);
 
   return (
