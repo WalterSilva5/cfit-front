@@ -64,18 +64,18 @@ const PageLoginFormLogin = () => {
       });
   };
 
-  React.useEffect(() => {
-    if (!modalVisible)
-      const listener = event => {
-        if (event.code === "Enter" || event.code === "NumpadEnter") {
-          AuthUser(username, password)
-        }
-      };
-      document.addEventListener("keydown", listener);
-      return () => {
-        document.removeEventListener("keydown", listener);
-      };
-  }, []);
+  // React.useEffect(() => {
+  //   if (!modalVisible)
+  //     const listener = event => {
+  //       if (event.code === "Enter" || event.code === "NumpadEnter") {
+  //         AuthUser(username, password)
+  //       }
+  //     };
+  //     document.addEventListener("keydown", listener);
+  //     return () => {
+  //       document.removeEventListener("keydown", listener);
+  //     };
+  // }, []);
 
   return (
     <div className="row wsi-border-container nm p-3 d-flex justify-content-center text-center py-3 col-12">
