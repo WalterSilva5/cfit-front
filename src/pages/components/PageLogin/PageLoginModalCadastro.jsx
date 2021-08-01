@@ -38,30 +38,6 @@ const PageLoginModalCadastro = (props) => {
     setalertType(type);
   }
 
-  React.useEffect(() => {
-    if (confirmPassword !== "" && confirmPassword !== password) {
-      showErrorCadastroMessage("As senhas não conferem", "danger");
-    }else{
-      showErrorCadastroMessage("", "")
-      setshowErrorCadastro(false)
-    }
-
-  }, [confirmPassword, password]);
-
-  useEffect(() => {
-    const listener = event => {
-      if (event.code === "Enter" || event.code === "NumpadEnter") {
-        event.preventDefault();
-        RegisterUser()
-      }
-    };
-    document.addEventListener("keydown", listener);
-    return () => {
-      document.removeEventListener("keydown", listener);
-    };
-  }, []);
-
-
   const RegisterUser = () => {
     axios.defaults.headers.common = { Authorization: ""};
     axios
@@ -78,7 +54,30 @@ const PageLoginModalCadastro = (props) => {
           showErrorCadastroMessage(error.response.data.message, "danger");
       });
   };
-  
+
+  React.useEffect(() => {
+    if (confirmPassword !== "" && confirmPassword !== password) {
+      showErrorCadastroMessage("As senhas não conferem", "danger");
+    }else{
+      showErrorCadastroMessage("", "")
+      setshowErrorCadastro(false)
+    }
+
+  }, [confirmPassword, password]);
+
+  React.useEffect(() => {
+    const listener = event => {
+      if (event.code === "Enter" || event.code === "NumpadEnter") {
+        event.preventDefault();
+        RegisterUser()
+      }
+    };
+    document.addEventListener("keydown", listener);
+    return () => {
+      document.removeEventListener("keydown", listener);
+    };
+  }, []);
+
   return (
     <div>
       <div
