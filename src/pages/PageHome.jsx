@@ -3,10 +3,11 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-unused-vars */
-import axios from 'axios';
 import PageHeader from './components/PageHeader';
-import { serverAddress } from '@/util/Settings';
 import PlaylistCard from './components/PageHome/PlaylistCard';
+import BannerAssine from './components/PageHome/BannerAssine';
+import { serverAddress } from '@/util/Settings';
+import axios from 'axios';
 import { logoutUser } from "@/util/UserUtil";
 
 const PageHome = () => {
@@ -15,8 +16,10 @@ const PageHome = () => {
   const [playlists, setplaylists] = React.useState([]);
   const [isCarregando, setCarregando] = React.useState(true);
   const [aulaAtual , setAulaAtual] = React.useState("");
+  const [assinante , setAssinante] = React.useState(false);
   const getPlaylists = () => {
     axios.get(`${serverAddress}playlist/`, { crossDomain: true}).then((response) => {
+      setAssinante(true)
       setplaylists(response.data.map((res) => (
           <PlaylistCard
             key={res.pk}
@@ -30,6 +33,8 @@ const PageHome = () => {
     }).catch((err)=>{
       if(err.response.status === 401){
         logoutUser();
+      }else{
+        setCarregando(false);
       }
     });
   };
@@ -43,8 +48,12 @@ const PageHome = () => {
   return (
     <div>
       <PageHeader />
-      <div className="row p-0 d-flex justify-content-center container-fluid">{playlists}</div>
-    </div>
+      <h1 className="text-center display-1">AULAS</h1>
+      <div className="row p-0 d-flex justify-content-center container-fluid">
+      { assinante ? playlists : <BannerAssine/>}
+      </div>
+        
+      </div>
   );
 };
 
