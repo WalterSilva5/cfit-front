@@ -39,7 +39,7 @@ const PageLoginModalCadastro = (props) => {
     if (confirmPassword !== "" && confirmPassword !== password) {
       showErrorCadastroMessage("As senhas não conferem", "danger");
     }else{
-      setErrorMessage("", "")
+      showErrorCadastroMessage("", "")
       setshowErrorCadastro(false)
     }
 
