@@ -16,8 +16,18 @@ const ModalAdicionarPlaylist = (props) => {
   const [sucesso_erro_mensagem, set_sucesso_erro_mensagem] = React.useState("");
   const [permiteDeletar, setPermiteDeletar] = React.useState(false);
 
+  React.useEffect(() => {
+    if (props.playlistIdEditar != -1) {
+      setPlaylistId(props.playlistIdEditar);
+    }
+  }, [props.playlistIdEditar]);
+
+  React.useEffect(() => {
+    getPLaylist();
+  }, [playlistId]);
+
+
   const resetData = () => {
-    props.setplaylistIdEditar(-1);
     setPlaylistId(-1);
     settitulo("");
     setdescricao("");
@@ -29,12 +39,12 @@ const ModalAdicionarPlaylist = (props) => {
 
   const salvarPlaylist = () => {
     let request_method = "";
-    let editar_playlist = "";
     let url="";
     if (playlistId != -1) {
-      url= `${serverAddress}playlist/${editar_playlist}`,
+      url= `${serverAddress}playlist/${playlistId}/`,
       request_method = "put";
     } else {
+      console.log(playlistId);
       request_method = "post";
       url = `${serverAddress}playlist/`;
     }
@@ -45,7 +55,6 @@ const ModalAdicionarPlaylist = (props) => {
       data: { titulo, descricao, imagem },
     })
       .then((result) => {
-        console.log(result);
         if (result.status == 201 || result.status == 200) {
           set_sucesso_erro_mensagem("Playlist salva com sucesso!");
           set_tipo_alert("success");
@@ -118,16 +127,6 @@ const ModalAdicionarPlaylist = (props) => {
         });
     }
   };
-
-  React.useEffect(() => {
-    getPLaylist();
-  }, [playlistId]);
-
-  React.useEffect(() => {
-    if (props.playlistIdEditar != -1 && props.playlistIdEditar != null && props.playlistIdEditar != "") {
-      setPlaylistId(props.playlistIdEditar);
-    }
-  }, [props]);
 
   return (
     <div>

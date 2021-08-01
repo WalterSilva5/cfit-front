@@ -13,35 +13,34 @@ const PageLoginModalCadastro = (props) => {
   const [showError, setshowError] = React.useState(false);
   const [alertType, setalertType] = React.useState("danger");
   
+  const clearData = () => {
+    setshowError(false);
+    setalertType("");
+    setusername("");
+    setpassword("");
+    setconfirmPassword("");
+    seterror("");
+  }
+
+  const showErrorMessage = (message, type) => {
+    setshowError(true);
+    seterror(message);
+    setalertType(type);
+  }
+
+
   const RegisterUser = (username, password) => {
     axios
       .post(`${serverAddress}user/`, { username, password })
       .then((response) => {
         if (response.status === 200 || response.data.success || response.status ==201) {
-          setusername("");
-          setpassword("");
-          setconfirmPassword("");
-          seterror("Cadastro efetuado com sucesso!");
-          setshowError(true);
-          setalertType("success");
+          showErrorMessage("Cadastro efetuado com sucesso!", "success");
         }else{
-          console.log(response)
-          setalertType("danger");
-          setshowError(true);
-          //seterror(response.data.message);
+          showErrorMessage(response.data.message, "danger");
         }
       })
-      .catch((error) => {
-        console.log(error.response.data.username);
-        setalertType("danger");
-        setshowError(true);
-        if(error.response.data.username) {
-          seterror(error.response.data.username);
-        }else if (error.response.data.password){
-          seterror(error.response.data.password);
-        }else{
-          setError("Ocorreu um erro ao efetuar o cadastro!");
-        }
+      .catch((error) => {       
+          showErrorMessage(error.response.data.message, "danger");
       });
   };
   
@@ -61,6 +60,7 @@ const PageLoginModalCadastro = (props) => {
               className="btn wsi-btn btn-danger btn-sm"
               type="button"
               onClick={() => {
+                clearData();
                 props.setmodalVisible(false);
               }}
             >
@@ -73,7 +73,7 @@ const PageLoginModalCadastro = (props) => {
               className="form-control my-3 wsi-shadow-light"
               placeholder="USUARIO"
               value={username}
-              onChange={(e) => setusername(e.target.value)}
+              onChange={(e) => setusername(e.target.value.toUpperCase())}
             />
             {/* <input
               type="text"
@@ -99,7 +99,7 @@ const PageLoginModalCadastro = (props) => {
               alertType
             } alert-dismissible alert-dismissible-dark wsi-shadow-light my-4 rounded
             ${
-              showError ? "d-block" : "d-none"
+              showError ? "d-block py-4 " : "d-none"
             }}`}>
               <h4>{error}</h4>
             </div>

@@ -10,10 +10,25 @@ import Page404 from "./pages/Page404";
 import CfitAdmin from "./pages/CfitAdmin";
 import PageReproduzirPlaylist from "./pages/PageReproduzirPlaylist";
 // import PageAulas from './pages/PageAulas';
-import PWAInstallerPrompt from 'react-pwa-installer-prompt';
+import PWAInstallerPrompt from "react-pwa-installer-prompt";
+import axios from "axios";
+import { serverAddress } from "@/util/Settings";
+
 
 function App() {
   const authToken = localStorage.getItem("authToken");
+  const [IsAdminUser, setIsAdminUser] = React.useState(false);
+  axios.defaults.headers.common = { Authorization: "Bearer " + authToken };
+
+  axios
+    .get(`${serverAddress}user/valida_admin/`)
+    .then((response) => {
+      setIsAdminUser(true);
+    })
+    .catch(() => {
+      setIsAdminUser(false);
+    });
+
   return (
     <div className="wsi-bg-black p-0 m-0">
       <div style={{ minHeight: "100vh" }} className="p-0 m-0">
@@ -29,7 +44,7 @@ function App() {
             }
           </Route> */}
           <Route path="/cfit_admin">
-            {authToken ?  <CfitAdmin />:<PageHome />}
+            {IsAdminUser ? <CfitAdmin /> : <PageHome />}
           </Route>
           <Route path="/reproduzir_playlist/:id?">
             {authToken ? <PageReproduzirPlaylist /> : <PageHome />}

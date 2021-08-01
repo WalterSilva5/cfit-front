@@ -28,6 +28,12 @@ const CfitAdminPlaylists = () => {
   };
 
   React.useEffect(() => {
+    if (!modalVisible) {
+      getPlaylists();
+    }
+  }, [modalVisible]);
+
+  React.useEffect(() => {
     if(playlists.length === 0) {
       getPlaylists();
     }

@@ -76,7 +76,7 @@ const PageLoginFormLogin = () => {
             className="form-control-lg wsi-shadow-primary form-control"
             value={username}
             onChange={(e) => {
-              setusername(e.target.value);
+              setusername(e.target.value.toUpperCase());
             }}
           />
           <input
