@@ -13,9 +13,9 @@ const PageLoginModalCadastro = (props) => {
   const [alertType, setalertType] = React.useState("danger");
   const [confirmPassword, setConfirmPassword] = React.useState("");
 
-  const clearForm = () => {
-    let oldAlertType = alertType;
-    let oldError =  error;
+  const clearForm = (alertType, error) => {
+    const oldAlertType = alertType;
+    const oldError =  error;
     setusername("");
     setpassword("");
     setConfirmPassword("");
@@ -55,7 +55,7 @@ const PageLoginModalCadastro = (props) => {
       .then((response) => {
         if (response.status === 200 || response.data.success || response.status ==201) {
           showErrorCadastroMessage("Cadastro efetuado com sucesso!", "success");
-          clearForm();
+          clearForm("success py-4 ", "Cadastro efetuado com sucesso!");
         }else{
           showErrorCadastroMessage(response.data.message, "danger");
         }
@@ -129,7 +129,7 @@ const PageLoginModalCadastro = (props) => {
               alertType
             } alert-dismissible alert-dismissible-dark wsi-shadow-light my-4 rounded
             ${
-              showErrorCadastro ? "d-block py-4 " : "d-none"
+              showErrorCadastro ? " d-block py-4 " : "d-none"
             }}`}>
               <h4>{error}</h4>
             </div>
