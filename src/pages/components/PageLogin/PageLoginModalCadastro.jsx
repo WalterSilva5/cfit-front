@@ -38,7 +38,7 @@ const PageLoginModalCadastro = (props) => {
     setalertType(type);
   }
 
-  const RegisterUser = (usernameCadastro, passwordCadastro) => {
+  const RegisterUser = () => {
     axios.defaults.headers.common = { Authorization: ""};
     axios
       .post(`${serverAddress}user/`, { usernameCadastro, passwordCadastro })
@@ -69,7 +69,7 @@ const PageLoginModalCadastro = (props) => {
     const listener = event => {
       if (event.code === "Enter" || event.code === "NumpadEnter") {
         if (usernameCadastro !== "" && passwordCadastro !== "") {
-          RegisterUser(usernameCadastro, passwordCadastro);
+          RegisterUser();
         }
       }
     };
@@ -134,7 +134,7 @@ const PageLoginModalCadastro = (props) => {
             <button
               className="btn btn-primary wsi-shadow-primary"
               onClick={() => {
-                RegisterUser(usernameCadastro, passwordCadastro);
+                RegisterUser();
               }}
             >
               CADASTRAR

@@ -33,7 +33,7 @@ const PageLoginFormLogin = () => {
       })
   };
 
-  const AuthUser = (username, password) => {
+  const AuthUser = () => {
     setmsgErrorVisbile(false);
     axios
       .post(`${serverAddress}token/`, { username, password, crossDomain: true })
@@ -64,20 +64,20 @@ const PageLoginFormLogin = () => {
       });
   };
 
-  React.useEffect(() => {
-    if (!modalVisible)
-      const listener = event => {
-        if (event.code === "Enter" || event.code === "NumpadEnter") {
-          if(username != "" && password != ""){
-            AuthUser(username, password);
-          }
-        }
-      };
-      document.addEventListener("keydown", listener);
-      return () => {
-        document.removeEventListener("keydown", listener);
-      };
-  }, []);
+  // React.useEffect(() => {
+  //   if (!modalVisible)
+  //     const listener = event => {
+  //       if (event.code === "Enter" || event.code === "NumpadEnter") {
+  //         if(username != "" && password != ""){
+  //           AuthUser(username, password);
+  //         }
+  //       }
+  //     };
+  //     document.addEventListener("keydown", listener);
+  //     return () => {
+  //       document.removeEventListener("keydown", listener);
+  //     };
+  // }, []);
 
   return (
     <div className="row wsi-border-container nm p-3 d-flex justify-content-center text-center py-3 col-12">
@@ -109,7 +109,7 @@ const PageLoginFormLogin = () => {
           <button
             className="btn btn-lg py-3 align-content-middle col-5 btn-primary wsi-shadow-light"
             onClick={() => {
-              AuthUser(username, password);
+              AuthUser();
             }}
           >
             <b>ENTRAR</b>
