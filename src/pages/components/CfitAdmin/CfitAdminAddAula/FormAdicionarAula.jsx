@@ -205,7 +205,7 @@ const FormAdicionarAula = (props) => {
               >
                 SALVAR
               </button>
-              {videoPk ? (
+              {videoPk != -1 ? (
                 <div>
                   <span>Confirma?</span>
                   <input
