@@ -9,12 +9,19 @@ const PageLoginModalCadastro = (props) => {
   const [username, setusername] = React.useState("");
   const [password, setpassword] = React.useState("");
   const [error, seterror] = React.useState("");
-  const [showError, setshowError] = React.useState(false);
+  const [showErrorCadastro, setshowErrorCadastro] = React.useState(false);
   const [alertType, setalertType] = React.useState("danger");
   const [confirmPassword, setConfirmPassword] = React.useState("");
 
+  const clearForm = () => {
+    setusername("");
+    setpassword("");
+    setConfirmPassword("");
+  }
+
+
   const clearData = () => {
-    setshowError(false);
+    setshowErrorCadastro(false);
     setalertType("");
     setusername("");
     setpassword("");
@@ -22,18 +29,18 @@ const PageLoginModalCadastro = (props) => {
     seterror("");
   }
 
-  const showErrorMessage = (message, type) => {
-    setshowError(true);
+  const showErrorCadastroMessage = (message, type) => {
+    setshowErrorCadastro(true);
     seterror(message);
     setalertType(type);
   }
 
   React.useEffect(() => {
     if (confirmPassword !== "" && confirmPassword !== password) {
-      showErrorMessage("As senhas não conferem", "danger");
+      showErrorCadastroMessage("As senhas não conferem", "danger");
     }else{
       setErrorMessage("", "")
-      setShowError(false)
+      setshowErrorCadastro(false)
     }
 
   }, [confirmPassword, password]);
@@ -44,13 +51,14 @@ const PageLoginModalCadastro = (props) => {
       .post(`${serverAddress}user/`, { username, password })
       .then((response) => {
         if (response.status === 200 || response.data.success || response.status ==201) {
-          showErrorMessage("Cadastro efetuado com sucesso!", "success");
+          showErrorCadastroMessage("Cadastro efetuado com sucesso!", "success");
+          clearForm();
         }else{
-          showErrorMessage(response.data.message, "danger");
+          showErrorCadastroMessage(response.data.message, "danger");
         }
       })
       .catch((error) => {       
-          showErrorMessage(error.response.data.message, "danger");
+          showErrorCadastroMessage(error.response.data.message, "danger");
       });
   };
   
@@ -118,7 +126,7 @@ const PageLoginModalCadastro = (props) => {
               alertType
             } alert-dismissible alert-dismissible-dark wsi-shadow-light my-4 rounded
             ${
-              showError ? "d-block py-4 " : "d-none"
+              showErrorCadastro ? "d-block py-4 " : "d-none"
             }}`}>
               <h4>{error}</h4>
             </div>
