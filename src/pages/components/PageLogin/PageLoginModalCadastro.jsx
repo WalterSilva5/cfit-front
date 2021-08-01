@@ -31,7 +31,11 @@ const PageLoginModalCadastro = (props) => {
   React.useEffect(() => {
     if (confirmPassword !== "" && confirmPassword !== password) {
       showErrorMessage("As senhas não conferem", "danger");
+    }else{
+      setErrorMessage("", "")
+      setShowError(false)
     }
+
   }, [confirmPassword, password]);
 
   const RegisterUser = (username, password) => {
