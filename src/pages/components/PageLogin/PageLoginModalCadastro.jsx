@@ -48,7 +48,21 @@ const PageLoginModalCadastro = (props) => {
 
   }, [confirmPassword, password]);
 
-  const RegisterUser = (username, password) => {
+  useEffect(() => {
+    const listener = event => {
+      if (event.code === "Enter" || event.code === "NumpadEnter") {
+        event.preventDefault();
+        RegisterUser()
+      }
+    };
+    document.addEventListener("keydown", listener);
+    return () => {
+      document.removeEventListener("keydown", listener);
+    };
+  }, []);
+
+
+  const RegisterUser = () => {
     axios.defaults.headers.common = { Authorization: ""};
     axios
       .post(`${serverAddress}user/`, { username, password })
@@ -120,7 +134,7 @@ const PageLoginModalCadastro = (props) => {
             <button
               className="btn btn-primary wsi-shadow-primary"
               onClick={() => {
-                RegisterUser(username, password);
+                RegisterUser();
               }}
             >
               CADASTRAR
