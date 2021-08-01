@@ -8,18 +8,17 @@ import { serverAddress } from "@/util/Settings";
 const PageLoginModalCadastro = (props) => {
   const [username, setusername] = React.useState("");
   const [password, setpassword] = React.useState("");
-  const [confirmPassword, setconfirmPassword] = React.useState("");
   const [error, seterror] = React.useState("");
   const [showError, setshowError] = React.useState(false);
   const [alertType, setalertType] = React.useState("danger");
-  const [confirmPassword, setconfirmPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
 
   const clearData = () => {
     setshowError(false);
     setalertType("");
     setusername("");
     setpassword("");
-    setconfirmPassword("");
+    setConfirmPassword("");
     seterror("");
   }
 
