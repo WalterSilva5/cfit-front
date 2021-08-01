@@ -12,7 +12,8 @@ const PageLoginModalCadastro = (props) => {
   const [error, seterror] = React.useState("");
   const [showError, setshowError] = React.useState(false);
   const [alertType, setalertType] = React.useState("danger");
-  
+  const [confirmPassword, setconfirmPassword] = React.useState("");
+
   const clearData = () => {
     setshowError(false);
     setalertType("");
@@ -28,6 +29,11 @@ const PageLoginModalCadastro = (props) => {
     setalertType(type);
   }
 
+  React.useEffect(() => {
+    if (confirmPassword !== "" && confirmPassword !== password) {
+      showErrorMessage("As senhas não conferem", "danger");
+    }
+  }, [confirmPassword, password]);
 
   const RegisterUser = (username, password) => {
     axios.defaults.headers.common = { Authorization: ""};
@@ -82,12 +88,21 @@ const PageLoginModalCadastro = (props) => {
               placeholder="NOME"
             /> */}
             <input
-              type="text"
+              type="password"
               className="form-control my-3 wsi-shadow-light"
               placeholder="SENHA"
               value={password}
               onChange={(e) => setpassword(e.target.value)}
             />
+
+            <input
+              type="password"
+              className="form-control my-3 wsi-shadow-light"
+              placeholder="CONFIRME A SENHA"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+
             <button
               className="btn btn-primary wsi-shadow-primary"
               onClick={() => {
@@ -107,7 +122,12 @@ const PageLoginModalCadastro = (props) => {
             <div className="mt-5">
               <p>
                 Ja possui cadastro?{" "}
-                <button className="btn wsi-btn-secondary wsi-shadow-light btn-sm">
+                <button className="btn wsi-btn-secondary wsi-shadow-light btn-sm"
+                  onClick={() => {
+                    clearData();
+                    props.setmodalVisible(false);
+                  }}
+                >
                   FAZER LOGIN
                 </button>
               </p>
