@@ -19,9 +19,7 @@ const PageLoginModalCadastro = (props) => {
     setusername("");
     setpassword("");
     setConfirmPassword("");
-    setAlertType(oldAlertType);
-    seterror(oldError);
-    setshowErrorCadastro(true);
+    showErrorCadastroMessage(oldError, oldAlertType);
   }
 
 
