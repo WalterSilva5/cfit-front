@@ -41,7 +41,7 @@ const PageLoginModalCadastro = (props) => {
   const RegisterUser = () => {
     axios.defaults.headers.common = { Authorization: ""};
     axios
-      .post(`${serverAddress}user/`, { usernameCadastro, passwordCadastro })
+      .post(`${serverAddress}user/`, { username: usernameCadastro, password: passwordCadastro })
       .then((response) => {
         if (response.status === 200 || response.data.success || response.status ==201) {
           showErrorCadastroMessage("Cadastro efetuado com sucesso!", "success");
