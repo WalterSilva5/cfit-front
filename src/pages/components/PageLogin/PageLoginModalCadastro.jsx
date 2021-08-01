@@ -14,9 +14,14 @@ const PageLoginModalCadastro = (props) => {
   const [confirmPassword, setConfirmPassword] = React.useState("");
 
   const clearForm = () => {
+    let oldAlertType = alertType;
+    let oldError =  error;
     setusername("");
     setpassword("");
     setConfirmPassword("");
+    setAlertType(oldAlertType);
+    seterror(oldError);
+    showErrorCadastro = true;
   }
 
 
