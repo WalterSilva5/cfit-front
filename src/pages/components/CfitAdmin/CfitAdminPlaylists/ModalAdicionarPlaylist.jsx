@@ -44,7 +44,6 @@ const ModalAdicionarPlaylist = (props) => {
       url= `${serverAddress}playlist/${playlistId}/`,
       request_method = "put";
     } else {
-      console.log(playlistId);
       request_method = "post";
       url = `${serverAddress}playlist/`;
     }
@@ -93,8 +92,7 @@ const ModalAdicionarPlaylist = (props) => {
         url: `${serverAddress}playlist/${playlistId}/`,
       })
         .then((result) => {
-          console.log(result);
-          if (result.status == 204) {
+          if (result.status == 204 || result.status == 200 || result.status == 201) {
             set_sucesso_erro_mensagem("Playlist deletada com sucesso!");
             set_tipo_alert("success");
           } else {
@@ -205,7 +203,6 @@ const ModalAdicionarPlaylist = (props) => {
                     className="form-check-input mx-3 mt-2"
                     onChange={(e) => {
                       setPermiteDeletar(e.target.checked);
-                      console.log(permiteDeletar);
                     }}
                     type="checkbox"
                     value={permiteDeletar}

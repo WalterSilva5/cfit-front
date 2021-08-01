@@ -11,10 +11,10 @@ const VideoPlayer = (props) => {
         <iframe
           style={{width: '100%', minHeight: '60vh'}}
           src={videoUrl}
-          frameBorder="false"
-          scrolling
+          frameBorder={false}
+          scrolling={true}
           seamless=""
-          allowFullScreen="true"
+          allowFullScreen={true}
         ></iframe>
         <div style={{width: '80px', height: '80px', opacity: '0', position: 'absolute', right: '0px', top: '0px',}}>
           &nbsp;

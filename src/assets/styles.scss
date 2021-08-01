@@ -11,6 +11,7 @@ $wsi-admin-dark: #12001a;
 $wsi-border-admin: 1px solid $wsi-admin;
 $wsi-border-primary: 1px solid rgba($wsi-secondary, .5);
 $wsi-shadow-light: 1px 1px 1px rgba(white, .5);
+$wsi-shadow-container: 3px 3px 3px rgba(red, .5);
 $wsi-shadow-primary: 1px 1px rgba($wsi-primary-dark, .5);
 $wsi-shadow-secondary: 2px 1px 3px rgba($wsi-secondary, .5);
 $wsi-shadow: 2px 2px 1px black;
@@ -18,6 +19,7 @@ $wsi-shadow: 2px 2px 1px black;
 * {
     user-select: none;
     transition: 0.5s;
+
     &:hover {
         transition: 0.5s;
     }
@@ -45,33 +47,37 @@ img {
 }
 
 
-.wsi-secondary{
+.wsi-secondary {
     color: $wsi-secondary;
 }
 
-.wsi-success{
+.wsi-success {
     color: $wsi-success;
 }
 
-.wsi-bg-success{
+.wsi-bg-success {
     background-color: $wsi-success;
 }
-.wsi-bg-admin{
+
+.wsi-bg-admin {
     background-color: $wsi-admin;
 }
-.wsi-bg-admin-light{
+
+.wsi-bg-admin-light {
     background-color: $wsi-admin-light;
 }
 
-.wsi-bg-admin-dark{
+.wsi-bg-admin-dark {
     background-color: $wsi-admin-dark;
 }
-.wsi-btn-admin{
+
+.wsi-btn-admin {
     background-color: $wsi-admin-light;
     color: rgb(6, 0, 39);
     box-shadow: $wsi-shadow-light;
     transition: .5s;
-    &:hover{
+
+    &:hover {
         color: white;
         font-weight: bold;
         background-color: $wsi-admin-dark;
@@ -79,34 +85,38 @@ img {
         box-shadow: $wsi-shadow-primary;
     }
 }
+
 /*backgrounds*/
 .wsi-bg-black {
     @include bg-dark;
     background-color: $wsi-black;
 }
 
-.wsi-bg-black-light{
+.wsi-bg-black-light {
     background-color: $wsi-black-light;
 }
 
 .wsi-bg-primary {
     @include bg-dark;
     background-color: $wsi-primary;
+
     &:hover {
         background-color: $wsi-primary-dark;
     }
+
     &:active {
         background-color: $wsi-primary-light;
     }
 }
 
-.wsi-bg-admin{
+.wsi-bg-admin {
     background-color: $wsi-admin;
 }
 
-.wsi-btn-secondary{
+.wsi-btn-secondary {
     background-color: $wsi-secondary;
-    &:hover{
+
+    &:hover {
         background-color: rgba($wsi-secondary, .8);
     }
 }
@@ -115,6 +125,7 @@ img {
 .wsi-border-primary {
     border: $wsi-border-primary;
 }
+
 .wsi-border-container {
     @extend .wsi-rounded;
     border: $wsi-border-primary;
@@ -130,16 +141,26 @@ img {
 
 .wsi-shadow-light {
     box-shadow: $wsi-shadow-light;
+
     &:hover {
         box-shadow: $wsi-shadow-primary;
     }
 }
 
-.wsi-shadow-primary{
+.wsi-shadow-primary {
     box-shadow: $wsi-shadow-light;
     border-radius: 5px;
+
     &:hover {
         box-shadow: $wsi-shadow-secondary;
+    }
+}
+
+.wsi-shadow-container {
+    box-shadow: $wsi-shadow-light;
+
+    &:hover {
+        box-shadow: $wsi-shadow-container;
     }
 }
 
@@ -148,16 +169,18 @@ img {
 }
 
 .wsi-container-dark {
-    @extend .wsi-rounded;
+
     background-color: $wsi-black-light;
 }
 
 .wsi-shadow {
     box-shadow: $wsi-shadow;
 }
+
 .btn {
     font-weight: bold;
 }
+
 .btn-primary {
     @extend .wsi-bg-primary;
     border: none;
@@ -181,9 +204,10 @@ img {
 }
 
 .nm {
-    margin-left: 0  !important;
+    margin-left: 0 !important;
     margin-right: 0 !important;
 }
-.np{
+
+.np {
     padding: 0 !important;
 }

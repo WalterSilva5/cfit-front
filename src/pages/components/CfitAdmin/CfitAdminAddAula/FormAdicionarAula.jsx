@@ -15,7 +15,7 @@ const FormAdicionarAula = (props) => {
   const [playlists, setplaylists] = React.useState([]);
   const [listaPlaylists, setListaPlaylists] = React.useState({});
   const [isCarregando, setCarregando] = React.useState(true);
-  const [videoPk, setVideoPk] = React.useState(0);
+  const [videoPk, setVideoPk] = React.useState(-1);
   const [permiteDeletar, setPermiteDeletar] = React.useState(false);
   const params = useParams();
 
@@ -82,7 +82,14 @@ const FormAdicionarAula = (props) => {
       playlist_id: playlistId,
     };
 
-    if (!videoPk) {
+    const clearData = () => {
+      setTitulo("");
+      setUrl("");
+      setPlaylistId(-1);
+    };
+
+
+    if (videoPk == -1) {
       request_method = "post";
       request_url = `${serverAddress}video/`;
     } else {
@@ -106,16 +113,20 @@ const FormAdicionarAula = (props) => {
       )
         .then((response) => {
           setTipoAlerta("success");
-          if (response.status === 201) {
+          clearData();
+          if (response.status === 201 || response.status === 200) {
+            if (request_method == "post") {
             setMensagemAdicionarAula("Aula adicionada com sucesso!");
-          } else if (response.status === 200) {
+            } else {
             setMensagemAdicionarAula("Aula alterada com sucesso!");
+            }
           } else {
             setMensagemAdicionarAula("Sucesso ao adicionar aula!");
           }
         })
         .catch((err) => {
           setTipoAlerta("danger");
+          console.log(err)
           if (err.response.status === 400) {
             setMensagemAdicionarAula("Erro ao adicionar aula!");
           } else if (err.response.status === 500) {
@@ -142,11 +153,11 @@ const FormAdicionarAula = (props) => {
   return (
     <div className="p-2">
       <div
-        className="wsi-shadow-primary border border-danger rounded wsi-container-dark"
+        className="rounded wsi-container-dark"
         style={{ minHeight: "70vh" }}
       >
         <div className="d-flex justify-content-center">
-          <div className="col-lg-10 col-sm-12 my-4 p-2 border border-danger rounded">
+          <div className="col-lg-10 col-sm-12 my-4 p-2 border border-secondary rounded">
             <div className="form-group mb-2">
               <label htmlFor="titulo" className="h2">
                 Titulo:
