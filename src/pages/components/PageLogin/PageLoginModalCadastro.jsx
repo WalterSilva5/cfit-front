@@ -30,6 +30,7 @@ const PageLoginModalCadastro = (props) => {
 
 
   const RegisterUser = (username, password) => {
+    axios.defaults.headers.common = { Authorization: ""};
     axios
       .post(`${serverAddress}user/`, { username, password })
       .then((response) => {
