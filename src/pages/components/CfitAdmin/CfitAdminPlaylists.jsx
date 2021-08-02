@@ -11,7 +11,7 @@ const CfitAdminPlaylists = () => {
   const [playlistIdEditar, setplaylistIdEditar] = React.useState(-1);
   const getPlaylists = () => {
     axios.get(`${serverAddress}playlist`).then((response) => {
-      setplaylists(response.data.map((res) => (
+      setplaylists(response.data.playlist.map((res) => (
         <tr className="wsi-border-admin" key={res.pk}>
           <td className="wsi-border-admin">{res.titulo}</td>
           <td className="wsi-border-admin">{res.descricao}</td>

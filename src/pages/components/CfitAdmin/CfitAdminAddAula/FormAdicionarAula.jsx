@@ -55,7 +55,7 @@ const FormAdicionarAula = (props) => {
       .then((response) => {
         setListaPlaylists(response.data);
         setplaylists(
-          response.data.map((res) => (
+          response.data.playlist.map((res) => (
             <option key={res.pk} value={res.pk}>
               {res.titulo}
             </option>

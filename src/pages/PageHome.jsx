@@ -19,8 +19,8 @@ const PageHome = () => {
   const [assinante , setAssinante] = React.useState(false);
   const getPlaylists = () => {
     axios.get(`${serverAddress}playlist/`, { crossDomain: true}).then((response) => {
-      setAssinante(true)
-      setplaylists(response.data.map((res) => (
+      setAssinante(true);
+      setplaylists(response.data.playlist.map((res) => (
           <PlaylistCard
             key={res.pk}
             titulo={res.titulo}
