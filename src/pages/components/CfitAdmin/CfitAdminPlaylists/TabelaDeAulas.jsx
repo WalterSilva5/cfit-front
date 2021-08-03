@@ -64,7 +64,7 @@ const TabelaDeAulas = (props) => {
   return (
     <div>
       <div className="d-flex justify-content-between">
-        <h1>Aulas Na Playlist</h1>
+        <h1>VIDEOS DA PLAYLIST</h1>
         <div>
           <a className="btn wsi-btn-admin" href="/cfit_admin/add_aula">
             ADICIONAR AULA
