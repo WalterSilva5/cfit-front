@@ -31,12 +31,17 @@ const PageReproduzirPlaylist = () => {
           setVideoUrl(response.data[0].url);
           setAulas(
             response.data.map((video) => (
-              <div key={video.pk} className="d-flex border border-secondary my-1 p-2 rounded">
-                <button className="btn btn-primary"
+              <div
+                key={video.pk}
+                className="d-flex border border-secondary my-1 p-2 rounded"
+              >
+                <button
+                  className="btn btn-primary"
                   onClick={() => {
-                    window.scrollTo( 0, 0);
+                    window.scrollTo(0, 0);
                     setVideoUrl(video.url);
-                  }}>
+                  }}
+                >
                   REPRODUZIR
                 </button>
                 <h4 className="d-block mx-4">{video.titulo}</h4>
@@ -52,14 +57,11 @@ const PageReproduzirPlaylist = () => {
   };
 
   const getPlaylist = () => {
-    axios
-      .get(`${serverAddress}playlist/${params.id}`)
-      .then((response) => {
-        setPlaylistTitulo(response.data.titulo);
-      })
-    };
-
-
+    axios.get(`${serverAddress}playlist/${params.id}`).then((response) => {
+      setPlaylistTitulo(response.data.titulo);
+    });
+  };
+  
   React.useEffect(() => {
     if (params.id) {
       getAulas();
@@ -75,14 +77,12 @@ const PageReproduzirPlaylist = () => {
           className="col-sm-12 col-md-10 border border-secondary rounded m-0 p-md-2"
           style={{ minHeight: "70vh" }}
         >
-          <h1 className="wsi-bg-dark text-center my-2">
-            {playlistTitulo}
-          </h1>
+          <h1 className="wsi-bg-dark text-center my-2">{playlistTitulo}</h1>
           <div
             className="border border-secondary rounded my-2"
             style={{ minHeight: "40vh" }}
           >
-            <VideoPlayer videoUrl={videoUrl}/>
+            <VideoPlayer videoUrl={videoUrl} />
           </div>
           <div className="col-12 border border-secondary p-2 mt-2 mb-4 rounded">
             {aulas}
