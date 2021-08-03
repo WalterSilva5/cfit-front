@@ -27,7 +27,6 @@ const PageReproduzirPlaylist = () => {
             </tr>
           );
         } else {
-          console.log(response.data[0].url);
           setVideoUrl(response.data[0].url);
           setAulas(
             response.data.map((video) => (

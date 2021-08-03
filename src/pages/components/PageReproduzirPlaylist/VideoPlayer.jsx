@@ -4,7 +4,6 @@ const VideoPlayer = (props) => {
 
   React.useEffect(() => {
     if (newVideoUrl !== videoUrl) {
-      console.log(`New video URL: ${newVideoUrl}`);
       setNewVideoUrl(videoUrl);
     }
   }, [videoUrl, newVideoUrl]);
