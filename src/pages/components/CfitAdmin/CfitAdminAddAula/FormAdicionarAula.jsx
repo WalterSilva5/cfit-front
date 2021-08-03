@@ -1,17 +1,18 @@
-import axios from "axios";
-import { serverAddress } from "@/util/Settings";
-import { logoutUser } from "@/util/UserUtil";
-import { useParams } from "react-router-dom";
-const FormAdicionarAula = (props) => {
-  const token = localStorage.getItem("authToken");
-  axios.defaults.headers.common = { Authorization: "Bearer " + token };
+import axios from 'axios';
+import { serverAddress } from '@/util/Settings';
+import { logoutUser } from '@/util/UserUtil';
+import { useParams } from 'react-router-dom';
 
-  const [titulo, setTitulo] = React.useState("");
-  const [url, setUrl] = React.useState("");
+const FormAdicionarAula = (props) => {
+  const token = localStorage.getItem('authToken');
+  axios.defaults.headers.common = { Authorization: `Bearer ${token}` };
+
+  const [titulo, setTitulo] = React.useState('');
+  const [url, setUrl] = React.useState('');
   const [playlistId, setPlaylistId] = React.useState(-1);
-  const [tipoAlerta, setTipoAlerta] = React.useState("success");
+  const [tipoAlerta, setTipoAlerta] = React.useState('success');
   const [alertaAdicionarAula, setAlertaAdicionarAula] = React.useState(false);
-  const [mensagemAdicionarAula, setMensagemAdicionarAula] = React.useState("");
+  const [mensagemAdicionarAula, setMensagemAdicionarAula] = React.useState('');
   const [playlists, setplaylists] = React.useState([]);
   const [listaPlaylists, setListaPlaylists] = React.useState({});
   const [isCarregando, setCarregando] = React.useState(true);
@@ -33,18 +34,18 @@ const FormAdicionarAula = (props) => {
   const deleteAula = () => {
     setAlertaAdicionarAula(true);
     if (!permiteDeletar) {
-      setTipoAlerta("warning");
-      setMensagemAdicionarAula("MARQUE A CAIXA PRA CONFIRMAR ANTES DE DELETAR");
+      setTipoAlerta('warning');
+      setMensagemAdicionarAula('MARQUE A CAIXA PRA CONFIRMAR ANTES DE DELETAR');
     } else {
       axios
         .delete(`${serverAddress}video/${params.id}`)
         .then((response) => {
-          setTipoAlerta("success");
-          setMensagemAdicionarAula("Aula removida com sucesso");
+          setTipoAlerta('success');
+          setMensagemAdicionarAula('Aula removida com sucesso');
         })
         .catch((error) => {
-          setTipoAlerta("danger");
-          setMensagemAdicionarAula("Não foi possível remover aula");
+          setTipoAlerta('danger');
+          setMensagemAdicionarAula('Não foi possível remover aula');
         });
     }
   };
@@ -59,7 +60,7 @@ const FormAdicionarAula = (props) => {
             <option key={res.pk} value={res.pk}>
               {res.titulo}
             </option>
-          ))
+          )),
         );
         setCarregando(false);
       })
@@ -69,39 +70,37 @@ const FormAdicionarAula = (props) => {
         }
       });
   };
- 
 
   const salvarVideo = () => {
     setAlertaAdicionarAula(true);
-    let request_method = "";
-    let request_url = "";
-    let request_data = {
-      titulo: titulo,
-      url: url,
+    let request_method = '';
+    let request_url = '';
+    const request_data = {
+      titulo,
+      url,
       pk: videoPk,
       playlist_id: playlistId,
     };
 
     const clearData = () => {
-      setTitulo("");
-      setUrl("");
+      setTitulo('');
+      setUrl('');
       setPlaylistId(-1);
     };
 
-
     if (videoPk == -1) {
-      request_method = "post";
+      request_method = 'post';
       request_url = `${serverAddress}video/`;
     } else {
       request_url = `${serverAddress}video/${videoPk}/`;
-      request_method = "put";
+      request_method = 'put';
     }
     if (playlistId == -1) {
-      setTipoAlerta("warning");
-      setMensagemAdicionarAula("Selecione uma playlist");
-    } else if (titulo == "" || url == "") {
-      setTipoAlerta("warning");
-      setMensagemAdicionarAula("Todos os campos são obrigatórios");
+      setTipoAlerta('warning');
+      setMensagemAdicionarAula('Selecione uma playlist');
+    } else if (titulo == '' || url == '') {
+      setTipoAlerta('warning');
+      setMensagemAdicionarAula('Todos os campos são obrigatórios');
     } else {
       axios(
         {
@@ -109,29 +108,29 @@ const FormAdicionarAula = (props) => {
           url: request_url,
           data: request_data,
         },
-        { crossDomain: true }
+        { crossDomain: true },
       )
         .then((response) => {
-          setTipoAlerta("success");
+          setTipoAlerta('success');
           clearData();
           if (response.status === 201 || response.status === 200) {
-            if (request_method == "post") {
-            setMensagemAdicionarAula("Aula adicionada com sucesso!");
+            if (request_method == 'post') {
+              setMensagemAdicionarAula('Aula adicionada com sucesso!');
             } else {
-            setMensagemAdicionarAula("Aula alterada com sucesso!");
+              setMensagemAdicionarAula('Aula alterada com sucesso!');
             }
           } else {
-            setMensagemAdicionarAula("Sucesso ao adicionar aula!");
+            setMensagemAdicionarAula('Sucesso ao adicionar aula!');
           }
         })
         .catch((err) => {
-          setTipoAlerta("danger");
+          setTipoAlerta('danger');
           if (err.response.status === 400) {
-            setMensagemAdicionarAula("Erro ao adicionar aula!");
+            setMensagemAdicionarAula('Erro ao adicionar aula!');
           } else if (err.response.status === 500) {
-            setMensagemAdicionarAula("Erro no servidor!");
+            setMensagemAdicionarAula('Erro no servidor!');
           } else {
-            setMensagemAdicionarAula("Erro desconhecido!");
+            setMensagemAdicionarAula('Erro desconhecido!');
           }
         });
     }
@@ -151,12 +150,9 @@ const FormAdicionarAula = (props) => {
   }
   return (
     <div className="p-2">
-      <div
-        className="rounded wsi-container-dark"
-        style={{ minHeight: "70vh" }}
-      >
+      <div className="rounded wsi-container-dark" style={{ minHeight: '70vh' }}>
         <div className="d-flex justify-content-center">
-          <div className="col-lg-10 col-12 my-4 p-2 border border-secondary rounded">
+          <div className="col-lg-10 col-12 my-4 p-2 wsi-border-admin rounded">
             <div className="form-group mb-2">
               <label htmlFor="titulo" className="h2">
                 Titulo:
@@ -191,7 +187,9 @@ const FormAdicionarAula = (props) => {
                 className="form-control"
                 onChange={(e) => setPlaylistId(e.target.value)}
               >
-                {playlistId ==-1? <option> ESCOLHA UMA PLAYLIST </option> :null}
+                {playlistId == -1 ? (
+                  <option> ESCOLHA UMA PLAYLIST </option>
+                ) : null}
                 {playlists}
               </select>
             </div>
@@ -205,7 +203,7 @@ const FormAdicionarAula = (props) => {
                 SALVAR
               </button>
               {videoPk != -1 ? (
-                <div>
+                <div className="d-flex justify-content-end">
                   <span>Confirma?</span>
                   <input
                     className="form-check-input mx-3 mt-2"

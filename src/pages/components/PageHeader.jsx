@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import $ from "jquery";
 import { logoutUser } from "@/util/UserUtil";
-
+import userIcon from "@/assets/img/conta.png"
 
 
 
@@ -30,7 +30,8 @@ const PageHeader = () => {
             title="Popover title"
             data-content="And here's some amazing content. It's very engaging. Right?"
           >
-            MENU
+            <img src={userIcon} style={{width: "30px"}} className="mx-1" />
+            {'  '}MENU
           </button>
         </nav>
 

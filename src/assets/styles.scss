@@ -8,7 +8,7 @@ $wsi-secondary: #00b87a;
 $wsi-admin: rgb(7, 0, 75);
 $wsi-admin-light: #6278f3;
 $wsi-admin-dark: #12001a;
-$wsi-border-admin: 1px solid $wsi-admin;
+$wsi-border-admin: 1px solid rgba($wsi-admin-light, .5);
 $wsi-border-primary: 1px solid rgba($wsi-secondary, .5);
 $wsi-shadow-light: 1px 1px 1px rgba(white, .5);
 $wsi-shadow-container: 3px 3px 3px rgba(red, .5);
@@ -18,10 +18,10 @@ $wsi-shadow: 2px 2px 1px black;
 
 * {
     user-select: none;
-    transition: 0.5s;
+    transition: 0.2s;
 
     &:hover {
-        transition: 0.5s;
+        transition: 0.2s;
     }
 }
 
@@ -121,6 +121,23 @@ img {
     }
 }
 
+.wsi-btn-panel{
+    color: white;
+    text-align: left;
+    font-weight: normal;
+    text-decoration: none;
+    background-color: rgba($wsi-admin-light, .2);
+    padding: 10px;
+    display: block;
+    &:hover {
+        color: white;
+        font-weight: bold;
+        text-decoration: underline;
+        background-color: rgba($wsi-admin-light, .5);
+        padding: 12px;
+    }
+}
+
 /*borders*/
 .wsi-border-primary {
     border: $wsi-border-primary;
@@ -210,4 +227,11 @@ img {
 
 .np {
     padding: 0 !important;
+}
+
+
+.icon-panel{
+    filter: invert(1);
+    width: 25px;
+    margin-right: 10px;
 }

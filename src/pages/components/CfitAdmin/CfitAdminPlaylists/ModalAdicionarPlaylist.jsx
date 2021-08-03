@@ -3,35 +3,28 @@
 import axios from "axios";
 import { serverAddress } from "@/util/Settings";
 import TabelaDeAulas from "./TabelaDeAulas";
+
 const ModalAdicionarPlaylist = (props) => {
   const token = localStorage.getItem("authToken");
-  axios.defaults.headers.common = { Authorization: "Bearer " + token };
+  axios.defaults.headers.common = { Authorization: `Bearer ${token}` };
   const [titulo, settitulo] = React.useState("");
   const [playlistId, setPlaylistId] = React.useState(-1);
   const [descricao, setdescricao] = React.useState("");
   const [imagem, setimagem] = React.useState("");
+  const [modalVisible, setModalVisible] = React.useState(false);
+  const [playlistAtivo, setPlaylistAtivo] = React.useState(false);
   const [alert_adicionar_editar_playlist, set_alert_adicionar_editar_playlist] =
     React.useState(false);
   const [tipo_alert, set_tipo_alert] = React.useState("");
   const [sucesso_erro_mensagem, set_sucesso_erro_mensagem] = React.useState("");
   const [permiteDeletar, setPermiteDeletar] = React.useState(false);
 
-  React.useEffect(() => {
-    if (props.playlistIdEditar != -1) {
-      setPlaylistId(props.playlistIdEditar);
-    }
-  }, [props.playlistIdEditar]);
-
-  React.useEffect(() => {
-    getPLaylist();
-  }, [playlistId]);
-
-
   const resetData = () => {
     setPlaylistId(-1);
     settitulo("");
     setdescricao("");
     setimagem("");
+    setPlaylistAtivo(false);
     set_tipo_alert("");
     set_sucesso_erro_mensagem("");
     set_alert_adicionar_editar_playlist(false);
@@ -39,27 +32,34 @@ const ModalAdicionarPlaylist = (props) => {
 
   const salvarPlaylist = () => {
     let request_method = "";
-    let url="";
+    let url = "";
     if (playlistId != -1) {
-      url= `${serverAddress}playlist/${playlistId}/`,
-      request_method = "put";
+      (url = `${serverAddress}playlist/${playlistId}/`),
+        (request_method = "put");
     } else {
       request_method = "post";
       url = `${serverAddress}playlist/`;
     }
     set_alert_adicionar_editar_playlist(true);
     axios({
-      url: url,
+      url,
       method: request_method,
-      data: { titulo, descricao, imagem },
+      data: {
+        titulo,
+        descricao,
+        imagem,
+        ativo: playlistAtivo,
+      },
     })
       .then((result) => {
         if (result.status == 201 || result.status == 200) {
           set_sucesso_erro_mensagem("Playlist salva com sucesso!");
           set_tipo_alert("success");
         } else if (result.status == 403 || result.status == 405) {
-          set_sucesso_erro_mensagem("Você não tem permissão para salvar playlist!");
-        }else {
+          set_sucesso_erro_mensagem(
+            "Você não tem permissão para salvar playlist!"
+          );
+        } else {
           set_sucesso_erro_mensagem("Houve um erro ao salvar a playlist!");
           set_tipo_alert("danger");
         }
@@ -68,12 +68,16 @@ const ModalAdicionarPlaylist = (props) => {
         set_tipo_alert("danger");
         if (result.response.status == 400) {
           set_sucesso_erro_mensagem("Playlist já existente!");
-        }
-        else if (result.response.status == 401) {
+        } else if (result.response.status == 401) {
           set_sucesso_erro_mensagem("Erro ao salvar playlist!");
-        }else if (result.response.status == 403 || result.response.status == 405) {
-          set_sucesso_erro_mensagem("Você não tem permissão para salvar playlist!");
-        }else{
+        } else if (
+          result.response.status == 403 ||
+          result.response.status == 405
+        ) {
+          set_sucesso_erro_mensagem(
+            "Você não tem permissão para salvar playlist!"
+          );
+        } else {
           set_sucesso_erro_mensagem("Erro ao salvar playlist!");
         }
       });
@@ -92,7 +96,11 @@ const ModalAdicionarPlaylist = (props) => {
         url: `${serverAddress}playlist/${playlistId}/`,
       })
         .then((result) => {
-          if (result.status == 204 || result.status == 200 || result.status == 201) {
+          if (
+            result.status == 204 ||
+            result.status == 200 ||
+            result.status == 201
+          ) {
             set_sucesso_erro_mensagem("Playlist deletada com sucesso!");
             set_tipo_alert("success");
           } else {
@@ -101,7 +109,7 @@ const ModalAdicionarPlaylist = (props) => {
           }
         })
         .catch((error) => {
-          console.log("err " + result);
+          console.log(`err ${result}`);
           set_sucesso_erro_mensagem("Ocorreu um erro ao deletar a playlist.");
           set_tipo_alert("danger");
         });
@@ -109,13 +117,15 @@ const ModalAdicionarPlaylist = (props) => {
   };
 
   const setCampos = (result) => {
+    console.log(result);
     settitulo(result.titulo);
     setdescricao(result.descricao);
     setimagem(result.imagem);
+    setPlaylistAtivo(result.ativo);
   };
   const getPLaylist = () => {
-    if(playlistId != -1) {
-    axios
+    if (playlistId != -1) {
+      axios
         .get(`${serverAddress}playlist/${playlistId}`)
         .then((response) => {
           setCampos(response.data);
@@ -126,6 +136,20 @@ const ModalAdicionarPlaylist = (props) => {
     }
   };
 
+  React.useEffect(() => {
+    if (props.playlistIdEditar != -1) {
+      setPlaylistId(props.playlistIdEditar);
+    }
+  }, [props]);
+
+  React.useEffect(() => {
+    getPLaylist();
+  }, [playlistId, modalVisible]);
+
+  React.useEffect(() => {
+    setModalVisible(props.modalVisible);
+  }, [props.modalVisible]);
+  
   return (
     <div>
       <div
@@ -133,7 +157,7 @@ const ModalAdicionarPlaylist = (props) => {
         role="document"
         style={{ width: "100%" }}
       >
-        <div className="modal-content wsi-container-dark wsi-border-primary wsi-shadow-primary blur">
+        <div className="modal-content wsi-container-dark wsi-border-admin wsi-shadow-primary blur">
           <div className="modal-header">
             <h5 className="modal-title text-center">
               <b>
@@ -147,57 +171,99 @@ const ModalAdicionarPlaylist = (props) => {
               onClick={() => {
                 props.setmodalVisible(false);
                 resetData();
-                //window.location.href = "/cfit_admin/playlists";
               }}
             >
               FECHAR
             </button>
           </div>
           <div className="modal-body">
-            <input
-              type="text"
-              className="form-control my-3 wsi-shadow-light"
-              placeholder="TITULO"
-              value={playlistId}
-              onChange={(e) => settitulo(e.target.value)}
-              hidden
-            />
-            <input
-              type="text"
-              className="form-control my-3 wsi-shadow-light"
-              placeholder="TITULO"
-              value={titulo}
-              onChange={(e) => settitulo(e.target.value)}
-            />
-            <input
-              type="text"
-              className="form-control my-3 wsi-shadow-light"
-              placeholder="DESCRICAO"
-              value={descricao}
-              onChange={(e) => setdescricao(e.target.value)}
-            />
-            <input
-              type="text"
-              className="form-control my-3 wsi-shadow-light"
-              placeholder="IMAGEM"
-              value={imagem}
-              onChange={(e) => setimagem(e.target.value)}
-            />
-            <div className="row d-flex justify-content-between">
-            <div className="col-md-6">
-              
-              <button
-                className="btn col-md-6 wsi-btn-admin wsi-shadow-light"
-                onClick={() => {
-                  salvarPlaylist();
-                }}
-              >
-                {playlistId == -1 ? "CADASTRAR" : "SALVAR"}
-              </button>
-              </div>
+            <div className="my-3 form-group">
+              <input
+                type="text"
+                className="form-control wsi-shadow-light"
+                placeholder="id"
+                value={playlistId}
+                onChange={(e) => settitulo(e.target.value)}
+                hidden
+              />
+            </div>
+            <div className="my-3 form-group">
+              <label htmlFor="titulo" className="h4">
+                <b>TITULO</b>
+              </label>
+              <input
+                type="text"
+                className="form-control wsi-shadow-light"
+                placeholder="TITULO"
+                id="titulo"
+                value={titulo}
+                onChange={(e) => settitulo(e.target.value)}
+              />
+            </div>
+            <div className="my-3 form-group">
+              <label htmlFor="descricao" className="h4">
+                <b>DESCRIÇÃO</b>
+              </label>
+              <input
+                type="text"
+                className="form-control wsi-shadow-light"
+                placeholder="DESCRICAO"
+                id="descricao"
+                value={descricao}
+                onChange={(e) => setdescricao(e.target.value)}
+              />
+            </div>
+            <div className="my-3 form-group">
+              <label htmlFor="imagem" className="h4">
+                <b>IMAGEM</b>
+              </label>
+              <input
+                type="text"
+                className="form-control wsi-shadow-light"
+                placeholder="IMAGEM"
+                id="imagem"
+                value={imagem}
+                onChange={(e) => setimagem(e.target.value)}
+              />
+            </div>
 
+            <div className="my-3 mb-5  form-group col-12 d-flex">
+              <div className="col-md-6 d-flex">
+                <label htmlFor="ativo" className="h4 mx-2 d-block col-7">
+                  <b>PLAYLIST ATIVA?</b>
+                </label>
+                <div className="col-lg-3">
+                  <select
+                    name="ativo"
+                    onChange={(e) => {
+                      setPlaylistAtivo(e.target.value);
+                    }}
+                    className="form-control col-md-1"
+                  >
+                    {playlistAtivo ? (
+                      <option value="true">SIM</option>
+                    ) : (
+                      <option value="false">NÃO</option>
+                    )}
+                    <option value>SIM</option>
+                    <option value={false}>NÃO</option>
+                  </select>
+                </div>
+              </div>
+              <div className="col-md-6 d-flex justify-content-end">
+                <button
+                  className="btn col-md-6 wsi-btn-secondary wsi-shadow-light"
+                  onClick={() => {
+                    salvarPlaylist();
+                  }}
+                >
+                  {playlistId == -1 ? "CADASTRAR" : "SALVAR"}
+                </button>
+              </div>
+            </div>
+            <div className="row d-flex justify-content-end">
               {playlistId != -1 ? (
-              <div className="col-md-6">
+                <div className="col-md-6 d-flex justify-content-end">
                   <span>Confirma?</span>
                   <input
                     className="form-check-input mx-3 mt-2"
@@ -225,7 +291,7 @@ const ModalAdicionarPlaylist = (props) => {
               </div>
             ) : null}
             {playlistId != -1 ? (
-              <div className="border border-danger rounded mt-5 p-2">
+              <div className="wsi-border-admin rounded mt-5 p-2">
                 <TabelaDeAulas
                   playlistId={playlistId}
                   modalVisible={props.modalVisible}

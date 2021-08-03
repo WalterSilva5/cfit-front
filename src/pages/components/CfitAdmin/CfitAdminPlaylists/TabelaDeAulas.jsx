@@ -13,17 +13,25 @@ const TabelaDeAulas = (props) => {
         `${serverAddress}video/videos_por_playlist/?playlist_id=${props.playlistId}`
       )
       .then((response) => {
-        if(!response.data || response.data.length === 0) {
-          setAulas(<tr><td>ESSA PLAYLIST NÃO TEM AULAS</td><td></td></tr>);
-        }else{
+        if (!response.data || response.data.length === 0) {
+          setAulas(
+            <tr>
+              <td>ESSA PLAYLIST NÃO TEM AULAS</td>
+              <td></td>
+            </tr>
+          );
+        } else {
           setAulas(
             response.data.map((video) => (
               <tr key={video.pk}>
                 <td>{video.titulo}</td>
                 <td>
-                  <a className="btn wsi-btn-admin"
-                  href={`/cfit_admin/add_aula/${video.pk}`}  
-                  >EDITAR</a>
+                  <a
+                    className="btn wsi-btn-admin"
+                    href={`/cfit_admin/add_aula/${video.pk}`}
+                  >
+                    EDITAR
+                  </a>
                 </td>
               </tr>
             ))
@@ -36,13 +44,15 @@ const TabelaDeAulas = (props) => {
       });
   };
 
-
   React.useEffect(() => {
-    if(props.playlistId != -1 && props.playlistId != undefined && props.playlistId){
+    if (
+      props.playlistId != -1 &&
+      props.playlistId != undefined &&
+      props.playlistId
+    ) {
       getAulas();
     }
   }, [props.playlistId]);
-
 
   if (isCarregando) {
     return (
@@ -56,7 +66,9 @@ const TabelaDeAulas = (props) => {
       <div className="d-flex justify-content-between">
         <h1>Aulas Na Playlist</h1>
         <div>
-          <a className="btn wsi-btn-admin" href="/cfit_admin/add_aula">ADICIONAR AULA</a>
+          <a className="btn wsi-btn-admin" href="/cfit_admin/add_aula">
+            ADICIONAR AULA
+          </a>
         </div>
       </div>
       <table className="table table-hover table-dark table-borderd wsi-border-admin rounded">
@@ -64,12 +76,13 @@ const TabelaDeAulas = (props) => {
           <tr className="">
             <th
               scope="col"
-              className="border border-primary"
+              className="wsi-border-admin"
               style={{ backgroundColor: "blue" }}
             >
               TITULO
             </th>
-            <th className="border border-primary col-1"
+            <th
+              className="wsi-border-admin col-1"
               style={{ backgroundColor: "blue" }}
             >
               EDITAR

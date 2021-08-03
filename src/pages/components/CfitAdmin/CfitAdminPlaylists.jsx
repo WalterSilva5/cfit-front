@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/button-has-type */
-import ModalAdicionarPlaylist from "./CfitAdminPlaylists/ModalAdicionarPlaylist";
 import axios from 'axios';
 import { serverAddress } from '@/util/Settings';
+import ModalAdicionarPlaylist from './CfitAdminPlaylists/ModalAdicionarPlaylist';
 
 const CfitAdminPlaylists = () => {
   const [modalVisible, setmodalVisible] = React.useState(false);
@@ -12,15 +12,21 @@ const CfitAdminPlaylists = () => {
   const getPlaylists = () => {
     axios.get(`${serverAddress}playlist`).then((response) => {
       setplaylists(response.data.playlist.map((res) => (
-        <tr className="wsi-border-admin" key={res.pk}>
-          <td className="wsi-border-admin">{res.titulo}</td>
-          <td className="wsi-border-admin">{res.descricao}</td>
-          <td className="wsi-border-admin"><button className="btn wsi-btn-admin" value={res.pk}
-            onClick={(e) => {
-              setmodalVisible(true);
-              setplaylistIdEditar(e.target.value);
-            }}
-          >EDITAR</button></td>
+        <tr className="border border-secondary" key={res.pk}>
+          <td className="border border-secondary">{res.titulo}</td>
+          <td className="border border-secondary">{res.descricao}</td>
+          <td className="border border-secondary">
+            <button
+              className="btn wsi-btn-admin"
+              value={res.pk}
+              onClick={(e) => {
+                setmodalVisible(true);
+                setplaylistIdEditar(e.target.value);
+              }}
+            >
+              EDITAR
+            </button>
+          </td>
         </tr>
       )));
       setCarregando(false);
@@ -34,7 +40,7 @@ const CfitAdminPlaylists = () => {
   }, [modalVisible]);
 
   React.useEffect(() => {
-    if(playlists.length === 0) {
+    if (playlists.length === 0) {
       getPlaylists();
     }
   }, []);
@@ -50,21 +56,24 @@ const CfitAdminPlaylists = () => {
           <h1 className="d-block col-4 m-md-2">PLAYLISTS</h1>
         </div>
         <div className="col-md-6 d-flex justify-content-end">
-          <button className="btn wsi-btn-admin col-md-8"
-          onClick={() => {
-            setmodalVisible(true);
-          }}
-          >ADICIONAR NOVA</button>
+          <button
+            className="btn wsi-btn-admin col-md-8"
+            onClick={() => {
+              setmodalVisible(true);
+            }}
+          >
+            ADICIONAR NOVA
+          </button>
         </div>
       </div>
       <div className="p-md-2">
-        <div style={{ height: '70vh', overflow: 'auto' }} className="rounded wsi-border-admin">
-          <table className="table table-hover table-dark table-borderd wsi-border-admin rounded">
+        <div style={{ height: '70vh', overflow: 'auto' }} className="rounded border border-secondary wsi-bg-black">
+          <table className="table table-borderd wsi-border-admin rounded text-white">
             <thead className="wsi-border-admin">
               <tr className="">
-                <th scope="col" className="border border-primary" style={{backgroundColor: 'blue'}}>TITULO</th>
-                <th scope="col" className="border border-primary" style={{backgroundColor: 'blue'}}>DESCRICAO</th>
-                <th className="col-1 border border-primary" style={{backgroundColor: 'blue'}}>EDITAR</th>
+                <th scope="col" className="wsi-border-admin border rounded" style={{ backgroundColor: '#12001a' }}>TITULO</th>
+                <th scope="col" className="wsi-border-admin border rounded" style={{ backgroundColor: '#12001a' }}>DESCRICAO</th>
+                <th className="col-1 wsi-border-admin border rounded" style={{ backgroundColor: '#12001a' }}>EDITAR</th>
               </tr>
             </thead>
             <tbody>
@@ -74,11 +83,15 @@ const CfitAdminPlaylists = () => {
           <div
             className={` modal animate__animated
               ${
-                modalVisible ? 'animate__fadeInLeft  d-block': 'animate__fadeOutRight  d-block' 
+                modalVisible ? 'animate__fadeInLeft  d-block' : 'animate__fadeOutRight  d-block'
               }`}
           >
-            <ModalAdicionarPlaylist setmodalVisible={setmodalVisible} playlistIdEditar={playlistIdEditar} 
-            setplaylistIdEditar={setplaylistIdEditar} modalVisible={modalVisible}/>
+            <ModalAdicionarPlaylist
+              setmodalVisible={setmodalVisible}
+              playlistIdEditar={playlistIdEditar}
+              setplaylistIdEditar={setplaylistIdEditar}
+              modalVisible={modalVisible}
+            />
           </div>
         </div>
       </div>
