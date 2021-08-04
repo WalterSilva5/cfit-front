@@ -10,7 +10,7 @@ import { logoutUser } from "@/util/UserUtil";
 import PageHeader from "./components/PageHeader";
 import PlaylistCard from "./components/PageHome/PlaylistCard";
 import BannerAssine from "./components/PageHome/BannerAssine";
-import Carregando from "@/pages/components/PageLogin/Carregando";
+import Carregando from "@/pages/components/Carregando";
 
 const PageHome = () => {
   const token = localStorage.getItem("authToken");
