@@ -22,5 +22,6 @@ module.exports = {
     'react/jsx-no-undef': 'off',
     'react/button-has-type ': 'off',
     'import/no-named-as-default-member ': 'off',
+    'linebreak-style': 'off',
   },
 };

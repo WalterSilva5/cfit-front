@@ -1,9 +1,11 @@
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { serverAddress } from '@/util/Settings';
-import PageHeader from './components/PageHeader';
-import VideoPlayer from './components/PageReproduzirPlaylist/VideoPlayer';
-import playIcon from '@/assets/img/play-icon.png'
+import PageHeader from '@/pages/components/PageHeader';
+import VideoPlayer from '@/pages/components/PageHome/PageReproduzirPlaylist/VideoPlayer';
+import playIcon from '@/pages/assets/img/play-icon.png';
+import Carregando from '../Carregando';
+
 const PageReproduzirPlaylist = () => {
   const token = localStorage.getItem('authToken');
   axios.defaults.headers.common = { Authorization: `Bearer ${token}` };
@@ -11,7 +13,7 @@ const PageReproduzirPlaylist = () => {
   const params = useParams();
   const [aulas, setAulas] = React.useState([]);
   const [videoUrl, setVideoUrl] = React.useState('');
-  const [isCarregando, setCarregando] = React.useState(true);
+  const [carregando, setCarregando] = React.useState(true);
   const [playlistTitulo, setPlaylistTitulo] = React.useState('');
 
   const getAulas = () => {
@@ -39,7 +41,7 @@ const PageReproduzirPlaylist = () => {
                   setVideoUrl(video.url);
                 }}
               >
-                <img className="img-fluid " style={{width:'40px'}} src={playIcon} alt="" />
+                <img className="img-fluid " style={{ width: '40px' }} src={playIcon} alt="" />
                 <h4 className="d-block mx-2">{video.titulo}</h4>
               </div>
             )),
@@ -64,7 +66,11 @@ const PageReproduzirPlaylist = () => {
       getPlaylist();
     }
   }, [params]);
-
+  if (carregando) {
+    return (
+      <Carregando />
+    );
+  }
   return (
     <div>
       <PageHeader />

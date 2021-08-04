@@ -2,23 +2,22 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-named-as-default */
 /* eslint-disable import/no-named-as-default-member */
-import { Route, Switch, Redirect } from "react-router-dom";
-import classes from "./App.module.scss";
-import PageHome from "./pages/PageHome.jsx";
-import PageLogin from "./pages/PageLogin";
-import Page404 from "./pages/Page404";
-import CfitAdmin from "./pages/CfitAdmin";
-import PageReproduzirPlaylist from "./pages/PageReproduzirPlaylist";
-// import PageAulas from './pages/PageAulas';
-import PWAInstallerPrompt from "react-pwa-installer-prompt";
-import axios from "axios";
-import { serverAddress } from "@/util/Settings";
-
+import { Route, Switch, Redirect } from 'react-router-dom';
+import PWAInstallerPrompt from 'react-pwa-installer-prompt';
+import axios from 'axios';
+import { serverAddress } from '@/util/Settings';
+import classes from './App.module.scss';
+import PageHome from './pages/PageHome.jsx';
+import PageLogin from './pages/PageLogin';
+import Page404 from './pages/Page404';
+import CfitAdmin from './pages/CfitAdmin';
+import PageReproduzirPlaylist from './pages/components/PageHome/PageReproduzirPlaylist';
+import PageNovoPagamento from './pages/components/PageHome/PageNovoPagamento';
 
 function App() {
-  const authToken = localStorage.getItem("authToken");
+  const authToken = localStorage.getItem('authToken');
   const [IsAdminUser, setIsAdminUser] = React.useState(false);
-  axios.defaults.headers.common = { Authorization: "Bearer " + authToken };
+  axios.defaults.headers.common = { Authorization: `Bearer ${authToken}` };
 
   axios
     .get(`${serverAddress}user/valida_admin/`)
@@ -31,7 +30,7 @@ function App() {
 
   return (
     <div className="wsi-bg-black p-0 m-0">
-      <div style={{ minHeight: "100vh" }} className="p-0 m-0">
+      <div style={{ minHeight: '100vh' }} className="p-0 m-0">
         <Switch>
           <Route exact path="/">
             {authToken ? <Redirect to="/home" /> : <PageLogin />}
@@ -49,6 +48,12 @@ function App() {
           <Route path="/reproduzir_playlist/:id?">
             {authToken ? <PageReproduzirPlaylist /> : <PageHome />}
           </Route>
+          <Route path="/novo_pagamento">
+            {authToken ? <PageNovoPagamento /> : <PageHome />}
+          </Route>
+          <Route path="/404">
+            {authToken ? <Page404 /> : <PageLogin />}
+          </Route>
           <Route exact path="*">
             <Page404 />
           </Route>
@@ -59,7 +64,10 @@ function App() {
       </div>
       <div className="mt-5 pt-3 navbar navbar-spand wsi-bg-black-light d-flex justify-content-center">
         <h4>
-          <b>CARVALHOS FIT -{new Date().getFullYear()}</b>
+          <b>
+            CARVALHOS FIT -
+            {new Date().getFullYear()}
+          </b>
         </h4>
         <div className="col-12 text-center">
           <a
