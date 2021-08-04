@@ -10,6 +10,7 @@ import { logoutUser } from '@/util/UserUtil';
 import PageHeader from './components/PageHeader';
 import PlaylistCard from './components/PageHome/PlaylistCard';
 import BannerAssine from './components/PageHome/BannerAssine';
+import Carregando from '@/pages/components/PageLogin/Carregando';
 
 const PageHome = () => {
   const token = localStorage.getItem('authToken');
@@ -17,8 +18,10 @@ const PageHome = () => {
   const [playlists, setplaylists] = React.useState([]);
   const [aulaAtual, setAulaAtual] = React.useState('');
   const [assinante, setAssinante] = React.useState(false);
+  const [carregando, setCarregando] = React.useState(true);
 
   const validaAssinante = () => {
+    setCarregando(false);
     axios
       .get(`${serverAddress}user/valida_cliente/`, { crossDomain: true })
       .then((response) => {
@@ -30,6 +33,7 @@ const PageHome = () => {
   };
 
   const getPlaylists = () => {
+    setCarregando(false);
     axios
       .get(`${serverAddress}playlist/`, { crossDomain: true })
       .then((response) => {
@@ -54,6 +58,13 @@ const PageHome = () => {
   React.useEffect(() => {
     getPlaylists();
   }, []);
+
+  if (carregando){
+    return (
+      <div>
+        <Carregando/>
+      </div>
+    )
   return (
     <div>
       <PageHeader />

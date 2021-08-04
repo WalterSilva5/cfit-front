@@ -3,6 +3,8 @@
 import axios from 'axios';
 import { serverAddress } from '@/util/Settings';
 import ModalAdicionarPlaylist from './CfitAdminPlaylists/ModalAdicionarPlaylist';
+import Carregando from '@/pages/components/PageLogin/Carregando';
+
 
 const CfitAdminPlaylists = () => {
   const [modalVisible, setmodalVisible] = React.useState(false);
@@ -45,7 +47,7 @@ const CfitAdminPlaylists = () => {
     }
   }, []);
   if (isCarregando) {
-    return <div><h1>Carregando...</h1></div>;
+    return <div><Carregando/></div>;
   }
 
   return (
