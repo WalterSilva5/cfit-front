@@ -4,36 +4,36 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-unused-vars */
-import { serverAddress } from "@/util/Settings";
-import axios from "axios";
-import { logoutUser } from "@/util/UserUtil";
-import PageHeader from "./components/PageHeader";
-import PlaylistCard from "./components/PageHome/PlaylistCard";
-import BannerAssine from "./components/PageHome/BannerAssine";
+import { serverAddress } from '@/util/Settings';
+import axios from 'axios';
+import { logoutUser } from '@/util/UserUtil';
 import Carregando from '@/pages/components/Carregando';
+import PageHeader from './components/PageHeader';
+import PlaylistCard from './components/PageHome/PlaylistCard';
+import BannerAssine from './components/PageHome/BannerAssine';
 
 const PageHome = () => {
-  const token = localStorage.getItem("authToken");
+  const token = localStorage.getItem('authToken');
   axios.defaults.headers.common = { Authorization: `Bearer ${token}` };
   const [playlists, setplaylists] = React.useState([]);
-  const [aulaAtual, setAulaAtual] = React.useState("");
+  const [aulaAtual, setAulaAtual] = React.useState('');
   const [assinante, setAssinante] = React.useState(false);
   const [carregando, setCarregando] = React.useState(true);
 
   const validaAssinante = () => {
-    setCarregando(false);
     axios
       .get(`${serverAddress}user/valida_cliente/`, { crossDomain: true })
       .then((response) => {
         getPlaylists();
+        setCarregando(false);
       })
       .catch((err) => {
         setAssinante(false);
+        setCarregando(false);
       });
   };
 
   const getPlaylists = () => {
-    setCarregando(false);
     axios
       .get(`${serverAddress}playlist/`, { crossDomain: true })
       .then((response) => {
@@ -47,8 +47,9 @@ const PageHome = () => {
               id={res.pk}
               imagem={res.imagem}
             />
-          ))
+          )),
         );
+        setCarregando(false);
       })
       .catch((err) => {
         validaAssinante();
