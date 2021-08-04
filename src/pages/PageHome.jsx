@@ -4,19 +4,19 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-unused-vars */
-import { serverAddress } from '@/util/Settings';
-import axios from 'axios';
-import { logoutUser } from '@/util/UserUtil';
-import PageHeader from './components/PageHeader';
-import PlaylistCard from './components/PageHome/PlaylistCard';
-import BannerAssine from './components/PageHome/BannerAssine';
-import Carregando from '@/pages/components/PageLogin/Carregando';
+import { serverAddress } from "@/util/Settings";
+import axios from "axios";
+import { logoutUser } from "@/util/UserUtil";
+import PageHeader from "./components/PageHeader";
+import PlaylistCard from "./components/PageHome/PlaylistCard";
+import BannerAssine from "./components/PageHome/BannerAssine";
+import Carregando from "@/pages/components/PageLogin/Carregando";
 
 const PageHome = () => {
-  const token = localStorage.getItem('authToken');
+  const token = localStorage.getItem("authToken");
   axios.defaults.headers.common = { Authorization: `Bearer ${token}` };
   const [playlists, setplaylists] = React.useState([]);
-  const [aulaAtual, setAulaAtual] = React.useState('');
+  const [aulaAtual, setAulaAtual] = React.useState("");
   const [assinante, setAssinante] = React.useState(false);
   const [carregando, setCarregando] = React.useState(true);
 
@@ -47,7 +47,7 @@ const PageHome = () => {
               id={res.pk}
               imagem={res.imagem}
             />
-          )),
+          ))
         );
       })
       .catch((err) => {
@@ -59,12 +59,13 @@ const PageHome = () => {
     getPlaylists();
   }, []);
 
-  if (carregando){
+  if (carregando) {
     return (
       <div>
-        <Carregando/>
+        <Carregando />
       </div>
-    )
+    );
+  }
   return (
     <div>
       <PageHeader />
