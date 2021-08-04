@@ -4,7 +4,7 @@ import { serverAddress } from '@/util/Settings';
 import PageHeader from '@/pages/components/PageHeader';
 import VideoPlayer from '@/pages/components/PageHome/PageReproduzirPlaylist/VideoPlayer';
 import playIcon from '@/assets/img/play-icon.png';
-import Carregando from '../Carregando';
+import Carregando from '@/pages/components/Carregando';
 
 const PageReproduzirPlaylist = () => {
   const token = localStorage.getItem('authToken');

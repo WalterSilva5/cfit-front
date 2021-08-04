@@ -3,7 +3,8 @@
 import axios from 'axios';
 import { serverAddress } from '@/util/Settings';
 import ModalAdicionarPlaylist from './CfitAdminPlaylists/ModalAdicionarPlaylist';
-import Carregando from '@/pages/components/PageLogin/Carregando';
+import Carregando from '@/pages/components/Carregando';
+
 
 
 const CfitAdminPlaylists = () => {
