@@ -1,4 +1,5 @@
 import PageHeader from '@/pages/components/PageHeader';
+import { NavLink } from 'react-router-dom';
 
 const PageTreinos = (props) => (
   <div>
@@ -9,7 +10,7 @@ const PageTreinos = (props) => (
     </h1>
 
     <div className="d-flex justify-content-center mt-3">
-      <button className="btn btn-lg btn-primary">CADASTRAR NOVO TREINO</button>
+      <NavLink className="btn btn-lg btn-primary" to="cadastro_treino">CADASTRAR NOVO TREINO</NavLink>
     </div>
   </div>
 
