@@ -57,9 +57,10 @@ const PageHome = () => {
   };
 
   React.useEffect(() => {
-    getPlaylists();
-  }, []);
-
+    if (playlists.length === 0) {
+      getPlaylists();
+    }
+  }, [playlists]);
   if (carregando) {
     return (
       <div>

@@ -14,7 +14,6 @@ const FormAdicionarAula = (props) => {
   const [alertaAdicionarAula, setAlertaAdicionarAula] = React.useState(false);
   const [mensagemAdicionarAula, setMensagemAdicionarAula] = React.useState('');
   const [playlists, setplaylists] = React.useState([]);
-  const [listaPlaylists, setListaPlaylists] = React.useState({});
   const [isCarregando, setCarregando] = React.useState(true);
   const [videoPk, setVideoPk] = React.useState(-1);
   const [permiteDeletar, setPermiteDeletar] = React.useState(false);
@@ -54,7 +53,6 @@ const FormAdicionarAula = (props) => {
     axios
       .get(`${serverAddress}playlist/`, { crossDomain: true })
       .then((response) => {
-        setListaPlaylists(response.data);
         setplaylists(
           response.data.playlist.map((res) => (
             <option key={res.pk} value={res.pk}>

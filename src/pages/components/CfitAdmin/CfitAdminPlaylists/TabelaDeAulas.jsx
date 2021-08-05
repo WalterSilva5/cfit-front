@@ -71,19 +71,16 @@ const TabelaDeAulas = (props) => {
           </a>
         </div>
       </div>
-      <table className="table table-hover table-dark table-borderd wsi-border-admin rounded">
-        <thead className="wsi-border-admin">
+      <table className="table table-hover text-white table-bordered rounded">
+        <thead className="bg-primary border-dark">
           <tr className="">
             <th
               scope="col"
-              className="wsi-border-admin"
-              style={{ backgroundColor: "blue" }}
             >
               TITULO
             </th>
             <th
-              className="wsi-border-admin col-1"
-              style={{ backgroundColor: "blue" }}
+              className="col-1"
             >
               EDITAR
             </th>

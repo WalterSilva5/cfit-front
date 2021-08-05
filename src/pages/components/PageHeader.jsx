@@ -1,12 +1,10 @@
-import { NavLink } from "react-router-dom";
-import $ from "jquery";
-import { logoutUser } from "@/util/UserUtil";
-import userIcon from "@/assets/img/conta.png"
-
-
+import { NavLink } from 'react-router-dom';
+import $ from 'jquery';
+import { logoutUser } from '@/util/UserUtil';
+import userIcon from '@/assets/img/conta.png';
 
 const PageHeader = () => {
-  const permission = localStorage.getItem("perm");
+  const permission = localStorage.getItem('perm');
   return (
     <div>
       <div className="">
@@ -24,35 +22,37 @@ const PageHeader = () => {
             type="button"
             className="btn btn-primary btn_poopover"
             onClick={() => {
-              $(".menu-popover").toggle();
+              $('.menu-popover').toggle();
             }}
             data-toggle="popover"
             title="Popover title"
             data-content="And here's some amazing content. It's very engaging. Right?"
           >
-            <img src={userIcon} style={{width: "30px"}} className="mx-1" />
-            {'  '}MENU
+            <img src={userIcon} style={{ width: '30px' }} className="mx-1" />
+            {'  '}
+            MENU
           </button>
         </nav>
 
         <div
           className="btn border border-danger p-5 menu-popover"
           style={{
-            backgroundColor: "rgba(255, 230, 220, 0.7)",
-            position: "absolute",
+            backgroundColor: 'rgba(255, 230, 220, 0.7)',
+            position: 'absolute',
             right: 0,
-            width: "200px",
-            display: "None",
-            zIndex: "9999",
+            width: '200px',
+            display: 'None',
+            zIndex: '9999',
           }}
-          onMouseLeave={()=>{$(".menu-popover").toggle()}}
+          onMouseLeave={() => { $('.menu-popover').toggle(); }}
         >
           <NavLink exact className="btn btn-primary col-12 my-1" to="/">
             INICIO
           </NavLink>
-          <button className="btn btn-primary col-12 my-1">TREINOS</button>
+          <NavLink exact className="btn btn-primary col-12 my-1" to="/treinos">TREINOS</NavLink>
           {permission == 10 ? (
-            <NavLink exact
+            <NavLink
+              exact
               className="btn my-1 btn-primary col-12"
               to="/cfit_admin"
               type="button"

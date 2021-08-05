@@ -13,6 +13,7 @@ import Page404 from './pages/Page404';
 import CfitAdmin from './pages/CfitAdmin';
 import PageReproduzirPlaylist from './pages/components/PageHome/PageReproduzirPlaylist';
 import PageNovoPagamento from './pages/components/PageHome/PageNovoPagamento';
+import PageTreinos from './pages/PageTreinos';
 
 function App() {
   const authToken = localStorage.getItem('authToken');
@@ -51,6 +52,7 @@ function App() {
           <Route path="/novo_pagamento">
             {authToken ? <PageNovoPagamento /> : <PageHome />}
           </Route>
+          <Route path="/treinos">{authToken ? <PageTreinos /> : <PageHome />}</Route>
           <Route path="/404">
             {authToken ? <Page404 /> : <PageLogin />}
           </Route>

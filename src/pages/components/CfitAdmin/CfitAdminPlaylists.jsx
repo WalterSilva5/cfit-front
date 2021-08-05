@@ -2,10 +2,8 @@
 /* eslint-disable react/button-has-type */
 import axios from 'axios';
 import { serverAddress } from '@/util/Settings';
-import ModalAdicionarPlaylist from './CfitAdminPlaylists/ModalAdicionarPlaylist';
 import Carregando from '@/pages/components/Carregando';
-
-
+import ModalAdicionarPlaylist from './CfitAdminPlaylists/ModalAdicionarPlaylist';
 
 const CfitAdminPlaylists = () => {
   const [modalVisible, setmodalVisible] = React.useState(false);
@@ -48,7 +46,7 @@ const CfitAdminPlaylists = () => {
     }
   }, []);
   if (isCarregando) {
-    return <div><Carregando/></div>;
+    return <div><Carregando /></div>;
   }
 
   return (
@@ -71,12 +69,12 @@ const CfitAdminPlaylists = () => {
       </div>
       <div className="p-md-2">
         <div style={{ height: '70vh', overflow: 'auto' }} className="rounded border border-secondary wsi-bg-black">
-          <table className="table table-borderd wsi-border-admin rounded text-white">
-            <thead className="wsi-border-admin">
+          <table className="table table-hover text-white table-bordered rounded">
+            <thead className="bg-primary border-dark">
               <tr className="">
-                <th scope="col" className="wsi-border-admin border rounded" style={{ backgroundColor: '#12001a' }}>TITULO</th>
-                <th scope="col" className="wsi-border-admin border rounded" style={{ backgroundColor: '#12001a' }}>DESCRICAO</th>
-                <th className="col-1 wsi-border-admin border rounded" style={{ backgroundColor: '#12001a' }}>EDITAR</th>
+                <th scope="col">TITULO</th>
+                <th scope="col">DESCRICAO</th>
+                <th className="col-1 rounded">EDITAR</th>
               </tr>
             </thead>
             <tbody>

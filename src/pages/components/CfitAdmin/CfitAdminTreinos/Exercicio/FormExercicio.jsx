@@ -1,4 +1,116 @@
-const FormExercicio = () => (
+import axios from 'axios';
+import { serverAddress } from '@/util/Settings';
+
+const FormExercicio = (props) => {
+  const [categorias, setCategorias] = React.useState([]);
+  const [categoriaId, setCategoriaId] = React.useState(-1);
+  const [nome, setNome] = React.useState('');
+  const [video, setVideo] = React.useState('');
+  const [dica, setDica] = React.useState('');
+  const [exercicioEditId, setExercicioEditId] = React.useState(-1);
+  const [alertType, setAlertType] = React.useState('success');
+  const [alertMessage, setAlertMessage] = React.useState('');
+  const [alertShow, setAlertShow] = React.useState(false);
+
+  const updateAlert = (type, message) => {
+    setAlertType(type);
+    setAlertMessage(message);
+    setAlertShow(true);
+  };
+
+  const getCategorias = () => {
+    axios.get(`${serverAddress}categoria/`)
+      .then((response) => {
+        setCategorias(
+          response.data.map((categoria) => (
+            <option key={categoria.pk} value={categoria.pk}>
+              {categoria.nome}
+            </option>
+          )),
+        );
+      })
+      .catch((error) => {
+        updateAlert('danger', error.response.data.message);
+      });
+  };
+
+  const getExercicioEdit = () => {
+    if (exercicioEditId > 0) {
+      axios.get(`${serverAddress}exercicio/${exercicioEditId}/`)
+        .then((response) => {
+          setNome(response.data.nome);
+          setVideo(response.data.video);
+          setDica(response.data.dica);
+          setCategoriaId(response.data.categoria_id);
+        })
+        .catch((error) => {
+          updateAlert('danger', error.response.data.message);
+        });
+    }
+  };
+
+  const salvarExercicio = () => {
+    let request_method = '';
+    let request_url = `${serverAddress}exercicio/`;
+    if (exercicioEditId === -1) {
+      request_method = 'post';
+    } else {
+      request_method = 'put';
+      request_url += `${exercicioEditId}/`;
+    }
+    if (nome.length === 0) {
+      updateAlert('danger', 'Nome não pode ser vazio');
+    } else if (video.length === 0) {
+      updateAlert('danger', 'Video não pode ser vazio');
+    } else if (dica.length === 0) {
+      updateAlert('danger', 'Dica não pode ser vazio');
+    } else if (categoriaId == -1) {
+      updateAlert('danger', 'Selecione uma categoria');
+    } else {
+      axios({
+        method: request_method,
+        url: request_url,
+        data: {
+          nome,
+          video,
+          dica,
+          categoria: categoriaId,
+        },
+      })
+        .then((response) => {
+          setNome('');
+          setVideo('');
+          setDica('');
+          setCategoriaId(-1);
+          setExercicioEditId(-1);
+          updateAlert('success', 'Exercício salvo com sucesso!');
+          props.setExercicioEditId(-1);
+        })
+        .catch((error) => {
+          console.log(error);
+          updateAlert('danger', 'Ocorreu um erro ao salvar o exercício!');
+        });
+    }
+  };
+
+  React.useEffect(() => {
+    if (exercicioEditId !== -1) {
+      getExercicioEdit();
+    }
+  }, [exercicioEditId]);
+
+  React.useEffect(() => {
+    if (props.exercicioEditId !== -1) {
+      setExercicioEditId(props.exercicioEditId);
+    }
+  }, [props.exercicioEditId]);
+
+  React.useEffect(() => {
+    if (categorias.length === 0) {
+      getCategorias();
+    }
+  }, [categorias]);
+  return (
     <div className="wsi-bg-black rounded my-2 p-md-2">
       <h3 className="text-secondary">ADICIONAR NOVO EXERCICIO</h3>
       <div className="form-group row">
@@ -6,7 +118,13 @@ const FormExercicio = () => (
           <label className="h2"><b>Nome</b></label>
         </div>
         <div className="col-md-10">
-          <input className="form-control " type="text" name="nome" />
+          <input
+            className="form-control"
+            onChange={(e) => setNome(e.target.value.toUpperCase())}
+            value={nome}
+            type="text"
+            name="nome"
+          />
         </div>
       </div>
       <div className="form-group row">
@@ -14,7 +132,13 @@ const FormExercicio = () => (
           <label className="h2"><b>Video</b></label>
         </div>
         <div className="col-md-10">
-          <input className="form-control " type="text" name="video" />
+          <input
+            className="form-control"
+            onChange={(e) => setVideo(e.target.value.toUpperCase())}
+            value={video}
+            type="text"
+            name="video"
+          />
         </div>
       </div>
       <div className="form-group row">
@@ -22,7 +146,13 @@ const FormExercicio = () => (
           <label className="h2"><b>Dica</b></label>
         </div>
         <div className="col-md-10 mb-2">
-          <textarea className="form-control " type="text" name="video" />
+          <textarea
+            className="form-control"
+            onChange={(e) => setDica(e.target.value.toUpperCase())}
+            value={dica}
+            type="text"
+            name="video"
+          />
         </div>
       </div>
       <div className="form-group row">
@@ -30,17 +160,42 @@ const FormExercicio = () => (
           <label className="h2"><b>Categoria</b></label>
         </div>
         <div className="col-md-9 mb-2">
-          <select name="categoria" id="categoria" className="form-control">
-            <option value="">Selecione</option>
-            <option value="1">Aeromodelismo</option>
-            <option value="2">Aeromodelo</option>
+          <select
+            name="categoria"
+            id="categoria"
+            className="form-control"
+            onChange={(e) => {
+              setCategoriaId(e.target.value);
+            }}
+          >
+            {categoriaId == -1 ? (
+              <option> ESCOLHA UMA CATEGORIA </option>
+            ) : null}
+            {categorias}
           </select>
         </div>
       </div>
       <div className="d-flex justify-content-end mt-3">
-        <button className="btn btn-lg wsi-btn-secondary">SALVAR</button>
+        <button
+          className="btn btn-lg wsi-btn-secondary"
+          onClick={() => {
+            salvarExercicio();
+          }}
+        >
+          SALVAR
+        </button>
+      </div>
+      <div
+        className={`my-2 alert alert-${alertType}`}
+        role="alert"
+        style={{ display: alertShow ? 'block' : 'none' }}
+      >
+        <h4>
+          {alertMessage}
+        </h4>
       </div>
     </div>
   );
-  
-  export default FormExercicio;
+};
+
+export default FormExercicio;
