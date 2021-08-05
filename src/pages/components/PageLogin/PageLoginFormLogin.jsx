@@ -8,10 +8,10 @@
 import axios from 'axios';
 import { nodeName } from 'jquery';
 import jwt_decode from 'jwt-decode';
+import { serverAddress } from '@/util/Settings';
+import Carregando from '@/pages/components/Carregando';
 import classes from './PageLogin.module.scss';
 import PageLoginModalCadastro from './PageLoginModalCadastro';
-import { serverAddress } from '@/util/Settings';
-
 
 const PageLoginFormLogin = () => {
   const [modalVisible, setmodalVisible] = React.useState(false);
@@ -19,21 +19,23 @@ const PageLoginFormLogin = () => {
   const [msgErrorVisbile, setmsgErrorVisbile] = React.useState(false);
   const [username, setusername] = React.useState('');
   const [password, setpassword] = React.useState('');
+  const [carregando, setcarregando] = React.useState(false);
   const setLevelAccess = () => {
     const accessUser = localStorage.getItem('accessUser');
     const rota = `${serverAddress}user/${accessUser}/`;
-    //console.log(rota);
+    // console.log(rota);
     axios.get(rota)
       .then((response) => {
-        //console.log(response.data)
+        // console.log(response.data)
         localStorage.setItem('perm', response.data.type);
         window.location.href = '/';
-      }).catch((error) => {  
+      }).catch((error) => {
         console.log(error);
-      })
+      });
   };
 
   const AuthUser = () => {
+    setcarregando(true);
     setmsgErrorVisbile(false);
     axios
       .post(`${serverAddress}token/`, { username, password, crossDomain: true })
@@ -41,12 +43,14 @@ const PageLoginFormLogin = () => {
         const dado = jwt_decode(response.data.access);
         localStorage.setItem('authToken', response.data.access);
         localStorage.setItem('accessUser', dado.user_id);
-        const token = localStorage.getItem("authToken");
-        axios.defaults.headers.common = {'Authorization': 'Bearer '+token}
+        const token = localStorage.getItem('authToken');
+        axios.defaults.headers.common = { Authorization: `Bearer ${token}` };
+        setcarregando(false);
         setLevelAccess();
       })
       .catch((error) => {
         setmsgErrorVisbile(true);
+        setcarregando(false);
         try {
           const status = error.response.status;
           if (status == 400) {
@@ -59,26 +63,31 @@ const PageLoginFormLogin = () => {
             setmsgError(toString(status.response.statusText));
           }
         } catch (e) {
+          setcarregando(false);
           setmsgError('ERRO NO SERVIDOR', e);
         }
       });
   };
 
   React.useEffect(() => {
-    const listener = event => {
-      if(!modalVisible){
-        if (event.code === "Enter" || event.code === "NumpadEnter") {
-          if (username != "" && password != ""){
+    const listener = (event) => {
+      if (!modalVisible) {
+        if (event.code === 'Enter' || event.code === 'NumpadEnter') {
+          if (username != '' && password != '') {
             AuthUser();
           }
         }
       }
     };
-    document.addEventListener("keydown", listener);
+    document.addEventListener('keydown', listener);
     return () => {
-      document.removeEventListener("keydown", listener);
+      document.removeEventListener('keydown', listener);
     };
-  }, [username, password, modalVisible]);;
+  }, [username, password, modalVisible]);
+
+  if (carregando) {
+    return <Carregando />;
+  }
 
   return (
     <div className="row wsi-border-container nm p-3 d-flex justify-content-center text-center py-3 col-12">

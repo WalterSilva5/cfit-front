@@ -1,43 +1,42 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-undef */
-import axios from "axios";
-import { serverAddress } from "@/util/Settings";
-import TabelaDeAulas from "./TabelaDeAulas";
+import axios from 'axios';
+import { serverAddress } from '@/util/Settings';
+import TabelaDeAulas from './TabelaDeAulas';
 
 const ModalAdicionarPlaylist = (props) => {
-  const token = localStorage.getItem("authToken");
+  const token = localStorage.getItem('authToken');
   axios.defaults.headers.common = { Authorization: `Bearer ${token}` };
-  const [titulo, settitulo] = React.useState("");
+  const [titulo, settitulo] = React.useState('');
   const [playlistId, setPlaylistId] = React.useState(-1);
-  const [descricao, setdescricao] = React.useState("");
-  const [imagem, setimagem] = React.useState("");
+  const [descricao, setdescricao] = React.useState('');
+  const [imagem, setimagem] = React.useState('');
   const [modalVisible, setModalVisible] = React.useState(false);
   const [playlistAtivo, setPlaylistAtivo] = React.useState(false);
-  const [alert_adicionar_editar_playlist, set_alert_adicionar_editar_playlist] =
-    React.useState(false);
-  const [tipo_alert, set_tipo_alert] = React.useState("");
-  const [sucesso_erro_mensagem, set_sucesso_erro_mensagem] = React.useState("");
+  const [alert_adicionar_editar_playlist, set_alert_adicionar_editar_playlist] = React.useState(false);
+  const [tipo_alert, set_tipo_alert] = React.useState('');
+  const [sucesso_erro_mensagem, set_sucesso_erro_mensagem] = React.useState('');
   const [permiteDeletar, setPermiteDeletar] = React.useState(false);
 
   const resetData = () => {
     setPlaylistId(-1);
-    settitulo("");
-    setdescricao("");
-    setimagem("");
+    settitulo('');
+    setdescricao('');
+    setimagem('');
     setPlaylistAtivo(false);
-    set_tipo_alert("");
-    set_sucesso_erro_mensagem("");
+    set_tipo_alert('');
+    set_sucesso_erro_mensagem('');
     set_alert_adicionar_editar_playlist(false);
   };
 
   const salvarPlaylist = () => {
-    let request_method = "";
-    let url = "";
+    let request_method = '';
+    let url = '';
     if (playlistId != -1) {
       (url = `${serverAddress}playlist/${playlistId}/`),
-        (request_method = "put");
+      (request_method = 'put');
     } else {
-      request_method = "post";
+      request_method = 'post';
       url = `${serverAddress}playlist/`;
     }
     set_alert_adicionar_editar_playlist(true);
@@ -53,32 +52,32 @@ const ModalAdicionarPlaylist = (props) => {
     })
       .then((result) => {
         if (result.status == 201 || result.status == 200) {
-          set_sucesso_erro_mensagem("Playlist salva com sucesso!");
-          set_tipo_alert("success");
+          set_sucesso_erro_mensagem('Playlist salva com sucesso!');
+          set_tipo_alert('success');
         } else if (result.status == 403 || result.status == 405) {
           set_sucesso_erro_mensagem(
-            "Você não tem permissão para salvar playlist!"
+            'Você não tem permissão para salvar playlist!',
           );
         } else {
-          set_sucesso_erro_mensagem("Houve um erro ao salvar a playlist!");
-          set_tipo_alert("danger");
+          set_sucesso_erro_mensagem('Houve um erro ao salvar a playlist!');
+          set_tipo_alert('danger');
         }
       })
       .catch((result) => {
-        set_tipo_alert("danger");
+        set_tipo_alert('danger');
         if (result.response.status == 400) {
-          set_sucesso_erro_mensagem("Playlist já existente!");
+          set_sucesso_erro_mensagem('Playlist já existente!');
         } else if (result.response.status == 401) {
-          set_sucesso_erro_mensagem("Erro ao salvar playlist!");
+          set_sucesso_erro_mensagem('Erro ao salvar playlist!');
         } else if (
-          result.response.status == 403 ||
-          result.response.status == 405
+          result.response.status == 403
+          || result.response.status == 405
         ) {
           set_sucesso_erro_mensagem(
-            "Você não tem permissão para salvar playlist!"
+            'Você não tem permissão para salvar playlist!',
           );
         } else {
-          set_sucesso_erro_mensagem("Erro ao salvar playlist!");
+          set_sucesso_erro_mensagem('Erro ao salvar playlist!');
         }
       });
   };
@@ -86,38 +85,37 @@ const ModalAdicionarPlaylist = (props) => {
   const deletarPlaylist = () => {
     set_alert_adicionar_editar_playlist(true);
     if (!permiteDeletar) {
-      set_tipo_alert("warning");
+      set_tipo_alert('warning');
       set_sucesso_erro_mensagem(
-        "MARQUE A CAIXA PRA CONFIRMAR ANTES DE DELETAR"
+        'MARQUE A CAIXA PRA CONFIRMAR ANTES DE DELETAR',
       );
     } else {
       axios({
-        method: "delete",
+        method: 'delete',
         url: `${serverAddress}playlist/${playlistId}/`,
       })
         .then((result) => {
           if (
-            result.status == 204 ||
-            result.status == 200 ||
-            result.status == 201
+            result.status == 204
+            || result.status == 200
+            || result.status == 201
           ) {
-            set_sucesso_erro_mensagem("Playlist deletada com sucesso!");
-            set_tipo_alert("success");
+            set_sucesso_erro_mensagem('Playlist deletada com sucesso!');
+            set_tipo_alert('success');
           } else {
-            set_sucesso_erro_mensagem("Ocorreu um erro ao deletar a playlist.");
-            set_tipo_alert("danger");
+            set_sucesso_erro_mensagem('Ocorreu um erro ao deletar a playlist.');
+            set_tipo_alert('danger');
           }
         })
         .catch((error) => {
-          console.log(`err ${result}`);
-          set_sucesso_erro_mensagem("Ocorreu um erro ao deletar a playlist.");
-          set_tipo_alert("danger");
+          // console.log(`err ${result}`);
+          set_sucesso_erro_mensagem('Ocorreu um erro ao deletar a playlist.');
+          set_tipo_alert('danger');
         });
     }
   };
 
   const setCampos = (result) => {
-    console.log(result);
     settitulo(result.titulo);
     setdescricao(result.descricao);
     setimagem(result.imagem);
@@ -131,7 +129,7 @@ const ModalAdicionarPlaylist = (props) => {
           setCampos(response.data);
         })
         .catch(() => {
-          setCampos({ titulo: "", descricao: "", imagem: "" });
+          setCampos({ titulo: '', descricao: '', imagem: '' });
         });
     }
   };
@@ -149,19 +147,19 @@ const ModalAdicionarPlaylist = (props) => {
   React.useEffect(() => {
     setModalVisible(props.modalVisible);
   }, [props.modalVisible]);
-  
+
   return (
     <div>
       <div
         className="modal-dialog modal-lg  "
         role="document"
-        style={{ width: "100%" }}
+        style={{ width: '100%' }}
       >
         <div className="modal-content wsi-container-dark wsi-border-admin wsi-shadow-primary blur">
           <div className="modal-header">
             <h5 className="modal-title text-center">
               <b>
-                {playlistId == -1 ? "CADASTRAR NOVA " : "EDITAR "}
+                {playlistId == -1 ? 'CADASTRAR NOVA ' : 'EDITAR '}
                 PLAYLIST
               </b>
             </h5>
@@ -257,7 +255,7 @@ const ModalAdicionarPlaylist = (props) => {
                     salvarPlaylist();
                   }}
                 >
-                  {playlistId == -1 ? "CADASTRAR" : "SALVAR"}
+                  {playlistId == -1 ? 'CADASTRAR' : 'SALVAR'}
                 </button>
               </div>
             </div>

@@ -1,17 +1,19 @@
+import carregandoGif from '@/assets/loading.gif';
 import PageHeader from './PageHeader';
 
 const Carregando = () => (
   <div className="container">
-    <PageHeader />
     <div className="row">
       <div className="col-md-12">
-        <div className="alert alert-info">
-          <i
-            className="fa fa-spinner fa-pulse fa-3x fa-fw"
-            aria-hidden="true"
-          />
-          <span className="sr-only">Carregando...</span>
-        </div>
+        <img
+          className="img-fluid rounded-circle p-0"
+          style={{ backgroundColor: '#dbdbdb', width: '400px'}}
+          src={carregandoGif}
+          alt=""
+        />
+        <h2>
+          <b>CARREGANDO</b>
+        </h2>
       </div>
     </div>
   </div>
