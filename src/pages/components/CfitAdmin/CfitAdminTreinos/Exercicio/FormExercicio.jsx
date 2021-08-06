@@ -100,7 +100,7 @@ const FormExercicio = (props) => {
   }, [exercicioEditId]);
 
   React.useEffect(() => {
-    if (props.exercicioEditId !== -1) {
+    if (props.exercicioEditId !== -1 && !isNaN(props.exercicioEditId)) {
       setExercicioEditId(props.exercicioEditId);
     }
   }, [props.exercicioEditId]);
