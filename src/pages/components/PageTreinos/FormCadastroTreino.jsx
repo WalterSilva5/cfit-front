@@ -116,6 +116,7 @@ const FormCadastroTreino = () => {
             style={{
               position: 'absolute',
               top: '-100px',
+              left: '0',
               margin: '0 !important',
               padding: '0 !important',
               zIndex: '9999999',
