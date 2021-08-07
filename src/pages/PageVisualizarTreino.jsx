@@ -180,8 +180,8 @@ const PageVisualizarTreino = (props) => {
               </div>
             </div>
           ))}
-          <div className="d-flex justify-content-end">
-            <div className="col-md-4 p-3">
+          <div className="d-flex justify-content-center p-2">
+            <div className="rounded bg-secondary">
               <div className="row my-3">
                 <button
                   className="btn wsi-btn-secondary"
