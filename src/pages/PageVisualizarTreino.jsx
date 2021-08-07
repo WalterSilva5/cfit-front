@@ -70,6 +70,8 @@ const PageVisualizarTreino = (props) => {
     if (treino_id != -1 && treino_id != null) {
       getTreino();
     }
+
+    console.log(treino);
   }, [treino_id]);
 
   React.useEffect(() => {
@@ -128,14 +130,17 @@ const PageVisualizarTreino = (props) => {
       </h3>
       <div className="d-flex justify-content-center my-4">
         <div className="p-2 border wsi-border rounded py-3 my-2 col-md-6">
-          <img
-            src={videoAtual}
-            alt=""
-            className="img-fluid col-12 animate__animated animate__bounceIn"
-            style={{
-              display: videoAtual != '' ? 'block' : 'none',
-            }}
-          />
+          <div className="d-flex justify-content-center">
+            <img
+              src={videoAtual}
+              alt=""
+              className="img-fluid col-12 animate__animated animate__bounceIn"
+              style={{
+                maxWidth: '400px',
+                display: videoAtual != '' ? 'block' : 'none',
+              }}
+            />
+          </div>
           {series.map((serie) => (
             <div
               key={serie.pk}
@@ -180,6 +185,13 @@ const PageVisualizarTreino = (props) => {
               </div>
             </div>
           ))}
+          {treino.dica != null && treino.dica!= ''? (
+            <div>
+              <h3>Dica:</h3>
+              {treino.dica}
+            </div>
+          ) : ''}
+
           <div className="d-flex justify-content-center p-2">
             <div className="rounded bg-secondary">
               <div className="row my-3">
@@ -213,7 +225,6 @@ const PageVisualizarTreino = (props) => {
             setModalConfirmDeleteVisivel={setModalConfirmDeleteVisivel}
             modalConfirmdeleteVisivel={modalConfirmdeleteVisivel}
           />
-
           <ModalEnviarTreino
             treino={treino}
             setModalEnviarParaAmigoVisivel={setModalEnviarParaAmigoVisivel}
