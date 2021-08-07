@@ -7,6 +7,8 @@ import ModalConfirmDelete from './components/ModalConfirmDelete';
 import ModalEnviarTreino from './components/PageTreinos/ModalEnviarTreino';
 
 const PageVisualizarTreino = (props) => {
+  const token = localStorage.getItem('authToken');
+  axios.defaults.headers.common = { Authorization: `Bearer ${token}` };
   const [treino, setTreino] = React.useState(null);
   const [series, setSeries] = React.useState(null);
   const [treino_id, setTreino_id] = React.useState(-1);
@@ -24,7 +26,7 @@ const PageVisualizarTreino = (props) => {
         setExercicios(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response);
       });
   };
 
@@ -34,7 +36,7 @@ const PageVisualizarTreino = (props) => {
       .then((response) => {
         setTreino(response.data);
       }).catch((error) => {
-        console.log(error);
+        console.log(error.response);
       });
   };
 
@@ -43,7 +45,7 @@ const PageVisualizarTreino = (props) => {
       .then((response) => {
         console.log(response.data);
       }).catch((error) => {
-        console.log(error);
+        console.log(error.response);
       });
   };
 
