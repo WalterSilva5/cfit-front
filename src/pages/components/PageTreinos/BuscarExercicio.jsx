@@ -32,7 +32,7 @@ const BuscarExercicio = (props) => {
                 type="button"
                 className="btn btn-primary"
                 onClick={() => {
-                  props.setExercicioTreino(exercicio.pk);
+                  props.setIdExercicio(exercicio.pk);
                 }}
               >
                 ESCOLHER
@@ -58,10 +58,10 @@ const BuscarExercicio = (props) => {
   }, [exercicios, categorias]);
 
   React.useEffect(() => {
-    if (props.exercicioEditId == -1) {
+    if (props.idExercicio == -1) {
       getExercicios();
     }
-  }, [props.exercicioEditId]);
+  }, [props.idExercicio]);
 
   if (isCarregando) {
     return <Carregando />;

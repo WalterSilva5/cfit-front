@@ -62,8 +62,6 @@ const FormExercicio = (props) => {
       updateAlert('danger', 'Nome não pode ser vazio');
     } else if (video.length === 0) {
       updateAlert('danger', 'Video não pode ser vazio');
-    } else if (dica.length === 0) {
-      updateAlert('danger', 'Dica não pode ser vazio');
     } else if (categoriaId == -1) {
       updateAlert('danger', 'Selecione uma categoria');
     } else {
@@ -134,7 +132,7 @@ const FormExercicio = (props) => {
         <div className="col-md-10">
           <input
             className="form-control"
-            onChange={(e) => setVideo(e.target.value.toUpperCase())}
+            onChange={(e) => setVideo(e.target.value)}
             value={video}
             type="text"
             name="video"

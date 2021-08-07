@@ -15,13 +15,14 @@ const PageLoginModalCadastro = (props) => {
   const [alertType, setalertType] = React.useState('danger');
   const [confirmpasswordCadastro, setConfirmpasswordCadastro] = React.useState('');
   const [formValido, setformValido] = React.useState(false);
-
+  const [telefoneCadastro, setTelefoneCadastro] = React.useState('');
   const clearForm = (alertType, error) => {
     const oldAlertType = alertType;
     const oldError = error;
     setusernameCadastro('');
     setpasswordCadastro('');
     setConfirmpasswordCadastro('');
+    setTelefoneCadastro('');
     showErrorCadastroMessage(oldError, oldAlertType);
   };
 
@@ -31,6 +32,7 @@ const PageLoginModalCadastro = (props) => {
     setusernameCadastro('');
     setpasswordCadastro('');
     setConfirmpasswordCadastro('');
+    setTelefoneCadastro('');
     seterror('');
   };
 
@@ -44,7 +46,7 @@ const PageLoginModalCadastro = (props) => {
     if (formValido) {
       axios.defaults.headers.common = { Authorization: '' };
       axios
-        .post(`${serverAddress}user/`, { username: usernameCadastro, password: passwordCadastro })
+        .post(`${serverAddress}user/`, { username: usernameCadastro, password: passwordCadastro, telefone: telefoneCadastro })
         .then((response) => {
           if (response.status === 200 || response.data.success || response.status == 201) {
             showErrorCadastroMessage('Cadastro efetuado com sucesso!', 'success');
@@ -110,34 +112,48 @@ const PageLoginModalCadastro = (props) => {
             </button>
           </div>
           <div className="modal-body">
-            <input
-              type="text"
-              className="form-control my-3 wsi-shadow-light"
-              placeholder="USUARIO"
-              value={usernameCadastro}
-              onChange={(e) => setusernameCadastro(e.target.value.toUpperCase())}
-            />
-            {/* <input
-              type="text"
-              className="form-control my-3 wsi-shadow-light"
-              placeholder="NOME"
-            /> */}
-            <input
-              type="password"
-              className="form-control my-3 wsi-shadow-light"
-              placeholder="SENHA"
-              value={passwordCadastro}
-              onChange={(e) => setpasswordCadastro(e.target.value)}
-            />
+            <div className="form-group my-2">
+              <label className="h6 d-flex">Usuario</label>
 
-            <input
-              type="password"
-              className="form-control my-3 wsi-shadow-light"
-              placeholder="CONFIRME A SENHA"
-              value={confirmpasswordCadastro}
-              onChange={(e) => setConfirmpasswordCadastro(e.target.value)}
-            />
+              <input
+                type="text"
+                className="form-control wsi-shadow-light"
+                placeholder="USUARIO"
+                value={usernameCadastro}
+                onChange={(e) => setusernameCadastro(e.target.value.toUpperCase())}
+              />
+            </div>
+            <div className="form-group my-2">
+              <label className="h6 d-flex">Telefone</label>
+              <input
+                type="text"
+                className="form-control wsi-shadow-light"
+                placeholder="TELEFONE"
+                value={telefoneCadastro}
+                onChange={(e) => setTelefoneCadastro(e.target.value)}
+              />
+            </div>
 
+            <div className="form-group my-2">
+              <label className="h6 d-flex">Senha</label>
+              <input
+                type="password"
+                className="form-control wsi-shadow-light"
+                placeholder="SENHA"
+                value={passwordCadastro}
+                onChange={(e) => setpasswordCadastro(e.target.value)}
+              />
+            </div>
+            <div className="form-group my-2">
+              <label className="h6 d-flex">Confirme a senha</label>
+              <input
+                type="password"
+                className="form-control wsi-shadow-light"
+                placeholder="CONFIRME A SENHA"
+                value={confirmpasswordCadastro}
+                onChange={(e) => setConfirmpasswordCadastro(e.target.value)}
+              />
+            </div>
             <button
               className="btn btn-primary wsi-shadow-primary"
               onClick={() => {
@@ -153,7 +169,7 @@ const PageLoginModalCadastro = (props) => {
               showErrorCadastro ? ' d-block py-4 ' : 'd-none'
             }}`}
             >
-              <h4>{error}</h4>
+              <h6>{error}</h6>
             </div>
             <div className="mt-5">
               <p>

@@ -22,7 +22,7 @@ const TabelaExercicio = (props) => {
         setExercicios(response.data.map((exercicio) => (
           <tr key={exercicio.pk}>
             <td>{exercicio.nome}</td>
-            <td>{exercicio.video}</td>
+            <td>{exercicio.video.slice(0, 30)}</td>
             <td>{exercicio.dica}</td>
             <td>
               {categorias.find((categoria) => categoria.pk == exercicio.categoria).nome}

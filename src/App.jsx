@@ -15,7 +15,7 @@ import PageReproduzirPlaylist from './pages/components/PageHome/PageReproduzirPl
 import PageNovoPagamento from './pages/components/PageHome/PageNovoPagamento';
 import PageTreinos from './pages/PageTreinos';
 import TelaCadastroTreino from './pages/components/PageTreinos/TelaCadastroTreino';
-
+import PageVisualizarTreino from './pages/PageVisualizarTreino';
 function App() {
   const authToken = localStorage.getItem('authToken');
   const [IsAdminUser, setIsAdminUser] = React.useState(false);
@@ -55,6 +55,7 @@ function App() {
           </Route>
           <Route path="/treinos">{authToken ? <PageTreinos /> : <PageHome />}</Route>
           <Route path="/cadastro_treino">{authToken ? <TelaCadastroTreino /> : <PageHome />}</Route>
+          <Route path="/visualizar_treino/:id">{authToken ? <PageVisualizarTreino /> : <PageHome />}</Route>
           <Route path="/404">
             {authToken ? <Page404 /> : <PageLogin />}
           </Route>
