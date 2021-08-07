@@ -77,6 +77,7 @@ const FormExercicio = (props) => {
           setDica('');
           setCategoriaId(-1);
           setExercicioEditId(-1);
+          setCategoriaEscolhida('ESCOLHA UMA CATEGORIA');
           updateAlert('success', 'Exercício salvo com sucesso!');
           props.setExercicioEditId(-1);
         })
