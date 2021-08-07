@@ -75,7 +75,7 @@ const TabelaExercicio = (props) => {
     <div className="wsi-bg-black rounded p-md-2">
       <div className="d-flex justify-content-between">
         <h2 className="text-secondary col-md-6 ">EXERCICIOS CADASTRADOS</h2>
-        <div className=" col-md-6 d-flex">
+        <div className=" col-md-6">
           <label className="h5 mx-2" htmlFor="filtrar">FILTRAR</label>
           <input
             type="text"
@@ -88,27 +88,22 @@ const TabelaExercicio = (props) => {
         </div>
       </div>
       <div className="table-responsive"
-         style={{ maxHeight: '300px', overflowY: 'auto' }}
+         style={{ maxHeight: '300px', overflow: 'auto' }}
       >
         <table className="table text-white table-bordered">
           <thead className="bg-primary border-dark">
             <tr>
               <th className="col-3">NOME</th>
-              <th className="col-4">VIDEO</th>
-              <th className="col-3">DICA</th>
-              <th className="col-1">CATEGORIA</th>
               <th className="col-1">EDITAR</th>
+              <th className="col-4">VIDEO</th>
+              <th className="col-1">CATEGORIA</th>
+              <th className="col-3">DICA</th>
             </tr>
           </thead>
           <tbody>
             {filtroExercicio.map((exercicio) => (
               <tr key={exercicio.pk}>
                 <td>{exercicio.nome}</td>
-                <td>{exercicio.video.slice(0, 30)}</td>
-                <td>{exercicio.dica}</td>
-                <td>
-                  {categorias.find((categoria) => categoria.pk == exercicio.categoria).nome}
-                </td>
                 <td>
                   <button
                     type="button"
@@ -120,6 +115,11 @@ const TabelaExercicio = (props) => {
                     EDITAR
                   </button>
                 </td>
+                <td>{exercicio.video.slice(0, 30)}</td>
+                <td>
+                  {categorias.find((categoria) => categoria.pk == exercicio.categoria).nome}
+                </td>
+                <td>{exercicio.dica}</td>
               </tr>
             ))}
           </tbody>

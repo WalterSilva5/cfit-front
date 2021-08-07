@@ -62,7 +62,7 @@ const TabelaCategoria = (props) => {
         </div>
       </div>
       <div className="table-responsive"
-         style={{ maxHeight: '300px', overflowY: 'auto' }}>      
+         style={{ maxHeight: '300px', overflowY: 'auto' }} 
       >
         <table className="table table-hover text-white table-bordered">
           <thead className="bg-primary border-dark">

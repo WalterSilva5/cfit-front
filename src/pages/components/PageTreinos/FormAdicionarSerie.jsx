@@ -20,19 +20,20 @@ const FormAdicionarSerie = (props) => {
     setAlertShow(true);
   };
   return (
-    <div className="border border-secondary rounded p-2 my-2 table-responsive my-3"
-    style={{
-      backgroundColor: '#02021f',
-    }}
+    <div
+      className="border border-secondary rounded my-3 col-12"
+      style={{
+        backgroundColor: '#02021f',
+      }}
     >
       <h4 className="text-center">ADICIONAR NOVA SERIE</h4>
       <div className="my-2">
-        <div className="form-group d-flex my-4">
+        <div className="form-group d-flex my-4 d-flex justify-content-center">
           <label htmlFor="repeticoes">
             Nº de Repetições:
             {' '}
           </label>
-          <div className="col-xsm-4 col-sm-2 col-md-1">
+          <div className="col-4 col-sm-2 col-md-1">
             <input
               type="text"
               id="repeticoes"
@@ -42,7 +43,9 @@ const FormAdicionarSerie = (props) => {
             />
           </div>
         </div>
-        <div className="my-4">
+        <div
+          className="my-4 mx-0"
+        >
           Exercicio:
           <BuscarExercicio
             setIdExercicio={setIdExercicio}
@@ -50,33 +53,39 @@ const FormAdicionarSerie = (props) => {
           />
         </div>
       </div>
-      <div className="d-flex justify-content-between mb-4">
-        <button
-          className="btn btn-danger"
-          onClick={() => {
-            closeForm();
-          }}
-        >
-          CANCELAR
-        </button>
-        <button
-          className="btn wsi-btn-secondary"
-          onClick={() => {
-            if (idExercicio > -1) {
-              props.adicionarSerie({ exercicio: idExercicio, repeticoes });
-              closeForm();
-            }
-          }}
-        >
-          ADICIONAR
-        </button>
-        <div
-          className={`alert alert-${alertType}`}
-          style={{ display: alertShow ? 'block' : 'none' }}
-        >
-          <h4>
-            {alertMessage}
-          </h4>
+      <div className="d-flex justify-content-center p-2">
+        <div className="rounded bg-secondary">
+          <div className="row my-3">
+            <button
+              className="btn wsi-btn-secondary"
+              onClick={() => {
+                if (idExercicio > -1) {
+                  props.adicionarSerie({ exercicio: idExercicio, repeticoes });
+                  closeForm();
+                }
+              }}
+            >
+              ADICIONAR
+            </button>
+          </div>
+          <div className="row my-3">
+            <button
+              className="btn btn-danger"
+              onClick={() => {
+                closeForm();
+              }}
+            >
+              CANCELAR
+            </button>
+          </div>
+          <div
+            className={`alert alert-${alertType}`}
+            style={{ display: alertShow ? 'block' : 'none' }}
+          >
+            <h4>
+              {alertMessage}
+            </h4>
+          </div>
         </div>
       </div>
     </div>

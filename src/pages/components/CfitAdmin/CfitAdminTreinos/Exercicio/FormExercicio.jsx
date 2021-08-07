@@ -11,7 +11,7 @@ const FormExercicio = (props) => {
   const [alertType, setAlertType] = React.useState('success');
   const [alertMessage, setAlertMessage] = React.useState('');
   const [alertShow, setAlertShow] = React.useState(false);
-
+  const [categoriaEscolhida, setCategoriaEscolhida] = React.useState('');
   const updateAlert = (type, message) => {
     setAlertType(type);
     setAlertMessage(message);
@@ -22,11 +22,7 @@ const FormExercicio = (props) => {
     axios.get(`${serverAddress}categoria/`)
       .then((response) => {
         setCategorias(
-          response.data.map((categoria) => (
-            <option key={categoria.pk} value={categoria.pk}>
-              {categoria.nome}
-            </option>
-          )),
+          response.data,
         );
       })
       .catch((error) => {
@@ -41,7 +37,7 @@ const FormExercicio = (props) => {
           setNome(response.data.nome);
           setVideo(response.data.video);
           setDica(response.data.dica);
-          setCategoriaId(response.data.categoria_id);
+          setCategoriaId(response.data.categoria);
         })
         .catch((error) => {
           updateAlert('danger', error.response.data.message);
@@ -108,6 +104,16 @@ const FormExercicio = (props) => {
       getCategorias();
     }
   }, [categorias]);
+
+  React.useEffect(() => {
+    if (categoriaId != -1 && categoriaId != undefined) {
+      const teste = categorias.find((categoria) => categoria.pk == categoriaId).nome;
+      setCategoriaEscolhida(teste);
+    } else {
+      setCategoriaEscolhida('ESCOLHA UMA CATEGORIA');
+    }
+  }, [categoriaId, categorias]);
+
   return (
     <div className="wsi-bg-black rounded my-2 p-md-2">
       <h3 className="text-secondary">ADICIONAR NOVO EXERCICIO</h3>
@@ -166,10 +172,16 @@ const FormExercicio = (props) => {
               setCategoriaId(e.target.value);
             }}
           >
-            {categoriaId == -1 ? (
-              <option> ESCOLHA UMA CATEGORIA </option>
-            ) : null}
-            {categorias}
+            <option>
+              {
+              categoriaEscolhida
+            }
+            </option>
+            {categorias.map((categoria) => (
+              <option key={categoria.pk} value={categoria.pk}>
+                {categoriaEscolhida == '' ? categoriaEscolhida : categoria.nome}
+              </option>
+            ))}
           </select>
         </div>
       </div>

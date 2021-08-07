@@ -75,14 +75,17 @@ const BuscarExercicio = (props) => {
     return <Carregando />;
   }
   return (
-    <div className="wsi-bg-black rounded col-12 d-block my-3"
-    style={{
-      backgroundColor: '#02021f',
-    }}
+    <div
+      className="wsi-bg-black rounded col-12 text-center my-3"
+      style={{
+        backgroundColor: '#02021f',
+      }}
     >
-      <div className="row">
-        <h4 className="text-secondary col-md-6 p-md-2 p-4">ESCOLHA UM EXERCICIO</h4>
-        <div className="col-md-6 d-flex p-md-2 p-4">
+      <div className="col-12 m-0 row">
+        <div className=" col-md-6">
+          <h4 className="text-secondary p-0 p-md-4">ESCOLHA UM EXERCICIO</h4>
+        </div>
+        <div className="col-md-6 pb-4 p-md-4">
           <label className="h5 mx-2" htmlFor="filtrar">FILTRAR</label>
           <input
             type="text"
@@ -94,33 +97,33 @@ const BuscarExercicio = (props) => {
           />
         </div>
       </div>
-      <div
-      >
+      <div>
         <div
-          className="table-responsive"
+          className="table-responsive bg-primary d-block"
           style={{ maxHeight: '300px', overflow: 'auto' }}
         >
-          <table className="table text-white table-bordered">
+          <table className="table text-white table-bordered col-12 container" style={{
+            width: '100%',
+            position: 'relative',
+          }}>
             <thead className="bg-primary border-dark">
               <tr>
                 <th className="col-4">NOME</th>
-                {/* <th className="col-3">VIDEO</th> */}
-                <th className="col-4">DICA</th>
-                <th className="col-2">CATEGORIA</th>
                 <th className="col-1">ESCOLHER</th>
+                {/* <th className="col-3">VIDEO</th> */}
+                <th className="col-2">CATEGORIA</th>
               </tr>
             </thead>
             <tbody>
               {filtroExercicio.map((exercicio) => (
                 <tr key={exercicio.pk}>
-                  <td>{exercicio.nome}</td>
+                  <td>
+                    {exercicio.nome}
+                  </td>
                   {/* <td>{exercicio.video}</td> */}
-                  <td>
+                  {/* <td>
                     {exercicio.dica.slice(0, 30)}
-                  </td>
-                  <td>
-                    {categorias.find((categoria) => categoria.pk == exercicio.categoria).nome}
-                  </td>
+                  </td> */}
                   <td className="col-1">
                     <button
                       type="button"
@@ -131,6 +134,9 @@ const BuscarExercicio = (props) => {
                     >
                       ESCOLHER
                     </button>
+                  </td>
+                  <td>
+                    {categorias.find((categoria) => categoria.pk == exercicio.categoria).nome}
                   </td>
                 </tr>
               ))}

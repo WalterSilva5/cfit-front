@@ -98,7 +98,7 @@ const FormCadastroTreino = () => {
           onChange={(e) => setTitulo(e.target.value.toUpperCase())}
         />
       </div>
-      <div className="my-2 px-2">
+      <div className="my-2 px-1">
         <div className="p-2">
           <div className="d-flex justify-content-between col-12">
             <h4>SERIES DO TREINO</h4>
@@ -109,14 +109,26 @@ const FormCadastroTreino = () => {
               ADICIONAR SERIE
             </button>
           </div>
-          {formAtivo
-            ? (
+        </div>
+        {formAtivo
+          ? (
+            <div
+            style={{
+              position: 'absolute',
+              top: '-100px',
+              margin: '0 !important',
+              padding: '0 !important',
+              zIndex: '9999999',
+            }}
+              className="col-12"
+            >
               <FormAdicionarSerie
                 setFormAtivo={setFormAtivo}
                 adicionarSerie={adicionarSerie}
               />
-            ) : null}
-        </div>
+
+            </div>
+          ) : null}
       </div>
       <div className="my-2 px-2">
         <div
@@ -157,7 +169,7 @@ const FormCadastroTreino = () => {
         </div>
 
         <div className="d-flex justify-content-center p-2">
-          <div className="rounded bg-secondary">
+            <div className="rounded bg-secondary">
             <div className="row my-2">
               <button
                 className="btn wsi-btn-secondary"
