@@ -5,14 +5,11 @@ import { serverAddress } from '@/util/Settings';
 import Carregando from '@/pages/components/Carregando';
 
 const CardTreino = (props) => {
-  let titulo = props;
+  let titulo = props.titulo;
   if (titulo.length > 30) {
     titulo = `${titulo.substring(0, 30)}...`;
   }
 
-  if (props == null) {
-    return (<div />);
-  }
   return (
     <div className="p-2 col-md-4" style={{ height: '200px' }}>
       <div className="m-2 p-2 border wsi-container-dark wsi-shadow-light border-secondary rounded text-center" style={{ height: '100%' }}>
@@ -48,12 +45,12 @@ const PageTreinos = (props) => {
       })
       .catch((error) => {
         setCarregando(false);
-        setTreinos([<></>]);
+        setTreinos([<div></div>]);
       });
   };
 
   React.useEffect(() => {
-    if (treinos.length === 0 && vazio === false) {
+    if (treinos.length === 0 && vazio === false && carregando === true) {
       getTreinos();
     }
   }, [treinos, vazio]);
