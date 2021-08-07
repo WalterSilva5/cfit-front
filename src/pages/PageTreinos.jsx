@@ -22,6 +22,9 @@ const CardTreino = (props) => {
         >
           VER TREINO
         </button>
+        {
+          props.dica
+        }
       </div>
     </div>
   );
@@ -39,7 +42,7 @@ const PageTreinos = (props) => {
           setVazio(true);
         }
         setTreinos(
-          response.data.treinos.map((res) => <CardTreino titulo={res.titulo} key={res.pk} pk={res.pk} />),
+          response.data.treinos.map((res) => <CardTreino titulo={res.titulo} key={res.pk} pk={res.pk} dica={res.dica}/>),
         );
         setCarregando(false);
       })
