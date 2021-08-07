@@ -2,9 +2,17 @@ import PageHeader from '@/pages/components/PageHeader';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import { serverAddress } from '@/util/Settings';
+import Carregando from '@/pages/components/Carregando';
 
 const CardTreino = (props) => {
-  const { titulo } = props;
+  let titulo = props;
+  if (titulo.length > 30) {
+    titulo = `${titulo.substring(0, 30)}...`;
+  }
+
+  if (props == null) {
+    return (<div />);
+  }
   return (
     <div className="p-2 col-md-4" style={{ height: '200px' }}>
       <div className="m-2 p-2 border wsi-container-dark wsi-shadow-light border-secondary rounded text-center" style={{ height: '100%' }}>
@@ -25,6 +33,7 @@ const CardTreino = (props) => {
 const PageTreinos = (props) => {
   const [treinos, setTreinos] = React.useState([]);
   const [vazio, setVazio] = React.useState(false);
+  const [carregando, setCarregando] = React.useState(true);
   const getTreinos = () => {
     axios
       .get(`${serverAddress}treino`)
@@ -35,9 +44,11 @@ const PageTreinos = (props) => {
         setTreinos(
           response.data.treinos.map((res) => <CardTreino titulo={res.titulo} key={res.pk} pk={res.pk} />),
         );
+        setCarregando(false);
       })
       .catch((error) => {
-        console.log(error);
+        setCarregando(false);
+        setTreinos([<></>]);
       });
   };
 
@@ -46,6 +57,11 @@ const PageTreinos = (props) => {
       getTreinos();
     }
   }, [treinos, vazio]);
+  if (carregando) {
+    return (
+      <Carregando />
+    );
+  }
   return (
     <div>
       <PageHeader />
