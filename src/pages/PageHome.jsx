@@ -11,7 +11,7 @@ import Carregando from '@/pages/components/Carregando';
 import PageHeader from './components/PageHeader';
 import PlaylistCard from './components/PageHome/PlaylistCard';
 import BannerAssine from './components/PageHome/BannerAssine';
-
+import { NavLink } from 'react-router-dom';
 const PageHome = () => {
   const token = localStorage.getItem('authToken');
   axios.defaults.headers.common = { Authorization: `Bearer ${token}` };
@@ -74,6 +74,10 @@ const PageHome = () => {
       <h1 className="text-center display-1">AULAS</h1>
       <div className="row p-0 d-flex justify-content-center container-fluid">
         {assinante ? playlists : <BannerAssine />}
+      </div>
+
+      <div className="d-flex justify-content-center">
+        <NavLink className="btn btn-primary btn-lg wsi-shadow-light" to="/treinos">IR PARA TREINOS</NavLink>
       </div>
     </div>
   );
