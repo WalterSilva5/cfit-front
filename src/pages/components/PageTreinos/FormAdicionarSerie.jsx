@@ -28,21 +28,6 @@ const FormAdicionarSerie = (props) => {
     >
       <h4 className="text-center">ADICIONAR NOVA SERIE</h4>
       <div className="my-2">
-        <div className="form-group d-flex my-4 d-flex justify-content-center">
-          <label htmlFor="repeticoes">
-            Nº de Repetições:
-            {' '}
-          </label>
-          <div className="col-4 col-sm-2 col-md-1">
-            <input
-              type="text"
-              id="repeticoes"
-              className="form-control"
-              value={repeticoes}
-              onChange={(e) => setRepeticoes(e.target.value)}
-            />
-          </div>
-        </div>
         <div
           className="my-4 mx-0"
         >
@@ -53,6 +38,22 @@ const FormAdicionarSerie = (props) => {
           />
         </div>
       </div>
+
+      <div className="form-group d-flex my-4 d-flex justify-content-center">
+          <label htmlFor="repeticoes">
+            Nº de Repetições:
+            {' '}
+          </label>
+          <div className="col-4 col-sm-2 col-md-1 mx-2">
+            <input
+              type="text"
+              id="repeticoes"
+              className="form-control"
+              value={repeticoes}
+              onChange={(e) => setRepeticoes(e.target.value)}
+            />
+          </div>
+        </div>
       <div className="d-flex justify-content-center p-2">
         <div className="rounded bg-secondary">
           <div className="row my-3">

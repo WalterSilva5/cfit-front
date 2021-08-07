@@ -82,10 +82,11 @@ const BuscarExercicio = (props) => {
       }}
     >
       <div className="col-12 m-0 row">
-        <div className=" col-md-6">
-          <h4 className="text-secondary p-0 p-md-4">ESCOLHA UM EXERCICIO</h4>
+        <div className="col-md-6">
+          <h4 className="text-secondary p-0 p-md-4"
+          >ESCOLHA UM EXERCICIO</h4>
         </div>
-        <div className="col-md-6 pb-4 p-md-4">
+        <div className="col-md-6 pb-4 p-md-4 d-md-flex">
           <label className="h5 mx-2" htmlFor="filtrar">FILTRAR</label>
           <input
             type="text"
