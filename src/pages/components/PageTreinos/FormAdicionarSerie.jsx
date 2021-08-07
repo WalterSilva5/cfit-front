@@ -3,12 +3,22 @@ import BuscarExercicio from './BuscarExercicio';
 const FormAdicionarSerie = (props) => {
   const [repeticoes, setRepeticoes] = React.useState(8);
   const [idExercicio, setIdExercicio] = React.useState(-1);
+  const [alertType, setAlertType] = React.useState('success');
+  const [alertMessage, setAlertMessage] = React.useState('');
+  const [alertShow, setAlertShow] = React.useState(false);
   const closeForm = () => {
     setRepeticoes(8);
     setIdExercicio(-1);
     props.setFormAtivo(false);
+    setAlertShow(false);
+    setAlertMessage('');
   };
 
+  const updateAlert = (type, message) => {
+    setAlertType(type);
+    setAlertMessage(message);
+    setAlertShow(true);
+  };
   return (
     <div className="border border-secondary rounded p-2 my-2 col-12">
       <h4 className="text-center">ADICIONAR NOVA SERIE</h4>
@@ -56,6 +66,14 @@ const FormAdicionarSerie = (props) => {
         >
           ADICIONAR
         </button>
+        <div
+          className={`alert alert-${alertType}`}
+          style={{ display: alertShow ? 'block' : 'none' }}
+        >
+          <h4>
+            {alertMessage}
+          </h4>
+        </div>
       </div>
     </div>
 

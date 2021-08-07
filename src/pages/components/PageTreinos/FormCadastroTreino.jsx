@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { serverAddress } from '@/util/Settings';
+import { NavLink } from 'react-router-dom';
 import FormAdicionarSerie from './FormAdicionarSerie';
 
 const FormCadastroTreino = () => {
@@ -12,6 +13,7 @@ const FormCadastroTreino = () => {
   const [alertShow, setAlertShow] = React.useState(false);
   const [titulo, setTitulo] = React.useState('');
   const [dica, setDica] = React.useState('');
+  const [botaoVisivel, setBotaoVisivel] = React.useState(false);
   let cont = 0;
   const getExercicios = () => {
     axios.get(`${serverAddress}exercicio/`)
@@ -37,6 +39,7 @@ const FormCadastroTreino = () => {
     setAlertType(type);
     setAlertMessage(message);
     setAlertShow(true);
+    setBotaoVisivel(true);
   };
 
   const adicionarTreino = () => {
@@ -149,11 +152,12 @@ const FormCadastroTreino = () => {
         </div>
 
         <div className="d-flex justify-content-between">
-          <button
+          <NavLink
             className="btn btn-danger"
+            to="/treinos"
           >
             CANCELAR
-          </button>
+          </NavLink>
           <button
             className="btn wsi-btn-secondary"
             onClick={() => {
@@ -170,6 +174,12 @@ const FormCadastroTreino = () => {
               <h4>{alertMessage}</h4>
             </div>
           ) : null}
+
+        <div
+          className={`d-flex justify-content-center d-s${botaoVisivel ? 'block' : 'none'}`}
+        >
+          <NavLink className="btn btn-primary" to="/treinos">VOLTAR PRA TREINOS</NavLink>
+        </div>
       </div>
     </div>
   );

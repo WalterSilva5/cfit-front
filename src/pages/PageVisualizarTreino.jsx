@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { serverAddress } from '@/util/Settings';
-import { useParams } from 'react-router-dom';
+import { useParams, NavLink } from 'react-router-dom';
 import PageHeader from '@/pages/components/PageHeader';
 import Carregando from '@/pages/components/Carregando';
 import ModalConfirmDelete from './components/ModalConfirmDelete';
@@ -17,8 +17,6 @@ const PageVisualizarTreino = (props) => {
   const [modalConfirmdeleteVisivel, setModalConfirmDeleteVisivel] = React.useState(false);
   const [modalEnviarParaAmigoVisivel, setModalEnviarParaAmigoVisivel] = React.useState(false);
   const params = useParams();
-
-
 
   const getExercicios = () => {
     axios.get(`${serverAddress}exercicio/`)
@@ -178,20 +176,32 @@ const PageVisualizarTreino = (props) => {
               </div>
             </div>
           ))}
-          <div className="d-flex justify-content-between">
-            <button
-              className="btn btn-danger"
-              onClick={() => {
-                setModalConfirmDeleteVisivel(true);
-              }}
-            >
-              DELETAR
-            </button>
-            <button className="btn wsi-btn-secondary"
-            onClick={() => {
-              setModalEnviarParaAmigoVisivel(true);}
-            }
-            >ENVIAR PARA AMIGO</button>
+          <div className="d-flex justify-content-end">
+            <div className="col-md-4 p-3">
+              <div className="row my-3">
+                <button
+                  className="btn wsi-btn-secondary"
+                  onClick={() => {
+                    setModalEnviarParaAmigoVisivel(true);
+                  }}
+                >
+                  ENVIAR PARA AMIGO
+                </button>
+              </div>
+              <div className="row my-3">
+                <NavLink className="btn btn-primary" to="/treinos">VOLTAR PRA TREINOS</NavLink>
+              </div>
+              <div className="row mt-5">
+                <button
+                  className="btn btn-danger"
+                  onClick={() => {
+                    setModalConfirmDeleteVisivel(true);
+                  }}
+                >
+                  DELETAR
+                </button>
+              </div>
+            </div>
           </div>
           <ModalConfirmDelete
             campo=" ESTE TREINO"

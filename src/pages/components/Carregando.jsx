@@ -3,10 +3,10 @@ import PageHeader from './PageHeader';
 
 const Carregando = () => (
   <div className="container">
-    <div className="row">
+    <div className="text-center d-flex justify-content-center">
       <div className="col-md-12">
         <img
-          className="img-fluid rounded-circle p-0"
+          className="img-fluid rounded-circle p-0 shadow"
           style={{ backgroundColor: '#dbdbdb', width: '400px'}}
           src={carregandoGif}
           alt=""

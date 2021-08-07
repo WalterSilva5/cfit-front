@@ -5,6 +5,8 @@ import Carregando from '@/pages/components/Carregando';
 const TabelaExercicio = (props) => {
   const [exercicios, setExercicios] = React.useState([]);
   const [isCarregando, setIsCarregando] = React.useState(false);
+  const [searchExercicio, setSearchExercicio] = React.useState('');
+  const [filtroExercicio, setFiltroExercicio] = React.useState([]);
   const [categorias, setCategorias] = React.useState([]);
   const getCategorias = () => {
     axios.get(`${serverAddress}categoria`)
@@ -19,27 +21,7 @@ const TabelaExercicio = (props) => {
     setIsCarregando(true);
     axios.get(`${serverAddress}exercicio/`)
       .then((response) => {
-        setExercicios(response.data.map((exercicio) => (
-          <tr key={exercicio.pk}>
-            <td>{exercicio.nome}</td>
-            <td>{exercicio.video.slice(0, 30)}</td>
-            <td>{exercicio.dica}</td>
-            <td>
-              {categorias.find((categoria) => categoria.pk == exercicio.categoria).nome}
-            </td>
-            <td>
-              <button
-                type="button"
-                className="btn wsi-btn-admin"
-                onClick={() => {
-                  props.setExercicioEditId(exercicio.pk);
-                }}
-              >
-                EDITAR
-              </button>
-            </td>
-          </tr>
-        )));
+        setExercicios(response.data);
         setIsCarregando(false);
       })
       .catch((error) => {
@@ -55,7 +37,7 @@ const TabelaExercicio = (props) => {
     if (categorias.length > 0 && exercicios.length == 0) {
       getExercicios();
     }
-  }, [exercicios, categorias]);
+  }, [categorias, exercicios]);
 
   React.useEffect(() => {
     if (props.exercicioEditId == -1) {
@@ -63,13 +45,51 @@ const TabelaExercicio = (props) => {
     }
   }, [props.exercicioEditId]);
 
+  React.useEffect(() => {
+    if (searchExercicio != '') {
+      const novosExercicios = [];
+      exercicios.map((exercicio) => {
+        if (exercicio.nome.toLowerCase().indexOf(searchExercicio.toLowerCase()) > -1) {
+          novosExercicios.push(exercicio);
+        }
+      });
+      setFiltroExercicio(novosExercicios);
+    } else if (searchExercicio == '' && filtroExercicio.length > 0) {
+      setFiltroExercicio([...exercicios]);
+    }
+  }, [searchExercicio]);
+
+  React.useEffect(() => {
+    if (exercicios.length === 0 && filtroExercicio.length === 0) {
+      getCategorias();
+    } else if (exercicios.length > 0 && filtroExercicio.length == 0) {
+      setFiltroExercicio([...exercicios]);
+    }
+  },
+  [exercicios]);
+
   if (isCarregando) {
     return <Carregando />;
   }
   return (
     <div className="wsi-bg-black rounded p-md-2">
-      <h2 className="text-secondary">EXERCICIOS CADASTRADOS</h2>
-      <div className="table-responsive">
+      <div className="d-flex justify-content-between">
+        <h2 className="text-secondary col-md-6 ">EXERCICIOS CADASTRADOS</h2>
+        <div className=" col-md-6 d-flex">
+          <label className="h5 mx-2" htmlFor="filtrar">FILTRAR</label>
+          <input
+            type="text"
+            id="filtrar"
+            className="form-control"
+            placeholder="Filtrar"
+            value={searchExercicio}
+            onChange={(e) => setSearchExercicio(e.target.value)}
+          />
+        </div>
+      </div>
+      <div className="table-responsive"
+         style={{ maxHeight: '300px', overflowY: 'auto' }}
+      >
         <table className="table text-white table-bordered">
           <thead className="bg-primary border-dark">
             <tr>
@@ -80,8 +100,28 @@ const TabelaExercicio = (props) => {
               <th className="col-1">EDITAR</th>
             </tr>
           </thead>
-          <tbody style={{ maxHeight: '500px', overflow: 'auto' }}>
-            {exercicios}
+          <tbody>
+            {filtroExercicio.map((exercicio) => (
+              <tr key={exercicio.pk}>
+                <td>{exercicio.nome}</td>
+                <td>{exercicio.video.slice(0, 30)}</td>
+                <td>{exercicio.dica}</td>
+                <td>
+                  {categorias.find((categoria) => categoria.pk == exercicio.categoria).nome}
+                </td>
+                <td>
+                  <button
+                    type="button"
+                    className="btn wsi-btn-admin"
+                    onClick={() => {
+                      props.setExercicioEditId(exercicio.pk);
+                    }}
+                  >
+                    EDITAR
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

@@ -6,8 +6,10 @@ const BuscarExercicio = (props) => {
   const [exercicios, setExercicios] = React.useState([]);
   const [isCarregando, setIsCarregando] = React.useState(false);
   const [categorias, setCategorias] = React.useState([]);
+  const [searchExercicio, setSearchExercicio] = React.useState('');
+  const [filtroExercicio, setFiltroExercicio] = React.useState([]);
   const getCategorias = () => {
-    axios.get(`${serverAddress}categoria`)
+    axios.get(`${serverAddress}categoria/`)
       .then((response) => {
         setCategorias(response.data);
       })
@@ -19,31 +21,11 @@ const BuscarExercicio = (props) => {
     setIsCarregando(true);
     axios.get(`${serverAddress}exercicio/`)
       .then((response) => {
-        setExercicios(response.data.map((exercicio) => (
-          <tr key={exercicio.pk}>
-            <td>{exercicio.nome}</td>
-            <td>{exercicio.video}</td>
-            <td>{exercicio.dica}</td>
-            <td>
-              {categorias.find((categoria) => categoria.pk == exercicio.categoria).nome}
-            </td>
-            <td>
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={() => {
-                  props.setIdExercicio(exercicio.pk);
-                }}
-              >
-                ESCOLHER
-              </button>
-            </td>
-          </tr>
-        )));
-        setIsCarregando(false);
+        setExercicios(response.data);
       })
       .catch((error) => {
-        setIsCarregando(false);
+        console.log(error)
+        // setIsCarregando(false);
       });
   };
   React.useEffect(() => {
@@ -63,25 +45,90 @@ const BuscarExercicio = (props) => {
     }
   }, [props.idExercicio]);
 
-  if (isCarregando) {
+  React.useEffect(() => {
+    if (searchExercicio != '') {
+      const novosExercicios = [];
+      exercicios.map((exercicio) => {
+        if (exercicio.nome.toLowerCase().indexOf(searchExercicio.toLowerCase()) > -1) {
+          novosExercicios.push(exercicio);
+        }
+      });
+      setFiltroExercicio(novosExercicios);
+    } else if (searchExercicio == '' && filtroExercicio.length > 0) {
+      setFiltroExercicio([...exercicios]);
+    }
+  }, [searchExercicio]);
+
+  React.useEffect(() => {
+    if (exercicios.length === 0 && filtroExercicio.length === 0) {
+      getCategorias();
+      getExercicios();
+    } else if (exercicios.length > 0 && filtroExercicio.length == 0) {
+      setFiltroExercicio([...exercicios]);
+    }
+    else if(exercicios.length > 0 && filtroExercicio.length > 0 && filtroExercicio != null) {
+      setIsCarregando(false);
+    }
+  },
+  [exercicios]);
+
+
+  if (isCarregando || exercicios.length == 0) {
     return <Carregando />;
   }
   return (
     <div className="wsi-bg-black rounded p-md-2 col-12">
-      <h2 className="text-secondary">ESCOLHA UM EXERCICIO</h2>
-      <div className="table-responsive">
+     <div className="d-flex justify-content-between my-2">
+        <h4 className="text-secondary col-md-6 ">ESCOLHA UM EXERCICIO</h4>
+        <div className=" col-md-6 d-flex">
+          <label className="h5 mx-2" htmlFor="filtrar">FILTRAR</label>
+          <input
+            type="text"
+            id="filtrar"
+            className="form-control"
+            placeholder="Filtrar"
+            value={searchExercicio}
+            onChange={(e) => setSearchExercicio(e.target.value)}
+          />
+        </div>
+      </div>
+      <div className="table-responsive"
+       style={{ maxHeight: '300px', overflow: 'auto' }}
+      >
         <table className="table text-white table-bordered">
           <thead className="bg-primary border-dark">
             <tr>
-              <th className="col-3">NOME</th>
-              <th className="col-3">VIDEO</th>
-              <th className="col-3">DICA</th>
-              <th className="col-1">CATEGORIA</th>
-              <th className="col-1">EDITAR</th>
+              <th className="col-4">NOME</th>
+              {/* <th className="col-3">VIDEO</th> */}
+              <th className="col-4">DICA</th>
+              <th className="col-2">CATEGORIA</th>
+              <th className="col-1">ESCOLHER</th>
             </tr>
           </thead>
-          <tbody style={{ maxHeight: '500px', overflow: 'auto' }}>
-            {exercicios}
+          <tbody>
+            {filtroExercicio.map((exercicio) => (
+              <tr key={exercicio.pk}>
+                <td>{exercicio.nome}</td>
+                {/* <td>{exercicio.video}</td> */}
+                <td>
+                  {exercicio.dica.slice(0, 30)}
+                </td>
+                <td>
+                  {categorias.find((categoria) => categoria.pk == exercicio.categoria).nome}
+                </td>
+                <td className="col-1">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={() => {
+                      props.setIdExercicio(exercicio.pk);
+                    }}
+                  >
+                    ESCOLHER
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
