@@ -119,12 +119,17 @@ const FormCadastroTreino = () => {
         </div>
       </div>
       <div className="my-2 px-2">
-        <div>
-          <table className="table table-bordered table-dark text-white">
+        <div
+          style={{
+            maxHeight: '300px',
+            overflowY: 'auto',
+          }}
+        >
+          <table className="table table-bordered table-secondary">
             <thead>
               <tr className="table-primary">
                 <th>EXERCICIO</th>
-                <th>REPETIÇÕES</th>
+                <th className="col-1">REPETIÇÕES</th>
               </tr>
             </thead>
             <tbody>
@@ -151,22 +156,34 @@ const FormCadastroTreino = () => {
           />
         </div>
 
-        <div className="d-flex justify-content-between">
-          <NavLink
-            className="btn btn-danger"
-            to="/treinos"
-          >
-            CANCELAR
-          </NavLink>
-          <button
-            className="btn wsi-btn-secondary"
-            onClick={() => {
-              setFormAtivo(false);
-              adicionarTreino();
-            }}
-          >
-            SALVAR TREINO
-          </button>
+        <div className="d-flex justify-content-center p-2">
+          <div className="rounded bg-secondary">
+            <div className="row my-2">
+              <button
+                className="btn wsi-btn-secondary"
+                onClick={() => {
+                  setFormAtivo(false);
+                  adicionarTreino();
+                }}
+              >
+                SALVAR TREINO
+              </button>
+            </div>
+            <div className="row my-2">
+              <button
+                className="btn btn-danger"
+                onClick={() => {
+                  limparTela();
+                }}
+              >
+                CANCELAR
+              </button>
+            </div>
+            <div className="row my-2">
+              <NavLink className="btn btn-primary" to="/treinos">VOLTAR PRA TREINOS</NavLink>
+            </div>
+
+          </div>
         </div>
         { alertShow
           ? (
@@ -174,12 +191,6 @@ const FormCadastroTreino = () => {
               <h4>{alertMessage}</h4>
             </div>
           ) : null}
-
-        <div
-          className={`d-flex justify-content-center d-s${botaoVisivel ? 'block' : 'none'}`}
-        >
-          <NavLink className="btn btn-primary" to="/treinos">VOLTAR PRA TREINOS</NavLink>
-        </div>
       </div>
     </div>
   );

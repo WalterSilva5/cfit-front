@@ -100,7 +100,9 @@ const PageVisualizarTreino = (props) => {
       deleteTreino();
       setModalConfirmDeleteVisivel(false);
       setConfirmDel(false);
-      window.location.href = '/treinos';
+      setTimeout(() => {
+        window.location.href = '/treinos';
+      }, 1000);
     }
   }, [confirmDelTreino]);
 

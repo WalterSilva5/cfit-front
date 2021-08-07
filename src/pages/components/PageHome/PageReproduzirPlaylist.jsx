@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, NavLink } from 'react-router-dom';
 import axios from 'axios';
 import { serverAddress } from '@/util/Settings';
 import PageHeader from '@/pages/components/PageHeader';
@@ -92,6 +92,15 @@ const PageReproduzirPlaylist = () => {
           </div>
         </div>
       </dir>
+      <div className="d-flex justify-content-center mt-4">
+        <div className="col-md-2 text-center p-3">
+          <NavLink className="btn btn-primary col-12"
+            to="/home"
+          >
+            VOLTAR PARA PLAYLISTS
+          </NavLink>
+        </div>
+      </div>
     </div>
   );
 };

@@ -24,7 +24,7 @@ const BuscarExercicio = (props) => {
         setExercicios(response.data);
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error);
         // setIsCarregando(false);
       });
   };
@@ -65,22 +65,24 @@ const BuscarExercicio = (props) => {
       getExercicios();
     } else if (exercicios.length > 0 && filtroExercicio.length == 0) {
       setFiltroExercicio([...exercicios]);
-    }
-    else if(exercicios.length > 0 && filtroExercicio.length > 0 && filtroExercicio != null) {
+    } else if (exercicios.length > 0 && filtroExercicio.length > 0 && filtroExercicio != null) {
       setIsCarregando(false);
     }
   },
   [exercicios]);
 
-
   if (isCarregando || exercicios.length == 0) {
     return <Carregando />;
   }
   return (
-    <div className="wsi-bg-black rounded p-md-2 col-12">
-     <div className="d-flex justify-content-between my-2">
-        <h4 className="text-secondary col-md-6 ">ESCOLHA UM EXERCICIO</h4>
-        <div className=" col-md-6 d-flex">
+    <div className="wsi-bg-black rounded col-12 d-block my-3"
+    style={{
+      backgroundColor: '#02021f',
+    }}
+    >
+      <div className="row">
+        <h4 className="text-secondary col-md-6 p-md-2 p-4">ESCOLHA UM EXERCICIO</h4>
+        <div className="col-md-6 d-flex p-md-2 p-4">
           <label className="h5 mx-2" htmlFor="filtrar">FILTRAR</label>
           <input
             type="text"
@@ -92,45 +94,49 @@ const BuscarExercicio = (props) => {
           />
         </div>
       </div>
-      <div className="table-responsive"
-       style={{ maxHeight: '300px', overflow: 'auto' }}
+      <div
       >
-        <table className="table text-white table-bordered">
-          <thead className="bg-primary border-dark">
-            <tr>
-              <th className="col-4">NOME</th>
-              {/* <th className="col-3">VIDEO</th> */}
-              <th className="col-4">DICA</th>
-              <th className="col-2">CATEGORIA</th>
-              <th className="col-1">ESCOLHER</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filtroExercicio.map((exercicio) => (
-              <tr key={exercicio.pk}>
-                <td>{exercicio.nome}</td>
-                {/* <td>{exercicio.video}</td> */}
-                <td>
-                  {exercicio.dica.slice(0, 30)}
-                </td>
-                <td>
-                  {categorias.find((categoria) => categoria.pk == exercicio.categoria).nome}
-                </td>
-                <td className="col-1">
-                  <button
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={() => {
-                      props.setIdExercicio(exercicio.pk);
-                    }}
-                  >
-                    ESCOLHER
-                  </button>
-                </td>
+        <div
+          className="table-responsive"
+          style={{ maxHeight: '300px', overflow: 'auto' }}
+        >
+          <table className="table text-white table-bordered">
+            <thead className="bg-primary border-dark">
+              <tr>
+                <th className="col-4">NOME</th>
+                {/* <th className="col-3">VIDEO</th> */}
+                <th className="col-4">DICA</th>
+                <th className="col-2">CATEGORIA</th>
+                <th className="col-1">ESCOLHER</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filtroExercicio.map((exercicio) => (
+                <tr key={exercicio.pk}>
+                  <td>{exercicio.nome}</td>
+                  {/* <td>{exercicio.video}</td> */}
+                  <td>
+                    {exercicio.dica.slice(0, 30)}
+                  </td>
+                  <td>
+                    {categorias.find((categoria) => categoria.pk == exercicio.categoria).nome}
+                  </td>
+                  <td className="col-1">
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      onClick={() => {
+                        props.setIdExercicio(exercicio.pk);
+                      }}
+                    >
+                      ESCOLHER
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

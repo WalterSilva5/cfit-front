@@ -20,7 +20,11 @@ const FormAdicionarSerie = (props) => {
     setAlertShow(true);
   };
   return (
-    <div className="border border-secondary rounded p-2 my-2 col-12">
+    <div className="border border-secondary rounded p-2 my-2 table-responsive my-3"
+    style={{
+      backgroundColor: '#02021f',
+    }}
+    >
       <h4 className="text-center">ADICIONAR NOVA SERIE</h4>
       <div className="my-2">
         <div className="form-group d-flex my-4">
@@ -46,7 +50,7 @@ const FormAdicionarSerie = (props) => {
           />
         </div>
       </div>
-      <div className="d-flex justify-content-between">
+      <div className="d-flex justify-content-between mb-4">
         <button
           className="btn btn-danger"
           onClick={() => {
