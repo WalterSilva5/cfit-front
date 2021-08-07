@@ -70,8 +70,6 @@ const PageVisualizarTreino = (props) => {
     if (treino_id != -1 && treino_id != null) {
       getTreino();
     }
-
-    console.log(treino);
   }, [treino_id]);
 
   React.useEffect(() => {
