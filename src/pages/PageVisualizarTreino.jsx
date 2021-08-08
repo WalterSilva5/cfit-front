@@ -81,7 +81,7 @@ const PageVisualizarTreino = (props) => {
   }, [treino_id]);
 
   React.useEffect(() => {
-    try{
+    try {
       if (treino_id != -1 && treino_id != null && series == null) {
         getSeries();
       } else if (series != null && treino.titulo != null) {
@@ -122,15 +122,15 @@ const PageVisualizarTreino = (props) => {
     return (
       <Carregando />
     );
-  } else if (series != null && treino != null) {
-    
-    try{return (
-      <div>
-        <PageHeader />
-        <h3 className="text-center display-5">
-          TREINO:
-          {' '}
-          {
+  } if (series != null && treino != null) {
+    try {
+      return (
+        <div>
+          <PageHeader />
+          <h3 className="text-center display-5">
+            TREINO:
+            {' '}
+            {
               treino != null
                 ? (
                   <span>
@@ -138,126 +138,131 @@ const PageVisualizarTreino = (props) => {
                   </span>
                 ) : <></>
             }
-        </h3>
-        <div className="d-flex justify-content-center my-4">
-          <div className="p-2 border wsi-border rounded py-3 my-2 col-md-6">
-            <div className="d-flex justify-content-center">
-              <img
-                src={videoAtual}
-                alt=""
-                className="img-fluid col-12 animate__animated animate__bounceIn"
-                style={{
-                  maxWidth: '400px',
-                  display: videoAtual != '' ? 'block' : 'none',
-                }}
-              />
-            </div>
-            <div id="lista-de-treinos">
-              {series.map((serie) => (
-                <div
-                  key={serie.pk}
-                  className="border border-secundary rounded my-2 py-3 px-2"
-                >
-                  <div>
-                    <h4>
-                      EXERCICIO:
-                      {' '}
-                      {exercicios.find((ex) => ex.pk == serie.exercicio_id).nome}
-                    </h4>
-                  </div>
+          </h3>
+          <div className="d-flex justify-content-center my-4">
+            <div className="p-2 border wsi-border rounded py-3 my-2 col-md-6">
+              <div className="d-flex justify-content-center">
+                <img
+                  src={videoAtual}
+                  alt=""
+                  className="img-fluid col-12 animate__animated animate__bounceIn"
+                  style={{
+                    maxWidth: '400px',
+                    display: videoAtual != '' ? 'block' : 'none',
+                  }}
+                />
+              </div>
+              <div id="lista-de-treinos">
+                {series.map((serie) => (
+                  <div
+                    key={serie.pk}
+                    className="border border-secundary rounded my-2 py-3 px-2"
+                  >
+                    <div>
+                      <h5 className="d-flex">
+                        EXERCICIO:
+                        {' '}
+                        <h6 className="mx-2">
+                          {exercicios.find((ex) => ex.pk == serie.exercicio_id).nome}
+                        </h6>
+                      </h5>
+                    </div>
 
-                  <div>
-                    <h4>
-                      Repetições:
-                      {' '}
-                      {serie.repeticoes}
-                    </h4>
+                    <div>
+                      <h5 className="d-flex">
+                        Repetições:
+                        {' '}
+                        <h6 className="mx-2">
+                          {serie.repeticoes}
+                        </h6>
+                      </h5>
+                    </div>
+                    <div>
+                      <h5 className="d-flex">
+                        Dica:
+                        <h6 className="mx-2">
+                          {serie.dica}
+                        </h6>
+                      </h5>
+                    </div>
+                    <div className="d-flex">
+                      <h5>
+                        Video:
+                        {' '}
+                      </h5>
+                      <button
+                        className="btn btn-primary mx-3"
+                        onClick={() => {
+                          setVideoAtual(getVideoUrl(serie.exercicio_id));
+                          window.scrollTo(0, 0);
+                        }}
+                      >
+                        VISUALIZAR
+                      </button>
+                    </div>
                   </div>
-                  <div>
-                    <h5>
-                      Dica:
-                      {' '}
-                      {serie.dica}
-                    </h5>
-                  </div>
-                  <div className="d-flex">
-                    <h4>
-                      Video:
-                      {' '}
-                    </h4>
+                ))}
+              </div>
+              {treino.dica != null && treino.dica != '' ? (
+                <div className="border border-secondary rounded p-2 mb-2 d-flex">
+                  <h6 className="mx-2">Dica:</h6>
+                  {treino.dica}
+                </div>
+              ) : ''}
+
+              <div className="d-flex justify-content-center p-2">
+                <div className="rounded bg-secondary">
+                  <div className="row my-3">
                     <button
-                      className="btn btn-primary mx-3"
+                      className="btn wsi-btn-secondary"
                       onClick={() => {
-                        setVideoAtual(getVideoUrl(serie.exercicio_id));
-                        window.scrollTo(0, 0);
+                        setModalEnviarParaAmigoVisivel(true);
                       }}
                     >
-                      VISUALIZAR
+                      ENVIAR PARA AMIGO
+                    </button>
+                  </div>
+                  <div className="row my-3">
+                    <button
+                      className="btn btn-info"
+                      onClick={() => {
+                        printPage();
+                      }}
+                    >
+                      BAIXAR TREINO
+                    </button>
+                  </div>
+                  <div className="row my-3">
+                    <NavLink className="btn btn-primary" to="/treinos">VOLTAR PRA TREINOS</NavLink>
+                  </div>
+                  <div className="row mt-5">
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => {
+                        setModalConfirmDeleteVisivel(true);
+                      }}
+                    >
+                      DELETAR
                     </button>
                   </div>
                 </div>
-              ))}
-            </div>
-            {treino.dica != null && treino.dica != '' ? (
-              <div>
-                <h3>Dica:</h3>
-                {treino.dica}
               </div>
-            ) : ''}
-
-            <div className="d-flex justify-content-center p-2">
-              <div className="rounded bg-secondary">
-                <div className="row my-3">
-                  <button
-                    className="btn wsi-btn-secondary"
-                    onClick={() => {
-                      setModalEnviarParaAmigoVisivel(true);
-                    }}
-                  >
-                    ENVIAR PARA AMIGO
-                  </button>
-                </div>
-                <div className="row my-3">
-                  <button
-                    className="btn btn-info"
-                    onClick={() => {
-                      printPage();
-                    }}
-                  >
-                    BAIXAR TREINO
-                  </button>
-                </div>
-                <div className="row my-3">
-                  <NavLink className="btn btn-primary" to="/treinos">VOLTAR PRA TREINOS</NavLink>
-                </div>
-                <div className="row mt-5">
-                  <button
-                    className="btn btn-danger"
-                    onClick={() => {
-                      setModalConfirmDeleteVisivel(true);
-                    }}
-                  >
-                    DELETAR
-                  </button>
-                </div>
-              </div>
+              <ModalConfirmDelete
+                campo=" ESTE TREINO"
+                setConfirmDel={setConfirmDel}
+                setModalConfirmDeleteVisivel={setModalConfirmDeleteVisivel}
+                modalConfirmdeleteVisivel={modalConfirmdeleteVisivel}
+              />
+              <ModalEnviarTreino
+                treino={treino}
+                setModalEnviarParaAmigoVisivel={setModalEnviarParaAmigoVisivel}
+                modalEnviarParaAmigoVisivel={modalEnviarParaAmigoVisivel}
+              />
             </div>
-            <ModalConfirmDelete
-              campo=" ESTE TREINO"
-              setConfirmDel={setConfirmDel}
-              setModalConfirmDeleteVisivel={setModalConfirmDeleteVisivel}
-              modalConfirmdeleteVisivel={modalConfirmdeleteVisivel}
-            />
-            <ModalEnviarTreino
-              treino={treino}
-              setModalEnviarParaAmigoVisivel={setModalEnviarParaAmigoVisivel}
-              modalEnviarParaAmigoVisivel={modalEnviarParaAmigoVisivel}
-            />
           </div>
         </div>
-      </div>
-    );}
-    catch (e) {
+      );
+    } catch (e) {
       window.location.reload();
     }
   }
