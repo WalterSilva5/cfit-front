@@ -66,6 +66,14 @@ const PageVisualizarTreino = (props) => {
         console.log(error);
       });
   };
+
+  const printPage = () => {
+    const atual = document.body.innerHTML;
+    document.body.innerHTML = document.getElementById('lista-de-treinos').innerHTML;
+    window.print();
+    document.body.innerHTML = atual;
+    return false;
+  };
   React.useEffect(() => {
     if (treino_id != -1 && treino_id != null) {
       getTreino();
@@ -73,13 +81,17 @@ const PageVisualizarTreino = (props) => {
   }, [treino_id]);
 
   React.useEffect(() => {
-    if (treino_id != -1 && treino_id != null && series == null) {
-      getSeries();
-    } else if (series != null) {
-      setCarregando(false);
-      // setVideoAtual(getVideoUrl(series[0].exercicio_id));
+    try{
+      if (treino_id != -1 && treino_id != null && series == null) {
+        getSeries();
+      } else if (series != null && treino.titulo != null) {
+        setCarregando(false);
+        // setVideoAtual(getVideoUrl(series[0].exercicio_id));
+      }
+    } catch (e) {
+      getTreino();
     }
-  }, [treino_id, series]);
+  }, [treino_id, series, treino]);
 
   const getVideoUrl = (videoId) => exercicios.find((ex) => ex.pk == videoId).video;
 
@@ -110,128 +122,141 @@ const PageVisualizarTreino = (props) => {
     return (
       <Carregando />
     );
-  }
-  return (
-    <div>
-      <PageHeader />
-      <h3 className="text-center display-5">
-        TREINO:
-        {' '}
-        {
-          treino != null
-            ? (
-              <span>
-                {treino.titulo}
-              </span>
-            ) : <></>
-        }
-      </h3>
-      <div className="d-flex justify-content-center my-4">
-        <div className="p-2 border wsi-border rounded py-3 my-2 col-md-6">
-          <div className="d-flex justify-content-center">
-            <img
-              src={videoAtual}
-              alt=""
-              className="img-fluid col-12 animate__animated animate__bounceIn"
-              style={{
-                maxWidth: '400px',
-                display: videoAtual != '' ? 'block' : 'none',
-              }}
+  } else if (series != null && treino != null) {
+    return (
+      <div>
+        <PageHeader />
+        <h3 className="text-center display-5">
+          TREINO:
+          {' '}
+          {
+              treino != null
+                ? (
+                  <span>
+                    {treino.titulo}
+                  </span>
+                ) : <></>
+            }
+        </h3>
+        <div className="d-flex justify-content-center my-4">
+          <div className="p-2 border wsi-border rounded py-3 my-2 col-md-6">
+            <div className="d-flex justify-content-center">
+              <img
+                src={videoAtual}
+                alt=""
+                className="img-fluid col-12 animate__animated animate__bounceIn"
+                style={{
+                  maxWidth: '400px',
+                  display: videoAtual != '' ? 'block' : 'none',
+                }}
+              />
+            </div>
+            <div id="lista-de-treinos">
+              {series.map((serie) => (
+                <div
+                  key={serie.pk}
+                  className="border border-secundary rounded my-2 py-3 px-2"
+                >
+                  <div>
+                    <h4>
+                      EXERCICIO:
+                      {' '}
+                      {exercicios.find((ex) => ex.pk == serie.exercicio_id).nome}
+                    </h4>
+                  </div>
+
+                  <div>
+                    <h4>
+                      Repetições:
+                      {' '}
+                      {serie.repeticoes}
+                    </h4>
+                  </div>
+                  <div>
+                    <h5>
+                      Dica:
+                      {' '}
+                      {serie.dica}
+                    </h5>
+                  </div>
+                  <div className="d-flex">
+                    <h4>
+                      Video:
+                      {' '}
+                    </h4>
+                    <button
+                      className="btn btn-primary mx-3"
+                      onClick={() => {
+                        setVideoAtual(getVideoUrl(serie.exercicio_id));
+                        window.scrollTo(0, 0);
+                      }}
+                    >
+                      VISUALIZAR
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+            {treino.dica != null && treino.dica != '' ? (
+              <div>
+                <h3>Dica:</h3>
+                {treino.dica}
+              </div>
+            ) : ''}
+
+            <div className="d-flex justify-content-center p-2">
+              <div className="rounded bg-secondary">
+                <div className="row my-3">
+                  <button
+                    className="btn wsi-btn-secondary"
+                    onClick={() => {
+                      setModalEnviarParaAmigoVisivel(true);
+                    }}
+                  >
+                    ENVIAR PARA AMIGO
+                  </button>
+                </div>
+                <div className="row my-3">
+                  <button
+                    className="btn btn-info"
+                    onClick={() => {
+                      printPage();
+                    }}
+                  >
+                    BAIXAR TREINO
+                  </button>
+                </div>
+                <div className="row my-3">
+                  <NavLink className="btn btn-primary" to="/treinos">VOLTAR PRA TREINOS</NavLink>
+                </div>
+                <div className="row mt-5">
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => {
+                      setModalConfirmDeleteVisivel(true);
+                    }}
+                  >
+                    DELETAR
+                  </button>
+                </div>
+              </div>
+            </div>
+            <ModalConfirmDelete
+              campo=" ESTE TREINO"
+              setConfirmDel={setConfirmDel}
+              setModalConfirmDeleteVisivel={setModalConfirmDeleteVisivel}
+              modalConfirmdeleteVisivel={modalConfirmdeleteVisivel}
+            />
+            <ModalEnviarTreino
+              treino={treino}
+              setModalEnviarParaAmigoVisivel={setModalEnviarParaAmigoVisivel}
+              modalEnviarParaAmigoVisivel={modalEnviarParaAmigoVisivel}
             />
           </div>
-          {series.map((serie) => (
-            <div
-              key={serie.pk}
-              className="border border-secundary rounded my-2 py-3 px-2"
-            >
-              <div>
-                <h4>
-                  EXERCICIO:
-                  {' '}
-                  {exercicios.find((ex) => ex.pk == serie.exercicio_id).nome}
-                </h4>
-              </div>
-
-              <div>
-                <h4>
-                  Repetições:
-                  {' '}
-                  {serie.repeticoes}
-                </h4>
-              </div>
-              <div>
-                <h5>
-                  Dica:
-                  {' '}
-                  {serie.dica}
-                </h5>
-              </div>
-              <div className="d-flex">
-                <h4>
-                  Video:
-                  {' '}
-                </h4>
-                <button
-                  className="btn btn-primary mx-3"
-                  onClick={() => {
-                    setVideoAtual(getVideoUrl(serie.exercicio_id));
-                    window.scrollTo(0, 0);
-                  }}
-                >
-                  VISUALIZAR
-                </button>
-              </div>
-            </div>
-          ))}
-          {treino.dica != null && treino.dica!= ''? (
-            <div>
-              <h3>Dica:</h3>
-              {treino.dica}
-            </div>
-          ) : ''}
-
-          <div className="d-flex justify-content-center p-2">
-            <div className="rounded bg-secondary">
-              <div className="row my-3">
-                <button
-                  className="btn wsi-btn-secondary"
-                  onClick={() => {
-                    setModalEnviarParaAmigoVisivel(true);
-                  }}
-                >
-                  ENVIAR PARA AMIGO
-                </button>
-              </div>
-              <div className="row my-3">
-                <NavLink className="btn btn-primary" to="/treinos">VOLTAR PRA TREINOS</NavLink>
-              </div>
-              <div className="row mt-5">
-                <button
-                  className="btn btn-danger"
-                  onClick={() => {
-                    setModalConfirmDeleteVisivel(true);
-                  }}
-                >
-                  DELETAR
-                </button>
-              </div>
-            </div>
-          </div>
-          <ModalConfirmDelete
-            campo=" ESTE TREINO"
-            setConfirmDel={setConfirmDel}
-            setModalConfirmDeleteVisivel={setModalConfirmDeleteVisivel}
-            modalConfirmdeleteVisivel={modalConfirmdeleteVisivel}
-          />
-          <ModalEnviarTreino
-            treino={treino}
-            setModalEnviarParaAmigoVisivel={setModalEnviarParaAmigoVisivel}
-            modalEnviarParaAmigoVisivel={modalEnviarParaAmigoVisivel}
-          />
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default PageVisualizarTreino;

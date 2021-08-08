@@ -108,8 +108,12 @@ const FormExercicio = (props) => {
 
   React.useEffect(() => {
     if (categoriaId != -1 && categoriaId != undefined) {
-      const teste = categorias.find((categoria) => categoria.pk == categoriaId).nome;
-      setCategoriaEscolhida(teste);
+      try {
+        const teste = categorias.find((categoria) => categoria.pk == categoriaId).nome;
+        setCategoriaEscolhida(teste);
+      } catch (e) {
+        setCategoriaId(-1);
+      }
     } else {
       setCategoriaEscolhida('ESCOLHA UMA CATEGORIA');
     }
