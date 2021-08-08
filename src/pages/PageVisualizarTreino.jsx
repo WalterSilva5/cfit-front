@@ -37,6 +37,7 @@ const PageVisualizarTreino = (props) => {
         setTreino(response.data);
       }).catch((error) => {
         console.log(error.response);
+        window.location.href = '/treinos';
       });
   };
 
