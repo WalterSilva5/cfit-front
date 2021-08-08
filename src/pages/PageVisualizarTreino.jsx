@@ -71,7 +71,7 @@ const PageVisualizarTreino = (props) => {
     const atual = document.body.innerHTML;
     document.body.innerHTML = document.getElementById('lista-de-treinos').innerHTML;
     window.print();
-    document.body.innerHTML = atual;
+    window.location.reload();
     return false;
   };
   React.useEffect(() => {
@@ -123,7 +123,8 @@ const PageVisualizarTreino = (props) => {
       <Carregando />
     );
   } else if (series != null && treino != null) {
-    return (
+    
+    try{return (
       <div>
         <PageHeader />
         <h3 className="text-center display-5">
@@ -255,7 +256,10 @@ const PageVisualizarTreino = (props) => {
           </div>
         </div>
       </div>
-    );
+    );}
+    catch (e) {
+      window.location.reload();
+    }
   }
 };
 
