@@ -36,6 +36,8 @@ const TabelaExercicio = (props) => {
   React.useEffect(() => {
     if (categorias.length > 0 && exercicios.length == 0) {
       getExercicios();
+    }else{
+      //console.log(exercicios);
     }
   }, [categorias, exercicios]);
 

@@ -101,7 +101,7 @@ const BuscarExercicio = (props) => {
       <div>
         <div
           className="table-responsive bg-primary d-block"
-          style={{ maxHeight: '300px', overflow: 'auto' }}
+          style={{ maxHeight: '250px', overflow: 'auto' }}
         >
           <table className="table text-white table-bordered col-12 container" style={{
             width: '100%',

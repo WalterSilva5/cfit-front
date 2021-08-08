@@ -169,6 +169,13 @@ const FormCadastroTreino = () => {
           />
         </div>
 
+        { alertShow
+          ? (
+            <div className={`my-3 alert alert-${alertType}`}>
+              <h4>{alertMessage}</h4>
+            </div>
+          ) : null}
+
         <div className="d-flex justify-content-center p-2">
             <div className="rounded bg-secondary">
             <div className="row my-2">
@@ -198,12 +205,6 @@ const FormCadastroTreino = () => {
 
           </div>
         </div>
-        { alertShow
-          ? (
-            <div className={`my-2 alert alert-${alertType}`}>
-              <h4>{alertMessage}</h4>
-            </div>
-          ) : null}
       </div>
     </div>
   );

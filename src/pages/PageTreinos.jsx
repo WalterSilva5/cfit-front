@@ -5,7 +5,7 @@ import { serverAddress } from '@/util/Settings';
 import Carregando from '@/pages/components/Carregando';
 
 const CardTreino = (props) => {
-  let titulo = props.titulo;
+  let { titulo } = props;
   if (titulo.length > 30) {
     titulo = `${titulo.substring(0, 30)}...`;
   }
@@ -22,9 +22,11 @@ const CardTreino = (props) => {
         >
           VER TREINO
         </button>
-        {
-          props.dica
+        <div className="mt-1">
+          {
+          props.dica.slice(0, 100)
         }
+        </div>
       </div>
     </div>
   );
@@ -42,13 +44,13 @@ const PageTreinos = (props) => {
           setVazio(true);
         }
         setTreinos(
-          response.data.treinos.map((res) => <CardTreino titulo={res.titulo} key={res.pk} pk={res.pk} dica={res.dica}/>),
+          response.data.treinos.map((res) => <CardTreino titulo={res.titulo} key={res.pk} pk={res.pk} dica={res.dica} />),
         );
         setCarregando(false);
       })
       .catch((error) => {
         setCarregando(false);
-        setTreinos([<div></div>]);
+        setTreinos([<div />]);
       });
   };
 
