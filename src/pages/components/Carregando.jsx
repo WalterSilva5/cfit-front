@@ -7,7 +7,7 @@ const Carregando = () => (
       <div className="col-md-12">
         <img
           className="img-fluid rounded-circle p-0 shadow"
-          style={{ backgroundColor: '#dbdbdb', width: '400px'}}
+          style={{ backgroundColor: '#dbdbdb', width: '400px', background: 'transparent' }}
           src={carregandoGif}
           alt=""
         />
