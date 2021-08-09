@@ -27,8 +27,8 @@ const ModalExercicioPreview = (props) => {
         style={{
           height: '100vh',
         }}
-        className="modal-content wsi-container-dark wsi-border-primary wsi-shadow-primary blur">
-          <div className="modal-header">
+        className="modal-content wsi-container-dark wsi-border-primary wsi-shadow-primary blur p-0 m-0">
+          <div className="modal-header ">
             <h5 className="modal-title text-center">
               <b>
                 EXEMPLO
@@ -44,9 +44,14 @@ const ModalExercicioPreview = (props) => {
               FECHAR
             </button>
           </div>
-          <div className="modal-body d-flex justify-content-center">
-            <div className="image-preview">
-              <img src={imagem} alt="Image Preview" className="img-fluid col-12 animate__animated animate__bounceIn" />
+          <div className="modal-body d-flex justify-content-center p-0 m-0">
+            <div className="image-preview p-0 m-0">
+              <img src={imagem} alt="Image Preview" className="img-fluid col-12 animate__animated animate__bounceIn" 
+                style={{
+                  maxHeight:'70vh'
+                }}
+
+              />
               <div className="d-flex justify-content-center mt-3">
                 <button
                   className="btn wsi-btn-secondary"
