@@ -6,6 +6,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import PWAInstallerPrompt from 'react-pwa-installer-prompt';
 import axios from 'axios';
 import { serverAddress } from '@/util/Settings';
+import { registerSW } from 'virtual:pwa-register';
 import classes from './App.module.scss';
 import PageHome from './pages/PageHome.jsx';
 import PageLogin from './pages/PageLogin';
@@ -17,11 +18,25 @@ import PageTreinos from './pages/PageTreinos';
 import TelaCadastroTreino from './pages/components/PageTreinos/TelaCadastroTreino';
 import PageVisualizarTreino from './pages/PageVisualizarTreino';
 import PageTodosOsExercicios from './pages/PageTodosOsExercicios';
+import * as serviceWorker from '../service-worker';
+
+serviceWorker.register();
+
+const updateSW = registerSW({
+  onNeedRefresh() {
+    // show a prompt to user
+  },
+  onOfflineReady() {
+    // show a ready to work offline to user
+  },
+});
 
 function App() {
   const authToken = localStorage.getItem('authToken');
   const [IsAdminUser, setIsAdminUser] = React.useState(false);
   axios.defaults.headers.common = { Authorization: `Bearer ${authToken}` };
+  serviceWorker.register();
+
   axios
     .get(`${serverAddress}user/valida_admin/`)
     .then((response) => {

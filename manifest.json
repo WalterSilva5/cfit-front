@@ -1,0 +1,15 @@
+{
+    "name": "CFIT MUSCULAÇÃO",
+    "short_name": "CFIT MUSCULAÇÃO",
+    "description": "CFIT MUSCULAÇÃO E AULAS DE DANÇA",
+    "icons": [
+      {
+        "src": "./assets/img/icon.png",
+        "sizes": "48x48, 32x32, 24x24, 16x16",
+        "type": "image/png"
+      }
+    ],
+    "start_url": "/",
+    "orientation": "portrait",
+    "lang": "pt-BR"
+    }

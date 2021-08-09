@@ -2,7 +2,7 @@ import classes from './components/PageLogin/PageLogin.module.scss';
 import PageLoginNav from './components/PageLogin/PageLoginNav';
 import PageLoginFormLogin from './components/PageLogin/PageLoginFormLogin';
 import PageLoginContatos from './components/PageLogin/PageLoginContatos';
-
+import * as serviceWorker from '../../service-worker.js';
 const PageLogin = () => (
   <div className="d-flex text-center col-12">
     <div
