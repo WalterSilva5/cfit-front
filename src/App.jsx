@@ -38,24 +38,19 @@ function App() {
             {authToken ? <Redirect to="/home" /> : <PageLogin />}
           </Route>
           <Route path="/home">{authToken ? <PageHome /> : <PageLogin />}</Route>
-          {/* <Route path="/aulas">
-            {
-              authToken ? <PageAulas /> : <PageLogin />
-            }
-          </Route> */}
           <Route path="/cfit_admin">
             {IsAdminUser ? <CfitAdmin /> : <PageHome />}
           </Route>
           <Route path="/reproduzir_playlist/:id?">
-            {authToken ? <PageReproduzirPlaylist /> : <PageHome />}
+            {authToken ? <PageReproduzirPlaylist /> : <PageLogin />}
           </Route>
           <Route path="/novo_pagamento">
             {authToken ? <PageNovoPagamento /> : <PageHome />}
           </Route>
-          <Route path="/treinos">{authToken ? <PageTreinos /> : <PageHome />}</Route>
-          <Route path="/cadastro_treino">{authToken ? <TelaCadastroTreino /> : <PageHome />}</Route>
-          <Route path="/visualizar_treino/:id">{authToken ? <PageVisualizarTreino /> : <PageHome />}</Route>
-          <Route path="/todos_os_exercicios">{authToken ? <PageTodosOsExercicios /> : <Page404 />}</Route>
+          <Route path="/treinos">{authToken ? <PageTreinos /> : <PageLogin />}</Route>
+          <Route path="/cadastro_treino">{authToken ? <TelaCadastroTreino /> : <PageLogin />}</Route>
+          <Route path="/visualizar_treino/:id">{authToken ? <PageVisualizarTreino /> : <PageLogin />}</Route>
+          <Route path="/todos_os_exercicios">{authToken ? <PageTodosOsExercicios /> : <PageLogin />}</Route>
           <Route path="/404">
             {authToken ? <Page404 /> : <PageLogin />}
           </Route>
