@@ -48,7 +48,7 @@ const ModalExercicioPreview = (props) => {
             <div className="image-preview p-0 m-0">
               <img src={imagem} alt="Image Preview" className="img-fluid col-12 animate__animated animate__bounceIn" 
                 style={{
-                  maxHeight:'70vh'
+                  height:'70vh'
                 }}
 
               />
