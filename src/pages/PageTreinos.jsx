@@ -74,6 +74,11 @@ const PageTreinos = (props) => {
         </NavLink>
       </div>
       <div className="row col-12 p-1">{treinos}</div>
+      <div className="d-flex justify-content-center mt-3">
+        <NavLink className="btn btn-primary" to="/todos_os_exercicios">
+          VER TODOS OS EXERCICIOS
+        </NavLink>
+      </div>
     </div>
   );
 };

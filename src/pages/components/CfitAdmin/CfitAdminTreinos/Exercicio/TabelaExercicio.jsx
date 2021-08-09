@@ -102,9 +102,11 @@ const TabelaExercicio = (props) => {
         <table className="table text-white table-bordered">
           <thead className="bg-primary border-dark">
             <tr>
-              <th className="col-3">NOME</th>
-              <th className="col-1">EDITAR</th>
-              <th className="col-4">VIDEO</th>
+              <th className="col-4">NOME</th>
+              {!props.visualizando
+                ? <th className="col-1">EDITAR</th>
+                : null}
+              <th className="col-1">VIDEO</th>
               <th className="col-1">CATEGORIA</th>
               <th className="col-3">DICA</th>
             </tr>
@@ -113,27 +115,30 @@ const TabelaExercicio = (props) => {
             {filtroExercicio.map((exercicio) => (
               <tr key={exercicio.pk}>
                 <td>{exercicio.nome}</td>
+                {!props.visualizando
+                  ? (
+                    <td>
+                      <button
+                        type="button"
+                        className="btn wsi-btn-admin"
+                        onClick={() => {
+                          props.setExercicioEditId(exercicio.pk);
+                        }}
+                      >
+                        EDITAR
+                      </button>
+                    </td>
+                  ) : null}
                 <td>
                   <button
-                    type="button"
                     className="btn wsi-btn-admin"
                     onClick={() => {
-                      props.setExercicioEditId(exercicio.pk);
+                      setExercicioPreview(exercicio.video);
                     }}
                   >
-                    EDITAR
+                    EXEMPLO
                   </button>
                 </td>
-                <td>
-                    <button
-                      className="btn wsi-btn-admin"
-                      onClick={() => {
-                        setExercicioPreview(exercicio.video);
-                      }}
-                    >
-                      EXEMPLO
-                    </button>
-                  </td>
                 <td>
                   {categorias.find((categoria) => categoria.pk == exercicio.categoria).nome}
                 </td>
