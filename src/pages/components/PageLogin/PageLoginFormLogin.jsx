@@ -97,7 +97,7 @@ const PageLoginFormLogin = () => {
         <div className="text-center col-12">
           <input
             type="text"
-            placeholder="TELEFONE OU EMAIL"
+            placeholder="USUARIO"
             autoComplete="off"
             className="form-control-lg wsi-shadow-primary form-control"
             value={username}
