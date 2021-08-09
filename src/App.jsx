@@ -22,7 +22,6 @@ function App() {
   const authToken = localStorage.getItem('authToken');
   const [IsAdminUser, setIsAdminUser] = React.useState(false);
   axios.defaults.headers.common = { Authorization: `Bearer ${authToken}` };
-
   axios
     .get(`${serverAddress}user/valida_admin/`)
     .then((response) => {
@@ -31,7 +30,6 @@ function App() {
     .catch(() => {
       setIsAdminUser(false);
     });
-
   return (
     <div className="wsi-bg-black p-0 m-0">
       <div style={{ minHeight: '100vh' }} className="p-0 m-0">
@@ -39,7 +37,6 @@ function App() {
           <Route exact path="/">
             {authToken ? <Redirect to="/home" /> : <PageLogin />}
           </Route>
-
           <Route path="/home">{authToken ? <PageHome /> : <PageLogin />}</Route>
           {/* <Route path="/aulas">
             {
@@ -58,7 +55,7 @@ function App() {
           <Route path="/treinos">{authToken ? <PageTreinos /> : <PageHome />}</Route>
           <Route path="/cadastro_treino">{authToken ? <TelaCadastroTreino /> : <PageHome />}</Route>
           <Route path="/visualizar_treino/:id">{authToken ? <PageVisualizarTreino /> : <PageHome />}</Route>
-          <Route path="/todos_os_exercicios">{authToken ? <PageTodosOsExercicios />: <Page404 />}</Route>
+          <Route path="/todos_os_exercicios">{authToken ? <PageTodosOsExercicios /> : <Page404 />}</Route>
           <Route path="/404">
             {authToken ? <Page404 /> : <PageLogin />}
           </Route>

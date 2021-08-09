@@ -28,5 +28,7 @@ module.exports = {
     'react/destructuring-assignment': 'off',
     'react/button-has-type': 'off',
     'jsx-a11y/img-redundant-alt': 'off',
+    'import/no-unresolved ': 'off',
+    'jsx-a11y/alt-text': 'off',
   },
 };

@@ -1,7 +1,7 @@
 import TabelaExercicio from './components/CfitAdmin/CfitAdminTreinos/Exercicio/TabelaExercicio';
 import PageHeader from './components/PageHeader';
 
-const PageTodosOsExercicios = (props) => (
+const PageTodosOsExercicios = () => (
   <div>
     <PageHeader />
     <div className="d-flex justify-content-center">

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { serverAddress } from '@/util/Settings';
-import Carregando from '@/pages/components/Carregando';
+import Carregando from '@/pages/generic/Carregando';
 import ModalExercicioPreview from '../../generic/ModalExercicioPreview';
 
 const BuscarExercicio = (props) => {
@@ -9,7 +9,7 @@ const BuscarExercicio = (props) => {
   const [categorias, setCategorias] = React.useState([]);
   const [searchExercicio, setSearchExercicio] = React.useState('');
   const [filtroExercicio, setFiltroExercicio] = React.useState([]);
-  const [exercicioPreview, setExercicioPreview] = React.useState("");
+  const [exercicioPreview, setExercicioPreview] = React.useState('');
   const getCategorias = () => {
     axios.get(`${serverAddress}categoria/`)
       .then((response) => {
@@ -91,7 +91,7 @@ const BuscarExercicio = (props) => {
         </div>
 
         <div>
-            <ModalExercicioPreview setExercicioPreview={setExercicioPreview} exercicioPreview={exercicioPreview}/>
+          <ModalExercicioPreview setExercicioPreview={setExercicioPreview} exercicioPreview={exercicioPreview} />
         </div>
 
         <div className="col-md-6 pb-4 p-md-4 d-md-flex">

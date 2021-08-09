@@ -1,17 +1,11 @@
-/* eslint-disable no-use-before-define */
-/* eslint-disable no-undef */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/prop-types */
-/* eslint-disable array-callback-return */
-/* eslint-disable no-unused-vars */
 import { serverAddress } from '@/util/Settings';
 import axios from 'axios';
-import { logoutUser } from '@/util/UserUtil';
 import Carregando from '@/pages/components/Carregando';
+import { NavLink } from 'react-router-dom';
 import PageHeader from './components/PageHeader';
 import PlaylistCard from './components/PageHome/PlaylistCard';
 import BannerAssine from './components/PageHome/BannerAssine';
-import { NavLink } from 'react-router-dom';
+
 const PageHome = () => {
   const token = localStorage.getItem('authToken');
   axios.defaults.headers.common = { Authorization: `Bearer ${token}` };

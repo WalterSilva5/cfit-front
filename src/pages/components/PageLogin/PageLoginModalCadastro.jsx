@@ -16,15 +16,6 @@ const PageLoginModalCadastro = (props) => {
   const [confirmpasswordCadastro, setConfirmpasswordCadastro] = React.useState('');
   const [formValido, setformValido] = React.useState(false);
   const [telefoneCadastro, setTelefoneCadastro] = React.useState('');
-  const clearForm = (alertType, error) => {
-    const oldAlertType = alertType;
-    const oldError = error;
-    setusernameCadastro('');
-    setpasswordCadastro('');
-    setConfirmpasswordCadastro('');
-    setTelefoneCadastro('');
-    showErrorCadastroMessage(oldError, oldAlertType);
-  };
 
   const clearData = () => {
     setshowErrorCadastro(false);
@@ -40,6 +31,16 @@ const PageLoginModalCadastro = (props) => {
     setshowErrorCadastro(true);
     seterror(message);
     setalertType(type);
+  };
+
+  const clearForm = (alertType, error) => {
+    const oldAlertType = alertType;
+    const oldError = error;
+    setusernameCadastro('');
+    setpasswordCadastro('');
+    setConfirmpasswordCadastro('');
+    setTelefoneCadastro('');
+    showErrorCadastroMessage(oldError, oldAlertType);
   };
 
   const RegisterUser = () => {

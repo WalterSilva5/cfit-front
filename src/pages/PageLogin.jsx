@@ -1,6 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable jsx-a11y/iframe-has-title */
-/* eslint-disable react/button-has-type */
 import classes from './components/PageLogin/PageLogin.module.scss';
 import PageLoginNav from './components/PageLogin/PageLoginNav';
 import PageLoginFormLogin from './components/PageLogin/PageLoginFormLogin';

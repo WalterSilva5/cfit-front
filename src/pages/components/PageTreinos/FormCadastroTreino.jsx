@@ -113,14 +113,14 @@ const FormCadastroTreino = () => {
         {formAtivo
           ? (
             <div
-            style={{
-              position: 'absolute',
-              top: '-100px',
-              left: '0',
-              margin: '0 !important',
-              padding: '0 !important',
-              zIndex: '9999999',
-            }}
+              style={{
+                position: 'absolute',
+                top: '-100px',
+                left: '0',
+                margin: '0 !important',
+                padding: '0 !important',
+                zIndex: '9999999',
+              }}
               className="col-12"
             >
               <FormAdicionarSerie
@@ -177,7 +177,7 @@ const FormCadastroTreino = () => {
           ) : null}
 
         <div className="d-flex justify-content-center p-2">
-            <div className="rounded bg-secondary">
+          <div className="rounded bg-secondary">
             <div className="row my-2">
               <button
                 className="btn wsi-btn-secondary"

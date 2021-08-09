@@ -43,10 +43,15 @@ const ModalConfirmDelete = (props) => {
                 </button>
               </div>
               <div className="modal-body d-flex justify-content-between">
-                <button className="btn btn-danger" onClick={()=>{props.setConfirmDel(true)}}>CONFIRMAR</button>
-                <button className="btn wsi-btn-secondary" onClick={()=>{
-                    props.setModalConfirmDeleteVisivel(false)
-                }}>CANCELAR</button>
+                <button className="btn btn-danger" onClick={() => { props.setConfirmDel(true); }}>CONFIRMAR</button>
+                <button
+                  className="btn wsi-btn-secondary"
+                  onClick={() => {
+                    props.setModalConfirmDeleteVisivel(false);
+                  }}
+                >
+                  CANCELAR
+                </button>
               </div>
             </div>
           </div>

@@ -1,7 +1,7 @@
 import BuscarExercicio from './BuscarExercicio';
 
 const FormAdicionarSerie = (props) => {
-  const [repeticoes, setRepeticoes] = React.useState("4-Series // 10-Repetições");
+  const [repeticoes, setRepeticoes] = React.useState('4-Series // 10-Repetições');
   const [idExercicio, setIdExercicio] = React.useState(-1);
   const [alertType, setAlertType] = React.useState('success');
   const [alertMessage, setAlertMessage] = React.useState('');
@@ -41,20 +41,20 @@ const FormAdicionarSerie = (props) => {
       </div>
 
       <div className="form-group my-4 d-flex justify-content-center">
-          <label htmlFor="repeticoes">
-            Repetições:
-            {' '}
-          </label>
-          <div className="col-8 col-sm-4 col-md-3 mx-2">
-            <input
-              type="text"
-              id="repeticoes"
-              className="form-control"
-              value={repeticoes}
-              onChange={(e) => setRepeticoes(e.target.value)}
-            />
-          </div>
+        <label htmlFor="repeticoes">
+          Repetições:
+          {' '}
+        </label>
+        <div className="col-8 col-sm-4 col-md-3 mx-2">
+          <input
+            type="text"
+            id="repeticoes"
+            className="form-control"
+            value={repeticoes}
+            onChange={(e) => setRepeticoes(e.target.value)}
+          />
         </div>
+      </div>
       <div className="d-flex justify-content-center p-2">
         <div className="rounded bg-secondary">
           <div className="row my-3">

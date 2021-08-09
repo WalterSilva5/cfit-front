@@ -12,9 +12,6 @@ const PageHeader = () => {
           <span className="navbar-brand">
             <b>CFIT</b>
           </span>
-          {/* <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon" />
-          </button> */}
           <div className="collapse navbar-collapse" id="navbarNav">
             <div className="navbar-nav" />
           </div>
@@ -50,7 +47,7 @@ const PageHeader = () => {
             INICIO
           </NavLink>
           <NavLink exact className="btn btn-primary col-12 my-1" to="/treinos">TREINOS</NavLink>
-          {permission == 10 ? (
+          {permission === 10 ? (
             <NavLink
               exact
               className="btn my-1 btn-primary col-12"
@@ -67,8 +64,6 @@ const PageHeader = () => {
           >
             SAIR
           </button>
-          {/* <NavLink className="btn btn-primary mx-2" to="/aulas">AULAS</NavLink>
-            <NavLink className="btn btn-primary" to="/teste">teste</NavLink> */}
         </div>
       </div>
     </div>

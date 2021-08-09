@@ -86,8 +86,9 @@ const ModalEnviarTreino = (props) => {
               </div>
               <div className="p-2">
 
-                <div className={`py-2 my-2 alert alert-${alertType}`}
-                style={{ display: alertShow ? 'block' : 'none' }}
+                <div
+                  className={`py-2 my-2 alert alert-${alertType}`}
+                  style={{ display: alertShow ? 'block' : 'none' }}
                 >
                   <h4>{alertMessage}</h4>
                 </div>
