@@ -2,9 +2,10 @@ import axios from 'axios';
 import { serverAddress } from '@/util/Settings';
 import { useParams, NavLink } from 'react-router-dom';
 import PageHeader from '@/pages/components/PageHeader';
-import Carregando from '@/pages/components/Carregando';
+import Carregando from '@/pages/generic/Carregando';
 import ModalConfirmDelete from './components/ModalConfirmDelete';
 import ModalEnviarTreino from './components/PageTreinos/ModalEnviarTreino';
+import ModalExercicioPreview from './generic/ModalExercicioPreview';
 
 const PageVisualizarTreino = (props) => {
   const token = localStorage.getItem('authToken');
@@ -18,6 +19,7 @@ const PageVisualizarTreino = (props) => {
   const [confirmDelTreino, setConfirmDel] = React.useState(false);
   const [modalConfirmdeleteVisivel, setModalConfirmDeleteVisivel] = React.useState(false);
   const [modalEnviarParaAmigoVisivel, setModalEnviarParaAmigoVisivel] = React.useState(false);
+  const [exercicioPreview, setExercicioPreview] = React.useState('');
   const params = useParams();
 
   const getExercicios = () => {
@@ -143,7 +145,7 @@ const PageVisualizarTreino = (props) => {
           <div className="d-flex justify-content-center my-4">
             <div className="p-2 border wsi-border rounded py-3 my-2 col-md-6">
               <div className="d-flex justify-content-center">
-                <img
+                {/* <img
                   src={videoAtual}
                   alt=""
                   className="img-fluid col-12 animate__animated animate__bounceIn"
@@ -151,7 +153,8 @@ const PageVisualizarTreino = (props) => {
                     maxWidth: '400px',
                     display: videoAtual != '' ? 'block' : 'none',
                   }}
-                />
+                /> */}
+                <ModalExercicioPreview setExercicioPreview={setExercicioPreview} exercicioPreview={exercicioPreview} />
               </div>
               <div id="lista-de-treinos">
                 {series.map((serie) => (
@@ -159,47 +162,44 @@ const PageVisualizarTreino = (props) => {
                     key={serie.pk}
                     className="border border-secundary rounded my-2 py-3 px-2"
                   >
-                    <div>
-                      <h5 className="d-flex">
+                    <div className="d-flex">
+                      <h5>
                         EXERCICIO:
-                        {' '}
-                        <h6 className="mx-2">
-                          {exercicios.find((ex) => ex.pk == serie.exercicio_id).nome}
-                        </h6>
                       </h5>
+                      <h6 className="mx-2">
+                        {exercicios.find((ex) => ex.pk == serie.exercicio_id).nome}
+                      </h6>
                     </div>
 
-                    <div>
-                      <h5 className="d-flex">
+                    <div className="d-flex">
+                      <h5>
                         Repetições:
-                        {' '}
-                        <h6 className="mx-2">
-                          {serie.repeticoes}
-                        </h6>
                       </h5>
-                    </div>
-                    <div>
-                      <h5 className="d-flex">
-                        Dica:
-                        <h6 className="mx-2">
-                          {serie.dica}
-                        </h6>
-                      </h5>
+                      <h6 className="mx-2">
+                        {serie.repeticoes}
+                      </h6>
                     </div>
                     <div className="d-flex">
                       <h5>
-                        Video:
+                        Exemplo:
                         {' '}
                       </h5>
                       <button
                         className="btn btn-primary mx-3"
                         onClick={() => {
-                          setVideoAtual(getVideoUrl(serie.exercicio_id));
-                          window.scrollTo(0, 0);
+                          setExercicioPreview(getVideoUrl(serie.exercicio_id));
                         }}
                       >
                         VISUALIZAR
                       </button>
+                    </div>
+                    <div className="d-flex">
+                      <h5>
+                        Dica:
+                      </h5>
+                      <h6 className="mx-2">
+                        {serie.dica}
+                      </h6>
                     </div>
                   </div>
                 ))}

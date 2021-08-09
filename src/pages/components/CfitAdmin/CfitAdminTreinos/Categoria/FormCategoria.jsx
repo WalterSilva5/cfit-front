@@ -1,6 +1,6 @@
 import { serverAddress } from '@/util/Settings';
 import axios from 'axios';
-import Carregando from '@/pages/components/Carregando';
+import Carregando from '@/pages/generic/Carregando';
 
 const FormCategoria = (props) => {
   const [alertTipo, setAlertTipo] = React.useState('');

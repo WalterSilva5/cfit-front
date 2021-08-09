@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { serverAddress } from '@/util/Settings';
-import Carregando from '@/pages/components/Carregando';
+import Carregando from '@/pages/generic/Carregando';
 
 const TabelaCategoria = (props) => {
   const [categorias, setCategorias] = React.useState([]);

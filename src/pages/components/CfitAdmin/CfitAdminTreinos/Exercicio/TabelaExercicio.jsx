@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { serverAddress } from '@/util/Settings';
-import Carregando from '@/pages/components/Carregando';
+import Carregando from '@/pages/generic/Carregando';
+import ModalExercicioPreview from '@/pages/generic/ModalExercicioPreview';
 
 const TabelaExercicio = (props) => {
   const [exercicios, setExercicios] = React.useState([]);
@@ -8,6 +9,8 @@ const TabelaExercicio = (props) => {
   const [searchExercicio, setSearchExercicio] = React.useState('');
   const [filtroExercicio, setFiltroExercicio] = React.useState([]);
   const [categorias, setCategorias] = React.useState([]);
+  const [exercicioPreview, setExercicioPreview] = React.useState('');
+
   const getCategorias = () => {
     axios.get(`${serverAddress}categoria`)
       .then((response) => {
@@ -36,8 +39,8 @@ const TabelaExercicio = (props) => {
   React.useEffect(() => {
     if (categorias.length > 0 && exercicios.length == 0) {
       getExercicios();
-    }else{
-      //console.log(exercicios);
+    } else {
+      // console.log(exercicios);
     }
   }, [categorias, exercicios]);
 
@@ -75,6 +78,9 @@ const TabelaExercicio = (props) => {
   }
   return (
     <div className="wsi-bg-black rounded p-md-2">
+      <div>
+        <ModalExercicioPreview setExercicioPreview={setExercicioPreview} exercicioPreview={exercicioPreview} />
+      </div>
       <div className="d-flex justify-content-between">
         <h2 className="text-secondary col-md-6 ">EXERCICIOS CADASTRADOS</h2>
         <div className=" col-md-6">
@@ -89,8 +95,9 @@ const TabelaExercicio = (props) => {
           />
         </div>
       </div>
-      <div className="table-responsive"
-         style={{ maxHeight: '300px', overflow: 'auto' }}
+      <div
+        className="table-responsive"
+        style={{ maxHeight: '300px', overflow: 'auto' }}
       >
         <table className="table text-white table-bordered">
           <thead className="bg-primary border-dark">
@@ -117,7 +124,16 @@ const TabelaExercicio = (props) => {
                     EDITAR
                   </button>
                 </td>
-                <td>{exercicio.video.slice(0, 30)}</td>
+                <td>
+                    <button
+                      className="btn wsi-btn-admin"
+                      onClick={() => {
+                        setExercicioPreview(exercicio.video);
+                      }}
+                    >
+                      EXEMPLO
+                    </button>
+                  </td>
                 <td>
                   {categorias.find((categoria) => categoria.pk == exercicio.categoria).nome}
                 </td>

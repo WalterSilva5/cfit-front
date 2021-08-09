@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { serverAddress } from '@/util/Settings';
 import Carregando from '@/pages/components/Carregando';
+import ModalExercicioPreview from '../../generic/ModalExercicioPreview';
 
 const BuscarExercicio = (props) => {
   const [exercicios, setExercicios] = React.useState([]);
@@ -8,6 +9,7 @@ const BuscarExercicio = (props) => {
   const [categorias, setCategorias] = React.useState([]);
   const [searchExercicio, setSearchExercicio] = React.useState('');
   const [filtroExercicio, setFiltroExercicio] = React.useState([]);
+  const [exercicioPreview, setExercicioPreview] = React.useState("");
   const getCategorias = () => {
     axios.get(`${serverAddress}categoria/`)
       .then((response) => {
@@ -83,12 +85,19 @@ const BuscarExercicio = (props) => {
     >
       <div className="col-12 m-0 row">
         <div className="col-md-6">
-          <h4 className="text-secondary p-0 p-md-4"
-          >ESCOLHA UM EXERCICIO</h4>
+          <h4 className="text-secondary p-0 p-md-4">
+            ESCOLHA UM EXERCICIO
+          </h4>
         </div>
+
+        <div>
+            <ModalExercicioPreview setExercicioPreview={setExercicioPreview} exercicioPreview={exercicioPreview}/>
+        </div>
+
         <div className="col-md-6 pb-4 p-md-4 d-md-flex">
           <label className="h5 mx-2" htmlFor="filtrar">FILTRAR</label>
           <input
+            autoFocus
             type="text"
             id="filtrar"
             className="form-control"
@@ -100,18 +109,23 @@ const BuscarExercicio = (props) => {
       </div>
       <div>
         <div
-          className="table-responsive bg-primary d-block"
+          className="table-responsive bg-secondary d-block"
           style={{ maxHeight: '250px', overflow: 'auto' }}
         >
-          <table className="table text-white table-bordered col-12 container" style={{
-            width: '100%',
-            position: 'relative',
-          }}>
+          <table
+            className="table text-white table-bordered col-12 container"
+            style={{
+              width: '100%',
+              position: 'relative',
+              overflow: 'auto',
+            }}
+          >
             <thead className="bg-primary border-dark">
               <tr>
                 <th className="col-4">NOME</th>
                 <th className="col-1">ESCOLHER</th>
                 {/* <th className="col-3">VIDEO</th> */}
+                <th>EXEMPLO</th>
                 <th className="col-2">CATEGORIA</th>
               </tr>
             </thead>
@@ -134,6 +148,16 @@ const BuscarExercicio = (props) => {
                       }}
                     >
                       ESCOLHER
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => {
+                        setExercicioPreview(exercicio.video);
+                      }}
+                    >
+                      EXEMPLO
                     </button>
                   </td>
                   <td>

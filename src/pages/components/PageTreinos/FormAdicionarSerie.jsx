@@ -42,7 +42,7 @@ const FormAdicionarSerie = (props) => {
 
       <div className="form-group my-4 d-flex justify-content-center">
           <label htmlFor="repeticoes">
-            Nº de Repetições:
+            Repetições:
             {' '}
           </label>
           <div className="col-8 col-sm-4 col-md-3 mx-2">
