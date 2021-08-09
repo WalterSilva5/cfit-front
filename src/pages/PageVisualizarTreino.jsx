@@ -72,15 +72,17 @@ const PageVisualizarTreino = (props) => {
 
   const printPage = () => {
     const atual = document.body.innerHTML;
-    document.body.innerHTML = document.getElementById('lista-de-treinos').innerHTML;
     setTimeout(() => {
-      window.print();
-      try {
-        window.location.reload();
+      document.body.innerHTML = document.getElementById('lista-de-treinos').innerHTML;
+      setTimeout(() => {
+        window.print();
+        try {
+          window.location.reload();
         // document.body.innerHTML = atual;
-      } catch (e) {
-        window.location.reload();
-      }
+        } catch (e) {
+          window.location.reload();
+        }
+      }, 1500);
     }, 1500);
     return false;
   };
