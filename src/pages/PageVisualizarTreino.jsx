@@ -72,7 +72,7 @@ const PageVisualizarTreino = (props) => {
 
   const printPage = () => {
     const atual = document.body.innerHTML;
-    document.body.innerHTML = document.getElementById('lista-de-treinos').innerHTML;
+    // document.body.innerHTML = document.getElementById('lista-de-treinos').innerHTML;
     setTimeout(() => {
       document.body.innerHTML = document.getElementById('lista-de-treinos').innerHTML;
       setTimeout(() => {
