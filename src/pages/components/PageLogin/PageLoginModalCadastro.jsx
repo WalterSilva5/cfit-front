@@ -15,7 +15,7 @@ const PageLoginModalCadastro = (props) => {
   const [alertType, setalertType] = React.useState('danger');
   const [confirmpasswordCadastro, setConfirmpasswordCadastro] = React.useState('');
   const [formValido, setformValido] = React.useState(false);
-  const [telefoneCadastro, setTelefoneCadastro] = React.useState('');
+  // const [telefoneCadastro, setTelefoneCadastro] = React.useState('');
 
   const clearData = () => {
     setshowErrorCadastro(false);
@@ -23,7 +23,7 @@ const PageLoginModalCadastro = (props) => {
     setusernameCadastro('');
     setpasswordCadastro('');
     setConfirmpasswordCadastro('');
-    setTelefoneCadastro('');
+    // setTelefoneCadastro('');
     seterror('');
   };
 
@@ -39,7 +39,7 @@ const PageLoginModalCadastro = (props) => {
     setusernameCadastro('');
     setpasswordCadastro('');
     setConfirmpasswordCadastro('');
-    setTelefoneCadastro('');
+    // setTelefoneCadastro('');
     showErrorCadastroMessage(oldError, oldAlertType);
   };
 
@@ -47,10 +47,10 @@ const PageLoginModalCadastro = (props) => {
     if (formValido) {
       axios.defaults.headers.common = { Authorization: '' };
       axios
-        .post(`${serverAddress}user/`, { username: usernameCadastro, password: passwordCadastro, telefone: telefoneCadastro })
+        .post(`${serverAddress}user/`, { username: usernameCadastro, password: passwordCadastro})
         .then((response) => {
           if (response.status === 200 || response.data.success || response.status == 201) {
-            showErrorCadastroMessage('Cadastro efetuado com sucesso!', 'success');
+            showErrorCadastroMessage('Cadastro efetuado com sucesso! Já pode fazer login!', 'success');
             clearForm('success py-4 ', 'Cadastro efetuado com sucesso!');
           } else {
             showErrorCadastroMessage(response.data.message, 'danger');
@@ -124,7 +124,7 @@ const PageLoginModalCadastro = (props) => {
                 onChange={(e) => setusernameCadastro(e.target.value.toUpperCase())}
               />
             </div>
-            <div className="form-group my-2">
+            {/* <div className="form-group my-2">
               <label className="h6 d-flex">Telefone</label>
               <input
                 type="text"
@@ -133,7 +133,7 @@ const PageLoginModalCadastro = (props) => {
                 value={telefoneCadastro}
                 onChange={(e) => setTelefoneCadastro(e.target.value)}
               />
-            </div>
+            </div> */}
 
             <div className="form-group my-2">
               <label className="h6 d-flex">Senha</label>

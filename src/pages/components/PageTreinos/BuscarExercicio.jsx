@@ -55,6 +55,13 @@ const BuscarExercicio = (props) => {
           novosExercicios.push(exercicio);
         }
       });
+      categorias.map((categoria) => {
+        exercicios.map((exercicio) => {
+          if (categoria.nome.toLowerCase().indexOf(searchExercicio.toLowerCase()) > -1) {
+            novosExercicios.push(exercicio); 
+          }
+        });
+      });
       setFiltroExercicio(novosExercicios);
     } else if (searchExercicio == '' && filtroExercicio.length > 0) {
       setFiltroExercicio([...exercicios]);
