@@ -7,7 +7,7 @@ const ModalEnviarTreino = (props) => {
   const [alertType, setAlertType] = React.useState('success');
   const [alertMessage, setAlertMessage] = React.useState('');
   const [alertShow, setAlertShow] = React.useState(false);
-  const [telefone, setTelefone] = React.useState('');
+  const [username, setusername] = React.useState('');
 
   const updateAlert = (type, message) => {
     setAlertType(type);
@@ -16,10 +16,10 @@ const ModalEnviarTreino = (props) => {
   };
 
   const enviarTreino = () => {
-    axios.post(`${serverAddress}treino/enviar_treino/`, { treino, telefone })
+    axios.post(`${serverAddress}treino/enviar_treino/`, { treino, username })
       .then((response) => {
         updateAlert('success', 'Treino enviado com sucesso!');
-        setTelefone('');
+        setusername('');
       })
       .catch((error) => {
         updateAlert('danger', error.response.data.message);
@@ -35,7 +35,7 @@ const ModalEnviarTreino = (props) => {
   React.useEffect(() => {
     if (props.modalEnviarParaAmigoVisivel) {
       setModalVisivel(true);
-      setTelefone('');
+      setusername('');
       setAlertMessage('');
       setAlertShow(false);
     }
@@ -74,13 +74,13 @@ const ModalEnviarTreino = (props) => {
                 </button>
               </div>
               <div className="p-2 my-3">
-                <label className="h4 mb-4">Numero de telefone do amigo</label>
+                <label className="h4 mb-4">Nome de usuario do amigo</label>
                 <input
                   type="text"
                   className="form-control"
-                  value={telefone}
+                  value={username}
                   onChange={(e) => {
-                    setTelefone(!isNaN(e.target.value) ? e.target.value : telefone);
+                    setusername(!isNaN(e.target.value) ? e.target.value : username);
                   }}
                 />
               </div>
