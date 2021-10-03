@@ -10,6 +10,7 @@ import { serverAddress } from '@/util/Settings';
 const PageLoginModalCadastro = (props) => {
   const [usernameCadastro, setusernameCadastro] = React.useState('');
   const [passwordCadastro, setpasswordCadastro] = React.useState('');
+  const [emailCadastro, setemailCadastro] = React.useState('');
   const [error, seterror] = React.useState('');
   const [showErrorCadastro, setshowErrorCadastro] = React.useState(false);
   const [alertType, setalertType] = React.useState('danger');
@@ -39,6 +40,7 @@ const PageLoginModalCadastro = (props) => {
     setusernameCadastro('');
     setpasswordCadastro('');
     setConfirmpasswordCadastro('');
+    setemailCadastro('');
     // setTelefoneCadastro('');
     showErrorCadastroMessage(oldError, oldAlertType);
   };
@@ -46,8 +48,14 @@ const PageLoginModalCadastro = (props) => {
   const RegisterUser = () => {
     if (formValido) {
       axios.defaults.headers.common = { Authorization: '' };
+      emailCadastro == '' ? null : emailCadastro;
       axios
-        .post(`${serverAddress}user/`, { username: usernameCadastro, password: passwordCadastro})
+        .post(`${serverAddress}user/`,
+         {
+          username: usernameCadastro,
+          password: passwordCadastro,
+          email: emailCadastro
+        })
         .then((response) => {
           if (response.status === 200 || response.data.success || response.status == 201) {
             showErrorCadastroMessage('Cadastro efetuado com sucesso! Já pode fazer login!', 'success');
@@ -89,6 +97,19 @@ const PageLoginModalCadastro = (props) => {
     };
   }, [usernameCadastro, passwordCadastro]);
 
+  React.useEffect(() => {
+    if (emailCadastro!=''){
+      const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (!emailRegex.test(emailCadastro)) {
+        showErrorCadastroMessage('Email inválido', 'danger');
+        setformValido(false);
+      } else {
+        showErrorCadastroMessage('', '');
+        setshowErrorCadastro(false);
+        setformValido(true);
+      }
+    }
+  }, [emailCadastro]);
   return (
     <div>
       <div
@@ -121,20 +142,19 @@ const PageLoginModalCadastro = (props) => {
                 className="form-control wsi-shadow-light"
                 placeholder="USUARIO"
                 value={usernameCadastro}
-                onChange={(e) => setusernameCadastro(e.target.value.toUpperCase())}
+                onChange={(e) => setusernameCadastro(e.target.value.trim())}
               />
             </div>
-            {/* <div className="form-group my-2">
-              <label className="h6 d-flex">Telefone</label>
+            <div className="form-group my-2">
+              <label className="h6 d-flex">Email</label>
               <input
                 type="text"
                 className="form-control wsi-shadow-light"
-                placeholder="TELEFONE"
-                value={telefoneCadastro}
-                onChange={(e) => setTelefoneCadastro(e.target.value)}
+                placeholder="EMAIL"
+                value={emailCadastro}
+                onChange={(e) => setemailCadastro(e.target.value.trim())}
               />
-            </div> */}
-
+            </div>
             <div className="form-group my-2">
               <label className="h6 d-flex">Senha</label>
               <input
@@ -142,7 +162,7 @@ const PageLoginModalCadastro = (props) => {
                 className="form-control wsi-shadow-light"
                 placeholder="SENHA"
                 value={passwordCadastro}
-                onChange={(e) => setpasswordCadastro(e.target.value)}
+                onChange={(e) => setpasswordCadastro(e.target.value.trim())}
               />
             </div>
             <div className="form-group my-2">

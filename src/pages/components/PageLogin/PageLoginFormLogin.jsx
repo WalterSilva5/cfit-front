@@ -145,10 +145,24 @@ const PageLoginFormLogin = () => {
           </div>
           <div className="mt-4">
             <p>
+              Esqueceu sua senha?
+              {' '}
+              <button
+                className="btn btn-sm wsi-btn-secondary wsi-shadow-light"
+                onClick={() => {
+                  window.location.href = '/recuperar-senha';
+                }}
+              >
+                RECUPERAR
+              </button>
+            </p>
+          </div>
+          <div className="mt-4">
+            <p>
               Ainda não tem conta?
               {' '}
               <button
-                className="btn wsi-btn-secondary wsi-shadow-light"
+                className="btn btn-sm wsi-btn-secondary bg-warning wsi-shadow-light"
                 onClick={() => {
                   setmodalVisible(true);
                 }}

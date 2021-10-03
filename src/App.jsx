@@ -17,6 +17,7 @@ import PageTreinos from './pages/PageTreinos';
 import TelaCadastroTreino from './pages/components/PageTreinos/TelaCadastroTreino';
 import PageVisualizarTreino from './pages/PageVisualizarTreino';
 import PageTodosOsExercicios from './pages/PageTodosOsExercicios';
+import PageRecuperarSenha from './pages/PageRecuperarSenha';
 
 function App() {
   const authToken = localStorage.getItem('authToken');
@@ -37,6 +38,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             {authToken ? <Redirect to="/home" /> : <PageLogin />}
+          </Route>
+          <Route exact path="/recuperar-senha">
+            <PageRecuperarSenha />
           </Route>
           <Route path="/home">{authToken ? <PageHome /> : <PageLogin />}</Route>
           <Route path="/cfit_admin">
