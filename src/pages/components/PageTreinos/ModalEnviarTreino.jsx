@@ -80,7 +80,7 @@ const ModalEnviarTreino = (props) => {
                   className="form-control"
                   value={username}
                   onChange={(e) => {
-                    setusername(!isNaN(e.target.value) ? e.target.value : username);
+                    setusername(e.target.value.trim().toUpperCase());
                   }}
                 />
               </div>
