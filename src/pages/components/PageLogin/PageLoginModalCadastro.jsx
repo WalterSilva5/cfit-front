@@ -146,7 +146,7 @@ const PageLoginModalCadastro = (props) => {
               />
             </div>
             <div className="form-group my-2">
-              <label className="h6 d-flex">Email</label>
+              <label className="h6 d-flex">Email (Não é obrigatorio!)</label>
               <input
                 type="text"
                 className="form-control wsi-shadow-light"
