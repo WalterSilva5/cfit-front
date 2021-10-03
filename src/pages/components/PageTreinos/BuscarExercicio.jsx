@@ -1,17 +1,18 @@
-import axios from 'axios';
-import { serverAddress } from '@/util/Settings';
-import Carregando from '@/pages/generic/Carregando';
-import ModalExercicioPreview from '../../generic/ModalExercicioPreview';
+import axios from "axios";
+import { serverAddress } from "@/util/Settings";
+import Carregando from "@/pages/generic/Carregando";
+import ModalExercicioPreview from "../../generic/ModalExercicioPreview";
 
 const BuscarExercicio = (props) => {
   const [exercicios, setExercicios] = React.useState([]);
   const [isCarregando, setIsCarregando] = React.useState(false);
   const [categorias, setCategorias] = React.useState([]);
-  const [searchExercicio, setSearchExercicio] = React.useState('');
+  const [searchExercicio, setSearchExercicio] = React.useState("");
   const [filtroExercicio, setFiltroExercicio] = React.useState([]);
-  const [exercicioPreview, setExercicioPreview] = React.useState('');
+  const [exercicioPreview, setExercicioPreview] = React.useState("");
   const getCategorias = () => {
-    axios.get(`${serverAddress}categoria/`)
+    axios
+      .get(`${serverAddress}categoria/`)
       .then((response) => {
         setCategorias(response.data);
       })
@@ -21,9 +22,18 @@ const BuscarExercicio = (props) => {
   };
   const getExercicios = () => {
     setIsCarregando(true);
-    axios.get(`${serverAddress}exercicio/`)
+    axios
+      .get(`${serverAddress}exercicio/`)
       .then((response) => {
-        setExercicios(response.data);
+        let exercicios = response.data;
+        if (exercicios.length > 0) {
+          for (let i = 0; i < exercicios.length; i++) {
+            exercicios[i].nome = exercicios[i].nome + " - " + categorias.find(
+              (categoria) => categoria.id === exercicios[i].categoria_id
+            ).nome;
+          }
+        }
+        setExercicios(exercicios);
       })
       .catch((error) => {
         console.log(error);
@@ -48,22 +58,18 @@ const BuscarExercicio = (props) => {
   }, [props.idExercicio]);
 
   React.useEffect(() => {
-    if (searchExercicio != '') {
+    if (searchExercicio != "") {
       const novosExercicios = [];
       exercicios.map((exercicio) => {
-        if (exercicio.nome.toLowerCase().indexOf(searchExercicio.toLowerCase()) > -1) {
+        if (
+          exercicio.nome.toLowerCase().indexOf(searchExercicio.toLowerCase()) >
+          -1
+        ) {
           novosExercicios.push(exercicio);
         }
       });
-      categorias.map((categoria) => {
-        exercicios.map((exercicio) => {
-          if (categoria.nome.toLowerCase().indexOf(searchExercicio.toLowerCase()) > -1) {
-            novosExercicios.push(exercicio); 
-          }
-        });
-      });
       setFiltroExercicio(novosExercicios);
-    } else if (searchExercicio == '' && filtroExercicio.length > 0) {
+    } else if (searchExercicio == "" && filtroExercicio.length > 0) {
       setFiltroExercicio([...exercicios]);
     }
   }, [searchExercicio]);
@@ -74,11 +80,14 @@ const BuscarExercicio = (props) => {
       getExercicios();
     } else if (exercicios.length > 0 && filtroExercicio.length == 0) {
       setFiltroExercicio([...exercicios]);
-    } else if (exercicios.length > 0 && filtroExercicio.length > 0 && filtroExercicio != null) {
+    } else if (
+      exercicios.length > 0 &&
+      filtroExercicio.length > 0 &&
+      filtroExercicio != null
+    ) {
       setIsCarregando(false);
     }
-  },
-  [exercicios]);
+  }, [exercicios]);
 
   if (isCarregando || exercicios.length == 0) {
     return <Carregando />;
@@ -87,22 +96,25 @@ const BuscarExercicio = (props) => {
     <div
       className="wsi-bg-black rounded col-12 text-center my-3"
       style={{
-        backgroundColor: '#02021f',
+        backgroundColor: "#02021f",
       }}
     >
       <div className="col-12 m-0 row">
         <div className="col-md-6">
-          <h4 className="text-secondary p-0 p-md-4">
-            ESCOLHA UM EXERCICIO
-          </h4>
+          <h4 className="text-secondary p-0 p-md-4">ESCOLHA UM EXERCICIO</h4>
         </div>
 
         <div>
-          <ModalExercicioPreview setExercicioPreview={setExercicioPreview} exercicioPreview={exercicioPreview} />
+          <ModalExercicioPreview
+            setExercicioPreview={setExercicioPreview}
+            exercicioPreview={exercicioPreview}
+          />
         </div>
 
         <div className="col-md-6 pb-4 p-md-4 d-md-flex">
-          <label className="h5 mx-2" htmlFor="filtrar">FILTRAR</label>
+          <label className="h5 mx-2" htmlFor="filtrar">
+            FILTRAR
+          </label>
           <input
             autoFocus
             type="text"
@@ -117,14 +129,14 @@ const BuscarExercicio = (props) => {
       <div>
         <div
           className="table-responsive bg-secondary d-block"
-          style={{ maxHeight: '250px', overflow: 'auto' }}
+          style={{ maxHeight: "250px", overflow: "auto" }}
         >
           <table
             className="table text-white table-bordered col-12 container"
             style={{
-              width: '100%',
-              position: 'relative',
-              overflow: 'auto',
+              width: "100%",
+              position: "relative",
+              overflow: "auto",
             }}
           >
             <thead className="bg-primary border-dark">
@@ -139,9 +151,7 @@ const BuscarExercicio = (props) => {
             <tbody>
               {filtroExercicio.map((exercicio) => (
                 <tr key={exercicio.pk}>
-                  <td>
-                    {exercicio.nome}
-                  </td>
+                  <td>{exercicio.nome}</td>
                   {/* <td>{exercicio.video}</td> */}
                   {/* <td>
                     {exercicio.dica.slice(0, 30)}
@@ -168,7 +178,11 @@ const BuscarExercicio = (props) => {
                     </button>
                   </td>
                   <td>
-                    {categorias.find((categoria) => categoria.pk == exercicio.categoria).nome}
+                    {
+                      categorias.find(
+                        (categoria) => categoria.pk == exercicio.categoria
+                      ).nome
+                    }
                   </td>
                 </tr>
               ))}
