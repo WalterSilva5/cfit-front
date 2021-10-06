@@ -226,7 +226,7 @@ const PageVisualizarTreino = (props) => {
                         setModalEnviarParaAmigoVisivel(true);
                       }}
                     >
-                      ENVIAR PARA AMIGO
+                      ENVIAR TREINO
                     </button>
                   </div>
                   <div className="row my-3">
@@ -239,12 +239,30 @@ const PageVisualizarTreino = (props) => {
                       BAIXAR TREINO
                     </button>
                   </div>
+                  <div className="row mt-2">
+                    <button
+                      className="btn"
+                      style={{
+                        backgroundColor: 'blue',
+                        color: '#fff',
+                      }}
+                      onClick={() => {
+                        window.location.href = `/cadastro_treino/${treino_id}`;
+                      }}
+                    >
+                      EDITAR TREINO
+                    </button>
+                  </div>
                   <div className="row my-3">
                     <NavLink className="btn btn-primary" to="/treinos">VOLTAR PRA TREINOS</NavLink>
                   </div>
                   <div className="row mt-5">
                     <button
-                      className="btn btn-danger"
+                      className="btn"
+                      style={{
+                        backgroundColor: '#ff0000',
+                        color: '#fff',
+                      }}
                       onClick={() => {
                         setModalConfirmDeleteVisivel(true);
                       }}

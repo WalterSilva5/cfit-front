@@ -53,7 +53,7 @@ function App() {
             {authToken ? <PageNovoPagamento /> : <PageHome />}
           </Route>
           <Route path="/treinos">{authToken ? <PageTreinos /> : <PageLogin />}</Route>
-          <Route path="/cadastro_treino">{authToken ? <TelaCadastroTreino /> : <PageLogin />}</Route>
+          <Route path="/cadastro_treino/:id?">{authToken ? <TelaCadastroTreino /> : <PageLogin />}</Route>
           <Route path="/visualizar_treino/:id">{authToken ? <PageVisualizarTreino /> : <PageLogin />}</Route>
           <Route path="/todos_os_exercicios">{authToken ? <PageTodosOsExercicios /> : <PageLogin />}</Route>
           <Route path="/404">
