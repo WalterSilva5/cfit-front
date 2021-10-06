@@ -18,6 +18,8 @@ import TelaCadastroTreino from './pages/components/PageTreinos/TelaCadastroTrein
 import PageVisualizarTreino from './pages/PageVisualizarTreino';
 import PageTodosOsExercicios from './pages/PageTodosOsExercicios';
 import PageRecuperarSenha from './pages/PageRecuperarSenha';
+import PagePerfil from './pages/PagePerfil';
+
 
 function App() {
   const authToken = localStorage.getItem('authToken');
@@ -48,6 +50,9 @@ function App() {
           </Route>
           <Route path="/reproduzir_playlist/:id?">
             {authToken ? <PageReproduzirPlaylist /> : <PageLogin />}
+          </Route>
+          <Route path="/perfil">
+            {authToken ? <PagePerfil /> : <PageLogin />}
           </Route>
           <Route path="/novo_pagamento">
             {authToken ? <PageNovoPagamento /> : <PageHome />}

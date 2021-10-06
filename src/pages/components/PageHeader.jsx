@@ -47,6 +47,8 @@ const PageHeader = () => {
             INICIO
           </NavLink>
           <NavLink exact className="btn btn-primary col-12 my-1" to="/treinos">TREINOS</NavLink>
+          <NavLink exact className="btn btn-primary col-12 my-1" to="/perfil">PERFIL</NavLink>
+
           {permission == 10 ? (
             <NavLink
               exact

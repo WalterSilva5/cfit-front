@@ -26,17 +26,21 @@ const BuscarExercicio = (props) => {
       .get(`${serverAddress}exercicio/`)
       .then((response) => {
         let exercicios = response.data;
-        if (exercicios.length > 0) {
-          for (let i = 0; i < exercicios.length; i++) {
-            exercicios[i].nome = exercicios[i].nome + " - " + categorias.find(
-              (categoria) => categoria.id === exercicios[i].categoria_id
-            ).nome;
-          }
-        }
-        setExercicios(exercicios);
+        let novos_exercicios = [];
+        if(exercicios.length > 0){
+          exercicios.map((exercicio) => {
+            novos_exercicios.push({
+              pk: exercicio.pk,
+              nome: exercicio.nome+" - "+categorias.find((categoria) => categoria.pk == exercicio.categoria).nome,
+              categoria: exercicio.categoria,
+              video: exercicio.video
+            });
+          });  
+      }
+        setExercicios(novos_exercicios);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         // setIsCarregando(false);
       });
   };
