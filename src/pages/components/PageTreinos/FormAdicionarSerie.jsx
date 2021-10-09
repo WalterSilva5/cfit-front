@@ -19,6 +19,13 @@ const FormAdicionarSerie = (props) => {
     setAlertMessage(message);
     setAlertShow(true);
   };
+  React.useEffect(() => {
+    if (idExercicio !== -1) {
+      props.adicionarSerie({ exercicio: idExercicio, repeticoes });
+      closeForm();
+    }
+  }, [idExercicio]);
+    
   return (
     <div
       className="border border-secondary rounded my-3 col-12"
@@ -57,7 +64,7 @@ const FormAdicionarSerie = (props) => {
       </div>
       <div className="d-flex justify-content-center p-2">
         <div className="rounded bg-secondary">
-          <div className="row my-3">
+          {/* <div className="row my-3">
             <button
               className="btn wsi-btn-secondary"
               onClick={() => {
@@ -69,7 +76,7 @@ const FormAdicionarSerie = (props) => {
             >
               ADICIONAR
             </button>
-          </div>
+          </div> */}
           <div className="row my-3">
             <button
               className="btn btn-danger"

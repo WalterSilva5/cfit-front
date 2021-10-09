@@ -97,7 +97,7 @@ const TabelaExercicio = (props) => {
       </div>
       <div
         className="table-responsive"
-        style={{ maxHeight: '300px', overflow: 'auto' }}
+        style={{ minHeight: '60vh', overflow: 'auto' }}
       >
         <table className="table text-white table-bordered">
           <thead className="bg-primary border-dark">
