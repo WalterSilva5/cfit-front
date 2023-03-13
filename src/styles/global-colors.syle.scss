@@ -1,0 +1,63 @@
+// Global colors;
+
+//primary colors
+$primary-color-1: #1C9973;
+$primary-color-2: #61FFD0;
+$primary-color-3: #3FE5B2;
+$primary-color-4: #992A0C;
+$primary-color-5: #E66440;
+
+//secondary colors
+$secondary-color-1: #993A53;
+$secondary-color-2: #E64C74;
+$secondary-color-3: #3FE5B2;
+$secondary-color-4: #995B1C;
+$secondary-color-5: #E68E35;
+$secondary-color-6: #F36772;
+$secondary-color-7: #FDC47F;
+$secondary-color-8: #F47C62;
+
+$alert-color: #CA1818;
+
+//cor do hover/selected menu
+$accent-color: #006cd2;
+
+$text-color-1: #3F3F46;
+$text-color-2: #52525B;
+$text-color-3: #A1A1AA;
+$text-color-4: #FFFFFF;
+$text-color-5: #333333;
+
+$background-color-1: #f5f5f5;
+$background-color-2: #1C9973;
+$background-color-3: #E66440;
+
+// Export colors - Javascript
+:export {
+  primaryColor1: $primary-color-1;
+  primaryColor2: $primary-color-2;
+  primaryColor3: $primary-color-3;
+  primaryColor4: $primary-color-4;
+
+  secondaryColor1: $secondary-color-1;
+  secondaryColor2: $secondary-color-2;
+  secondaryColor3: $secondary-color-3;
+  secondaryColor4: $secondary-color-4;
+  secondaryColor5: $secondary-color-5;
+  secondaryColor6: $secondary-color-6;
+  secondaryColor7: $secondary-color-7;
+  secondaryColor8: $secondary-color-8;
+
+  alertColor: $alert-color;
+  accentColor: $accent-color;
+
+  textColor1: $text-color-1;
+  textColor2: $text-color-2;
+  textColor3: $text-color-3;
+  textColor4: $text-color-4;
+  textColor5: $text-color-5;
+
+  backgroundColor1: $background-color-1;
+  backgroundColor2: $background-color-2;
+  backgroundColor3: $background-color-3;
+}
