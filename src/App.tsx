@@ -22,8 +22,8 @@ function App() {
         padding: "0"
       }}
     >
-      <CfitNav />
-      <Router>
+      <Router>  
+        <CfitNav />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/admin" element={<AdminPage />} />

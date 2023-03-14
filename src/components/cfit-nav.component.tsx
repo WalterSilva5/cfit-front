@@ -12,8 +12,15 @@ import {
   Grid
 } from "@mui/material";
 import { Menu as MenuIcon } from "@mui/icons-material";
+import {
+  MemoryRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from 'react-router-dom';
 
 export function CfitNav() {
+  const navigate = useNavigate();
   return (
     <AppBar position="static">
       <Toolbar variant="dense">
@@ -28,9 +35,18 @@ export function CfitNav() {
         >
           <MenuIcon />
         </IconButton>
-        <Link variant="h6" color="inherit" component="div">
+        <Typography variant="h6" color="inherit" component="div">
+          <Link href="/" underline="none" color="inherit">
+            CFIT
+          </Link>
+        </Typography>
+        <Box />
+        <Button sx={{ ml: "20px" }} color="inherit" onClick={() => navigate("/")}>
           Home
-        </Link>
+        </Button>
+        <Button color="inherit" onClick={() => navigate("/admin")}>
+          Admin
+        </Button>
       </Toolbar>
     </AppBar>
   );
