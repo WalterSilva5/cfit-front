@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "start": "vite",
     "start:dev": "vite",
     "build": "tsc && vite build",
     "start:preview": "vite preview"
@@ -21,7 +22,7 @@
     "moment-timezone": "^0.5.41",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.9.0",
+    "react-router-dom": "6.0.0",
     "redux": "^4.2.1",
     "sass": "^1.59.2",
     "scss": "^0.2.4",

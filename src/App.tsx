@@ -1,16 +1,17 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
 import "./App.module.css";
 import { Box } from "@mui/material";
 import { CfitNav } from "./components";
 import { AdminPage } from "./pages/admin";
 import { HomePage } from "./pages/home";
+import { ExercisePage } from "./pages/admin/exercise/exercise.page";
 import {
   MemoryRouter as Router,
-  Routes,
   Route,
   useNavigate,
-} from 'react-router-dom';
+  Link,
+  Routes
+} from "react-router-dom";
 
 function App() {
   return (
@@ -22,16 +23,15 @@ function App() {
         padding: "0"
       }}
     >
-      <Router>  
+      <Router>
         <CfitNav />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/admin" element={<AdminPage />} />
+          <Route path="admin">
+            <Route path="/admin" element={<AdminPage />} />
+            <Route path="/admin/exercise" element={<ExercisePage />} />
+          </Route>
         </Routes>
-        {/* <Route path="home">
-          <Route path="/home" element={<Home />} />
-          <Route path="/home/:id" element={<Home />} />
-        </Route> */}
       </Router>
     </Box>
   );

@@ -16,10 +16,10 @@ import {
   MemoryRouter as Router,
   Routes,
   Route,
-  useNavigate,
-} from 'react-router-dom';
+  useNavigate
+} from "react-router-dom";
 
-export function CfitNav() {
+export function CfitNav(props: any) {
   const navigate = useNavigate();
   return (
     <AppBar position="static">
@@ -41,7 +41,11 @@ export function CfitNav() {
           </Link>
         </Typography>
         <Box />
-        <Button sx={{ ml: "20px" }} color="inherit" onClick={() => navigate("/")}>
+        <Button
+          sx={{ ml: "20px" }}
+          color="inherit"
+          onClick={() => navigate("/")}
+        >
           Home
         </Button>
         <Button color="inherit" onClick={() => navigate("/admin")}>
