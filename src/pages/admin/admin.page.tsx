@@ -1,31 +1,29 @@
+import React from "react";
 import {
-  MemoryRouter as Router,
+  BrowserRouter as Router,
   Route,
-  useNavigate,
-  Routes,
   Link,
-  useLocation
+  withRouter
 } from "react-router-dom";
 import {
   Button
 } from "@mui/material"
 import { ExercisePage } from "./exercise";
 
-export function AdminPage() {
-  const path = useLocation().pathname;
-  const url = useLocation().search;
-  console.log(path);
-  console.log(url);
-  const navigate = useNavigate();
+export function AdminPage(props: any) {
+  const { pathname, search } = props.location;
+  const { history } = props;
   return (
     <div>
       <h1>ADMIN</h1>
-      <Routes>
-      
-      </Routes>
+      <Router>
+        <Route path="/admin/exercise" component={ExercisePage} />
+      </Router>
       <Button onClick={() => {
-        navigate(`exercise`)
+        history.push(`/admin/exercise`);
       }}>exercicios</Button>
     </div>
   );
 }
+
+export default withRouter(AdminPage);

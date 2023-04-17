@@ -1,1 +1,0 @@
-export { WorkoutPage } from './workout.page';

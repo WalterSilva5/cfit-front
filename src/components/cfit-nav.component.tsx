@@ -1,3 +1,4 @@
+import React from "react";
 import {
   AppBar,
   Toolbar,
@@ -13,14 +14,14 @@ import {
 } from "@mui/material";
 import { Menu as MenuIcon } from "@mui/icons-material";
 import {
-  MemoryRouter as Router,
-  Routes,
+  BrowserRouter as Router,
   Route,
-  useNavigate
+  Link as RouterLink,
+  withRouter
 } from "react-router-dom";
 
 export function CfitNav(props: any) {
-  const navigate = useNavigate();
+  const { history } = props;
   return (
     <AppBar position="static">
       <Toolbar variant="dense">
@@ -36,7 +37,7 @@ export function CfitNav(props: any) {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" color="inherit" component="div">
-          <Link href="/" underline="none" color="inherit">
+          <Link component={RouterLink} to="/" underline="none" color="inherit">
             CFIT
           </Link>
         </Typography>
@@ -44,14 +45,16 @@ export function CfitNav(props: any) {
         <Button
           sx={{ ml: "20px" }}
           color="inherit"
-          onClick={() => navigate("/")}
+          onClick={() => history.push("/")}
         >
           Home
         </Button>
-        <Button color="inherit" onClick={() => navigate("/admin")}>
+        <Button color="inherit" onClick={() => history.push("/admin")}>
           Admin
         </Button>
       </Toolbar>
     </AppBar>
   );
 }
+
+export default withRouter(CfitNav);
