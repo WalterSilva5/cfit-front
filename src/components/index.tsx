@@ -1,1 +1,1 @@
-export { CfitNav } from "./cfit-nav.component";
+export { NavComponent } from "./nav.component";

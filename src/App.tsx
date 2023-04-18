@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.module.css";
 import { Box } from "@mui/material";
-import { CfitNav } from "./components";
+import { NavComponent } from "./components";
 import { AdminPage, ExercisePage } from "./pages/admin";
 import { HomePage } from "./pages/home";
 import { LoginPage } from "./pages/auth/login";
@@ -24,7 +24,7 @@ function App() {
       }}
     >
       <Router>
-        <CfitNav />
+        <NavComponent />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/admin/*" render={AdminRoutes} />

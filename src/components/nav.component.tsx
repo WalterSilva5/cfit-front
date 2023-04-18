@@ -20,7 +20,7 @@ import {
   withRouter
 } from "react-router-dom";
 
-export function CfitNav(props: any) {
+export function NavComponent(props: any) {
   const { history } = props;
   return (
     <AppBar position="static">
@@ -57,4 +57,4 @@ export function CfitNav(props: any) {
   );
 }
 
-export default withRouter(CfitNav);
+export default withRouter(NavComponent);
