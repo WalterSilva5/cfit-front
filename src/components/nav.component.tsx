@@ -38,7 +38,7 @@ export function NavComponent(props: any) {
         </IconButton>
         <Typography variant="h6" color="inherit" component="div">
           <Link component={RouterLink} to="/" underline="none" color="inherit">
-            CFIT
+            NOME_DO_APP
           </Link>
         </Typography>
         <Box />
