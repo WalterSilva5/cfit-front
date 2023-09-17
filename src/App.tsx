@@ -1,19 +1,19 @@
-import "./App.module.scss";
-import store from "./store/store";
-import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
-import { Navigation } from "./components/navigation/navigation";
-import Routes from './routes';
+import './App.module.scss'
+import store from './store/store'
+import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
+import menu from './components/menu/menu'
+import Routes from './routes'
 
-function App() {
+function App () {
   return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <Navigation />
-        <Routes />
-      </BrowserRouter>
-    </Provider>
-  );
+        <Provider store={store}>
+            <BrowserRouter>
+                <menu />
+                <Routes />
+            </BrowserRouter>
+        </Provider>
+  )
 }
 
-export default App;
+export default App

@@ -1,4 +1,4 @@
 export interface AnyAction {
-  type: any;
-  [extraProps: string]: any;
+  type: any
+  [extraProps: string]: any
 }

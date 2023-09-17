@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react'
 import {
   BrowserRouter as Router,
   Route,
   Link,
   withRouter
-} from "react-router-dom";
+} from 'react-router-dom'
 import {
   Button
-} from "@mui/material"
-import { ExercisePage } from "./exercise";
+} from '@mui/material'
+import { ExercisePage } from './exercise'
 
-export function AdminPage(props: any) {
-  const { pathname, search } = props.location;
-  const { history } = props;
+export function AdminPage (props: any) {
+  const { pathname, search } = props.location
+  const { history } = props
   return (
     <div>
       <h1>ADMIN</h1>
@@ -20,10 +20,10 @@ export function AdminPage(props: any) {
         <Route path="/admin/exercise" component={ExercisePage} />
       </Router>
       <Button onClick={() => {
-        history.push(`/admin/exercise`);
+        history.push('/admin/exercise')
       }}>exercicios</Button>
     </div>
-  );
+  )
 }
 
-export default withRouter(AdminPage);
+export default withRouter(AdminPage)

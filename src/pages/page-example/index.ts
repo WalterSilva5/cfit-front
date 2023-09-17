@@ -1,1 +1,1 @@
-export { PageExample } from './page-example';
+export { PageExample } from './page-example'

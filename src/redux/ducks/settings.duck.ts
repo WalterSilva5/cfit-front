@@ -1,13 +1,13 @@
 export const actionTypes = {
   getSettings: '[Settings] Action',
-  setSettings: '[SetSettings] Action',
-};
+  setSettings: '[SetSettings] Action'
+}
 
 const settingsInitialState = {
   url: '',
   environment: '',
-  version: '',
-};
+  version: ''
+}
 
 export const settingsReducer = (
   statePart = settingsInitialState,
@@ -15,27 +15,27 @@ export const settingsReducer = (
 ) => {
   switch (action.type) {
     case actionTypes.getSettings:
-      const settings = localStorage.getItem('settings');
+      const settings = localStorage.getItem('settings')
       return {
         ...statePart,
         url: action.payload.url,
         environment: action.payload.environment,
-        version: action.payload.version,
-      };
+        version: action.payload.version
+      }
     case actionTypes.setSettings:
-      localStorage.setItem('settings', JSON.stringify(action.payload));
+      localStorage.setItem('settings', JSON.stringify(action.payload))
       return {
         ...statePart,
         url: action.payload.url,
         environment: action.payload.environment,
-        version: action.payload.version,
-      };
+        version: action.payload.version
+      }
     default:
-      return statePart;
+      return statePart
   }
-};
+}
 
 export const actions = {
   getSettings: (payload: any) => ({ payload, type: actionTypes.getSettings }),
-  setSettings: (payload: any) => ({ payload, type: actionTypes.setSettings }),
-};
+  setSettings: (payload: any) => ({ payload, type: actionTypes.setSettings })
+}

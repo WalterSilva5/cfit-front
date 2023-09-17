@@ -1,15 +1,15 @@
 export const actionTypes = {
   setLoginData: '[Remember] Action',
-  clearLoginData: '[RememberClear] Action',
-};
+  clearLoginData: '[RememberClear] Action'
+}
 
 const rememberInitialState = {
   user: {
     name: '',
     password: '',
-    rememberMe: false,
-  },
-};
+    rememberMe: false
+  }
+}
 
 export const rememberReducer = (
   statePart = rememberInitialState,
@@ -17,23 +17,23 @@ export const rememberReducer = (
 ) => {
   switch (action.type) {
     case actionTypes.setLoginData:
-      localStorage.setItem('rememberUser', JSON.stringify(action.payload));
+      localStorage.setItem('rememberUser', JSON.stringify(action.payload))
       return {
         ...statePart,
-        remember: action.payload,
-      };
+        remember: action.payload
+      }
     case actionTypes.clearLoginData:
-      localStorage.removeItem('rememberUser');
+      localStorage.removeItem('rememberUser')
       return {
         ...statePart,
-        remember: null,
-      };
+        remember: null
+      }
     default:
-      return statePart;
+      return statePart
   }
-};
+}
 
 export const actions = {
   setLoginData: (payload: any) => ({ payload, type: actionTypes.setLoginData }),
-  clearLoginData: () => ({ type: actionTypes.clearLoginData }),
-};
+  clearLoginData: () => ({ type: actionTypes.clearLoginData })
+}

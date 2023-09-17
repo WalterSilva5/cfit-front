@@ -1,18 +1,18 @@
-import { Container, Grid, Paper, Typography, TextField, Button } from '@mui/material';
-import { LoginForm } from './components/login.form';
+import { Container, Grid, Paper, Typography, TextField, Button } from '@mui/material'
+import { LoginForm } from './components/login.form'
 
-export function LoginPage() {
+export function LoginPage () {
   return (
     <Container>
       <Grid container spacing={0}
        style={{
-        marginTop: '2rem',
+         marginTop: '2rem'
 
-      }}
+       }}
       >
         <Grid item xs={12} sm={6}
           style={{
-            height: '80vh',
+            height: '80vh'
           }}
         >
           <Paper
@@ -23,7 +23,7 @@ export function LoginPage() {
               flexDirection: 'column',
               justifyContent: 'center',
               alignItems: 'center',
-              height: '100%',
+              height: '100%'
             }}
             elevation={3}
           >
@@ -33,14 +33,14 @@ export function LoginPage() {
         </Grid>
         <Grid item xs={12} sm={6}
           style={{
-            height: '80vh',
+            height: '80vh'
           }}
         >
           <LoginForm/>
         </Grid>
       </Grid>
     </Container>
-  );
+  )
 };
 
-export default LoginPage;
+export default LoginPage

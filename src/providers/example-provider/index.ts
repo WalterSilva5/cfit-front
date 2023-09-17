@@ -1,1 +1,1 @@
-export * from './example-provider';
+export * from './example-provider'

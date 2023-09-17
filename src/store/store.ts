@@ -5,6 +5,6 @@ import searchHistoryReducer from './reducers/search-history.reducer'
 export default configureStore({
   reducer: {
     profile: profileReducer,
-    searchHistory: searchHistoryReducer,
+    searchHistory: searchHistoryReducer
   }
 })

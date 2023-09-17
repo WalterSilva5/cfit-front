@@ -1,19 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { INITIAL_STATE } from "./states/profile-initial.state";
+import { createSlice } from '@reduxjs/toolkit'
+import { INITIAL_STATE } from './states/profile-initial.state'
 
 const profileSlice = createSlice({
-  name: "profile",
+  name: 'profile',
   initialState: INITIAL_STATE,
   reducers: {
     setProfile: (state, action) => {
-      Object.assign(state, action.payload);
+      Object.assign(state, action.payload)
     },
     clearProfile: (_state) => {
-      return { ...INITIAL_STATE };
-    },
-  },
-});
+      return { ...INITIAL_STATE }
+    }
+  }
+})
 
-export const { setProfile, clearProfile } = profileSlice.actions;
+export const { setProfile, clearProfile } = profileSlice.actions
 
-export default profileSlice.reducer;
+export default profileSlice.reducer
