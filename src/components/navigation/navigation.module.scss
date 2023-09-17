@@ -1,0 +1,30 @@
+.Navigation{
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    padding: 0.5rem 1rem;
+    background-color: rgb(255, 255, 255);
+    border-bottom: 1px solid #acacac;
+  
+    button{
+      display: block;
+      margin: 5px;
+      padding: 0.5rem 1rem;
+      background-color: rgb(255, 255, 255);
+      border: 1px solid #e6e6e6;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #000;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      &:hover{
+        background-color: #343434;
+        color: rgb(255, 255, 255);
+        box-shadow: 0 5px 5px #000;
+      }
+    }
+  }
+  

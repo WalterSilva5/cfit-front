@@ -22,4 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+bkp/
 package-lock.json
+yarn.lock
+.env
