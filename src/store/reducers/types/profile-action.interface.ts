@@ -1,5 +1,5 @@
-import { type AnyAction } from './any-action.interface'
+import { type AnyAction } from './any-action.interface';
 export interface ProfileAction extends AnyAction {
-  type: string
-  payload: any
+  type: string;
+  payload: any;
 }

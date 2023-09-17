@@ -1,33 +1,28 @@
-import { AppAPIService } from '../AppAPIService'
-const api = new AppAPIService()
+import { AppAPIService } from '../AppAPIService';
+const api = new AppAPIService();
 
-export async function getOne (id: number) {
+export async function getOne(id: number) {
   const config = {
     url: '/test/' + id,
     method: 'GET'
-  }
+  };
 
-  return await api.makeHttpRequest(config)
+  return await api.makeHttpRequest(config);
 }
 
-export async function createOne (data: any) {
+export async function createOne(data: any) {
   const config = {
     url: '/test',
     method: 'POST',
     data
-  }
+  };
 
-  return await api.makeHttpRequest(config)
+  return await api.makeHttpRequest(config);
 }
 
-export async function getByOsId (
-  osId: number,
-  page = '1',
-  perPage = '8',
-  order = 'desc'
-) {
-  const pageNumber = parseInt(page)
-  const perPageNumber = parseInt(perPage)
+export async function getByOsId(osId: number, page = '1', perPage = '8', order = 'desc') {
+  const pageNumber = parseInt(page);
+  const perPageNumber = parseInt(perPage);
   const config = {
     url: `/test/os/${osId}/all`,
     method: 'GET',
@@ -36,12 +31,12 @@ export async function getByOsId (
       perPage: perPageNumber,
       order
     }
-  }
+  };
 
-  return await api.makeHttpRequest(config)
+  return await api.makeHttpRequest(config);
 }
 
-export async function getTestPdf (id: number, osId: number) {
+export async function getTestPdf(id: number, osId: number) {
   const config = {
     url: `/test/pdf-desktop?executionTestId=${id}&osId=${osId}`,
     method: 'GET',
@@ -51,7 +46,7 @@ export async function getTestPdf (id: number, osId: number) {
       'Content-Disposition': 'attachment; filename="document.pdf"'
     },
     responseType: 'arraybuffer'
-  }
+  };
 
-  return await api.makeHttpRequest(config)
+  return await api.makeHttpRequest(config);
 }

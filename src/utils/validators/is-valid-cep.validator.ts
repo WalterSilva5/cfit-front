@@ -1,20 +1,20 @@
-import formatCEP from '../format-cep.util'
+import formatCEP from '../format-cep.util';
 
-export default function validateCep (value: string): any {
-  value = value.replace(/[\D]/g, '')
+export default function validateCep(value: string): any {
+  value = value.replace(/[\D]/g, '');
 
-  let error
-  let role
-  let roleIcon
+  let error;
+  let role;
+  let roleIcon;
 
   if (value.length < 8) {
-    error = 'Preenchimento incorreto'
-    role = 'notOk'
-    roleIcon = 'danger'
+    error = 'Preenchimento incorreto';
+    role = 'notOk';
+    roleIcon = 'danger';
   } else {
-    error = ''
-    role = 'ok'
-    roleIcon = 'ok'
+    error = '';
+    role = 'ok';
+    roleIcon = 'ok';
   }
 
   return {
@@ -23,7 +23,7 @@ export default function validateCep (value: string): any {
     cep: value,
     role,
     roleIcon
-  }
+  };
 }
 
-export { validateCep }
+export { validateCep };

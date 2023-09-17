@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components';
 
 const anyStyle = {
   margin: 0,
@@ -6,14 +6,14 @@ const anyStyle = {
   outline: 0,
   boxSizing: 'border-box',
   fontFamily: 'Roboto, sans-serif'
-}
+};
 
 const bodyStyle = {
   margin: 0,
   padding: 0,
   boxSizing: 'border-box',
   backgroundColor: 'red'
-}
+};
 
 const submitBtn = {
   backgroundColor: 'red',
@@ -28,9 +28,11 @@ const submitBtn = {
   '&:hover': {
     backgroundColor: 'blue'
   }
-}
+};
 
-export const StyledBtn = styled.button`${submitBtn.toString().replace(/,/g, ';')}`
+export const StyledBtn = styled.button`
+  ${submitBtn.toString().replace(/,/g, ';')}
+`;
 
 export const theme = createGlobalStyle`
     * {
@@ -47,4 +49,4 @@ export const theme = createGlobalStyle`
         ${submitBtn.toString().replace(/,/g, ';')}
     }
 
-`
+`;

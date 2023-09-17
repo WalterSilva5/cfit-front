@@ -1,4 +1,4 @@
-import { type ProfileState } from '../types/profile-state.interface'
+import { type ProfileState } from '../types/profile-state.interface';
 
 export const INITIAL_STATE: ProfileState = {
   profile: {
@@ -6,4 +6,4 @@ export const INITIAL_STATE: ProfileState = {
     repos_url: '',
     avatar_url: ''
   }
-}
+};

@@ -1,12 +1,12 @@
-export function ConverterTitle (value: string): string {
+export function ConverterTitle(value: string): string {
   switch (value) {
     case 'isOpen':
-      return 'Em Aberto'
+      return 'Em Aberto';
     case 'inProgress':
-      return 'Em Progresso'
+      return 'Em Progresso';
     case 'isDone':
-      return 'Concluídos'
+      return 'Concluídos';
     default:
-      return value
+      return value;
   }
 }

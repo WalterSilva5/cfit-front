@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
   AppBar,
   Toolbar,
@@ -11,17 +11,17 @@ import {
   Box,
   Container,
   Grid
-} from '@mui/material'
-import { Menu as MenuIcon } from '@mui/icons-material'
+} from '@mui/material';
+import { Menu as MenuIcon } from '@mui/icons-material';
 import {
   BrowserRouter as Router,
   Route,
   Link as RouterLink,
   withRouter
-} from 'react-router-dom'
+} from 'react-router-dom';
 
-export function NavComponent (props: any) {
-  const { history } = props
+export function NavComponent(props: any) {
+  const { history } = props;
   return (
     <AppBar position="static">
       <Toolbar variant="dense">
@@ -42,11 +42,7 @@ export function NavComponent (props: any) {
           </Link>
         </Typography>
         <Box />
-        <Button
-          sx={{ ml: '20px' }}
-          color="inherit"
-          onClick={() => history.push('/')}
-        >
+        <Button sx={{ ml: '20px' }} color="inherit" onClick={() => history.push('/')}>
           Home
         </Button>
         <Button color="inherit" onClick={() => history.push('/admin')}>
@@ -54,7 +50,7 @@ export function NavComponent (props: any) {
         </Button>
       </Toolbar>
     </AppBar>
-  )
+  );
 }
 
-export default withRouter(NavComponent)
+export default withRouter(NavComponent);
