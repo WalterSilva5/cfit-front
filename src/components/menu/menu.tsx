@@ -1,31 +1,35 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
-import { ProSidebar, Menu, MenuItem } from 'react-pro-sidebar';
-import 'react-pro-sidebar/dist/css/styles.css';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
 
-import getMenuConfig from '../menu.config';
+import getMenuConfig from './menu.config';
 
-function Menu() {
+export function MenuComponent() {
   const navigate = useNavigate();
   const menuConfig = getMenuConfig(); // Obtenha a configuração de menu com base no papel do usuário
 
   return (
-    <ProSidebar>
-      <Menu>
-        {menuConfig.aside.items.map((menuItem) => (
-          <MenuItem
-            key={menuItem.title}
-            icon={menuItem.icon}
+    <Drawer variant="permanent" open={true}>
+      <List>
+        {menuConfig.aside.items.map((menuItem: any) => (
+          <ListItem 
+            button 
+            key={menuItem.title} 
             onClick={() => {
               navigate(menuItem.page);
             }}
           >
-            {menuItem.title}
-          </MenuItem>
+            {menuItem.icon && <ListItemIcon>{menuItem.icon}</ListItemIcon>}
+            <ListItemText primary={menuItem.title} />
+          </ListItem>
         ))}
-      </Menu>
-    </ProSidebar>
+      </List>
+    </Drawer>
   );
 }
 
-export default Menu;
+export default MenuComponent;

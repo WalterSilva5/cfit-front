@@ -39,7 +39,11 @@ const generateMenu = () => {
     menuItems = [...userMenu, ...adminMenu, ...managerMenu];
   }
 
-  return menuItems;
+  return {
+    aside: {
+      items: menuItems
+    }
+  };
 };
 
 export default generateMenu;
