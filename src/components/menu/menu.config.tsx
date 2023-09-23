@@ -25,7 +25,9 @@ const managerMenu = [
 
 const generateMenu = () => {
   const { auth } = store.getState();
-  let menuItems: any = [];
+  let menuItems: any = [
+    { name: 'Home', icon: <HomeOutlinedIcon />, path: '/home' }
+  ];
 
   if (auth.user?.role === 'USER') {
     menuItems = [...userMenu];
