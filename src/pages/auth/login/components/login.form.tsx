@@ -11,7 +11,8 @@ function LoginForm(props: any) {
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          padding: '0 2rem'
+          padding: '0 2rem',
+          boxShadow: 'none',
         }}
         elevation={3}
       >

@@ -5,6 +5,8 @@ import { Home } from '../pages/home';
 import { PageExample } from '../pages/page-example';
 import { Deep } from '../pages/page-example/deep';
 import { PageRequest } from '../pages/page-request';
+import { LoginPage } from '@/pages/auth/login';
+
 
 export default function Router() {
   return (
@@ -17,6 +19,7 @@ export default function Router() {
       </Route>
       <Route path="/page-with-request" element={<PageRequest />} />
       <Route path="*" element={<Page404 />} />
+    <Route path="/auth/login" element={<LoginPage />} />
     </Routes>
   );
 }

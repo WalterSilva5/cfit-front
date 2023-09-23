@@ -7,11 +7,14 @@ import Routes from "./routes";
 
 function App() {
   const location = window.location;
+  console.log("location", location);
+  const authPages = ['/auth', '/auth/login', '/auth/register'];
+
   return (
     <Provider store={store}>
       <BrowserRouter>
         <div className="appWrapper" style={{ display: 'flex' }}>
-          {location.pathname !== '/login' && <MenuComponent />}
+          {authPages.includes(location.pathname) ? null : <MenuComponent />}
           <div className="contentArea" style={{ flexGrow: 1, overflowY: 'auto' }}>
             <Routes />
           </div>
