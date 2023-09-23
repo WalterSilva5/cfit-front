@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
