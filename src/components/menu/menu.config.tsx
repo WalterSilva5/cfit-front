@@ -13,8 +13,15 @@ const userMenu = [
 ];
 
 const adminMenu = [
-  { name: 'Contacts', icon: <ContactsOutlinedIcon />, path: '/contacts' },
-  { name: 'Invoices', icon: <ReceiptOutlinedIcon />, path: '/invoices' }
+  { 
+    name: 'Admin', 
+    icon: <ContactsOutlinedIcon />, 
+    path: '/admin',
+    subItems: [
+      { name: 'Submenu Item 1', path: '/submenu-item-1', icon: <MenuOutlinedIcon />},
+      { name: 'Submenu Item 2', path: '/submenu-item-2', icon: <MenuOutlinedIcon />}
+    ]
+  },
 ];
 
 const managerMenu = [
@@ -26,8 +33,22 @@ const managerMenu = [
 const generateMenu = () => {
   const { auth } = store.getState();
   let menuItems: any = [
-    { name: 'Home', icon: <HomeOutlinedIcon />, path: '/home' }
-  ];
+    { name: 'Home', icon: <HomeOutlinedIcon />, path: '/home' },
+    { 
+      name: 'Admin', 
+      icon: <ContactsOutlinedIcon />, 
+      path: '/admin',
+      subItems: [
+        { name: 'Submenu Item 1', path: '/submenu-item-1', icon: <MenuOutlinedIcon />},
+        { name: 'Submenu Item 2', path: '/submenu-item-2', icon: <MenuOutlinedIcon />}
+      ]
+    },
+    { name: 'Home', icon: <HomeOutlinedIcon />, path: '/home' },
+    { name: 'Home', icon: <HomeOutlinedIcon />, path: '/home' },
+    { name: 'Home', icon: <HomeOutlinedIcon />, path: '/home' },
+
+  ]
+  ;
 
   if (auth.user?.role === 'USER') {
     menuItems = [...userMenu];

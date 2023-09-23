@@ -3,13 +3,3 @@ body {
   color: #000;
   padding: 20px;
 }
-
-.appWrapper {
-  display: flex;
-  height: 100vh;
-}
-
-.contentArea {
-  flex-grow: 1;
-  overflow-y: auto; 
-}

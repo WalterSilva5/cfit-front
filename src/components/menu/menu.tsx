@@ -1,16 +1,11 @@
-import { useNavigate } from "react-router";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-
+import Button from "@mui/material/Button";
+import { MenuItemComponent } from "./menu-item-component";
 import getMenuConfig from "./menu.config";
 
-export function MenuComponent() {
-  const navigate = useNavigate();
+export function Menu() {
   const menuConfig = getMenuConfig();
 
   return (
@@ -18,6 +13,7 @@ export function MenuComponent() {
       variant="permanent"
       open={true}
       sx={{
+        overflow: "visible",
         width: "240px",
         flexShrink: 0,
         "& .MuiDrawer-paper": {
@@ -28,39 +24,24 @@ export function MenuComponent() {
     >
       <List>
         {menuConfig.aside.items.map((menuItem: any) => (
-          <ListItem
-            button
-            key={menuItem.name}
-            onClick={() => {
-              navigate(menuItem.path);
-            }}
-          >
-            {menuItem.icon && <ListItemIcon>{menuItem.icon}</ListItemIcon>}
-            <ListItemText primary={menuItem.name} />
-          </ListItem>
+          <MenuItemComponent key={menuItem.name} item={menuItem} />
         ))}
       </List>
+
       <Box
         sx={{
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-end",
           alignItems: "center",
-          height: "100%", 
-          pb: 2, 
+          height: "100%",
+          pb: 2,
         }}
       >
-        <Button
-          variant="outlined"
-          onClick={() => {
-            navigate("/login");
-          }}
-        >
-          Logout
-        </Button>
-      </Box>  
+        <Button variant="outlined" onClick={() => {}}>Logout</Button>
+      </Box>
     </Drawer>
   );
 }
 
-export default MenuComponent;
+export default Menu;
