@@ -1,11 +1,15 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
+import Svgr from "vite-plugin-svgr";
 
 const __dirname = path.resolve(path.dirname(""));
 
 export default defineConfig({
-  plugins: [react({})],
+  plugins: [
+    react({}),
+    Svgr() 
+  ],
   server: {
     host: true,
     port: 3001,
