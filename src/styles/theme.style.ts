@@ -33,20 +33,3 @@ const submitBtn = {
 export const StyledBtn = styled.button`
   ${submitBtn.toString().replace(/,/g, ';')}
 `;
-
-export const theme = createGlobalStyle`
-    * {
-        ${anyStyle.toString().replace(/,/g, ';')}
-    }
-    body {
-        ${bodyStyle.toString().replace(/,/g, ';')}
-    }
-    #root {
-        margin: 0 auto;
-    }
-    
-    .submitBtn {
-        ${submitBtn.toString().replace(/,/g, ';')}
-    }
-
-`;

@@ -5,8 +5,11 @@ import Button from '@mui/material/Button';
 import getMenuConfig from './menu.config';
 import { MenuItemComponent } from './menu-item-component';
 import { Logo } from '../../assets/img/logo';
+import { useTheme } from '@mui/material/styles';
+
 export function Menu() {
   const menuConfig = getMenuConfig();
+  const theme = useTheme();
 
   return (
     <Drawer
@@ -28,15 +31,15 @@ export function Menu() {
           justifyContent: 'center',
           alignItems: 'center',
           height: '64px',
-          bgcolor: 'primary.main',
-          color: 'primary.contrastText'
+          bgcolor: theme.palette.primary.main, // Use o valor do tema
+          color: theme.palette.primary.contrastText // Use o valor do tema
         }}
       >
         <Logo
           style={{
             width: '100px',
             height: '100px',
-            userSelect: 'none',
+            userSelect: 'none'
           }}
         />
       </Box>
