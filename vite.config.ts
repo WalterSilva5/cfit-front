@@ -7,8 +7,8 @@ const __dirname = path.resolve(path.dirname(""));
 
 export default defineConfig({
   plugins: [
+    Svgr(),
     react({}),
-    Svgr() 
   ],
   server: {
     host: true,

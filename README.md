@@ -106,3 +106,9 @@ Armazena os arquivos de estilo da aplicação.
 getting-started](https://react-redux.js.org/introduction/getting-started)*
 
 *[EsLint: https://eslint.org/](https://reactjs.org/)*
+
+SVG
+
+### todos os icones svg devem ser convertidos em componentes react
+https://jairorlandohuamanbellido.medium.com/import-icon-as-component-instead-as-a-svg-file-react-typescript-d485aa71c17
+https://react-svgr.com/playground/
