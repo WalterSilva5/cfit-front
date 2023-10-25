@@ -12,10 +12,11 @@ export default function Router() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="page-example">
-        <Route path="/page-example" element={<PageExample />} />
-        <Route path="deep/" element={<Deep />} />
-        <Route path="deep/:parameter" element={<Deep />} />
+      <Route path="/home" element={<Home />} />
+      <Route path="/example" element={<PageExample />} />
+      <Route path="deep">
+        <Route path="/deep" element={<Deep />} />
+        <Route path="/deep/:parameter" element={<Deep />} />
       </Route>
       <Route path="/page-with-request" element={<PageRequest />} />
       <Route path="*" element={<Page404 />} />

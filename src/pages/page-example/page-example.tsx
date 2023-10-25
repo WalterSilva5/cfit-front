@@ -5,7 +5,7 @@ export function PageExample() {
     <div>
       <h1>Pagina Exemplo</h1>
       <hr />
-      <GoToPageWithParameter url="/page-example/deep" />
+      <GoToPageWithParameter url="/deep" />
     </div>
   );
 }

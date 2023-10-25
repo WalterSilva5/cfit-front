@@ -18,8 +18,8 @@ const adminMenu = [
     icon: <ContactsOutlinedIcon />, 
     path: '/admin',
     subItems: [
-      { name: 'Submenu Item 1', path: '/submenu-item-1', icon: <MenuOutlinedIcon />},
-      { name: 'Submenu Item 2', path: '/submenu-item-2', icon: <MenuOutlinedIcon />}
+      { name: 'Submenu Item 1', path: '/deep', icon: <MenuOutlinedIcon />},
+      { name: 'Submenu Item 2', path: '/deep/1', icon: <MenuOutlinedIcon />}
     ]
   },
 ];
@@ -39,13 +39,11 @@ const generateMenu = () => {
       icon: <ContactsOutlinedIcon />, 
       path: '/admin',
       subItems: [
-        { name: 'Submenu Item 1', path: '/submenu-item-1', icon: <MenuOutlinedIcon />},
-        { name: 'Submenu Item 2', path: '/submenu-item-2', icon: <MenuOutlinedIcon />}
+        { name: 'Submenu Item 1', path: '/deep', icon: <MenuOutlinedIcon />},
+        { name: 'Submenu Item 2', path: 'deep/1', icon: <MenuOutlinedIcon />}
       ]
     },
-    { name: 'Home', icon: <HomeOutlinedIcon />, path: '/home' },
-    { name: 'Home', icon: <HomeOutlinedIcon />, path: '/home' },
-    { name: 'Home', icon: <HomeOutlinedIcon />, path: '/home' },
+    { name: 'example', icon: <HomeOutlinedIcon />, path: '/example' },
 
   ]
   ;

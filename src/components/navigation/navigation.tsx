@@ -19,7 +19,7 @@ export function Navigation() {
       </button>
       <button
         onClick={() => {
-          handleClick('/page-example');
+          handleClick('/deep');
         }}
       >
         Exemplo Pagina
