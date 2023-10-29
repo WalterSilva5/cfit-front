@@ -22,7 +22,6 @@ export const authReducer = (statePart = authInitialState, action: any) => {
     case actionTypes.Logout:
       localStorage.removeItem('authData');
       localStorage.removeItem('environment');
-      // if rememberUser in localStorage mantain it
       let tmpRememberUser = '';
       let tmpTestResults = '';
       if (localStorage.getItem('rememberUser')) {

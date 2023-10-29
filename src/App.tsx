@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import MenuComponent from './components/menu/menu';
 import Routes from './routes';
 import * as themes from './styles/theme.colors';
-import { ThemeProvider } from '@mui/material/styles'; // Import ThemeProvider
+import { ThemeProvider } from '@mui/material/styles';
 import { Box } from '@mui/material';
 import Navbar from './components/navbar/navbar';
 

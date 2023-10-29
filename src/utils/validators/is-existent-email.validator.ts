@@ -1,4 +1,4 @@
-import { AppAPIService } from '../../services/AppAPIService';
+import { AppAPIService } from '../../services/app-api-service';
 
 export default async function verifyEmailLogin(
   login: string,

@@ -1,4 +1,4 @@
-import { type AppAPIService } from '../AppAPIService';
+import { type AppAPIService } from '../app-api-service';
 // const api = new AppAPIService();
 
 export async function getTestCategory(id: number, api: AppAPIService) {

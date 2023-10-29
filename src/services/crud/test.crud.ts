@@ -1,4 +1,4 @@
-import { AppAPIService } from '../AppAPIService';
+import { AppAPIService } from '../app-api-service';
 const api = new AppAPIService();
 
 export async function getOne(id: number) {

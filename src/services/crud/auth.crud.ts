@@ -1,4 +1,4 @@
-import { AppAPIService } from '../AppAPIService';
+import { AppAPIService } from '../app-api-service';
 import Swal from 'sweetalert2';
 const api = new AppAPIService();
 export async function login(login: string, password: string, api: AppAPIService) {

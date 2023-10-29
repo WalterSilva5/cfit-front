@@ -1,4 +1,4 @@
-import { type AppAPIService } from '../AppAPIService';
+import { type AppAPIService } from '../app-api-service';
 import Swal from 'sweetalert2';
 export async function getOne(id: number, api: AppAPIService) {
   const config = {
