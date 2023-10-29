@@ -4,7 +4,7 @@ export default class AxiosProvider {
   public axios: any;
   constructor() {
     this.axios = axios.create({
-      baseURL: import.meta.env.VITE_API_URL,
+      baseURL: import.meta.env.GITHUB_API_URL,
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json'

@@ -1,7 +1,7 @@
 import { User } from "src/models/user.model";
 
 export const INITIAL_STATE = {
-  access_token: null,
-  refresh_token: null,
+  accessToken: null,
+  refreshToken: null,
   user: null as User | null,
 };

@@ -1,92 +1,67 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosError } from 'axios';
-import { Store } from 'redux'; // Ajuste esse import se estiver usando outra versão ou setup do Redux
 import store from '../store/store';
-import * as authReducer from '../store/reducers/auth.reducer'; // Ajuste esse import se estiver usando outro reducer para autenticação
-import { HttpService } from './http.service';
+import * as authDuck from '../store/reducers/auth.duck';
+import axios from 'axios';
 
-interface AuthData {
-  accessToken?: string;
-  refreshToken?: string;
-  [key: string]: any; // Para propriedades adicionais que não foram especificadas
-}
+const TIMEOUT = 300000; // 5 minutos
 
-interface AuthState {
-  auth: {
-    user: any; // Substitua 'any' pelo tipo apropriado do usuário, se disponível
-  };
-}
-
-export class HttpProvider extends HttpService {
-  private instance: AxiosInstance;
-
-  constructor() {
-    super(axios);
-    this.instance = axios.create({
-      baseURL: `${import.meta.env.VITE_API_URL}/api`,
-      headers: {
-        'Content-type': 'application/json'
-      },
-      maxContentLength: Infinity,
-      maxBodyLength: Infinity
-    });
-  }
-
-  async makeHttpRequest(config: AxiosRequestConfig) {
-    const authData = this.getAuthData();
-    if (authData?.accessToken) {
-      config.headers = {
-        ...(config.headers || {}),
-        Authorization: `Bearer ${authData.accessToken}`
-      };
+export class HttpProvider {
+  axios: any;
+  constructor(axiosInstance: any) {
+    if (!axiosInstance) {
+      throw new Error('Setup do axios não fornecido');
     }
-    return super.makeHttpRequest(config);
+
+    this.axios = axiosInstance;
   }
 
-  getAuthUser(): any {
-    // Substitua 'any' pelo tipo apropriado do usuário, se disponível
-    const {
-      auth: { user }
-    } = store.getState() as AuthState;
+  getAuthData() {
+    const { user } = store.getState();
     return user;
   }
 
-  // Função para obter dados de autenticação (por exemplo, do local storage)
-  getAuthData(): AuthData | null {
-    // Aqui, você precisa implementar a lógica para obter os dados de autenticação
-    // Por exemplo, se estiver armazenando os tokens no local storage:
-    const data = localStorage.getItem('authData');
-    return data ? JSON.parse(data) : null;
+  async makeHttpRequest(config: any) {
+    const source = axios.CancelToken.source();
+    config.timeout = config?.timeout ?? TIMEOUT;
+
+    setTimeout(() => {
+      source.cancel();
+    }, config.timeout - 1000);
+
+    config.cancelToken = source.token;
+
+    try {
+      const httpResponse = await this.axios.request(config);
+      return config.responseType === 'blob' ? httpResponse : httpResponse.data;
+    } catch (e: any) {
+      console.log(`Error on makeHttpRequest ${e} on ${config.url}`);
+      if (e?.response?.status === 401 && e.config.url.includes('refresh')) {
+        store.dispatch(authDuck.actions.logout());
+        window.location.reload();
+      }
+
+      if (!e?.response) {
+        throw e;
+      }
+
+      return this.handleRequestError(e, config);
+    }
   }
 
-  async handleRequestError(e: AxiosError, config: AxiosRequestConfig) {
-    console.log(`Error ${e} on ${config.url}`);
-    if (e.response?.status !== 401) {
-      return super.handleRequestError(e, config);
+  handleRequestError(e: any, config: any) {
+      if (import.meta.env.VITE_DEBUG === 'true') {
+      const reponsePayload =
+        typeof e.response.data === 'string'
+          ? e.response.data
+          : JSON.stringify(e.response.data);
+
+      console.error(`
+        Error: ${e.message},
+        StatusCode: ${e.response.status},
+        Request Config: ${JSON.stringify(config)},
+        Response Payload: ${reponsePayload}
+      `);
     }
 
-    const authData = this.getAuthData();
-
-    if (authData && authData.refreshToken) {
-      const response = await super.makeHttpRequest({
-        ...config,
-        url: 'auth/refresh',
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${authData.refreshToken}`
-        }
-      });
-
-      if (response) {
-        store.dispatch(
-          authReducer.refreshTokenSuccess({
-            ...authData,
-            accessToken: response.accessToken,
-            refreshToken: response.refreshToken
-          })
-        );
-
-        return this.makeHttpRequest(config);
-      }
-    }
+    throw e;
   }
 }

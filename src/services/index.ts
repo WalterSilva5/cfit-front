@@ -1,2 +1,2 @@
-export { AppAPIService } from './app-api-service';
-export { HttpService } from './HttpService';
+export { AppApiProvider } from '../providers/app-api.provider';
+export { HttpService } from '../providers/http.provider';

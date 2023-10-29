@@ -6,17 +6,17 @@ const authSlice = createSlice({
   initialState: AUTH_INITIAL_STATE,
   reducers: {
     loginSuccess: (state, action) => {
-      state.access_token = action.payload.access_token;
-      state.refresh_token = action.payload.refresh_token;
+      state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
       state.user = action.payload.user;
     },
     logout: (state) => {
-      state.access_token = null;
-      state.refresh_token = null;
+      state.accessToken = null;
+      state.refreshToken = null;
       state.user = null;
     },
     refreshTokenSuccess: (state, action) => {
-      state.access_token = action.payload.access_token;
+      state.accessToken = action.payload.accessToken;
     },
     updateUser: (state, action) => {
       state.user = action.payload;

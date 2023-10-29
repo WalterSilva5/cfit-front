@@ -1,19 +1,4 @@
-import styled, { createGlobalStyle } from 'styled-components';
-
-const anyStyle = {
-  margin: 0,
-  padding: 0,
-  outline: 0,
-  boxSizing: 'border-box',
-  fontFamily: 'Roboto, sans-serif'
-};
-
-const bodyStyle = {
-  margin: 0,
-  padding: 0,
-  boxSizing: 'border-box',
-  backgroundColor: 'red'
-};
+import styled from 'styled-components';
 
 const submitBtn = {
   backgroundColor: 'red',

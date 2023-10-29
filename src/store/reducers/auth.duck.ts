@@ -4,7 +4,8 @@ export const actionTypes = {
   Refresh: '[Refresh] Action',
   Register: '[Register] Action',
   UserRequested: '[Request User] Action',
-  UserLoaded: '[Load User] Auth API'
+  UserLoaded: '[Load User] Auth API',
+  setAuthData: '[Set Auth Data] Action'
 };
 const authInitialState = {
   authData: null,
@@ -14,7 +15,14 @@ const authInitialState = {
 export const authReducer = (statePart = authInitialState, action: any) => {
   switch (action.type) {
     case actionTypes.Login:
-      localStorage.setItem('authData', JSON.stringify(action.payload));
+      console.log('action.payload', action.payload);
+      console.log('action.login');
+      const { accessToken, refreshToken, user } = action.payload;
+      localStorage.setItem(
+        'authData',
+        JSON.stringify({ accessToken, refreshToken, user })
+      );
+
       return {
         ...statePart,
         authData: action.payload
@@ -62,6 +70,11 @@ export const authReducer = (statePart = authInitialState, action: any) => {
         ...statePart,
         authData: action.payload
       };
+    case actionTypes.setAuthData:
+      return {
+        ...statePart,
+        authData: action.payload
+      };
     default:
       return statePart;
   }
@@ -76,5 +89,6 @@ export const actions = {
     payload,
     type: actionTypes.UserRequested
   }),
-  userLoaded: (payload: any) => ({ payload, type: actionTypes.UserLoaded })
+  userLoaded: (payload: any) => ({ payload, type: actionTypes.UserLoaded }),
+  setAuthData: (payload: any) => ({ payload, type: actionTypes.setAuthData })
 };

@@ -1,10 +1,10 @@
-import { AppAPIService } from '../../services/app-api-service';
+import { AppApiProvider } from '../../providers/app-api.provider';
 
 export default async function verifyEmailLogin(
   login: string,
   email: string
 ): Promise<any> {
-  const api = AppAPIService.getInstance();
+  const api = new AppApiProvider();
 
   try {
     const response = await api.makeHttpRequest({

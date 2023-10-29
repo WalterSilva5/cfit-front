@@ -1,7 +1,37 @@
-import React from 'react';
-import { Container, Grid, Paper, Typography, TextField, Button } from '@mui/material';
+import { useState } from 'react';
+import { Paper, Typography, TextField, Button } from '@mui/material';
+import { AppApiProvider } from '../../../../providers/app-api.provider';
+import { store } from '../../../../store/store';
+import * as authDuck from '../../../../store/reducers/auth.duck';
+import { useSelector } from 'react-redux';
 
-function LoginForm(props: any) {
+function LoginForm(_props: any) {
+  const api = new AppApiProvider();
+
+  const [loginState, setLoginState] = useState({});
+  const auth = useSelector((state: any) => state.user);
+  console.log(auth);
+
+  const handleChange = (event: any) => {
+    console.log(event.target.name, ' - ', event.target.value);
+    setLoginState({ ...loginState, [event.target.name]: event.target.value });
+  };
+
+  const handleSubmit = async (event: any) => {
+    event.preventDefault();
+    try {
+      const result = await api.makeHttpRequest({
+        method: 'POST',
+        url: '/auth/login',
+        data: loginState
+      });
+      console.log(result);
+      store.dispatch(authDuck.actions.login(result));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <Paper
@@ -12,7 +42,7 @@ function LoginForm(props: any) {
           justifyContent: 'center',
           alignItems: 'center',
           padding: '0 2rem',
-          boxShadow: 'none',
+          boxShadow: 'none'
         }}
         elevation={3}
       >
@@ -29,6 +59,8 @@ function LoginForm(props: any) {
           variant="outlined"
           style={{ marginBottom: '1rem' }}
           fullWidth
+          onChange={handleChange}
+          name="email"
         />
         <TextField
           label="Senha"
@@ -36,8 +68,17 @@ function LoginForm(props: any) {
           type="password"
           style={{ marginBottom: '1rem' }}
           fullWidth
+          onChange={handleChange}
+          name="password"
         />
-        <Button variant="contained" color="primary" size="large">
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          style={{ width: '100%' }}
+          onClick={handleSubmit}
+          type="submit"
+        >
           <b>Entrar</b>
         </Button>
       </Paper>

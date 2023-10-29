@@ -12,7 +12,6 @@ const settingsInitialState = {
 export const settingsReducer = (statePart = settingsInitialState, action: any) => {
   switch (action.type) {
     case actionTypes.getSettings:
-      const settings = localStorage.getItem('settings');
       return {
         ...statePart,
         url: action.payload.url,

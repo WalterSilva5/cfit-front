@@ -1,7 +1,6 @@
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import PeopleOutlinedIcon from '@mui/icons-material/PeopleOutlined';
 import ContactsOutlinedIcon from '@mui/icons-material/ContactsOutlined';
-import ReceiptOutlinedIcon from '@mui/icons-material/ReceiptOutlined';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
@@ -13,15 +12,15 @@ const userMenu = [
 ];
 
 const adminMenu = [
-  { 
-    name: 'Admin', 
-    icon: <ContactsOutlinedIcon />, 
+  {
+    name: 'Admin',
+    icon: <ContactsOutlinedIcon />,
     path: '/admin',
     subItems: [
-      { name: 'Submenu Item 1', path: '/deep', icon: <MenuOutlinedIcon />},
-      { name: 'Submenu Item 2', path: '/deep/1', icon: <MenuOutlinedIcon />}
+      { name: 'Submenu Item 1', path: '/deep', icon: <MenuOutlinedIcon /> },
+      { name: 'Submenu Item 2', path: '/deep/1', icon: <MenuOutlinedIcon /> }
     ]
-  },
+  }
 ];
 
 const managerMenu = [
@@ -31,32 +30,40 @@ const managerMenu = [
 ];
 
 const generateMenu = () => {
-  const { auth } = store.getState();
+  //TODO refatorar
+  const { user: auth } = store.getState();
+  let user = auth.user as any;
+  if (!user) {
+    return {
+      aside: {
+        items: []
+      }
+    };
+  }
+  const role = user.role;
+
   let menuItems: any = [
     { name: 'Home', icon: <HomeOutlinedIcon />, path: '/home' },
-    { 
-      name: 'Admin', 
-      icon: <ContactsOutlinedIcon />, 
+    {
+      name: 'Admin',
+      icon: <ContactsOutlinedIcon />,
       path: '/admin',
       subItems: [
-        { name: 'Submenu Item 1', path: '/deep', icon: <MenuOutlinedIcon />},
-        { name: 'Submenu Item 2', path: 'deep/1', icon: <MenuOutlinedIcon />}
+        { name: 'Submenu Item 1', path: '/deep', icon: <MenuOutlinedIcon /> },
+        { name: 'Submenu Item 2', path: 'deep/1', icon: <MenuOutlinedIcon /> }
       ]
     },
-    { name: 'example', icon: <HomeOutlinedIcon />, path: '/example' },
-
-  ]
-  ;
-
-  if (auth.user?.role === 'USER') {
+    { name: 'example', icon: <HomeOutlinedIcon />, path: '/example' }
+  ];
+  if (role === 'USER') {
     menuItems = [...userMenu];
   }
 
-  if (auth.user?.role === 'ADMIN') {
+  if (role === 'ADMIN') {
     menuItems = [...userMenu, ...adminMenu];
   }
 
-  if (auth.user?.role === 'MANAGER') {
+  if (role === 'MANAGER') {
     menuItems = [...userMenu, ...adminMenu, ...managerMenu];
   }
 
