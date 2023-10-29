@@ -17,6 +17,7 @@ export function Home() {
         justifyContent: 'center',
         alignItems: 'center',
         height: '100%',
+        width: '100%',
         bgcolor: theme.palette.background.default,
         color: theme.palette.text.primary
       }}

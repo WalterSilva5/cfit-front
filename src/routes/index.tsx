@@ -6,6 +6,7 @@ import { PageExample } from '../pages/page-example';
 import { Deep } from '../pages/page-example/deep';
 import { PageRequest } from '../pages/page-request';
 import { LoginPage } from '@/pages/auth/login';
+import { UserListing } from '@/pages/user/user.listing';
 
 
 export default function Router() {
@@ -13,6 +14,7 @@ export default function Router() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/home" element={<Home />} />
+      <Route path="/user" element={<UserListing />} />
       <Route path="/example" element={<PageExample />} />
       <Route path="deep">
         <Route path="/deep" element={<Deep />} />

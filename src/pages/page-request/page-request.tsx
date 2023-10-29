@@ -1,21 +1,26 @@
 import { GetProfile, ShowProfile, ShowSearchHistory } from '../../components';
-import styles from './page-request.module.scss';
+import { Box } from '@mui/material';
+import {
+  BoxContainer,
+  ProfileContainer,
+  SearchHistoryContainer
+} from './page-request.component';
 
 export function PageRequest() {
   return (
-    <div>
+    <BoxContainer>
       <h1>Pagina com exemplos de requisições</h1>
       <hr />
       <GetProfile />
       <hr />
-      <div className={styles.displayGroup}>
-        <div className={styles.showProfile}>
+      <Box>
+        <ProfileContainer>
           <ShowProfile />
-        </div>
-        <div className={styles.showSearchHistory}>
+        </ProfileContainer>
+        <SearchHistoryContainer>
           <ShowSearchHistory />
-        </div>
-      </div>
-    </div>
+        </SearchHistoryContainer>
+      </Box>
+    </BoxContainer>
   );
 }

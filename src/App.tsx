@@ -8,6 +8,7 @@ import Routes from './routes';
 import * as themes from './styles/theme.colors';
 import { ThemeProvider } from '@mui/material/styles'; // Import ThemeProvider
 import { Box } from '@mui/material';
+import Navbar from './components/navbar/navbar';
 
 export const ThemeContext = React.createContext<{
   theme: any;
@@ -16,10 +17,9 @@ export const ThemeContext = React.createContext<{
 
 function App() {
   const [theme, setTheme] = useState(themes.defaultTheme);
-
   const location = window.location;
-  console.log('location', location);
   const authPages = ['/auth', '/auth/login', '/auth/register'];
+  const [useMenu, setUseMenu] = useState(false);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
@@ -35,14 +35,38 @@ function App() {
             margin: 0,
             padding: 0,
             bgcolor: theme.palette.background.default,
-            color: theme.palette.text.primary
+            color: theme.palette.text.primary,
+            boxShadow: 'none'
           }}
         >
           <Provider store={store}>
             <BrowserRouter>
-              {authPages.includes(location.pathname) ? null : <MenuComponent />}
-              <Box className="contentArea" style={{ flexGrow: 1, overflowY: 'auto' }}>
-                <Routes />
+              {authPages.includes(location.pathname) ? null : (
+                <>
+                  <Navbar useMenu={useMenu} setUseMenu={setUseMenu} username="" />
+                  <MenuComponent useMenu={useMenu} />
+                </>
+              )}
+              <Box
+                className="contentArea"
+                style={{
+                  display: 'flex',
+                  minHeight: '80vh',
+                  width: '100%',
+                  height: '100%'
+                }}
+              >
+                <Box
+                  sx={{
+                    display: 'block',
+                    width: '100%',
+                    height: '100%',
+                    padding: '0px',
+                    margin: '0px'
+                  }}
+                >
+                  <Routes />
+                </Box>
               </Box>
             </BrowserRouter>
           </Provider>

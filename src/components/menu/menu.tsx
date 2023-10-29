@@ -7,7 +7,7 @@ import { MenuItemComponent } from './menu-item-component';
 import { Logo } from '../../assets/img/logo';
 import { useTheme } from '@mui/material/styles';
 
-export function Menu() {
+export function Menu(props: { useMenu: boolean }) {
   const menuConfig = getMenuConfig();
   const theme = useTheme();
 
@@ -22,7 +22,8 @@ export function Menu() {
         '& .MuiDrawer-paper': {
           width: '240px',
           boxSizing: 'border-box'
-        }
+        },
+        display: props.useMenu ? 'block' : 'none'
       }}
     >
       <Box
