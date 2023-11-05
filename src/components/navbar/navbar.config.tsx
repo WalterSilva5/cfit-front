@@ -35,8 +35,8 @@ const managerNavbar: any = [
   { name: 'User', icon: <PeopleOutlinedIcon />, path: '/user' }
 ];
 
-const generateNavbar = () => {
-  //TODO refatorar
+export const generateNavbar = () => {
+  //TODO refatorar para não utilizar any
   const { user: auth } = store.getState();
   let user = auth.user as any;
   if (!user) {

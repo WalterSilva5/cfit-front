@@ -97,7 +97,7 @@ export const Navbar = (props: {
             justifyContent: 'center'
           }}
         >
-          {navbarConfig.items.map((item: any) => (
+          {navbarConfig?.items?.map((item: any) => (
             <React.Fragment key={item.name}>
               {item.subItems ? (
                 <>
@@ -130,7 +130,7 @@ export const Navbar = (props: {
                       margin: '0px'
                     }}
                   >
-                    {item.subItems.map((subItem: any) => (
+                    {item?.subItems?.map((subItem: any) => (
                       <MenuItem key={`${subItem.name}${subItem.path}`} onClick={handleClose}
                       sx={{
                         backgroundColor: defaultThemeColors.accentDarkest2,

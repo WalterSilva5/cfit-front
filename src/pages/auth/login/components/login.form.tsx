@@ -1,19 +1,17 @@
 import { useState } from 'react';
 import { Paper, Typography, TextField, Button } from '@mui/material';
-import { AppApiProvider } from '../../../../providers/app-api.provider';
-import { store } from '../../../../store/store';
-import * as authDuck from '../../../../store/reducers/auth.duck';
-import { useSelector } from 'react-redux';
+import { AppApiProvider } from '@/providers/app-api.provider';
+import { store } from '@/store/store';
+import * as authDuck from '@/store/reducers/auth.duck';
+import { useNavigate } from 'react-router-dom';
 
 function LoginForm(_props: any) {
   const api = new AppApiProvider();
+  const navigate = useNavigate()
 
   const [loginState, setLoginState] = useState({});
-  const auth = useSelector((state: any) => state.user);
-  console.log(auth);
 
   const handleChange = (event: any) => {
-    console.log(event.target.name, ' - ', event.target.value);
     setLoginState({ ...loginState, [event.target.name]: event.target.value });
   };
 
@@ -25,10 +23,10 @@ function LoginForm(_props: any) {
         url: '/auth/login',
         data: loginState
       });
-      console.log(result);
       store.dispatch(authDuck.actions.login(result));
+      navigate('/home');
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
