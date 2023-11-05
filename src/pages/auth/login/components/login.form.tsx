@@ -3,17 +3,19 @@ import { Paper, Typography, TextField, Button } from '@mui/material';
 import { AppApiProvider } from '@/providers/app-api.provider';
 import { store } from '@/store/store';
 import * as authDuck from '@/store/reducers/auth.duck';
-import { useNavigate } from 'react-router-dom';
 
 function LoginForm(_props: any) {
   const api = new AppApiProvider();
-  const navigate = useNavigate()
 
   const [loginState, setLoginState] = useState({});
 
   const handleChange = (event: any) => {
     setLoginState({ ...loginState, [event.target.name]: event.target.value });
   };
+
+  const handleLoginDispatch = async (result: any) => {
+    store.dispatch(authDuck.actions.login(result));
+  }
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
@@ -23,8 +25,13 @@ function LoginForm(_props: any) {
         url: '/auth/login',
         data: loginState
       });
-      store.dispatch(authDuck.actions.login(result));
-      navigate('/home');
+      // store.dispatch(authDuck.actions.login(result));
+      if (result) {
+        console.log(result);
+        await handleLoginDispatch(result);
+        await setTimeout(() => { }, 300);
+        window.location.href = '/home';
+      }
     } catch (error) {
       console.error(error);
     }

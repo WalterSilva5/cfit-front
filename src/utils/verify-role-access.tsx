@@ -1,34 +1,32 @@
-import { store } from "@/store/store";
-import * as authDuck from "@/store/reducers/auth.duck";
-import generateNavbar from "@/components/navbar/navbar.config";
-import { useNavigate, useLocation } from "react-router-dom";
 
-export async function useRoleAccess (){
-    const location = useLocation();
-    const navigate = useNavigate();
-    const navbarConfig = generateNavbar();
+export function useRoleAccess(navbarConfig: any) {
+    // const auth = useSelector((state: any) => state?.user);
+    try {
+        let auth = JSON.parse(localStorage.getItem("authData") || "{}");
 
-    const auth = store.getState().user;
-    console.log(auth);
-    const user = auth?.user;
-    console.log(user);
-
-    const locationPath = location.pathname;
-    console.log(locationPath);
-
-    const userRole = navbarConfig?.items?.find(
-        (item: any) => item.path === locationPath
-    );
-    console.log(userRole);
-
-    if (!user) {
-        store.dispatch(authDuck.actions.logout());
-        console.log("logout");
-        navigate("/auth/login");
-    } else if (!userRole) {
-        console.log("not found");
-        navigate("/home");
+        if (auth) {
+            console.log(auth);
+            const user = auth?.user;
+            console.log(user);
+            const locationPath = location.pathname;
+            console.log(locationPath);
+            console.log(navbarConfig);
+            const userRole = navbarConfig?.items?.find(
+                (item: any) => item.path === locationPath
+            );
+            console.log(userRole);
+            if (!user) {
+                localStorage.removeItem("authData");
+                window.location.href = "/auth/login";
+            } else if (!userRole) {
+                window.location.href = "/home";
+            }
+        } else {
+            localStorage.removeItem("authData");
+            window.location.href = "/auth/login";
+        }
+    } catch (error) {
+        localStorage.removeItem("authData");
+        window.location.href = "/auth/login";
     }
-};
-
-export default useRoleAccess;
+}
