@@ -1,17 +1,13 @@
 import { Button, Typography, Box } from "@mui/material";
 import * as themes from "../../styles/theme.colors";
 import { ThemeContext } from "../../App";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { useTheme } from "@mui/material/styles";
 import { useRoleAccess } from "@/utils/verify-role-access";
-import generateNavbar from "@/components/navbar/navbar.config";
+import { Role } from "@/enums/role.enum";
 
 export function Home() {
-  const navbarConfig = generateNavbar();
-
-  useEffect(() => {
-    useRoleAccess(navbarConfig);
-  }, []);
+  useRoleAccess([Role.ADMIN, Role.USER, Role.MANAGER]);
   const theme = useTheme();
 
   const themeContext = useContext(ThemeContext);

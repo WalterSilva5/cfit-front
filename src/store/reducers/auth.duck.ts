@@ -7,9 +7,14 @@ export const actionTypes = {
   UserLoaded: '[Load User] Auth API',
   setAuthData: '[Set Auth Data] Action'
 };
-const authInitialState = {
-  authData: null,
-  user: null
+
+const persistedAuthData = localStorage.getItem('authData');
+
+const authInitialState: any = {
+  auth: {
+    authData: persistedAuthData ? JSON.parse(persistedAuthData) : null,
+    user: null
+  }
 };
 
 export const authReducer = (statePart = authInitialState, action: any) => {
