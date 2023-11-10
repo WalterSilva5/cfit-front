@@ -42,7 +42,7 @@ export const defaultTheme = createTheme({
     },
     secondary: {
       main: defaultThemeColors.secondary,
-      dark: defaultThemeColors.secondaryDark,
+      dark: defaultThemeColors.secondaryDarker,
       light: defaultThemeColors.secondaryLight,
       contrastText: defaultThemeColors.white
     },
