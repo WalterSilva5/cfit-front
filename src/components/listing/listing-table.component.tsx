@@ -9,19 +9,23 @@ import {
   TableRow,
   Paper,
   TablePagination,
+  Button,
 } from "@mui/material";
+import { FormActions } from '@/enums/form-actions.enum';
 
 interface Data {
   [key: string]: string | number;
 }
 
 interface DataTableProps {
-  datas: Data[];
+  data: Data[];
   headers: string[];
+  actions?: string[];
 }
 
 interface TableHeaderProps {
   headers: string[];
+  actions?: string[];
 }
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -40,17 +44,18 @@ const StyledTablePagination = styled(TablePagination)({
   float: 'right',
 });
 
-const TableHeader: React.FC<TableHeaderProps> = ({ headers }) => (
+const TableHeader: React.FC<TableHeaderProps> = ({ headers, actions }) => (
   <TableHead>
     <TableRow>
       {headers.map((header, index) => (
         <StyledTableCell key={index}>{header}</StyledTableCell>
       ))}
+      {actions && <StyledTableCell>Ações</StyledTableCell>}
     </TableRow>
   </TableHead>
 );
 
-export const DataTable: React.FC<DataTableProps> = ({ datas, headers }) => {
+export const DataTable: React.FC<DataTableProps> = ({ data, headers, actions }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -63,6 +68,32 @@ export const DataTable: React.FC<DataTableProps> = ({ datas, headers }) => {
     setPage(0);
   };
 
+  const renderActionButtons = (actionType: string) => {
+    switch (actionType) {
+      case FormActions.EDIT:
+        return <Button
+          sx={{
+            color: "#963f00",
+            marginRight: "5px",
+            backgroundColor: "#cffffa",
+            fontWeight: "bold",
+          }}
+        >Editar</Button>;
+      case FormActions.DELETE:
+        return <Button
+          sx={{
+            color: "#d4fff6",
+            marginRight: "5px",
+            backgroundColor: "#96000f",
+            fontWeight: "bold",
+          }}
+        >Excluir</Button>;
+      default:
+        return null;
+    }
+  };
+
+
 	return (
 		<TableContainer component={Paper}
 			sx={{
@@ -72,21 +103,28 @@ export const DataTable: React.FC<DataTableProps> = ({ datas, headers }) => {
 				},
 			}}
 		>
-			<Table>
-				<TableHeader headers={headers} />
-				<TableBody>
-					{datas.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((data, index) => (
-						<StyledTableRow key={index}>
-							{headers.map((header, i) => (
-								<TableCell key={i}>{data[header]}</TableCell>
-							))}
-						</StyledTableRow>
-					))}
-				</TableBody>
-			</Table>
+      <Table>
+        <TableHeader headers={headers} actions={actions} />
+        <TableBody>
+          {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((data, index) => (
+            <StyledTableRow key={index}>
+              {headers.map((header, i) => (
+                <TableCell key={i}>{data[header]}</TableCell>
+              ))}
+              {actions && (
+                <TableCell>
+                  {actions.map((action, idx) => (
+                    <span key={idx}>{renderActionButtons(action)}</span>
+                  ))}
+                </TableCell>
+              )}
+            </StyledTableRow>
+          ))}
+        </TableBody>
+      </Table>
 			<StyledTablePagination
 				rowsPerPageOptions={[1, 10, 25]}
-				count={datas.length}
+				count={data.length}
 				rowsPerPage={rowsPerPage}
 				page={page}
 				onPageChange={handleChangePage}

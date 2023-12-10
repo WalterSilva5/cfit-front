@@ -7,6 +7,7 @@ import { Deep } from '../pages/page-example/deep';
 import { PageRequest } from '../pages/page-request';
 import { LoginPage } from '@/pages/auth/login';
 import { UserListing } from '@/pages/user/user.listing';
+import { MuscleGroupListing } from '@/pages/muscle-group/muscle-group.listing';
 
 
 export default function Router() {
@@ -14,8 +15,9 @@ export default function Router() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/home" element={<Home />} />
-      <Route path="/user" element={<UserListing />} />
+      <Route path="/users" element={<UserListing />} />
       <Route path="/example" element={<PageExample />} />
+      <Route path="/muscle-groups" element={<MuscleGroupListing />} />
       <Route path="deep">
         <Route path="/deep" element={<Deep />} />
         <Route path="/deep/:parameter" element={<Deep />} />

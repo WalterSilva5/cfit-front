@@ -19,6 +19,7 @@ interface MenuItem {
 
 const userNavbar: MenuItem[] = [
   { name: "Home", icon: <HomeOutlinedIcon />, path: "/home" },
+  { name: "Meus Treinos", icon: <HomeOutlinedIcon />, path: "/my-workouts" },
   { name: "Example", icon: <CompareArrowsIcon />, path: "/example" },
   {
     name: "Request",
@@ -30,22 +31,23 @@ const userNavbar: MenuItem[] = [
 
 const adminNavbar: MenuItem[] = [
   {
-    name: "Sample Submenu",
+    name: "Gerenciamento",
     icon: <ContactsOutlinedIcon />,
-    path: "/sample-submenu",
+    path: "/management",
     subItems: [
-      { name: "Submenu Item 1", path: "/deep", icon: <MenuOutlinedIcon /> },
-      { name: "Submenu Item 2", path: "/deep/1", icon: <MenuOutlinedIcon /> },
+      { name: "Grupos Musculares", path: "/muscle-groups", icon: <MenuOutlinedIcon /> },
+      { name: "Exercicios", path: "/exercises", icon: <MenuOutlinedIcon /> },
+      { name: "Treinos", path: "/workouts", icon: <MenuOutlinedIcon /> },
     ],
   },{
-		name: "User",
+		name: "Usuarios",
 		icon: <UsersOutlinedIcon />,
-		path: "/user",
+		path: "/users",
 	}
 ];
 
 const managerNavbar: MenuItem[] = [
-  { name: "User", icon: <PeopleOutlinedIcon />, path: "/user" },
+  { name: "Usuarios", icon: <PeopleOutlinedIcon />, path: "/users" },
 ];
 
 export const generateNavbar = () => {
