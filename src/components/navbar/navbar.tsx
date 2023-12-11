@@ -9,8 +9,10 @@ import Avatar from '@mui/material/Avatar';
 import { defaultThemeColors } from '../../styles/theme.colors';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import { Logo } from '@/assets/img/logo';
 
 import styled from 'styled-components';
+import { SvgIcon } from '@mui/material';
 
 const StyledToolbar = styled(Toolbar)`
   height: 35px !important;
@@ -74,27 +76,27 @@ export const Navbar = (props: {
           padding: '0px'
         }}
       >
-        {/* Logo ou Placeholder */}
-        <Avatar
+        <Typography
+          variant="h4"
+          component={Link}
+          to="/"
           sx={{
-            height: '28px',
-            width: '28px',
-            marginRight: 2,
-            fontSize: '0.7rem',
+            padding: '10px',
+            display: 'inline-block',
             cursor: 'pointer',
+            color: defaultThemeColors.neutralLight,
+            textDecoration: 'none',
+            marginRight: '5px',
+            marginLeft: '5px',
+            fontWeight: 'bold'
           }}
-          onClick={() => {
-            window.location.href = '/';
-          }}
-        >
-          Logo
-        </Avatar>
-
+        >CFIT
+        </Typography>
         <div
           style={{
             flex: 1,
             display: 'flex',
-            justifyContent: 'center'
+            justifyContent: 'center',
           }}
         >
           {navbarConfig?.items?.map((item: any) => (
@@ -125,21 +127,21 @@ export const Navbar = (props: {
                     keepMounted
                     open={Boolean(anchorEl) && selectedItemName === item.name}
                     onClose={handleClose}
-                    style={{
+                    sx={{
                       padding: '0px',
-                      margin: '0px'
+                      margin: '0px',
                     }}
                   >
                     {item?.subItems?.map((subItem: any) => (
                       <MenuItem key={`${subItem.name}${subItem.path}`} onClick={handleClose}
-                      sx={{
-                        backgroundColor: defaultThemeColors.accentDarkest2,
-                        color: defaultThemeColors.neutralLight,
-                        textDecoration: 'none',
-                        '&:hover': {
-                          backgroundColor: defaultThemeColors.accentDarkest,
-                        },
-                      }}
+                        sx={{
+                          backgroundColor: defaultThemeColors.accentDarkest2,
+                          color: defaultThemeColors.neutralLight,
+                          textDecoration: 'none',
+                          '&:hover': {
+                            backgroundColor: defaultThemeColors.accentDarkest,
+                          },
+                        }}
                       >
                         <StyledLink to={subItem.path}>{subItem.name}</StyledLink>
                       </MenuItem>
@@ -151,7 +153,11 @@ export const Navbar = (props: {
                   color="inherit"
                   component={Link}
                   to={item.path}
-                  sx={{ padding: '5px', minHeight: 0 }}
+                  sx={{ padding: '5px', minHeight: 0,
+                  '&:hover': {
+                    backgroundColor: defaultThemeColors.accentDarkest,
+                  }
+                }}
                 >
                   {item.icon}
                   <Typography variant="caption" sx={{ fontSize: '0.8rem', minHeight: 0 }}>
@@ -163,7 +169,6 @@ export const Navbar = (props: {
           ))}
         </div>
 
-        {/* Nome do usuário */}
         <Typography
           variant="caption"
           component="div"

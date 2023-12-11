@@ -10,7 +10,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import { Role } from "@/enums/role.enum";
 
-interface MenuItem {
+export interface MenuItem {
   name: string;
   icon: React.ReactNode;
   path: string;

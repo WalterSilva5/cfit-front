@@ -1,69 +1,64 @@
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import PeopleOutlinedIcon from '@mui/icons-material/PeopleOutlined';
 import ContactsOutlinedIcon from '@mui/icons-material/ContactsOutlined';
-import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
-import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import { store } from '@/store/store';
+import { MenuItem } from '@/components/navbar/navbar.config';
+import RequestPageIcon from "@mui/icons-material/RequestPage";
+import UsersOutlinedIcon from "@mui/icons-material/Face";
+import LoginIcon from "@mui/icons-material/Login";
+import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
+import { Role } from "@/enums/role.enum";
 
-const userMenu = [
-  { name: 'Home', icon: <HomeOutlinedIcon />, path: '/home' },
-  { name: 'Team', icon: <PeopleOutlinedIcon />, path: '/team' }
-];
-
-const adminMenu = [
+const userMenu: MenuItem[] = [
+  { name: "Home", icon: <HomeOutlinedIcon />, path: "/home" },
+  { name: "Meus Treinos", icon: <HomeOutlinedIcon />, path: "/my-workouts" },
+  { name: "Example", icon: <CompareArrowsIcon />, path: "/example" },
   {
-    name: 'Admin',
+    name: "Request",
+    icon: <RequestPageIcon />,
+    path: "/page-with-request",
+  },
+  { name: "Login", icon: <LoginIcon />, path: "/auth/login" },
+];
+
+const adminMenu: MenuItem[] = [
+  {
+    name: "Gerenciamento",
     icon: <ContactsOutlinedIcon />,
-    path: '/admin',
+    path: "/management",
     subItems: [
-      { name: 'Submenu Item 1', path: '/deep', icon: <MenuOutlinedIcon /> },
-      { name: 'Submenu Item 2', path: '/deep/1', icon: <MenuOutlinedIcon /> }
-    ]
-  }
+      { name: "Grupos Musculares", path: "/muscle-groups", icon: <MenuOutlinedIcon /> },
+      { name: "Exercicios", path: "/exercises", icon: <MenuOutlinedIcon /> },
+      { name: "Treinos", path: "/workouts", icon: <MenuOutlinedIcon /> },
+    ],
+  },{
+		name: "Usuarios",
+		icon: <UsersOutlinedIcon />,
+		path: "/users",
+	}
 ];
 
-const managerMenu = [
-  { name: 'Calendar', icon: <CalendarTodayOutlinedIcon />, path: '/calendar' },
-  { name: 'Help', icon: <HelpOutlineOutlinedIcon />, path: '/help' },
-  { name: 'Menu', icon: <MenuOutlinedIcon />, path: '/menu' }
+const managerMenu: MenuItem[] = [
+  { name: "Usuarios", icon: <PeopleOutlinedIcon />, path: "/users" },
 ];
 
-const generateMenu = () => {
-  //TODO refatorar
-  const { user: auth } = store.getState();
-  let user = auth.user as any;
+export const generateMenu = () => {
+  const { user: authData } = store.getState();
+  const user = authData?.auth?.authData?.user;
+
   if (!user) {
-    return {
-      aside: {
-        items: []
-      }
-    };
+    return { items: [] };
   }
+
   const role = user.role;
+  let menuItems: MenuItem[] = [];
 
-  let menuItems: any = [
-    { name: 'Home', icon: <HomeOutlinedIcon />, path: '/home' },
-    {
-      name: 'Admin',
-      icon: <ContactsOutlinedIcon />,
-      path: '/admin',
-      subItems: [
-        { name: 'Submenu Item 1', path: '/deep', icon: <MenuOutlinedIcon /> },
-        { name: 'Submenu Item 2', path: 'deep/1', icon: <MenuOutlinedIcon /> }
-      ]
-    },
-    { name: 'example', icon: <HomeOutlinedIcon />, path: '/example' }
-  ];
-  if (role === 'USER') {
+  if (role === Role.USER) {
     menuItems = [...userMenu];
-  }
-
-  if (role === 'ADMIN') {
+  } else if (role === Role.ADMIN) {
     menuItems = [...userMenu, ...adminMenu];
-  }
-
-  if (role === 'MANAGER') {
+  } else if (role === Role.MANAGER) {
     menuItems = [...userMenu, ...adminMenu, ...managerMenu];
   }
 

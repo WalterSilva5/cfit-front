@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import './App.module.scss';
-import store from './store/store';
-import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import MenuComponent from './components/menu/menu';
 import Routes from './routes';
@@ -9,6 +7,7 @@ import * as themes from './styles/theme.colors';
 import { ThemeProvider } from '@mui/material/styles';
 import { Box } from '@mui/material';
 import Navbar from './components/navbar/navbar';
+import { useSelector } from 'react-redux';
 
 export const ThemeContext = React.createContext<{
   theme: any;
@@ -20,7 +19,10 @@ function App() {
   const location = window.location;
   const authPages = ['/auth', '/auth/login', '/auth/register'];
   const [useMenu, setUseMenu] = useState(false);
-
+  const user = useSelector((state: any) => state.user);
+  console.log("user ", user);
+  const {firstName} = user.auth.authData.user;
+  const {lastName} = user.auth.authData.user;
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <ThemeProvider theme={theme}>
@@ -39,11 +41,14 @@ function App() {
             boxShadow: 'none'
           }}
         >
-          <Provider store={store}>
             <BrowserRouter>
               {authPages.includes(location.pathname) ? null : (
                 <>
-                  <Navbar useMenu={useMenu} setUseMenu={setUseMenu} username="" />
+                  <Navbar 
+                    useMenu={useMenu}
+                    setUseMenu={setUseMenu}
+                    username={`${firstName} ${lastName}`.slice(0, 20)}
+                    />
                   <MenuComponent useMenu={useMenu} />
                 </>
               )}
@@ -69,7 +74,6 @@ function App() {
                 </Box>
               </Box>
             </BrowserRouter>
-          </Provider>
         </Box>
       </ThemeProvider>
     </ThemeContext.Provider>

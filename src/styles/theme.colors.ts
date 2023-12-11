@@ -1,22 +1,22 @@
 import { createTheme } from '@mui/material/styles';
 
 export const defaultThemeColors = {
-  primary: '#A160EB',
-  primaryDark: '#9036F7',
-  primaryDarker: '#843BD8',
+  primary: '#4CAF50', 
+  primaryDark: '#388E3C',
+  primaryDarker: '#1B5E20',
 
-  secondary: '#4CBDD4',
-  secondaryDark: '#22A7C2',
-  secondaryDarker: '#168CA4',
-  secondaryLight: '#3FE4C7',
+  secondary: '#81C784',
+  secondaryDark: '#66BB6A',
+  secondaryDarker: '#388E3C',
+  secondaryLight: '#A5D6A7',
 
-  accent: '#4A4AFC',
-  accentDark: '#2D2D8C',
-  accentDarker: '#213F5B',
-  accentDarkest: '#102941',
-  accentDarkest2: '#0D2337',
+  accent: '#8BC34A',
+  accentDark: '#558B2F',
+  accentDarker: '#33691E',
+  accentDarkest: '#1B5E20',
+  accentDarkest2: '#1B5E20',
 
-  success: '#33D258',
+  success: '#4CAF50',
 
   neutral1: '#B9C1C9',
   neutral2: '#7E8B98',
@@ -27,10 +27,10 @@ export const defaultThemeColors = {
   black: '#000000',
   blackSoft: '#333333',
 
-  warning: '#FFA318',
+  warning: '#FFEB3B',
   white: '#FFFFFF',
-  alert: '#FF4500',
-  danger: '#FF4555'
+  alert: '#FFC107',
+  danger: '#FF5252'
 };
 
 export const defaultTheme = createTheme({
