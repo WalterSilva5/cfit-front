@@ -18,7 +18,11 @@ export class AppApiProvider extends HttpProvider {
   }
 
   async makeHttpRequest(config: any) {
-    const authData = this.getAuthData();
+    const auth = this.getAuthData();
+    console.log('auth', auth);
+    const authData = auth?.auth?.authData;
+    console.log('authData', authData);
+
     if (authData?.accessToken) {
       config.headers = {
         ...(config.headers || {}),

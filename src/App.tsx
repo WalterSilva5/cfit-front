@@ -20,7 +20,6 @@ function App() {
   const authPages = ['/auth', '/auth/login', '/auth/register'];
   const [useMenu, setUseMenu] = useState(false);
   const user = useSelector((state: any) => state.user);
-  console.log("user ", user);
   const {firstName} = user.auth.authData.user;
   const {lastName} = user.auth.authData.user;
   return (

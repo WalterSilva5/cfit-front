@@ -35,7 +35,7 @@ const adminNavbar: MenuItem[] = [
     icon: <ContactsOutlinedIcon />,
     path: "/management",
     subItems: [
-      { name: "Grupos Musculares", path: "/muscle-groups", icon: <MenuOutlinedIcon /> },
+      { name: "Grupos Musculares", path: "/muscle-group", icon: <MenuOutlinedIcon /> },
       { name: "Exercicios", path: "/exercises", icon: <MenuOutlinedIcon /> },
       { name: "Treinos", path: "/workouts", icon: <MenuOutlinedIcon /> },
     ],

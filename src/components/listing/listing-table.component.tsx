@@ -14,7 +14,7 @@ import {
   Box
 } from "@mui/material";
 import { FormActions } from '@/enums/form-actions.enum';
-import { PageBox } from "../../components/pages/page-container-box";
+import { PageBox } from "@/components/pages/page-container-box";
 import { Link } from 'react-router-dom';
 
 interface Data {
