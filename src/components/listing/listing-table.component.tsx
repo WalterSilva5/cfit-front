@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import { FormActions } from '@/enums/form-actions.enum';
 import { PageBox } from "../../components/pages/page-container-box";
+import { Link } from 'react-router-dom';
 
 interface Data {
   [key: string]: any; // Changed to any to support more data types
@@ -24,6 +25,7 @@ interface DataTableProps {
   title: string;
   headers: string[];
   renderCell?: (item: Data, column: string) => ReactNode;
+  module: string;
   actions?: ReactNode[]; // Changed to array of ReactNode for custom actions
   addNew?: boolean;
   customStyles?: {
@@ -70,7 +72,8 @@ export const DataTable: React.FC<DataTableProps> = ({
   actions,
   customStyles,
   title,
-  addNew = true
+  module,
+  addNew = true,
 }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -128,19 +131,26 @@ export const DataTable: React.FC<DataTableProps> = ({
             height: "60px",
           }}
         >
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{
-              marginTop: "20px",
-              display: addNew ? "block" : "none",
-              backgroundColor: "#00a152",
-              fontWeight: "bold",
-              boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)",
+          <Link
+            to={`/${module}/new`}
+            style={{
+              textDecoration: "none",
             }}
           >
-            Adicionar
-          </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              sx={{
+                marginTop: "20px",
+                display: addNew ? "block" : "none",
+                backgroundColor: "#00a152",
+                fontWeight: "bold",
+                boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)",
+              }}
+            >
+              Adicionar
+            </Button>
+          </Link>
         </Box>
         <TableContainer component={Paper}
           sx={{

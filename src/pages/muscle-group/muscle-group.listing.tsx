@@ -34,6 +34,7 @@ export function MuscleGroupListing() {
         actions={actions}
         title="Grupos Musculares"
         addNew={true}
+        module="muscle-group"
       />
     </>
   );

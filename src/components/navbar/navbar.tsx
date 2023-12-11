@@ -133,17 +133,20 @@ export const Navbar = (props: {
                     }}
                   >
                     {item?.subItems?.map((subItem: any) => (
-                      <MenuItem key={`${subItem.name}${subItem.path}`} onClick={handleClose}
+                      <MenuItem
+                        key={`${subItem.name}${subItem.path}`} onClick={handleClose}
                         sx={{
-                          backgroundColor: defaultThemeColors.accentDarkest2,
                           color: defaultThemeColors.neutralLight,
                           textDecoration: 'none',
-                          '&:hover': {
-                            backgroundColor: defaultThemeColors.accentDarkest,
-                          },
                         }}
                       >
-                        <StyledLink to={subItem.path}>{subItem.name}</StyledLink>
+                        <StyledLink
+                          style={{
+                            backgroundColor: "#DDD",
+                            fontWeight: "bold",
+                            color: defaultThemeColors.accentDarkest2
+                          }}
+                          to={subItem.path}>{subItem.name}</StyledLink>
                       </MenuItem>
                     ))}
                   </Menu>
@@ -153,11 +156,12 @@ export const Navbar = (props: {
                   color="inherit"
                   component={Link}
                   to={item.path}
-                  sx={{ padding: '5px', minHeight: 0,
-                  '&:hover': {
-                    backgroundColor: defaultThemeColors.accentDarkest,
-                  }
-                }}
+                  sx={{
+                    padding: '5px', minHeight: 0,
+                    '&:hover': {
+                      backgroundColor: defaultThemeColors.accentDarkest,
+                    }
+                  }}
                 >
                   {item.icon}
                   <Typography variant="caption" sx={{ fontSize: '0.8rem', minHeight: 0 }}>
