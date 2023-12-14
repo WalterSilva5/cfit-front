@@ -2,28 +2,34 @@ import { useRoleAccess } from "@/utils/verify-role-access";
 import { Role } from "@/enums/role.enum";
 import { DataTable } from "@/components/listing/listing-table.component";
 import { FormActions } from '@/enums/form-actions.enum';
-
-const muscleGroups = [
-  {
-    Name: "Biceps",
-    createdAt: "2021-10-10",
-    updatedAt: "2021-10-10",
-  },
-  {
-    Name: "Triceps",
-    createdAt: "2021-10-10",
-    updatedAt: "2021-10-10",
-  },
-  {
-    Name: "Peito",
-    createdAt: "2021-10-10",
-    updatedAt: "2021-10-10",
-  },
-];
-const headers = ["Name", "createdAt", "updatedAt", "Ações"];
-const actions = [FormActions.EDIT, FormActions.DELETE];
+import { AppApiProvider } from "@/providers/app-api.provider";
+import { useCallback, useEffect, useState } from "react";
 
 export function MuscleGroupListing() {
+  const headers = ["name", "createdAt", "updatedAt", "Ações"];
+  const actions = [FormActions.EDIT, FormActions.DELETE];
+  
+  const api = new AppApiProvider();
+  const [muscleGroups, setMuscleGroups] = useState([]);
+
+  const getMuscleGroups = useCallback(async () => {
+    try {
+      const response = await api.makeHttpRequest({
+        url: '/muscle-group',
+        method: 'GET'
+      });
+      console.log(response);
+      // setMuscleGroups(response);
+      setMuscleGroups(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }, [api]);
+
+  useEffect(() => {
+    getMuscleGroups();
+  }, [getMuscleGroups]);
+
   useRoleAccess([Role.ADMIN, Role.USER, Role.MANAGER]);
 
   return (
