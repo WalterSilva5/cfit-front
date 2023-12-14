@@ -23,7 +23,7 @@ interface Data {
 interface DataTableProps {
   data: Data[];
   title: string;
-  headers: string[];
+  headers: HeaderProps[];
   renderCell?: (item: Data, column: string) => ReactNode;
   module: string;
   actions?: ReactNode[]; // Changed to array of ReactNode for custom actions
@@ -34,9 +34,14 @@ interface DataTableProps {
     header?: object;
   };
 }
+export interface HeaderProps {
+  displayText: string;
+  value: string;
+  css?: React.CSSProperties;
+}
 
-interface TableHeaderProps {
-  headers: string[];
+export interface TableHeaderProps {
+  headers: HeaderProps[];
 }
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -59,7 +64,7 @@ const TableHeader: React.FC<TableHeaderProps> = ({ headers }) => (
   <TableHead>
     <TableRow>
       {headers.map((header, index) => (
-        <StyledTableCell key={index}>{header}</StyledTableCell>
+        <StyledTableCell key={index} style={{...header.css}}>{header.displayText}</StyledTableCell>
       ))}
     </TableRow>
   </TableHead>
@@ -154,21 +159,25 @@ export const DataTable: React.FC<DataTableProps> = ({
         </Box>
         <TableContainer component={Paper}
           sx={{
-            ...customStyles?.table,
             marginTop: "20px",
             boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)",
             borderRadius: "10px"
           }}>
-          <Table>
+          <Table
+            sx={{
+              ...customStyles?.table,
+              borderRadius: "10px"
+            }}
+          >
             <TableHeader headers={headers} />
             <TableBody>
               {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((data, index) => (
                 <StyledTableRow key={index} sx={{ ...customStyles?.row }}>
                   {headers.map((header, i) => (
                     <TableCell key={i}>
-                      {header === "Ações"
+                      {header.value === "actions"
                         ? actions?.map((action, idx) => <span key={idx}>{renderActionButtons(action ? action.toString() : "")}</span>)
-                        : (renderCell ? renderCell(data, header) : data[header])
+                        : (renderCell ? renderCell(data, header.value) : data[header.value])
                       }
                     </TableCell>
                   ))}
