@@ -20,6 +20,7 @@ export default function Router() {
       <Route path="/example" element={<PageExample />} />
       <Route path="/muscle-group" element={<MuscleGroupListing />} />
       <Route path="/muscle-group/new" element={<MuscleGroupForm />} />
+			<Route path="/muscle-group/:id" element={<MuscleGroupForm />} />
       <Route path="deep">
         <Route path="/deep" element={<Deep />} />
         <Route path="/deep/:parameter" element={<Deep />} />

@@ -101,7 +101,7 @@ export const DataTable: React.FC<DataTableProps> = ({
 					<ButtonLink
 						component={Link}
 						// todo ajustar essa rota para endereço correto
-						to={`${module}/${id}`}
+						to={`/${module}/${id}`}
 					>
 						<Button
 							sx={{
