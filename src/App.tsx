@@ -19,9 +19,10 @@ function App() {
   const location = window.location;
   const authPages = ['/auth', '/auth/login', '/auth/register'];
   const [useMenu, setUseMenu] = useState(false);
-  const user = useSelector((state: any) => state.user);
-  const {firstName} = user.auth.authData.user;
-  const {lastName} = user.auth.authData.user;
+  const authUser = useSelector((state: any) => state?.user);
+	const user = authUser?.auth?.authData?.user;
+  const firstName = user?.firstName || '';
+  const lastName = user?.lastName || '';
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <ThemeProvider theme={theme}>
@@ -43,7 +44,7 @@ function App() {
             <BrowserRouter>
               {authPages.includes(location.pathname) ? null : (
                 <>
-                  <Navbar 
+                  <Navbar
                     useMenu={useMenu}
                     setUseMenu={setUseMenu}
                     username={`${firstName} ${lastName}`.slice(0, 20)}

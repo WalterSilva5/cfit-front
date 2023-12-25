@@ -23,7 +23,7 @@ export function Menu(props: { useMenu: boolean }) {
           width: '240px',
           boxSizing: 'border-box'
         },
-        display: props.useMenu ? 'block' : 'none'
+        display: props?.useMenu ? 'block' : 'none'
       }}
     >
       <Box
@@ -45,7 +45,7 @@ export function Menu(props: { useMenu: boolean }) {
         />
       </Box>
       <List>
-        {menuConfig.aside.items.map((menuItem: any) => (
+        {menuConfig?.aside?.items.map((menuItem: any) => (
           <MenuItemComponent key={menuItem.name} item={menuItem} />
         ))}
       </List>
