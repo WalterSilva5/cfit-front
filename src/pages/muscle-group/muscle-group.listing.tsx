@@ -10,12 +10,12 @@ export function MuscleGroupListing() {
     { displayText: "Nome", value: "name" },
     { displayText: "Criado em", value: "createdAt" },
     { displayText: "Atualizado em", value: "updatedAt" },
-    { displayText: "Ações", value: "actions", css: { 
+    { displayText: "Ações", value: "actions", css: {
       textAlign: 'center',
     } },
   ];
   const actions = [FormActions.EDIT, FormActions.DELETE];
-  
+
   const api = new AppApiProvider();
   const [muscleGroups, setMuscleGroups] = useState([]);
 
