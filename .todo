@@ -1,6 +1,9 @@
 -- add editor config settings
--- emprove the api provider
+-- improve the api provider
 -- apply login system
--- emprove datatable headers
+-- improve datatable headers
 -- adjust error messages in the login form in case of authentication error
-
+-- adjust muscle group editing form
+-- create exercise registration form
+-- create workout registration form
+-- change exercise entity to have multiple examples
