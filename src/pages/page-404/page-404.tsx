@@ -3,8 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 export function Page404() {
   const authUser = useSelector((state: any) => state?.user);
-  const authData = authUser?.authData
+	const authData = authUser?.auth?.authData
 	const history = useNavigate();
+	console.log(authData)
   useEffect(() => {
     if (!authData) {
 			history('/auth/login');
