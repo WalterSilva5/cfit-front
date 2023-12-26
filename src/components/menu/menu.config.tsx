@@ -29,8 +29,8 @@ const adminMenu: MenuItem[] = [
     path: "/management",
     subItems: [
       { name: "Grupos Musculares", path: "/muscle-group", icon: <MenuOutlinedIcon /> },
-      { name: "Exercicios", path: "/exercises", icon: <MenuOutlinedIcon /> },
-      { name: "Treinos", path: "/workouts", icon: <MenuOutlinedIcon /> },
+      { name: "Exercicios", path: "/exercise", icon: <MenuOutlinedIcon /> },
+      { name: "Treinos", path: "/workout", icon: <MenuOutlinedIcon /> },
     ],
   },{
 		name: "Usuarios",

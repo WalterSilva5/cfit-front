@@ -5,7 +5,7 @@ import { FormActions } from '@/enums/form-actions.enum';
 import { AppApiProvider } from "@/providers/app-api.provider";
 import { useCallback, useEffect, useState } from "react";
 
-export function MuscleGroupListing() {
+export function WorkoutListing() {
   const headers: HeaderProps[] = [
     { displayText: "Nome", value: "name" },
     { displayText: "Criado em", value: "createdAt" },
@@ -17,38 +17,38 @@ export function MuscleGroupListing() {
   const actions = [FormActions.EDIT, FormActions.DELETE];
 
   const api = new AppApiProvider();
-  const [muscleGroups, setMuscleGroups] = useState([]);
+  const [data, setData] = useState([]);
 
-  const getMuscleGroups = useCallback(async () => {
+  const getData = useCallback(async () => {
     try {
       const response = await api.makeHttpRequest({
-        url: '/muscle-group',
+        url: '/workout',
         method: 'GET'
       });
-      setMuscleGroups(response.data);
+      setData(response.data);
     } catch (error) {
       console.error(error);
     }
   }, [api]);
 
   useEffect(() => {
-    getMuscleGroups();
-  }, [getMuscleGroups]);
+    getData();
+  }, [getData]);
 
   useRoleAccess([Role.ADMIN, Role.USER, Role.MANAGER]);
 
   return (
     <>
       <DataTable
-        data={muscleGroups}
+        data={data}
         headers={headers}
         actions={actions}
-        title="Grupos Musculares"
+        title="Workouts"
         addNew={true}
-        module="muscle-group"
+        module="workout"
       />
     </>
   );
 }
 
-export default MuscleGroupListing;
+export default WorkoutListing;
