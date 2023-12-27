@@ -43,7 +43,7 @@ export function WorkoutListing() {
         data={data}
         headers={headers}
         actions={actions}
-        title="Workouts"
+        title="Treinos"
         addNew={true}
         module="workout"
       />

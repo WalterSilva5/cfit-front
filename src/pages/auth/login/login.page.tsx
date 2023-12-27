@@ -21,7 +21,7 @@ export function LoginPage() {
         >
           <Paper
             style={{
-              backgroundColor: '#1976d2',
+              backgroundColor: '#015e1a',
               color: '#ffffff',
               display: 'flex',
               flexDirection: 'column',

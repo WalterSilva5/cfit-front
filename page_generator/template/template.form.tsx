@@ -16,7 +16,7 @@ interface FormProps {}
 
 export const TemplateForm: React.FC<FormProps> = () => {
 	const api = new Api();
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 	const { id } = useParams();
 	console.log(id);
 	const [initialFormValues, setInitialFormValues] = useState<FormData>({
@@ -25,7 +25,8 @@ export const TemplateForm: React.FC<FormProps> = () => {
 	});
 
 	useEffect(() => {
-		if (id) {
+		if (id && id !== 'new') {
+			setIsLoading(true);
 			api
 				.makeHttpRequest({
 					method: 'GET',
@@ -39,7 +40,6 @@ export const TemplateForm: React.FC<FormProps> = () => {
 					setIsLoading(false);
 				});
 		}
-		console.log('id', id);
 	}, [id]);
 
 	const onSubmit = useCallback(
